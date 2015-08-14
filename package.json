@@ -1,0 +1,50 @@
+{
+  "name": "online-registration-system",
+  "version": "1.0.0",
+  "description": "Online Registration System on a specific college for our Thesis ",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Robert-Janagap/online-registration-system.git"
+  },
+  "keywords": [
+    "Online",
+    "Registration",
+    "System"
+  ],
+  "author": "Robert Janagap",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Robert-Janagap/online-registration-system/issues"
+  },
+  "homepage": "https://github.com/Robert-Janagap/online-registration-system#readme",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "cookie-parser": "^1.3.5",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.1.2",
+    "morgan": "^1.6.1",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-minify-html": "^1.0.4",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.0.1",
+    "sass": "^0.5.0"
+  }
+}
