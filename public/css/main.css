@@ -1,0 +1,375 @@
+*:after, *:before {
+  box-sizing: border-box; }
+
+html {
+  font-size: 1em; }
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'merriweather', arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #333;
+  background: #fff;
+  margin: 0;
+  padding: 0; }
+
+a {
+  text-decoration: none;
+  -webkit-user-select: none; }
+
+label,
+a {
+  font-family: 'Lato'; }
+
+p {
+  margin-bottom: 1.3em; }
+
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  font-family: 'Lato';
+  font-weight: inherit;
+  line-height: 1.2; }
+
+h1 {
+  margin-top: 0;
+  font-size: 3.998rem; }
+
+h2 {
+  font-size: 2.827rem; }
+
+h3 {
+  font-size: 1.999rem; }
+
+h4 {
+  font-size: 1.414rem; }
+
+small, .font_small {
+  font-size: 0.707rem; }
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+@font-face {
+  font-family: 'lato';
+  src: url("lato-regular-webfont.eot");
+  src: url("lato-regular-webfont.eot?#iefix") format("embedded-opentype"), url("lato-regular-webfont.woff2") format("woff2"), url("lato-regular-webfont.woff") format("woff"), url("lato-regular-webfont.ttf") format("truetype"), url("lato-regular-webfont.svg#latoregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'merriweather';
+  src: url("merriweather-regular-webfont.eot");
+  src: url("merriweather-regular-webfont.eot?#iefix") format("embedded-opentype"), url("merriweather-regular-webfont.woff2") format("woff2"), url("merriweather-regular-webfont.woff") format("woff"), url("merriweather-regular-webfont.ttf") format("truetype"), url("merriweather-regular-webfont.svg#merriweatherregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+/*
+* Pure Grid V1
+* Copyright 2015, Robert Janagap
+* www.github.com/Robert-Janagap
+* Free to use under the GNU GENERAL PUBLIC LICENSE version 2.
+* <http://fsf.org/>
+* 8/10/2015
+*/
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin-right: auto;
+  margin-left: auto; }
+
+.row {
+  display: block; }
+
+.container:before, .container:after,
+.row:before, .row:after,
+.column:before, .column:after,
+.cf:before, .cf:after {
+  content: ' ';
+  display: table; }
+
+.container:after,
+.row:after,
+.column:after
+.cf:after {
+  clear: both; }
+
+.column {
+  padding: 0 0.42%;
+  float: left; }
+
+.one {
+  width: 7.49%; }
+
+.two {
+  width: 15.83%; }
+
+.three {
+  width: 24.16%; }
+
+.four {
+  width: 32.49%; }
+
+.five {
+  width: 40.83%; }
+
+.six {
+  width: 49.16%; }
+
+.seven {
+  width: 57.49%; }
+
+.eight {
+  width: 65.82%; }
+
+.nine {
+  width: 74.16%; }
+
+.ten {
+  width: 82.49%; }
+
+.eleven {
+  width: 90.82%; }
+
+.twelve {
+  width: 100%;
+  padding: 0; }
+
+.btn {
+  border: 1px solid #BEBEBE;
+  font-size: 1rem;
+  background: transparent;
+  text-decoration: none;
+  color: #222;
+  display: inline-block;
+  padding: 4px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -webkit-user-select: none;
+  outline: none; }
+  .btn:active {
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+    color: #fff; }
+
+.btn--md {
+  padding: 6px 14px;
+  font-size: 1.2rem;
+  border-radius: 4px; }
+
+.btn--lg {
+  padding: 8px 16px;
+  font-size: 1.3rem;
+  border-radius: 5px; }
+  .btn--lg:active {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6); }
+
+.btn--green {
+  background: linear-gradient(to top, #c7db00, #f2fe67);
+  border: 1px solid #c7db00; }
+
+.btn--orange {
+  background: linear-gradient(to top, #DB6700, #fec467);
+  border: 1px solid #DB6700; }
+
+.btn--red {
+  background: linear-gradient(to top, #DB0000, #ff6666);
+  border: 1px solid #DB0000; }
+
+.btn--blue {
+  background: linear-gradient(to top, #0052DB, #669eff);
+  border: 1px solid #0052DB; }
+
+.btn--green:hover {
+  background: linear-gradient(to top, #eaff00, #f4fe80); }
+
+.btn--orange:hover {
+  background: linear-gradient(to top, #ff7700, #fece80); }
+
+.btn--red:hover {
+  background: linear-gradient(to top, red, #ff8080); }
+
+.btn--blue:hover {
+  background: linear-gradient(to top, #005eff, #80aeff); }
+
+.btn--green:active {
+  background: #cddb33; }
+
+.btn--orange:active {
+  background: #db8233; }
+
+.btn--red:active {
+  background: #db3333; }
+
+.btn--blue:active {
+  background: #3371db; }
+
+label {
+  font-size: 1.214rem;
+  font-weight: 400; }
+
+.header {
+  width: 100%;
+  height: 100px;
+  background: skyblue; }
+
+.admin {
+  overflow: hidden;
+  padding-top: 1.25rem; }
+  .admin_sidebar {
+    position: fixed;
+    height: 100%;
+    max-width: 285px;
+    background: lightblue;
+    text-align: center; }
+    .admin_sidebar--fixed {
+      top: 20px; }
+    .admin_sidebarNav {
+      margin-top: 5%; }
+      .admin_sidebarNav--list {
+        margin-top: 20px; }
+      .admin_sidebarNav--item {
+        display: block;
+        background: #94A427;
+        font-size: 1.999rem;
+        padding: 10px 0;
+        cursor: pointer; }
+  .admin_content {
+    background: #EFEB83;
+    height: 2400px;
+    float: right; }
+
+.content {
+  background: #7EADFB;
+  margin-bottom: 8.47rem;
+  padding: 0.8rem 0 1.5rem 0.5rem; }
+  .content_title {
+    margin: 0;
+    margin-bottom: 2rem; }
+    .content_title_btn {
+      font-size: 1rem;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+      vertical-align: middle;
+      padding: 5px 6px;
+      margin-left: 10px; }
+
+.curriculum {
+  text-align: center; }
+
+.box {
+  width: 100%;
+  height: 200px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  position: relative; }
+  .box:hover .box--overlay {
+    display: block; }
+  .box_btn {
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 1.214rem;
+    font-weight: 600;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.4); }
+    .box_btn a {
+      color: #fff;
+      display: block;
+      padding: 10px; }
+    .box_btn--blue {
+      background: rgba(22, 78, 243, 0.8); }
+      .box_btn--blue:hover {
+        background: #154EF3; }
+    .box_btn--orange {
+      background: rgba(247, 180, 24, 0.8); }
+      .box_btn--orange:hover {
+        background: #F7B515; }
+    .box_btn--red {
+      background: rgba(247, 24, 24, 0.8); }
+      .box_btn--red:hover {
+        background: #F71515; }
+  .box--overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 4;
+    color: #fff; }
+
+th {
+  position: relative; }
+
+td {
+  text-align: center; }
+
+label {
+  position: absolute;
+  top: 50%;
+  pointer-events: none;
+  transform: translateY(-50%);
+  color: #999;
+  padding-left: 10px; }
+
+input {
+  border: 0;
+  outline: none;
+  padding: 10px 0 10px 10px;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #24A2FA; }
+
+.assestment_form {
+  margin-bottom: 50px;
+  display: none; }
+
+.assestment .types_fee {
+  position: relative;
+  margin-bottom: 35px; }
+
+.department_mntDep {
+  vertical-align: baseline; }
+
+.department_mnt table {
+  text-align: center; }
+
+.department_mntCourse {
+  height: 50px;
+  padding-bottom: 10px; }
+
+.departmentAdd {
+  position: fixed;
+  background: #AD31E6;
+  z-index: 5;
+  top: 20%;
+  left: 5%;
+  padding: 40px 20px;
+  display: none; }
+  .departmentAdd--top {
+    position: relative;
+    z-index: 5; }
+  .departmentAdd_curYear {
+    position: relative;
+    margin-bottom: 20px; }
+  .departmentAdd_table th {
+    padding: 20px 0; }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 4;
+  display: none; }
+
+.btn--close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer; }

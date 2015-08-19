@@ -1,0 +1,70 @@
+/*
+* Pure Grid V1
+* Copyright 2015, Robert Janagap
+* www.github.com/Robert-Janagap
+* Free to use under the GNU GENERAL PUBLIC LICENSE version 2.
+* <http://fsf.org/>
+* 8/10/2015
+*/
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin-right: auto;
+  margin-left: auto; }
+
+.row {
+  display: block; }
+
+.container:before, .container:after,
+.row:before, .row:after,
+.column:before, .column:after,
+.cf:before, .cf:after {
+  content: ' ';
+  display: table; }
+
+.container:after,
+.row:after,
+.column:after
+.cf:after {
+  clear: both; }
+
+.column {
+  padding: 0 0.42%;
+  float: left; }
+
+.one {
+  width: 7.49%; }
+
+.two {
+  width: 15.83%; }
+
+.three {
+  width: 24.16%; }
+
+.four {
+  width: 32.49%; }
+
+.five {
+  width: 40.83%; }
+
+.six {
+  width: 49.16%; }
+
+.seven {
+  width: 57.49%; }
+
+.eight {
+  width: 65.82%; }
+
+.nine {
+  width: 74.16%; }
+
+.ten {
+  width: 82.49%; }
+
+.eleven {
+  width: 90.82%; }
+
+.twelve {
+  width: 100%;
+  padding: 0; }
