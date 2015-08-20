@@ -269,28 +269,18 @@ label {
   .box_btn {
     width: 40%;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 70px;
     border-radius: 3px;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.3);
     font-size: 1.214rem;
-    font-weight: 600;
-    text-shadow: 0 1px rgba(0, 0, 0, 0.4); }
+    text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+    border: 1px solid #fff; }
+    .box_btn:hover {
+      background: rgba(0, 0, 0, 0.7); }
     .box_btn a {
       color: #fff;
       display: block;
       padding: 10px; }
-    .box_btn--blue {
-      background: rgba(22, 78, 243, 0.8); }
-      .box_btn--blue:hover {
-        background: #154EF3; }
-    .box_btn--orange {
-      background: rgba(247, 180, 24, 0.8); }
-      .box_btn--orange:hover {
-        background: #F7B515; }
-    .box_btn--red {
-      background: rgba(247, 24, 24, 0.8); }
-      .box_btn--red:hover {
-        background: #F71515; }
   .box--overlay {
     display: none;
     position: absolute;
@@ -325,11 +315,28 @@ input {
 
 .assestment_form {
   margin-bottom: 50px;
-  display: none; }
+  background: #fff;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 10%;
+  border-radius: 5px;
+  position: relative;
+  z-index: 5; }
 
 .assestment .types_fee {
   position: relative;
   margin-bottom: 35px; }
+
+.assestment--overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 4;
+  display: none; }
 
 .department_mntDep {
   vertical-align: baseline; }
@@ -349,16 +356,13 @@ input {
   left: 5%;
   padding: 40px 20px;
   display: none; }
-  .departmentAdd--top {
-    position: relative;
-    z-index: 5; }
   .departmentAdd_curYear {
     position: relative;
     margin-bottom: 20px; }
   .departmentAdd_table th {
     padding: 20px 0; }
 
-.overlay {
+.departmentAdd--overlay {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -372,4 +376,42 @@ input {
   position: absolute;
   right: 20px;
   top: 20px;
-  cursor: pointer; }
+  cursor: pointer;
+  z-index: 5; }
+
+.department--overlay {
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 4; }
+
+.department_subjects {
+  position: fixed;
+  z-index: 5;
+  background: lightblue;
+  padding: 20px; }
+  .department_subjects li {
+    display: inline-block; }
+    .department_subjects li span {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 5px 8px;
+      margin: 10px;
+      display: inline-block; }
+  .department_subjects_mnt th {
+    padding: 10px; }
+
+.input_subject, .input_preRequisite {
+  width: 150px; }
+
+.input_des {
+  width: 200px; }
+
+.input_units {
+  width: 50px; }
+
+.input_cpu {
+  width: 100px; }

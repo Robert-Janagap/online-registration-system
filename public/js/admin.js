@@ -1,15 +1,18 @@
 ( function ( $ ) {
-
-    $( '.assestment_formView' ).on( 'click',function ( event ){
+	//show assestment view
+    $( '.assestment--overlayShow, .assestment_formView, .assestment--overlayClose' ).on( 'click',function ( event ){
 
         event.preventDefault();
-        $( '.assestment_form' ).slideToggle( 400 );
+        $( '.assestment--overlay' ).toggle();
+        console.log('obj');
 
     } );
-    $( '.departmentAdd--show, .btn--close' ).on( 'click',function ( event ) {
+    //show curriculum add form
+    $( '.departmentAdd--show, .curriculum--overlayClose, .departmentAdd--overlay' ).on( 'click',function ( event ) {
 
-        $( '.departmentAdd, .overlay' ).toggle();
+        $( '.departmentAdd, .departmentAdd--overlay' ).toggle();
 
     } );
+
 
 } )( jQuery );

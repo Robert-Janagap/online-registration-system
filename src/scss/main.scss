@@ -71,36 +71,20 @@
 	&_btn{
 		width: 40%;
 		margin: 0 auto;
-		margin-top: 10px;
+		margin-top: 70px;
 		border-radius: 3px;
-		background: rgba(0,0,0,0.2);
+		background: rgba(0,0,0,0.3);
 		font-size:1.214rem;
-		font-weight: 600;
 		text-shadow: 0 1px rgba(0,0,0,0.4);
+		border:1px solid #fff;
+		&:hover{
+			background: rgba(0,0,0,0.7);
+		}
 		a{
 			color: #fff;
 			display: block;
 			padding: 10px;
 		}
-		&--blue{
-			background: hsla(225, 90%, 52%, .8);
-			&:hover{
-				background: #154EF3;
-			}
-		}
-		&--orange{
-			background: hsla(42, 93%, 53%, .8);
-			&:hover{
-				background: #F7B515;
-			}
-		}
-		&--red{
-			background: hsla(0, 93%, 53%, .8);
-			&:hover{
-				background:  #F71515;
-			}
-		}
-		
 	}
 	&--overlay{
 		display: none;
@@ -114,6 +98,7 @@
 		color: #fff;
 	}
 }
+//for tables
 th{
 	position: relative;
 }
@@ -135,16 +120,35 @@ input{
 	font-size: 1.2rem;
 	border-bottom: 2px solid #24A2FA;
 }
+
+
+//for assestments
 .assestment{
 	&_form{
 		margin-bottom: 50px;
-		display: none;
+		background: #fff;
+		width: 80%;
+		margin: 0 auto;
+		padding: 20px;
+		margin-top: 10%;
+		border-radius: 5px;
+		position: relative;
+		z-index: 5;
 	}
 	.types_fee {
 	position: relative;
 	margin-bottom: 35px;
 	}
-	
+	&--overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0,0,0,0.4);
+		z-index: 4;
+		display: none;
+	}
 }
 // curriculum mnt
 .department_mnt {
@@ -170,10 +174,6 @@ input{
 	left: 5%;
 	padding: 40px 20px;
 	display: none;
-	&--top{
-		position: relative;
-		z-index: 5;
-	}
 	&_curYear{
 		position: relative;
 		margin-bottom: 20px;
@@ -183,11 +183,8 @@ input{
 			padding: 20px 0;
 		}
 	}
-	&_courses{
-		
-	}
 }
-.overlay{
+.departmentAdd--overlay{
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -202,4 +199,48 @@ input{
 	right: 20px;
 	top: 20px;
 	cursor: pointer;
+	z-index: 5;
+}
+//department subject mnt
+.department--overlay{
+	background: rgba(0,0,0,0.4);
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: 4;
+}
+.department_subjects{
+	position: fixed;
+	z-index: 5;
+	background: lightblue;
+	padding: 20px;
+	li{
+		display: inline-block;
+		span{
+			background: #fff;
+			border: 1px solid #ccc;
+			padding: 5px 8px;
+			margin: 10px;
+			display: inline-block;
+		}
+	}
+	&_mnt{
+		th{
+			padding: 10px;
+		}
+	}
+}
+.input_subject, .input_preRequisite{
+	width: 150px;
+}
+.input_des {
+	width: 200px;
+}
+.input_units{
+	width: 50px;
+}
+.input_cpu{
+	width: 100px;
 }
