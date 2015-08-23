@@ -1,0 +1,43 @@
+.curriculum{
+	text-align: center;
+	&_box{
+		width: 100%;
+		height: 200px;
+		box-shadow: 0 0 10px rgba(0,0,0,0.4);
+		position: relative;
+		&:hover{
+			.curriculum_box--overlay{
+				display: block;
+			}
+		}
+		&_btn{
+			width: 40%;
+			margin: 0 auto;
+			margin-top: 70px;
+			border-radius: 3px;
+			background: rgba(0,0,0,0.3);
+			font-size:1.214rem;
+			text-shadow: 0 1px rgba(0,0,0,0.4);
+			border:1px solid #fff;
+			&:hover{
+				background: rgba(0,0,0,0.7);
+			}
+			a{
+				color: #fff;
+				display: block;
+				padding: 10px;
+			}
+		}
+		&--overlay{
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0,0,0,0.7);
+			z-index: 4;
+			color: #fff;
+		}
+	}
+}

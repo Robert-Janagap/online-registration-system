@@ -1,18 +1,25 @@
 ( function ( $ ) {
-	//show assestment view
+
+    //show assestment view
     $( '.assestment--overlayShow, .assestment_formView, .assestment--overlayClose' ).on( 'click',function ( event ){
 
         event.preventDefault();
         $( '.assestment--overlay' ).toggle();
-        console.log('obj');
+        console.log( 'obj' );
 
     } );
     //show curriculum add form
-    $( '.departmentAdd--show, .curriculum--overlayClose, .departmentAdd--overlay' ).on( 'click',function ( event ) {
+    $( '.department_add--show, .curriculum--overlayClose, .department_add--overlay' ).on( 'click',function ( event ) {
 
-        $( '.departmentAdd, .departmentAdd--overlay' ).toggle();
+        $( '.department_add, .department_add--overlay' ).toggle();
 
     } );
 
+    $( '.department_subjects--show, .department_subjects--close, .department--overlay' ).on( 'click',function ( event ){
+
+        event.preventDefault();
+        $( '.department_subjects, .department--overlay' ).toggle();
+        console.log('obj');
+    } );
 
 } )( jQuery );

@@ -1,0 +1,28 @@
+.admin {
+	overflow: hidden;
+	&_sidebar {
+		position: fixed;
+		height: 100%;
+		max-width: 285px;
+		background: #fff;
+		text-align: center;
+		border-radius: 4px;
+		padding-top: 1.25rem;
+		&--fixed{
+			top: 0;
+		}	
+		&Nav{
+			margin-top: 5%;
+			&--list{
+				margin-top: 20px;	
+			}
+			&--item{
+				display: block;
+				background: #94A427;
+				font-size: 1.999rem;
+				padding: 10px 0;
+				cursor: pointer;
+			}
+		}
+	}
+}

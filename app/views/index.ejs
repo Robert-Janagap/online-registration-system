@@ -3,60 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Administrator</title>
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 	<div class="header"></div>
-	<div class="departmentAdd--overlay"></div>
-	<form class="departmentAdd row">
-		<div class="departmentAdd_curYear">
-			<label for="">Year</label>
-			<input type="text">
-		</div>
-		<div class="departmentAdd_table">
-			<div class="btn--close curriculum--overlayClose">X</div>
-			<h3>Department<span href="" class="content_title_btn">Add</span></h3>
-			<table>
-				<thead>
-					<tr>
-						<th>
-							<label for="">Department Name</label>
-							<input type="text">
-						</th>
-						<th>
-							<label for="">Department Description</label>
-							<input type="text">	
-						</th>
-					</tr>
-				</thead>
-				<tbody class="departmentAdd_courses">
-					<tr>
-						<th>Course Code</th>
-						<th>Course Description</th>
-						<th># of years</th>
-						<th># of terms</th>
-						<th>add</th>
-						<th>delete</th>
-					</tr>
-					<tr>
-						<td>
-							<input type="text">
-						</td>
-						<td>
-							<input type="text">
-						</td>
-						<td>
-							<input type="text">
-						</td>
-						<td>
-							<input type="text">
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="btn">Next</div>
-		</div>
-	</form>
+	<div class="department_add--overlay"></div>
 	<div class="container admin">
 		<div class="three column admin_sidebar">
 			<div class="person">
@@ -84,47 +35,47 @@
 		<div class="nine column admin_content">
 			<article class="content row">
 				<div class="row">
-					<h2 class="content_title">Curriculum<span href="" class="departmentAdd--show content_title_btn">Add</span></h2>
+					<h3 class="content_title">Curriculum<span href="" class="department_add--show content_title_btn">Add</span></h3>
 				</div>
 				<div class="curriculum four column">
-					<div class="box cf">
+					<div class="curriculum_box cf">
 						<div class="tag"><h3>2015</h3></div>
 						<div class="tag">Curriculum</div>
-						<div class="box--overlay">
-							<div class="box_btn"><a href="/curriculum">View</a></div>
+						<div class="curriculum_box--overlay">
+							<div class="curriculum_box_btn"><a href="/curriculum">View</a></div>
 						</div>
 					</div>
 				</div>
 				<div class="curriculum four column">
-					<div class="box cf">
+					<div class="curriculum_box cf">
 						<div class="tag"><h3>2014</h3></div>
 						<div class="tag">Curriculum</div>
-						<div class="box--overlay">
-							<div class="box_btn box_btn--blue"><a href="/curriculum">View</a></div>
+						<div class="curriculum_box--overlay">
+							<div class="curriculum_box_btn"><a href="/curriculum">View</a></div>
 						</div>
 					</div>
 				</div>
 				<div class="curriculum four column">
-					<div class="box cf">
+					<div class="curriculum_box cf">
 						<div class="tag"><h3>2013</h3></div>
 						<div class="tag">Curriculum</div>
-						<div class="box--overlay">
-							<div class="box_btn box_btn--blue"><a href="/curriculum">View</a></div>
+						<div class="curriculum_box--overlay">
+							<div class="curriculum_box_btn"><a href="/curriculum">View</a></div>
 						</div>
 					</div>
 				</div>
 			</article>
 			<article class="content row">
 				<div class="row">
-					<h2 class="content_title">Assestment<span href="" class="assestment--overlayShow content_title_btn ">Add</span></h2>
+					<h3 class="content_title">Assestment<span href="" class="assestment--overlayShow content_title_btn ">Add</span></h3>
 				</div>
 				<div class="assestment">
 					<div class="assestment--overlay">
 						<form action="" class="assestment_form row">
 							<div class="btn--close assestment--overlayClose">X</div>
-							<div class="types_fee">
-								<label for="fee_label" class="types_fee_label">Type of School Fee</label>
-								<input type="text" id="fee_label">
+							<div class="input_groups">
+								<label for="fee_label">Type of School Fee</label>
+								<input type="text">
 							</div>
 							<div class="assestment_mtn row">
 								<table class=" twelve column">
@@ -204,9 +155,64 @@
 			</article>
 		</div>
 	</div>
-<script src="lib/angular.min.js"></script>
-<script src="lib/jquery-1.11.1.min.js"></script>
-<script src="js/sideBarFixed.js"></script>
-<script src="js/admin.js"></script>
+	<div class="container">
+		<div class="department_add">
+			<form class="cf">
+				<div class="input_groups">
+					<label for="">Year</label>
+					<input type="text" class="input_units">
+				</div>
+				<div class="department_add_table">
+					<div class="btn--close curriculum--overlayClose">X</div>
+					<h3>Department<span href="" class="content_title_btn">Add</span></h3>
+					<table>
+						<thead>
+							<tr>
+								<th>
+									<label for="">Department Name</label>
+									<input type="text" class="input_name">
+								</th>
+								<th>
+									<label for="">Department Description</label>
+									<input type="text" class="input_des">	
+								</th>
+							</tr>
+						</thead>
+						<tbody class="department_add_courses">
+							<tr>
+								<th>Course Code</th>
+								<th>Course Description</th>
+								<th># of years</th>
+								<th># of terms</th>
+								<th><button>Add</button></th>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" class="input_name">
+								</td>
+								<td>
+									<input type="text" class="input_des">
+								</td>
+								<td>
+									<input type="text" class="input_units">
+								</td>
+								<td>
+									<input type="text" class="input_units">
+								</td>
+								<td>
+									<button>delete</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="btn pull--right">Next</div>
+				</div>
+			</form>	
+		</div>
+	</div>
+<script src="/lib/angular.min.js"></script>
+<script src="/lib/jquery-1.11.1.min.js"></script>
+<script src="/js/sideBarFixed.js"></script>
+<script src="/js/admin.js"></script>
 </body>
 </html>

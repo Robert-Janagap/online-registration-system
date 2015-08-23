@@ -1,4 +1,40 @@
-label{
+label {
+	position: absolute;
+	top: 50%;
+	pointer-events: none;
+	transform: translateY(-79%); 
+	color: #999;
+	padding-left: 10px;
 	font-size: 1.214rem;
 	font-weight: 400;
+}
+input{
+	border: 0;
+	outline: none;
+	padding: 10px 0 5px 10px;
+	font-size: 1.2rem;
+	border-bottom: 2px solid #24A2FA;
+	margin-bottom: 20px;
+	display: inline-block;
+}
+.input_groups{
+	position: relative;
+	display: inline-block;
+	padding: .5rem .6rem;
+}
+
+.input_name, .input_preRequisite{
+	width: 10rem;
+}
+.input_des {
+	width: 14rem;
+}
+.input_units{
+	width: 5.93rem;
+}
+.input_cpu{
+	width: 10.17rem;
+}
+.input_units, .input_cpu{
+	text-align: center;
 }

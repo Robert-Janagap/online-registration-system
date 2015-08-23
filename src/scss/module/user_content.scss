@@ -1,0 +1,21 @@
+.admin_content {
+	height: 2400px;
+	float: right;
+}
+.content{
+	background: #fff;
+	margin-bottom: 2rem;
+	padding: 15px 20px;
+	border-radius: 4px;  
+	&_title{
+		margin: 0;
+		margin-bottom: 2rem;
+		&_btn{
+			font-size: 1rem;
+			box-shadow: 0 0 4px rgba(0,0,0,0.7);
+			vertical-align: middle;
+			padding: 5px 6px;
+			margin-left: 10px;
+		}
+	}
+}

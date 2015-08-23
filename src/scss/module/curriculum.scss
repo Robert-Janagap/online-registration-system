@@ -1,0 +1,15 @@
+.department_mnt {
+	background: #fff;
+	border-radius: 4px;
+	padding: 15px 20px;
+	&_dep{
+		vertical-align: baseline;
+	}
+	&_course{
+		height: 50px;
+    	padding-bottom: 10px;
+	}
+}
+.department_subjects--show {
+	cursor: pointer;
+}
