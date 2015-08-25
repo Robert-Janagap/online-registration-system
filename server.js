@@ -14,128 +14,60 @@ mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
 var curriculums = mongoose.model('curriculum', require('./app/models/curriculums.js'));
 
 // var addCurriculum = new curriculums({
-// 	school_year : 2015,
-//     departments  : {
-//     	department_name : 'AS',
-//     	department_des : 'Arts and Science',
-//     	courses: [
-// 	    	{
-// 	    		course_name : 'BSOA',
-// 	    		course_des : 'Bachelor of office Administration',
-// 	    		year_levels: [
-// 	    			{
-// 		    			year_level: 4,
-// 		    			terms: [
-// 			    			{
-// 			    				term : 1,
-// 			    				subjects: {
-// 			    					subject_name: 'Softwen',
-// 			    					subject_des: 'Software Engineering',
-// 			    					units: 3,
-// 			    					cost_perUnits: 30,
-// 			    					pre_requisite: ''
-// 			    				}
-// 			    			},
-// 			    			{
-// 			    				term : 2,
-// 			    				subjects: {
-// 			    					subject_name: 'addprog',
-// 			    					subject_des: 'Addvance Programming',
-// 			    					units: 3,
-// 			    					cost_perUnits: 30,
-// 			    					pre_requisite: ''
-// 			    				}
-// 			    			}
-// 		    			]
-// 		    		},
-// 		    		{
-// 		    			year_level: 1,
-// 		    			terms: [
-// 			    			{
-// 			    				term : 1,
-// 			    				subjects: {
-// 			    					subject_name: 'Softwen',
-// 			    					subject_des: 'Software Engineering',
-// 			    					units: 4,
-// 			    					cost_perUnits: 40,
-// 			    					pre_requisite: ''
-// 			    				}
-// 			    			},
-// 			    			{
-// 			    				term : 2,
-// 			    				subjects: {
-// 			    					subject_name: 'addprog',
-// 			    					subject_des: 'Addvance Programming',
-// 			    					units: 5,
-// 			    					cost_perUnits: 50,
-// 			    					pre_requisite: ''
-// 			    				}
-// 			    			}
-// 		    			]
-// 		    		}
-// 	    		]
-// 	    	},
-// 	    	{
-// 	    		course_name : 'BSOA',
-// 	    		course_des : 'Bachelor of office Administration',
-// 	    		year_levels: [
-// 	    			{
-// 		    			year_level: 4,
-// 		    			terms: [
-// 			    			{
-// 			    				term : 1,
-// 			    				subjects: {
-// 			    					subject_name: 'Softwen',
-// 			    					subject_des: 'Software Engineering',
-// 			    					units: 3,
-// 			    					cost_perUnits: 30,
-// 			    					pre_requisite: ''
-// 			    				}
-// 			    			},
-// 			    			{
-// 			    				term : 2,
-// 			    				subjects: {
-// 			    					subject_name: 'addprog',
-// 			    					subject_des: 'Addvance Programming',
-// 			    					units: 3,
-// 			    					cost_perUnits: 30,
-// 			    					pre_requisite: ''
-// 			    				}
-// 			    			}
-// 		    			]
-// 		    		},
-// 		    		{
-// 		    			year_level: 1,
-// 		    			terms: [
-// 			    			{
-// 			    				term : 1,
-// 			    				subjects: {
-// 			    					subject_name: 'Softwen',
-// 			    					subject_des: 'Software Engineering',
-// 			    					units: 4,
-// 			    					cost_perUnits: 40,
-// 			    					pre_requisite: ''
-// 			    				}
-// 			    			},
-// 			    			{
-// 			    				term : 2,
-// 			    				subjects: {
-// 			    					subject_name: 'addprog',
-// 			    					subject_des: 'Addvance Programming',
-// 			    					units: 5,
-// 			    					cost_perUnits: 50,
-// 			    					pre_requisite: ''
-// 			    				}
-// 			    			}
-// 		    			]
-// 		    		}
-// 	    		]
-// 	    	}
-//     	]
-// 	},
-//     keywords:['Robert', 'Strong'] 
+//  	school_year : 2014,
+//     departments  : [
+//         {
+//             department_name : 'testing',
+//             department_des : 'test1',
+//             course_name: 'BSIT',
+//             course_des: 'Bachelor of information technology',
+//             subjects: [
+//                 {
+//                     subject_name: 'Addprog',
+//                     subject_des: 'Addvance Programming',
+//                     units: '3',
+//                     cost_perUnits: '30',
+//                     pre_requisite: ''
+//                 },
+//                   {
+//                     subject_name: 'Addbase',
+//                     subject_des: 'Addvance Database',
+//                     units: '3',
+//                     cost_perUnits: '30',
+//                     pre_requisite: ''
+//                 }
+//             ],
+//             term: '2',
+//             year_level: '4'
+//         },
+//          {
+//             department_name : 'test',
+//             department_des : 'Arts and Science',
+//             course_name: 'BSHM',
+//             course_des: 'Bachelor of Home management',
+//             subjects: [
+//                 {
+//                     subject_name: 'engl1',
+//                     subject_des: 'english 1',
+//                     units: '3',
+//                     cost_perUnits: '30',
+//                     pre_requisite: ''
+//                 },
+//                   {
+//                     subject_name: 'engl2',
+//                     subject_des: 'english 2',
+//                     units: '3',
+//                     cost_perUnits: '30',
+//                     pre_requisite: ''
+//                 }
+//             ],
+//             term: '2',
+//             year_level: '3'
+//         }
+//     ],
+//     keywords:['ok doki'] 
 // });
-// addCurriculum.save();
+//  addCurriculum.save();
 
 //use middleware
 app.use( express.static( path.join( __dirname,'/public' ) ) );

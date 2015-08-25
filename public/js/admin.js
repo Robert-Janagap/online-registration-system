@@ -17,9 +17,9 @@
 
     $( '.department_subjects--show, .department_subjects--close, .department--overlay' ).on( 'click',function ( event ){
 
+        console.log('obj');
         event.preventDefault();
         $( '.department_subjects, .department--overlay' ).toggle();
-        console.log('obj');
     } );
 
 } )( jQuery );

@@ -12,7 +12,7 @@
 			<article class="row">
 				<div class="department_mnt">
 					<div class="row">
-						<h3 class="content_title">Curriculum{{curriculums.school_year}}</h3>
+						<h3 class="content_title">Curriculum {{curriculum.school_year}}</h3>
 					</div>
 					<table>
 						<thead>
@@ -27,29 +27,33 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="department in curriculums">
-								<td class="department_mnt_dep">{{department.departments.department_name}}</td>
-								<td class="department_mnt_dep">{{department.departments.department_des}}</td>
+							<tr ng-repeat="department in departments">
+								<td class="department_mnt_dep">{{department.department_name}}</td>
+								<td class="department_mnt_dep">{{department.department_des}}</td>
 								<td>
-									<div ng-repeat="courses in department.departments.courses">
-										<div class="department_mnt_course">{{courses.course_name}}</div>	
+									<div ng-repeat="course in departments">
+										<div class="department_mnt_course">{{course.course_name}}</div>	
 									</div>
 								</td>
 								<td>
-									<div ng-repeat="courses in department.departments.courses">
-										<div class="department_mnt_course">{{courses.course_des}}</div>	
+									<div ng-repeat="course in departments">
+										<div class="department_mnt_course">{{course.course_des}}</div>	
 									</div>
 								</td>
 								<td>
-									<div ng-repeat="year_levels in department.departments.courses.year_levels">
-										<div class="department_mnt_course">{{year_levels.year_levels.year_level}}</div>	
+									<div ng-repeat="yearLevel in departments">
+										<div class="department_mnt_course">{{yearLevel.year_level}}</div>	
 									</div>
 								</td>
 								<td>
-									<div class="department_mnt_course">{{department.departments.courses.year_levels.terms.term}}</div>
+									<div ng-repeat="term in departments">
+										<div class="department_mnt_course">{{term.term}}</div>	
+									</div>
 								</td>
 								<td>
-									<div class="department_mnt_course"><div class="department_subjects--show">Subjects</div></div>
+									<div class="department_mnt_course department_subjects--show" ng-repeat="course in departments">
+									Subjects
+									</div>
 								</td>
 							</tr>
 						</tbody>
@@ -107,30 +111,12 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th>Subject code</th>
-								<th>Description</th>
-								<th>Units</th>
-								<th>Cost/Units</th>
-								<th>Pre-requisite</th>
-							</tr>
-							<tr>
-								<td>Addbase</td>
-								<td>Addvance Database</td>
-								<td>3</td>
-								<td><span>P</span>30</td>
-								<td>Copro2</td>
-								<td><button class="btn btn--orange">Edit</button></td>
-								<td><button class="btn btn--red">Delete</button></td>
-							</tr>
-							<tr>
-								<td>Addbase</td>
-								<td>Addvance Database</td>
-								<td>3</td>
-								<td><span>P</span>30</td>
-								<td>Copro2</td>
-								<td><button class="btn btn--orange">Edit</button></td>
-								<td><button class="btn btn--red">Delete</button></td>
+							<tr ng-repeat = "subject in subjects">
+								<td>{{subject.subject_name}}</td>
+								<td>{{subject.subject_des}}</td>
+								<td>{{subject.units}}</td>
+								<td>{{subject.cost_perUnits}}</td>
+								<td>{{subject.pre_requisite}}</td>
 							</tr>
 						</tbody>
 					</table>
