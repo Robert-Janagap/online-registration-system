@@ -1,17 +1,17 @@
-.department_add{
-	position: fixed;
-	background: #fff;
-	border-radius: 4px;
-	z-index: 5;
-	top: 20%;
-	left: 15%;
-	padding: 1.5rem;
-	display: none;
-	margin: 0 auto;
-	table {
-		margin-bottom: 1.5rem;
-	}
-}
+// .department_add{
+// 	position: fixed;
+// 	background: #fff;
+// 	border-radius: 4px;
+// 	z-index: 5;
+// 	top: 20%;
+// 	left: 15%;
+// 	padding: 1.5rem;
+// 	display: none;
+// 	margin: 0 auto;
+// 	table {
+// 		margin-bottom: 1.5rem;
+// 	}
+// }
 .department_add--overlay{
 	position: fixed;
 	top: 0;
@@ -21,4 +21,22 @@
 	background: rgba(0,0,0,0.4);
 	z-index: 4;
 	display: none;
+}
+.curriculum_year {
+	position: fixed;
+	background: #fff;
+	border-radius: 4px;
+	z-index: 5;
+	top: 20%;
+	left: 40%;
+	padding: 1rem 3rem;
+	display: none;
+	margin: 0 auto;
+	.input_groups{
+		margin-top: 1.4rem;
+		display: block;
+	}
+	.btn {
+		margin-top: 1.4rem;
+	}
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ors_app">
 <head>
 	<meta charset="UTF-8">
 	<title>Administrator</title>
@@ -40,24 +40,6 @@
 				<div class="curriculum four column">
 					<div class="curriculum_box cf">
 						<div class="tag"><h3>2015</h3></div>
-						<div class="tag">Curriculum</div>
-						<div class="curriculum_box--overlay">
-							<div class="curriculum_box_btn"><a href="/curriculum">View</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="curriculum four column">
-					<div class="curriculum_box cf">
-						<div class="tag"><h3>2014</h3></div>
-						<div class="tag">Curriculum</div>
-						<div class="curriculum_box--overlay">
-							<div class="curriculum_box_btn"><a href="/curriculum">View</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="curriculum four column">
-					<div class="curriculum_box cf">
-						<div class="tag"><h3>2013</h3></div>
 						<div class="tag">Curriculum</div>
 						<div class="curriculum_box--overlay">
 							<div class="curriculum_box_btn"><a href="/curriculum">View</a></div>
@@ -155,63 +137,85 @@
 			</article>
 		</div>
 	</div>
-	<div class="container">
+	<div class="curriculum_year">
+		<div class="btn--close curriculum--overlayClose">X</div>
+		<div class="input_groups">
+			<label for="">Year</label>
+			<input type="text" class="input_units" ng-model="curriculum_new.school_year">
+		</div>
+		<a class="btn pull--right" href="/departments/settings">Next</a>
+	</div>
+	<!-- <div class="container" ng-controller= "curriculumsCtrl">
 		<div class="department_add">
 			<form class="cf">
 				<div class="input_groups">
 					<label for="">Year</label>
-					<input type="text" class="input_units">
+					<input type="text" class="input_units" ng-model="curriculum_new.school_year">
 				</div>
 				<div class="department_add_table">
-					<div class="btn--close curriculum--overlayClose">X</div>
 					<h3>Department<span href="" class="content_title_btn">Add</span></h3>
 					<table>
 						<thead>
 							<tr>
 								<th>
 									<label for="">Department Name</label>
-									<input type="text" class="input_name">
+									<input type="text" class="input_name" ng-model="curriculum_new.department_name">
 								</th>
 								<th>
 									<label for="">Department Description</label>
-									<input type="text" class="input_des">	
+									<input type="text" class="input_des" ng-model="curriculum_new.department_des">
 								</th>
 							</tr>
 						</thead>
 						<tbody class="department_add_courses">
 							<tr>
-								<th>Course Code</th>
-								<th>Course Description</th>
-								<th># of years</th>
-								<th># of terms</th>
-								<th><button>Add</button></th>
+								<th>
+									<label for="">Course Code</label>
+									<input type="text" class="input_name" ng-model="curriculum_new.course_name">
+								</th>
+								<th>
+									<label for="fee_amount">Course Description</label>
+									<input type="text" class="input_des" ng-model="curriculum_new.course_des">
+								</th>
+								<th>
+									<label for="fee_amount">year levels</label>
+									<input type="text" class="input_units" ng-model="curriculum_new.year_level">
+								</th>
+								<th>
+									<label for="fee_amount">semester</label>
+									<input type="text" class="input_units" ng-model="curriculum_new.term">
+								</th>
+								<th>
+									<button class="btn btn--blue">Add</button>
+								</th>
 							</tr>
-							<tr>
+							<tr ng-repeat="selection in selections.departments">
 								<td>
-									<input type="text" class="input_name">
+									<input type="text" class="input_name" value="{{selection.course_name}}">
 								</td>
 								<td>
-									<input type="text" class="input_des">
+									<input type="text" class="input_des" value="{{selection.course_des}}">
 								</td>
 								<td>
-									<input type="text" class="input_units">
+									<input type="number" class="input_units" value="{{selection.year_level}}">
 								</td>
 								<td>
-									<input type="text" class="input_units">
+									<input type="number" class="input_units" value="{{selection.term}}">
 								</td>
-								<td>
-									<button>delete</button>
-								</td>
+								<th>
+									<button class="btn btn--red">Delete</button>
+								</th>
 							</tr>
 						</tbody>
 					</table>
-					<div class="btn pull--right">Next</div>
+					<div class="btn pull--right" ng-click="curriculum_add()">Next</div>
 				</div>
 			</form>	
 		</div>
-	</div>
-<script src="/lib/angular.min.js"></script>
+	</div> -->
 <script src="/lib/jquery-1.11.1.min.js"></script>
+<script src="/lib/angular.min.js"></script>
+<script src="/js/controllers/curriculumsCtrl.js"></script>
 <script src="/js/sideBarFixed.js"></script>
 <script src="/js/admin.js"></script>
 </body>

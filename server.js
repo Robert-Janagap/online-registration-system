@@ -11,63 +11,8 @@ app.set( 'view engine','ejs' );
 
 mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
 
-var curriculums = mongoose.model('curriculum', require('./app/models/curriculums.js'));
-
-// var addCurriculum = new curriculums({
-//  	school_year : 2014,
-//     departments  : [
-//         {
-//             department_name : 'testing',
-//             department_des : 'test1',
-//             course_name: 'BSIT',
-//             course_des: 'Bachelor of information technology',
-//             subjects: [
-//                 {
-//                     subject_name: 'Addprog',
-//                     subject_des: 'Addvance Programming',
-//                     units: '3',
-//                     cost_perUnits: '30',
-//                     pre_requisite: ''
-//                 },
-//                   {
-//                     subject_name: 'Addbase',
-//                     subject_des: 'Addvance Database',
-//                     units: '3',
-//                     cost_perUnits: '30',
-//                     pre_requisite: ''
-//                 }
-//             ],
-//             term: '2',
-//             year_level: '4'
-//         },
-//          {
-//             department_name : 'test',
-//             department_des : 'Arts and Science',
-//             course_name: 'BSHM',
-//             course_des: 'Bachelor of Home management',
-//             subjects: [
-//                 {
-//                     subject_name: 'engl1',
-//                     subject_des: 'english 1',
-//                     units: '3',
-//                     cost_perUnits: '30',
-//                     pre_requisite: ''
-//                 },
-//                   {
-//                     subject_name: 'engl2',
-//                     subject_des: 'english 2',
-//                     units: '3',
-//                     cost_perUnits: '30',
-//                     pre_requisite: ''
-//                 }
-//             ],
-//             term: '2',
-//             year_level: '3'
-//         }
-//     ],
-//     keywords:['ok doki'] 
-// });
-//  addCurriculum.save();
+var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
+var courseSelection = mongoose.model('courseSelection', require('./app/models/courseSelection.js'));
 
 //use middleware
 app.use( express.static( path.join( __dirname,'/public' ) ) );
@@ -93,6 +38,90 @@ app.get( '/database',function ( req,res ) {
     } );
 
 } );
+app.get( '/tmdatabase',function ( req,res ) {
+
+    courseSelection.find( {},function ( err,data ) {
+
+        res.json( data );
+
+    } );
+
+} );
+// flow to add data
+app.post('/', function(req, res) {
+	// var dataKeywords= [
+	// req.body.department_name,
+	// req.body.department_des,
+	// req.body.course_name,
+	// req.body.course_des];
+
+	// var newData = {
+	// 	school_year :  req.body.school_year,
+	// 	departments  : [
+	//         {
+	//             department_name : req.body.department_name,
+	//             department_des : req.body.department_des,
+	//             course_name: req.body.course_name,
+	//             course_des: req.body.course_des,
+	//             subjects: [
+	//                 {
+	//                     subject_name: '',
+	//                     subject_des: '',
+	//                     units: '',
+	//                     cost_perUnits: '',
+	//                     pre_requisite: ''
+	//                 }
+	//             ],
+	//             term: req.body.term,
+	//             year_level: req.body.year_level
+	// 	    }
+	//     ],
+	//     keywords:dataKeywords
+	// };
+
+	// var department_new = new curriculums(newData);
+
+	// department_new.save(function(err, data){
+	// 	if (err){
+	// 		console.log('there was an error');
+	// 	};
+	// 	res.json(data)
+	// });
+	console.log({
+		school_year : req.body.school_year,
+    	departments  : [
+	        {
+	            department_name : req.body.department_name,
+	            department_des : req.body.department_des,
+	            course_name: req.body.course_name,
+	            course_des: req.body.course_des,
+	            term: req.body.term,
+	            year_level: req.body.year_level
+	        }
+   		]
+	});
+	var selection = {
+		school_year : req.body.school_year,
+    	departments  : [
+	        {
+	            department_name : req.body.department_name,
+	            department_des : req.body.department_des,
+	            course_name: req.body.course_name,
+	            course_des: req.body.course_des,
+	            term: req.body.term,
+	            year_level: req.body.year_level
+	        }
+   		]
+	};
+	var newSelection = new courseSelection(selection);
+	newSelection.save(function(err, data){
+		if(err){
+			console.log('there was an error');
+		}
+		res.json(data);
+	});
+	
+});
 
 //server listening
 http.createServer( app ).listen( port,function() {

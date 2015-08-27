@@ -375,19 +375,6 @@ td {
 .department_subjects--show {
   cursor: pointer; }
 
-.department_add {
-  position: fixed;
-  background: #fff;
-  border-radius: 4px;
-  z-index: 5;
-  top: 20%;
-  left: 15%;
-  padding: 1.5rem;
-  display: none;
-  margin: 0 auto; }
-  .department_add table {
-    margin-bottom: 1.5rem; }
-
 .department_add--overlay {
   position: fixed;
   top: 0;
@@ -397,6 +384,22 @@ td {
   background: rgba(0, 0, 0, 0.4);
   z-index: 4;
   display: none; }
+
+.curriculum_year {
+  position: fixed;
+  background: #fff;
+  border-radius: 4px;
+  z-index: 5;
+  top: 20%;
+  left: 40%;
+  padding: 1rem 3rem;
+  display: none;
+  margin: 0 auto; }
+  .curriculum_year .input_groups {
+    margin-top: 1.4rem;
+    display: block; }
+  .curriculum_year .btn {
+    margin-top: 1.4rem; }
 
 .department--overlay {
   background: rgba(0, 0, 0, 0.4);
