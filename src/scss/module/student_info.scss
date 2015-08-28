@@ -1,0 +1,15 @@
+.student_info {
+	position: relative;
+	margin-top: 1.8rem;
+	margin-bottom: 3.2rem;
+	background: #fff;
+	&_details{
+		padding: 0 1rem;
+		padding-bottom: 1.9rem;
+	}
+	.block{
+		display: inline-block;
+		padding: 1rem .8rem;
+		text-align: center;
+	}
+}	

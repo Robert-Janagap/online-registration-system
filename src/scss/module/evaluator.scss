@@ -1,0 +1,22 @@
+.search_student {
+	background: #FCF9F9;
+	text-align: center;
+}
+.course_view{
+	background: #fff;
+	box-shadow: 0 0 10px rgba(0,0,0,0.4);
+	padding: 1rem 1.4rem;
+	margin-top: 1.8rem;
+	margin-bottom: 1.8rem;
+}
+.selectBar{
+	margin-bottom: 20px;
+	margin-right: 10px;
+	display: inline-block;
+	label{
+		padding-right:5px;
+	}
+}
+.block span:first-child {
+	display: block;
+}
