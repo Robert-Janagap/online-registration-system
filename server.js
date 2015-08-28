@@ -9,7 +9,7 @@ var express =require( 'express' ),
 app.set( 'views',path.join( __dirname,'app/views' ) );
 app.set( 'view engine','ejs' );
 
-mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
+// mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
 
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
 var courseSelection = mongoose.model('courseSelection', require('./app/models/courseSelection.js'));
@@ -22,12 +22,27 @@ app.use( bodyParser.urlencoded( { extended :false } ) );
 //define routes
 var index =require( './app/routes/index.js' ),
 	curriculum =require( './app/routes/curriculum.js' );
-	departmentSettings =require( './app/routes/curriculumSettings.js' );
+	departmentSettings =require( './app/routes/curriculumSettings.js' ),
+	evaluator =require( './app/routes/evaluator.js' ),
+	studentInfo =require( './app/routes/studentInfo.js' ),
+	studentCourse =require( './app/routes/studentCourse.js' ),
+	programCoordinator =require( './app/routes/programCoordinator.js' ),
+	setSchedule =require( './app/routes/setSchedule.js' );
 
+// page url
 //for admin
 app.use( '/',index );
 app.use( '/curriculum',curriculum );
 app.use( '/departments/settings',departmentSettings );
+//for staff
+app.use( '/evaluator',evaluator );
+app.use( '/program-coordinator',programCoordinator );
+app.use( '/program-coordinator/set-schedule',setSchedule );
+
+//for student
+app.use( '/student-info',studentInfo );
+app.use( '/student-course',studentCourse );
+
 
 app.get( '/database',function ( req,res ) {
 

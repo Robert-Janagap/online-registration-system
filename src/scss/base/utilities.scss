@@ -1,10 +1,16 @@
-.btn--close{
-	position: absolute;
-	right: 20px;
-	top: 20px;
-	cursor: pointer;
-	z-index: 5;
-}
 .pull--right {
 	float: right;
+}
+.pull--left {
+	float: left;
+}
+.overlay{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.4);
+	z-index: 4;
+	display: none;
 }

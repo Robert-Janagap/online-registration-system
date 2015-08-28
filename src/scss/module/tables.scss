@@ -1,3 +1,10 @@
+table{
+	width: 100%;
+	text-align: center;
+	td, th {
+		vertical-align: baseline;
+	}
+}
 th{
 	position: relative;
 	padding: .5rem .7rem;
@@ -5,4 +12,5 @@ th{
 td{
 	text-align: center;
 	vertical-align: baseline;
+	padding-bottom: 1.5rem;
 }
