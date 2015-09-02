@@ -2,11 +2,15 @@
 <html lang="en" ng-app="ors_app">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
 	<title>Administrator</title>
 	<link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-	<div class="header"></div>
+	<div ng-include="'/views/header.ejs'"></div>
 	<div class="department_add--overlay"></div>
 	<div class="container admin">
 		<div class="three column admin_sidebar">
@@ -146,75 +150,8 @@
 		</div>
 		<a class="btn pull--right" href="/departments/settings">Next</a>
 	</div>
-	<!-- <div class="container" ng-controller= "curriculumsCtrl">
-		<div class="department_add">
-			<form class="cf">
-				<div class="input_groups">
-					<label for="">Year</label>
-					<input type="text" class="input_units" ng-model="curriculum_new.school_year">
-				</div>
-				<div class="department_add_table">
-					<h3>Department<span href="" class="content_title_btn">Add</span></h3>
-					<table>
-						<thead>
-							<tr>
-								<th>
-									<label for="">Department Name</label>
-									<input type="text" class="input_name" ng-model="curriculum_new.department_name">
-								</th>
-								<th>
-									<label for="">Department Description</label>
-									<input type="text" class="input_des" ng-model="curriculum_new.department_des">
-								</th>
-							</tr>
-						</thead>
-						<tbody class="department_add_courses">
-							<tr>
-								<th>
-									<label for="">Course Code</label>
-									<input type="text" class="input_name" ng-model="curriculum_new.course_name">
-								</th>
-								<th>
-									<label for="fee_amount">Course Description</label>
-									<input type="text" class="input_des" ng-model="curriculum_new.course_des">
-								</th>
-								<th>
-									<label for="fee_amount">year levels</label>
-									<input type="text" class="input_units" ng-model="curriculum_new.year_level">
-								</th>
-								<th>
-									<label for="fee_amount">semester</label>
-									<input type="text" class="input_units" ng-model="curriculum_new.term">
-								</th>
-								<th>
-									<button class="btn btn--blue">Add</button>
-								</th>
-							</tr>
-							<tr ng-repeat="selection in selections.departments">
-								<td>
-									<input type="text" class="input_name" value="{{selection.course_name}}">
-								</td>
-								<td>
-									<input type="text" class="input_des" value="{{selection.course_des}}">
-								</td>
-								<td>
-									<input type="number" class="input_units" value="{{selection.year_level}}">
-								</td>
-								<td>
-									<input type="number" class="input_units" value="{{selection.term}}">
-								</td>
-								<th>
-									<button class="btn btn--red">Delete</button>
-								</th>
-							</tr>
-						</tbody>
-					</table>
-					<div class="btn pull--right" ng-click="curriculum_add()">Next</div>
-				</div>
-			</form>	
-		</div>
-	</div> -->
-<script src="/lib/jquery-1.11.1.min.js"></script>
+	<div ng-include="'/views/footer.ejs'"></div>
+<script src="/lib/jquery-2.1.4.min.js"></script>
 <script src="/lib/angular.min.js"></script>
 <script src="/js/controllers/curriculumsCtrl.js"></script>
 <script src="/js/sideBarFixed.js"></script>
