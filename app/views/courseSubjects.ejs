@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app = "ors_app">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>Curriculum</title>
+	<link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+	<div ng-include="'/views/header.ejs'"></div>
+	<div class="container" ng-controller ="curriculumsCtrl">
+		<div class="twelve column">
+			<div class="department_subjects">
+				<ul>
+					<li>
+						<span>1</span>
+					</li>
+					<li>
+						<span>2</span>
+					</li>
+					<li>
+						<span>3</span>
+					</li>
+					<li>
+						<span>4</span>
+					</li>
+				</ul>
+				<div class="department_subjects_mnt">
+					<span>1st semester</span><span>2nd semester</span>
+					<table>
+						<thead>
+							<tr>
+								<th>
+									<label for="">Subject code</label>
+									<input type="text" class="input_name">
+								</th>
+								<th>
+									<label for="">Description</label>
+									<input type="text" class="input_des">
+								</th>
+								<th>
+									<label for="">Units</label>
+									<input type="text" class="input_units">
+								</th>
+								<th>
+									<label for="">Cost/Units</label>
+									<input type="text" class="input_cpu">
+								</th>
+								<th>
+									<label for="">Pre-requisite</label>
+									<input type="text" class="input_preRequisite">
+								</th>
+								<th>
+									<button class="btn btn--blue">Add</button>
+								</th>
+								<th>
+									<button class="btn btn--green">Update</button>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat = "subject in subjects">
+								<td>{{subject.subject_name}}</td>
+								<td>{{subject.subject_des}}</td>
+								<td>{{subject.units}}</td>
+								<td>{{subject.cost_perUnits}}</td>
+								<td>{{subject.pre_requisite}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="/lib/jquery-2.1.4.min.js"></script>
+<script src="/lib/angular.min.js"></script>
+<script src="/js/controllers/curriculumsCtrl.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

@@ -9,9 +9,10 @@ var express =require( 'express' ),
 app.set( 'views',path.join( __dirname,'app/views' ) );
 app.set( 'view engine','ejs' );
 
-// mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
-
+mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
+//database
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
+var assestments = mongoose.model('assestments', require('./app/models/assestments.js'));
 
 //use middleware
 app.use( express.static( path.join( __dirname,'/public' ) ) );
@@ -26,13 +27,15 @@ var administrator =require( './app/routes/administrator.js' ),
 	studentInfo =require( './app/routes/studentInfo.js' ),
 	findCourse =require( './app/routes/findCourse.js' ),
 	programCoordinator =require( './app/routes/programCoordinator.js' ),
-	setSchedule =require( './app/routes/setSchedule.js' );
+	setSchedule =require( './app/routes/setSchedule.js' ),
+	courseSubjects =require( './app/routes/courseSubjects.js' );
 
 // page url
 //for admin
 app.use( '/administrator',administrator );
-app.use( '/curriculum',curriculum );
-app.use( '/departments/settings',curriculumSettings );
+app.use( '/administrator/curriculum',curriculum );
+app.use( '/administrator/curriculum/settings',curriculumSettings );
+app.use( '/administrator/curriculum/course-subjects',courseSubjects );
 //for staff
 app.use( '/evaluator',evaluator );
 app.use( '/program-coordinator',programCoordinator );
@@ -52,92 +55,40 @@ app.get( '/database',function ( req,res ) {
     } );
 
 } );
+app.get( '/database/assestment',function ( req,res ) {
 
-// testing area
-// app.post('/', function(req, res) {
-// 	var newData = {
-// 		school_year : 2015,
-// 	    department_name : "ICT",
-// 	    department_des : "Information Techonoloy",
-// 	    courses: [
-// 	        {
-// 	            course_name: "BSIT",
-// 	            course_des: "BAchelor Of Information Technology",
-// 	            totalYears: 4,
-// 	            totalTerms: 2,
-// 	        }
-// 	    ],
-// 	    subjects: [
-// 	        {
-// 	            course_name: "BSIT",
-// 	            course_des: "BAchelor Of Information Technology",
-// 	            year_level: 2,
-// 	            term: 2,
-// 	            subject_name: "Addprog",
-// 	            subject_des: "Addvance Programming",
-// 	            units: 3,
-// 	            cost_perUnits: 30,
-// 	            pre_requisite: ""
-// 	        }
-// 	    ],
-// 	    keywords:["Addprog","Addvance"] 
-// 	};
+    assestments.find( {},function ( err,data ) {
 
-// 	var department_new = new curriculums(newData);
+        res.json( data );
 
-// 	department_new.save(function(err, data){
-// 		if (err){
-// 			console.log(data);
-// 		};
-// 		console.log("ati ok");
-// 	});
+    } );
 
+} );
+
+var new_assest = new assestments({
+	typeOfFee: 'miscelineous',
+	fees:[
+		{
+			fee_name: 'uniforms',
+		    amount: 4000,
+		    date_created: '12-01-15' 
+		},
+		{
+			fee_name: 'libarary',
+		    amount: 4000,
+		    date_created: '12-01-15' 
+		},
+		{
+			fee_name: 'equipments',
+		    amount: 4000,
+		    date_created: '12-01-15' 
+		}
+	],
+    keywords:['school fees','uniforms'] 
+})
+// new_assest.save(function(err,data){
+	
 // });
-
-
-
-// ///maintainance departments and course
-// //get the data
-// app.get('/departments/settings/:id', function(req, res){
-// 	curriculums.find( {school_year: req.params.id},function ( err,data ) {
-
-//         res.json( data );
-
-//     } );
-// });
-// //add department
-// app.post('/departments/settings', function(req, res){
-// 	var newData = {
-// 		school_year : 2015,
-// 	    department_name : req.body.depName,
-// 	    department_des : req.body.depDes
-// 	};
-// 	var department_new = new curriculums(newData);
-
-// 	department_new.save(function(err, data){
-// 		if (err){
-// 			return err;
-// 		};
-// 		res.json(data);
-// 	});
-
-// });
-// //add courses
-// app.put('/departments/settings/:id', function(req, res){
-// 	curriculums.findByIdAndUpdate(req.params.id,{$addToSet:{courses:{course_name:req.body.courseName,course_des:req.body.courseDes,totalYears: req.body.courseYears, totalTerms: req.body.courseTerms}}} ,function(err, data){
-// 		if (err){
-// 			return err;
-// 		};
-// 		res.json(data);
-// 	});
-// });
-// //delete course
-// app.delete('/departments/settings/:id', function(req, res){
-// 	curriculums.findByIdAndRemove(req.params.id, function(err, data){
-// 		res.json(data);
-// 	});
-// });
-
 //server listening
 http.createServer( app ).listen( port,function() {
 

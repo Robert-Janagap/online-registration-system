@@ -16,8 +16,9 @@
 			<article class="row">
 				<div class="department_mnt">
 					<div class="row">
-						<h3 class="content_title">Curriculum {{curriculum.school_year}}</h3>
+						<h3 class="content_title">Curriculum {{curYear}}</h3>
 					</div>
+					<a href="/administrator/curriculum/settings">settings</a>
 					<table>
 						<thead>
 							<tr>
@@ -27,36 +28,35 @@
 								<th>Code Description</th>
 								<th># of Years</th>
 								<th># of Terms</th>
-								<th><a href="/departments/settings">settings</a></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="department in departments">
+							<tr ng-repeat="department in curriculum">
 								<td class="department_mnt_dep">{{department.department_name}}</td>
 								<td class="department_mnt_dep">{{department.department_des}}</td>
 								<td>
-									<div ng-repeat="course in departments">
+									<div ng-repeat="course in department.courses">
 										<div class="department_mnt_course">{{course.course_name}}</div>	
 									</div>
 								</td>
 								<td>
-									<div ng-repeat="course in departments">
+									<div ng-repeat="course in department.courses">
 										<div class="department_mnt_course">{{course.course_des}}</div>	
 									</div>
 								</td>
 								<td>
-									<div ng-repeat="yearLevel in departments">
-										<div class="department_mnt_course">{{yearLevel.year_level}}</div>	
+									<div ng-repeat="yearLevel in department.courses">
+										<div class="department_mnt_course">{{yearLevel.totalYears}}</div>	
 									</div>
 								</td>
 								<td>
-									<div ng-repeat="term in departments">
-										<div class="department_mnt_course">{{term.term}}</div>	
+									<div ng-repeat="term in department.courses">
+										<div class="department_mnt_course">{{term.totalTerms}}</div>	
 									</div>
 								</td>
 								<td>
-									<div class="department_mnt_course department_subjects--show" ng-repeat="course in departments">
-									Subjects
+									<div class="department_mnt_course department_subjects--show" ng-repeat="course in department.courses">
+									<a href="/administrator/curriculum/course-subjects">subjects</a>
 									</div>
 								</td>
 							</tr>
@@ -64,73 +64,11 @@
 					</table>
 				</div>
 			</article>
-			<div class="department--overlay"></div>
-			<div class="department_subjects">
-				<div class="btn--close department_subjects--close">X</div>
-				<ul>
-					<li>
-						<span>1</span>
-					</li>
-					<li>
-						<span>2</span>
-					</li>
-					<li>
-						<span>3</span>
-					</li>
-					<li>
-						<span>4</span>
-					</li>
-				</ul>
-				<div class="department_subjects_mnt">
-					<span>1st semester</span><span>2nd semester</span>
-					<table>
-						<thead>
-							<tr>
-								<th>
-									<label for="">Subject code</label>
-									<input type="text" class="input_name">
-								</th>
-								<th>
-									<label for="">Description</label>
-									<input type="text" class="input_des">
-								</th>
-								<th>
-									<label for="">Units</label>
-									<input type="text" class="input_units">
-								</th>
-								<th>
-									<label for="">Cost/Units</label>
-									<input type="text" class="input_cpu">
-								</th>
-								<th>
-									<label for="">Pre-requisite</label>
-									<input type="text" class="input_preRequisite">
-								</th>
-								<th>
-									<button class="btn btn--blue">Add</button>
-								</th>
-								<th>
-									<button class="btn btn--green">Update</button>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat = "subject in subjects">
-								<td>{{subject.subject_name}}</td>
-								<td>{{subject.subject_des}}</td>
-								<td>{{subject.units}}</td>
-								<td>{{subject.cost_perUnits}}</td>
-								<td>{{subject.pre_requisite}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
 		</div>
 	</div>
+<script src="/lib/jquery-2.1.4.min.js"></script>
 <script src="/lib/angular.min.js"></script>
 <script src="/js/controllers/curriculumsCtrl.js"></script>
-<script src="/lib/jquery-1.11.1.min.js"></script>
 <script src="/js/admin.js"></script>
 </body>
 </html>

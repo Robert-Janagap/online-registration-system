@@ -33,7 +33,7 @@ gulp.task( 'sass-watch',[ 'sass' ],browserSync.reload );
 gulp.task( 'watching',function(){
 
     browserSync({
-        server: 'localhost:3000'
+        proxy: 'localhost:3000'
     });
     //gulp.watch( 'app/views/**/*.html',[ 'nodemon-watch' ] );
     gulp.watch( 'src/scss/**/*.scss',[ 'sass-watch' ] );

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div ng-include="'/views/header.ejs'"></div>
-	<div class="department_add--overlay"></div>
+	<div class="curriculum_add--overlay"></div>
 	<div class="container admin">
 		<div class="three column admin_sidebar">
 			<div class="person">
@@ -47,12 +47,12 @@
 						<div class="tag"><h3>2015</h3></div>
 						<div class="tag">Curriculum</div>
 						<div class="curriculum_box--overlay">
-							<div class="curriculum_box_btn"><a href="/curriculum">View</a></div>
+							<div class="curriculum_box_btn"><a href="/administrator/curriculum">View</a></div>
 						</div>
 					</div>
 				</div>
 			</article>
-			<article class="content row">
+			<article class="content row" ng-controller="assestmentsCtrl">
 				<div class="row">
 					<h3 class="content_title">Assestment<span href="" class="assestment--overlayShow content_title_btn ">Add</span></h3>
 				</div>
@@ -62,7 +62,7 @@
 							<div class="btn--close assestment--overlayClose">X</div>
 							<div class="input_groups">
 								<label for="fee_label">Type of School Fee</label>
-								<input type="text">
+								<input type="text" value="{{typeOfFee}}">
 							</div>
 							<div class="assestment_mtn row">
 								<table class=" twelve column">
@@ -70,17 +70,17 @@
 										<tr>
 											<th>
 												<label for="fee_name">Fee name</label>
-												<input type="text">
+												<input type="text" ng-model="fee.fee_name">
 											</th>
 											<th>
 												<label for="fee_amount">Fee amount</label>
-												<input type="text">
+												<input type="text" ng-model="fee.amount">
 											</th>
 											<th>
-												<button class="btn btn--blue">Add</button>
+												<div class="btn btn--blue" ng-click="newFee(typeOfFee_id)">Add</div>
 											</th>
 											<th>
-												<button class="btn btn--green">Update</button>
+												<div class="btn btn--green">Update</div>
 											</th>
 										</tr>
 									</thead>
@@ -88,24 +88,14 @@
 										<tr>
 											<th>Name</th>
 											<th>Amount</th>
+											<th>date created</th>
 										</tr>
-										<tr>
-											<td>Equipment</td>
-											<td><span>P</span>1,000</td>
-											<td><button class="btn btn--orange">Edit</button></td>
-											<td><button class="btn btn--red">Delete</button></td>
-										</tr>
-										<tr>
-											<td>Libary</td>
-											<td><span>P</span>2,000</td>
-											<td><button class="btn btn--orange">Edit</button></td>
-											<td><button class="btn btn--red">Delete</button></td>
-										</tr>
-										<tr>
-											<td>Insurance</td>
-											<td><span>P</span>3,000</td>
-											<td><button class="btn btn--orange">Edit</button></td>
-											<td><button class="btn btn--red">Delete</button></td>
+										<tr ng-repeat="fee in fees.fees">
+											<td>{{fee.fee_name}}</td>
+											<td><span>P</span>{{fee.amount}}</td>
+											<td>{{fee.date_created}}</td>
+											<td><div class="btn btn--orange">Edit</div></td>
+											<td><div class="btn btn--red" ng-click="deleteFee(typeOfFee_id, fee)">Delete</div></td>
 										</tr>
 									</tbody>
 								</table>
@@ -116,25 +106,14 @@
 						<thead>
 							<tr>
 								<th>Type of Fee</th>
-								<th>Date Created</th>
-								<th># of Fees</th>
-								<th>Amount</th>
+								<th>Total Amount</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>Other School fee</td>
-								<td>1-2-3</td>
-								<td>3</td>
+							<tr ng-repeat="fee in assestments">
+								<td>{{fee.typeOfFee}}</td>
 								<td><span>P</span>10,000</td>
-								<td><button class="btn btn--blue assestment_formView">View</button></td>
-							</tr>
-							<tr>
-								<td>Miscellenous</td>
-								<td>6-4-2</td>
-								<td>4</td>
-								<td><span>P</span>8,000</td>
-								<td><button class="btn btn--blue assestment_formView">View</button></td>
+								<td><show-fees ng-click="viewFees(fee._id)"></show-fees></td>
 							</tr>
 						</tbody>
 					</table>
@@ -148,12 +127,12 @@
 			<label for="">Year</label>
 			<input type="text" class="input_units" ng-model="curriculum_new.school_year">
 		</div>
-		<a class="btn pull--right" href="/departments/settings">Next</a>
+		<a class="btn pull--right" href="/administrator/curriculum/settings">Next</a>
 	</div>
 	<div ng-include="'/views/footer.ejs'"></div>
 <script src="/lib/jquery-2.1.4.min.js"></script>
 <script src="/lib/angular.min.js"></script>
-<script src="/js/controllers/curriculumsCtrl.js"></script>
+<script src="/js/controllers/assestmentsCtrl.js"></script>
 <script src="/js/sideBarFixed.js"></script>
 <script src="/js/admin.js"></script>
 </body>

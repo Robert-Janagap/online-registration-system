@@ -13,43 +13,55 @@
 	<div ng-include="'/views/header.ejs'"></div>
 	<div class="container" ng-controller= "curriculumsCtrl">
 		<div class="twelve column">
+		<a href="/administrator/curriculum">back</a>
 			<div class="curriculum_setting_list">
 				<h3 class="content_title">Settings</h3>
 				<form class="curriculum_setting">
 					<div class="input_groups">
-						<label for="" class="">Curriculum year</label>
-						<input type="text">
+					<!-- 	<label for="" class="">{{curYear}}</label> -->
+						<input type="text" ng-model="curYear">
 					</div>
 					<h4>Departments<span href="" class="content_title_btn">Add</span></h4>
-					<div class="department_settings">
+					<div class="newDepartment">
 						<div class="input_groups">
-							<label for="">{{department.department_name}}</label>
-							<input type="text" class="input_name">
+							<label for="">Department Name</label>
+							<input type="text" ng-model="dep.depName">
 						</div>
 						<div class="input_groups">
-							<label for="">{{department.department_des}}</label>
-							<input type="text" class="input_des">
+							<label for="">Department Description</label>
+							<input type="text" ng-model="dep.depDes">
+						</div>
+						<div class="btn btn--blue" ng-click="addDep()">Add</div>
+					</div>
+					<div class="department_settings" ng-repeat="department in curriculum">
+						<div class="input_groups">
+							<!-- <label for="">Department Name</label> -->
+							<input type="text" class="input_name" value="{{department.department_name}}">
+						</div>
+						<div class="input_groups">
+							<!-- <label for="">Department Description</label> -->
+							<input type="text" class="input_des" value="{{department.department_des}}">
 						</div>
 						<table>
 							<thead>
 								<tr>
 									<th>
 										<label for="">Course code</label>
-										<input type="text" class="input_name">
+										<input type="text" class="input_name" ng-model="dep.courseName">
 									</th>
 									<th>
 										<label for="">Course description</label>
-										<input type="text" class="input_des">
+										<input type="text" class="input_des" ng-model="dep.courseDes">
 									</th>
 									<th>
 										<label for="">years</label>
-										<input type="text" class="input_units">
+										<input type="number" class="input_units" ng-model="dep.courseYears">
 									</th>
 									<th>
 										<label for="">terms</label>
-										<input type="text" class="input_units">
+										<input type="number" class="input_units" ng-model="dep.courseTerms">
 									</th>
-									<th><button class="btn btn--blue">Add</button></th>
+									<th><button class="btn btn--blue" ng-click="addCourse(department._id, dep)">Add</button></th>
 									<th><button class="btn btn--green">Update</button></th>
 								</tr>
 							</thead>
@@ -60,13 +72,13 @@
 									<th># of years</th>
 									<th># of terms</th>
 								</tr>
-								<tr ng-repeat="course in departments">
+								<tr ng-repeat="course in department.courses">
 									<td>{{course.course_name}}</td>
 									<td>{{course.course_des}}</td>
-									<td>4</td>
-									<td>2</td>
-									<td><button class="btn btn--orange">Edit</button></td>
-									<td><button class="btn btn--red">Delete</button></td>
+									<td>{{course.totalYears}}</td>
+									<td>{{course.totalTerms}}</td>
+									<td><button class="btn btn--orange" ng-click="editCourse(course._id)">Edit</button></td>
+									<td><button class="btn btn--red" ng-click="deleteCourse(department._id, course)">Delete</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -77,9 +89,9 @@
 	</div>
 
 
+<script src="/lib/jquery-2.1.4.min.js"></script>
 <script src="/lib/angular.min.js"></script>
 <script src="/js/controllers/curriculumsCtrl.js"></script>
-<script src="/lib/jquery-1.11.1.min.js"></script>
 <script src="/js/admin.js"></script>
 </body>
 </html>

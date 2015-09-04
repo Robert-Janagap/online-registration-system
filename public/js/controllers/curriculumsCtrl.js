@@ -2,24 +2,40 @@ var app = angular.module('ors_app',[]);
 app.controller('curriculumsCtrl', ['$scope', '$http', function($scope, $http){
 
 	$http.get('/database').success(function(data){
-		// change this later
-		$scope.curriculum = data;
-		$scope.departments = data[4].departments;
-		$scope.subjects = data[1].departments[1].subjects;
+		//$scope.curriculum = data;
 	});
-	var refresh = function(){
-
-	};
-	$http.get('/tmdatabase').success(function(data){
-		for (var i = 0; i < data.length; i++) {
-			$scope.selections = data[i];
-			console.log($scope.selections);
-		};
-	});
-
-	$scope.curriculum_add = function(){
-		$http.post('/', $scope.curriculum_new).success(function(data){
-			
+	//get data dynamic
+	$scope.refresh = function(){
+		$http.get('/administrator/curriculum/settings/' + 2015).success(function(data){
+			$scope.curriculum = data;
+			$scope.curYear = data[0].school_year;
+			$scope.dep = "";
+		});	
+	}
+	$scope.refresh();
+	//add department
+	$scope.addDep = function(){
+		$http.post('/administrator/curriculum/settings', $scope.dep).success(function(data){
+			$scope.refresh();
 		});
-	};
+	}
+	//add course
+	$scope.addCourse = function(id, info){
+		$http.put('/administrator/curriculum/settings/'+ id, info).success(function(data){
+			$scope.refresh();
+		});
+	}
+	//delete course
+	$scope.deleteCourse = function(id, course){
+		var status = 'delete';
+		course.status = status;
+
+		$http.put('/administrator/curriculum/settings/'+ id, course).success(function(data){
+			$scope.refresh();
+		});
+	}
+	//edit course not done yet
+	$scope.editCourse = function(id){
+		console.log(id);
+	}
 }]);

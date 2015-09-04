@@ -5,15 +5,11 @@
 
         event.preventDefault();
         $( '.assestment--overlay' ).toggle();
-        console.log( 'obj' );
 
     } );
-
-    $( '.department_subjects--show, .department_subjects--close, .department--overlay' ).on( 'click',function ( event ){
-
-        console.log('obj');
+    $('.department_add--show,.curriculum--overlayClose,.curriculum_add--overlay').on('click',function(event) {
         event.preventDefault();
-        $( '.department_subjects, .department--overlay' ).toggle();
-    } );
+        $('.curriculum_year,.curriculum_add--overlay').toggle();
+    });
 
 } )( jQuery );
