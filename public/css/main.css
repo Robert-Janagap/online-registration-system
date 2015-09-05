@@ -512,8 +512,10 @@ ul {
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.4);
-  z-index: 4;
-  display: none; }
+  z-index: 4; }
+
+.boxShadow {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4); }
 
 .btn {
   border: 1px solid #BEBEBE;
@@ -597,29 +599,27 @@ ul {
   cursor: pointer;
   z-index: 5; }
 
-label {
-  position: absolute;
-  top: 50%;
-  pointer-events: none;
-  transform: translateY(-79%);
-  color: #999;
-  padding-left: 10px;
-  font-size: 1.214rem;
-  font-weight: 400; }
-
-input {
-  border: 0;
-  outline: none;
-  padding: 10px 0 5px 10px;
-  font-size: 1.2rem;
-  border-bottom: 2px solid #24A2FA;
-  margin-bottom: 20px;
-  display: inline-block; }
-
 .input_groups {
   position: relative;
   display: inline-block;
   padding: 0.5rem 0.6rem; }
+  .input_groups label {
+    position: absolute;
+    top: 50%;
+    pointer-events: none;
+    transform: translateY(-79%);
+    color: #999;
+    padding-left: 10px;
+    font-size: 1.214rem;
+    font-weight: 400; }
+  .input_groups input {
+    border: 0;
+    outline: none;
+    padding: 10px 0 5px 10px;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #24A2FA;
+    margin-bottom: 20px;
+    display: inline-block; }
 
 .input_name, .input_preRequisite {
   width: 10rem; }
@@ -648,7 +648,6 @@ th {
 
 td {
   text-align: center;
-  vertical-align: baseline;
   padding-bottom: 1.5rem; }
 
 .admin {
@@ -669,14 +668,12 @@ td {
         margin-top: 20px; }
       .admin_sidebarNav--item {
         display: block;
-        background: #94A427;
-        font-size: 1.999rem;
+        font-size: 1.414rem;
         padding: 10px 0;
-        cursor: pointer; }
-
-.admin_content {
-  height: 2400px;
-  float: right; }
+        cursor: pointer;
+        transition: color 0.3s ease-in-out; }
+        .admin_sidebarNav--item:hover {
+          color: #28E607; }
 
 .content {
   background: #fff;
@@ -688,10 +685,10 @@ td {
     margin-bottom: 2rem; }
     .content_title_btn {
       font-size: 1rem;
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
       vertical-align: middle;
       padding: 5px 6px;
-      margin-left: 10px; }
+      margin-left: 10px;
+      cursor: pointer; }
 
 .curriculum {
   text-align: center; }
@@ -752,12 +749,15 @@ td {
 .department_mnt {
   background: #fff;
   border-radius: 4px;
-  padding: 15px 20px; }
-  .department_mnt_dep {
-    vertical-align: baseline; }
+  padding: 15px 20px;
+  position: relative; }
   .department_mnt_course {
     height: 50px;
     padding-bottom: 10px; }
+  .department_mnt_settings {
+    position: absolute;
+    top: 20px;
+    right: 20px; }
 
 .department_subjects--show {
   cursor: pointer; }
@@ -815,6 +815,14 @@ td {
   .department_settings table {
     margin: 0 auto; }
 
+.newDepartment {
+  position: fixed;
+  background: #fff;
+  z-index: 5;
+  left: 25%;
+  top: 20%;
+  padding: 1.5rem; }
+
 .search_student {
   background: #FCF9F9;
   text-align: center; }
@@ -849,12 +857,147 @@ td {
     padding: 1rem 0.8rem;
     text-align: center; }
 
-.header {
-  width: 100%;
-  height: 100px;
-  background: skyblue; }
-
 .registration_form {
   background: #fff;
   padding: 0 10px;
   margin-top: 30px; }
+
+body {
+  background-image: url("/img/system_bg.png"); }
+
+.logo {
+  height: 80px;
+  width: 80px;
+  float: left; }
+  .logo .logo-img {
+    height: 80px;
+    background-size: 80px 80px;
+    background-image: url(/img/bcclogo.png);
+    background-repeat: no-repeat; }
+
+.title {
+  max-height: 80px;
+  min-width: 300px;
+  text-align: center; }
+  .title .title_republic {
+    font-size: .75rem;
+    padding-top: 9px;
+    font-weight: light; }
+  .title .title_school {
+    font-size: 1.25rem;
+    font-weight: bold; }
+  .title .title_city {
+    font-size: .8rem; }
+
+.header .header-content {
+  background-color: white;
+  height: 80px;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.header-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 393.33px; }
+
+.menu {
+  height: 20px;
+  width: 100%; }
+
+.nav {
+  background-color: lightgreen; }
+  .nav ul {
+    margin: 0;
+    padding: 0; }
+    .nav ul li {
+      font-size: 1rem;
+      text-align: center;
+      list-style-type: none;
+      margin-left: 10px;
+      display: inline-block;
+      line-height: 22px;
+      font-weight: light;
+      cursor: pointer;
+      padding-left: 25px;
+      padding-right: 25px;
+      padding-top: 10px;
+      padding-bottom: 10px; }
+      .nav ul li a {
+        text-decoration: none; }
+
+.nav ul li:hover {
+  transition: 0.8s;
+  background-color: green; }
+
+.follow-links {
+  float: right;
+  background-color: lightgreen;
+  padding-top: 3px; }
+
+.footer-content {
+  padding-top: 15px;
+  padding-bottom: 5px;
+  background-color: lightgreen; }
+  .footer-content span {
+    font-weight: bold;
+    font-size: 1.1rem; }
+  .footer-content .copyright {
+    padding-top: 15px;
+    font-size: .9rem;
+    font-weight: bold; }
+
+.pad-bot {
+  padding-bottom: 5px; }
+
+.contact ul, .admission ul,
+.about ul, .academics ul {
+  margin: 0;
+  padding: 0; }
+
+.contact li, .admission ul li, .about ul li,
+.academics ul li {
+  list-style-type: none; }
+
+.admission a, .about a,
+.academics a {
+  text-decoration: none; }
+
+.contact-info a {
+  font-size: .9rem; }
+
+.links {
+  width: 100%;
+  width: 200px;
+  margin-top: 10px; }
+  .links ul {
+    margin-bottom: 0; }
+    .links ul li {
+      list-style-type: none;
+      display: block;
+      display: inline-block;
+      margin-left: 5px; }
+      .links ul li a {
+        text-decoration: none; }
+        .links ul li a img {
+          height: 25px; }
+
+.follow-links {
+  width: 100%;
+  text-align: right;
+  float: right;
+  width: 200px; }
+  .follow-links ul {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-bottom: 0;
+    padding: 0; }
+    .follow-links ul li {
+      list-style-type: none;
+      display: block;
+      float: right;
+      padding-left: 5px; }
+      .follow-links ul li a {
+        text-decoration: none; }
+        .follow-links ul li a img {
+          height: 25px; }

@@ -2,12 +2,15 @@
 	background: #fff;
 	border-radius: 4px;
 	padding: 15px 20px;
-	&_dep{
-		vertical-align: baseline;
-	}
+	position: relative;
 	&_course{
 		height: 50px;
     	padding-bottom: 10px;
+	}
+	&_settings{
+		position: absolute;
+		top: 20px;
+		right: 20px;
 	}
 }
 .department_subjects--show {

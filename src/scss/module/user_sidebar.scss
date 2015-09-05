@@ -18,10 +18,13 @@
 			}
 			&--item{
 				display: block;
-				background: #94A427;
-				font-size: 1.999rem;
+				font-size: 1.414rem;
 				padding: 10px 0;
 				cursor: pointer;
+				transition: color .3s ease-in-out;
+				&:hover{
+					color: #28E607;
+				}
 			}
 		}
 	}

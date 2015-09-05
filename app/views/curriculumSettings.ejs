@@ -13,16 +13,16 @@
 	<div ng-include="'/views/header.ejs'"></div>
 	<div class="container" ng-controller= "curriculumsCtrl">
 		<div class="twelve column">
-		<a href="/administrator/curriculum">back</a>
 			<div class="curriculum_setting_list">
+				<a href="/administrator/curriculum">back</a>
 				<h3 class="content_title">Settings</h3>
 				<form class="curriculum_setting">
 					<div class="input_groups">
-					<!-- 	<label for="" class="">{{curYear}}</label> -->
 						<input type="text" ng-model="curYear">
 					</div>
-					<h4>Departments<span href="" class="content_title_btn">Add</span></h4>
-					<div class="newDepartment">
+					<h4>Departments<span href="" class="content_title_btn newDepartment--show">Add</span></h4>
+					<div class="overlay"></div>
+					<div class="newDepartment boxShadow six column">
 						<div class="input_groups">
 							<label for="">Department Name</label>
 							<input type="text" ng-model="dep.depName">
@@ -35,11 +35,9 @@
 					</div>
 					<div class="department_settings" ng-repeat="department in curriculum">
 						<div class="input_groups">
-							<!-- <label for="">Department Name</label> -->
 							<input type="text" class="input_name" value="{{department.department_name}}">
 						</div>
 						<div class="input_groups">
-							<!-- <label for="">Department Description</label> -->
 							<input type="text" class="input_des" value="{{department.department_des}}">
 						</div>
 						<table>
@@ -87,7 +85,7 @@
 			</div>	
 		</div>
 	</div>
-
+	<div ng-include="'/views/footer.ejs'"></div>
 
 <script src="/lib/jquery-2.1.4.min.js"></script>
 <script src="/lib/angular.min.js"></script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>Evaluator</title>
+	<link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+	<div ng-include="'/views/header.ejs'"></div>
+	<div class="container">
+		<div class="content">
+			<span>Name:</span><span>Robert Janagap</span>
+			<span>course:</span><span>BSIT</span>
+			<span>year</span>
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Subject Name</th>
+					<th>Subject des</th>
+					<th>course year</th>
+					<th>course term</th>
+					<th>units</th>
+					<th>cost/units</th>
+					<th>pre-requisite</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Addprog</td>
+					<td>Addvance programming</td>
+					<td>1</td>
+					<td>1</td>
+					<td>3</td>
+					<td>30</td>
+					<td>none</td>
+					<td><button>select</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+<script src="/lib/jquery-2.1.4.min.js"></script>
+<script src="/lib/angular.min.js"></script>
+<script src="/js/controllers/curriculumsCtrl.js"></script>
+<script src="/js/sideBarFixed.js"></script>
+<script src="/js/admin.js"></script>	
+</body>
+</html>

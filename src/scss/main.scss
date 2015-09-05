@@ -3,12 +3,184 @@
 
 //test area
 .header{
-	width: 100%;
-	height: 100px;
-	background: skyblue;
+	// width: 100%;
+	// height: 100px;
+	// background: skyblue;
 }
 .registration_form {
 	background: #fff;
 	padding: 0 10px;
 	margin-top: 30px;
+}
+body{
+	background:{
+		image: url('/img/system_bg.png');
+	}
+}
+.logo{
+	height: 80px;
+	width: 80px;
+	float: left;
+		.logo-img{
+			height: 80px;
+			background-size: 80px 80px;
+			background-image: url(/img/bcclogo.png);
+			background-repeat: no-repeat;
+		}
+}
+ .title{
+ 	max-height: 80px;
+ 	min-width: 300px;
+ 	text-align: center;
+
+		.title_republic{
+		 	font-size: .75rem;
+		 	padding-top: 9px;
+		 	font-weight: light;
+		 }
+
+		 .title_school {
+		 	font-size: 1.25rem;
+		 	font-weight: bold;
+		 }
+		 
+		 .title_city{
+		 	font-size: .8rem;
+		 }
+ }
+.header {
+	.header-content{
+		background-color: white;
+		height: 80px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+}
+	.header-container{
+		margin-left: auto;
+		margin-right: auto;
+		width: 100%;
+		max-width: 393.33px;
+	}
+.menu{
+  height: 20px;
+  width: 100%;
+}
+.nav{
+	background-color: lightgreen;
+	 ul{
+		margin: 0;
+		padding: 0;
+	 
+		li{
+		 	font-size: 1rem;
+		 	text-align: center;
+		 	list-style-type: none;
+			margin-left: 10px;
+			display: inline-block;
+			line-height: 22px;
+			font-weight: light;
+			cursor: pointer;
+			padding-left: 25px;
+			padding-right: 25px;
+			padding-top: 10px;
+			padding-bottom: 10px; 
+			a{
+				text-decoration: none;
+			 
+			}
+		}
+	}
+}
+.nav ul li:hover{
+	transition: 0.8s;
+	background-color: green;
+}
+.follow-links{
+	float: right;
+	background-color: lightgreen;
+	padding-top: 3px;
+}
+//footer
+.footer-content{	
+	padding-top: 15px;
+	padding-bottom: 5px;
+	background-color: lightgreen;
+	span{
+			font-weight: bold;
+			font-size: 1.1rem;
+		}
+	.copyright{
+		padding-top: 15px;
+		font-size: .9rem;
+		font-weight: bold;
+	}
+}
+.pad-bot{
+	padding-bottom: 5px;
+}
+.contact ul, .admission ul,
+	.about ul, .academics ul {
+		margin: 0;
+		padding: 0;
+}
+
+.contact li, .admission ul li, .about ul li,
+	.academics ul li {
+		list-style-type: none;
+}
+
+.admission a, .about a, 
+	.academics a{
+		text-decoration: none;
+
+}
+.contact-info{
+	a{
+		font-size: .9rem;
+	}
+}
+.links{
+	width: 100%;
+	width: 200px;
+	margin-top: 10px;
+		ul{
+			margin-bottom: 0;
+			li{
+				list-style-type: none;
+				display: block;
+				display: inline-block;
+				margin-left: 5px;
+				a {
+					text-decoration: none;
+					img{
+						height: 25px;
+					}
+				}
+			}
+		}
+}
+.follow-links{
+	width: 100%;
+	text-align: right;
+	float:right;
+	width: 200px;
+	ul{
+		margin-top: 5px;
+		margin-left: 5px;
+		margin-bottom: 0;
+		padding: 0;
+		li{
+			list-style-type: none;
+			display: block;
+			float: right;
+			padding-left: 5px;
+			a {
+				text-decoration: none;
+				img{
+					height: 25px;
+				}
+			}
+		}
+	}
 }
