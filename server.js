@@ -9,7 +9,7 @@ var express =require( 'express' ),
 app.set( 'views',path.join( __dirname,'app/views' ) );
 app.set( 'view engine','ejs' );
 
-mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
+// mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
 //database
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
 var assestments = mongoose.model('assestments', require('./app/models/assestments.js'));
@@ -28,7 +28,8 @@ var administrator =require( './app/routes/administrator.js' ),
 	findCourse =require( './app/routes/findCourse.js' ),
 	programCoordinator =require( './app/routes/programCoordinator.js' ),
 	setSchedule =require( './app/routes/setSchedule.js' ),
-	courseSubjects =require( './app/routes/courseSubjects.js' );
+	courseSubjects =require( './app/routes/courseSubjects.js' ),
+	recSubjects =require( './app/routes/recSubjects.js' );
 
 // page url
 //for admin
@@ -41,9 +42,10 @@ app.use( '/evaluator',evaluator );
 app.use( '/program-coordinator',programCoordinator );
 app.use( '/program-coordinator/set-schedule',setSchedule );
 
-//for student
+//evaluator
 app.use( '/student-info',studentInfo );
 app.use( '/school-courses',findCourse );
+app.use( '/subjects-recommended',recSubjects );
 
 
 app.get( '/database',function ( req,res ) {
@@ -66,25 +68,20 @@ app.get( '/database/assestment',function ( req,res ) {
 } );
 
 var new_assest = new assestments({
-	typeOfFee: 'miscelineous',
-	fees:[
-		{
-			fee_name: 'uniforms',
-		    amount: 4000,
-		    date_created: '12-01-15' 
-		},
-		{
-			fee_name: 'libarary',
-		    amount: 4000,
-		    date_created: '12-01-15' 
-		},
-		{
-			fee_name: 'equipments',
-		    amount: 4000,
-		    date_created: '12-01-15' 
-		}
-	],
-    keywords:['school fees','uniforms'] 
+	typeOfFee: 'Misceleneous',
+    fees:[
+    	{
+    		fee_name: 'libarary',
+		    amount: 2000,
+		    date_created: 7-04-15
+    	},
+    	{
+    		fee_name: 'equipments',
+		    amount: 3000,
+		    date_created: 7-04-15
+    	}
+    ],
+    keywords:["libarary"] 
 })
 // new_assest.save(function(err,data){
 	

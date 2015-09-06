@@ -13,10 +13,10 @@
 	<div ng-include="'/views/header.ejs'"></div>
 	<div class="curriculum_add--overlay"></div>
 	<div class="container admin">
-		<div class="three column admin_sidebar">
+		<div class="three column admin_sidebar boxShadow ">
 			<div class="person">
 				<div class="person_image"><img src="img/me.png" alt=" Profile picture "></div>
-				<div class="person_name">Robert Admin</div>
+				<div class="person_name">Robert Janagap</div>
 				<div class="person_role">Administrator</div>
 			</div>
 			<div class="admin_sidebarNav">
@@ -36,9 +36,8 @@
 				</ul>
 			</div>
 		</div>
-		<!-- the admin_content class is just for test -->
-		<div class="nine column admin_content">
-			<article class="content row">
+		<div class="nine column pull--right">
+			<article class="content row boxShadow">
 				<div class="row">
 					<h3 class="content_title">Curriculum<span href="" class="department_add--show content_title_btn">Add</span></h3>
 				</div>
@@ -52,7 +51,7 @@
 					</div>
 				</div>
 			</article>
-			<article class="content row" ng-controller="assestmentsCtrl">
+			<article class="content row boxShadow" ng-controller="assestmentsCtrl">
 				<div class="row">
 					<h3 class="content_title">Assestment<span href="" class="assestment--overlayShow content_title_btn ">Add</span></h3>
 				</div>
@@ -130,6 +129,7 @@
 		<a class="btn pull--right" href="/administrator/curriculum/settings">Next</a>
 	</div>
 	<div ng-include="'/views/footer.ejs'"></div>
+	
 <script src="/lib/jquery-2.1.4.min.js"></script>
 <script src="/lib/angular.min.js"></script>
 <script src="/js/controllers/assestmentsCtrl.js"></script>

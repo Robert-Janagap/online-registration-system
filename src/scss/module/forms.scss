@@ -1,26 +1,26 @@
-label {
-	position: absolute;
-	top: 50%;
-	pointer-events: none;
-	transform: translateY(-79%); 
-	color: #999;
-	padding-left: 10px;
-	font-size: 1.214rem;
-	font-weight: 400;
-}
-input{
-	border: 0;
-	outline: none;
-	padding: 10px 0 5px 10px;
-	font-size: 1.2rem;
-	border-bottom: 2px solid #24A2FA;
-	margin-bottom: 20px;
-	display: inline-block;
-}
 .input_groups{
 	position: relative;
 	display: inline-block;
 	padding: .5rem .6rem;
+	label {
+		position: absolute;
+		top: 50%;
+		pointer-events: none;
+		transform: translateY(-79%); 
+		color: #999;
+		padding-left: 10px;
+		font-size: 1.214rem;
+		font-weight: 400;
+	}
+	input{
+		border: 0;
+		outline: none;
+		padding: 10px 0 5px 10px;
+		font-size: 1.2rem;
+		border-bottom: 2px solid #24A2FA;
+		margin-bottom: 20px;
+		display: inline-block;
+	}
 }
 
 .input_name, .input_preRequisite{

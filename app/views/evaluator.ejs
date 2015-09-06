@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app = "ors_app">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
@@ -12,75 +12,80 @@
 <body>
 	<div ng-include="'/views/header.ejs'"></div>
 	<div class="container">
-	<div class="three column admin_sidebar">
-		<div class="person">
-			<div class="person_image"><img src="img/me.png" alt=" Profile picture "></div>
-			<div class="person_name">Robert Admin</div>
-			<div class="person_role">Evaluator</div>
+		<div class="three column admin_sidebar">
+			<div class="person">
+				<div class="person_image"><img src="img/me.png" alt=" Profile picture "></div>
+				<div class="person_name">Robert Admin</div>
+				<div class="person_role">Evaluator</div>
+			</div>
+			<div class="admin_sidebarNav">
+				<ul>
+					<li class="admin_sidebarNav--list">
+						<a href="/school-courses" class="admin_sidebarNav--item">Course info</a>
+					</li>
+					<li class="admin_sidebarNav--list">
+						<a class="admin_sidebarNav--item">Registration</a>
+					</li>
+				</ul>
+			</div>
 		</div>
-		<div class="admin_sidebarNav">
-			<ul>
-				<li class="admin_sidebarNav--list">
-					<a href="/student-course" class="admin_sidebarNav--item">Course info</a>
-				</li>
-				<li class="admin_sidebarNav--list">
-					<a class="admin_sidebarNav--item">Registration</a>
-				</li>
-			</ul>
+	    <div class="nine column pull--right">
+	    	<div class="search_student row">
+		      <div class="input_groups">
+		        <label>Search Student</label>
+		        <input type="text"/>
+		      </div>
+		      <table>
+		        <thead>
+		          <tr>
+		            <th>Name</th>
+		            <th>Age</th>
+		            <th>Gender</th>
+		            <th>Address</th>
+		            <th>Contact no.</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		          <tr>
+		            <td>Mark Carumba</td>
+		            <td>32</td>
+		            <td>female</td>
+		            <td>Murcia cadiz talisay stree.t no.8</td>
+		            <td>xxxxxxx</td>
+		            <td> <a href="/student-info" class="view">View</a></td>
+		            <td> <a href="" class="view">subjects</a></td>
+		          </tr>
+		          <tr>
+		            <td>Rhoi Abello</td>
+		            <td>32</td>
+		            <td>female</td>
+		            <td>Silay</td>
+		            <td>xxxxxxx</td>
+		            <td> <a href="/student-info" class="view">View</a></td>
+		            <td> <a href="" class="view">subjects</a></td>
+		          </tr>
+		          <tr>
+		            <td>Anthony Abellar</td>
+		            <td>32</td>
+		            <td>female</td>
+		            <td>Silay</td>
+		            <td>xxxxxxx</td>
+		            <td> <a href="/student-info" class="view">View</a></td>
+		            <td> <a href="" class="view">subjects</a></td>
+		          </tr>
+		          <tr>
+		            <td>Robert Janagap</td>
+		            <td>32</td>
+		            <td>female</td>
+		            <td>Silay</td>
+		            <td>xxxxxxx</td>
+		            <td> <a a href="/student-info" class="view">View</a></td>
+		            <td> <a href="" class="view">subjects</a></td>
+		          </tr>
+		        </tbody>
+		      </table>
+		    </div>
 		</div>
-	</div>
-    <div class="nine column pull--right">
-    	<div class="search_student row">
-	      <div class="input_groups">
-	        <label>Search Student</label>
-	        <input type="text"/>
-	      </div>
-	      <table>
-	        <thead>
-	          <tr>
-	            <th>Name</th>
-	            <th>Age</th>
-	            <th>Gender</th>
-	            <th>Address</th>
-	            <th>Contact no.</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          <tr>
-	            <td>Mark Carumba</td>
-	            <td>32</td>
-	            <td>female</td>
-	            <td>Murcia cadiz talisay stree.t no.8</td>
-	            <td>xxxxxxx</td>
-	            <td> <a href="/student-info" class="view">View</a></td>
-	          </tr>
-	          <tr>
-	            <td>Rhoi Abello</td>
-	            <td>32</td>
-	            <td>female</td>
-	            <td>Silay</td>
-	            <td>xxxxxxx</td>
-	            <td> <a href="/student-info" class="view">View</a></td>
-	          </tr>
-	          <tr>
-	            <td>Anthony Abellar</td>
-	            <td>32</td>
-	            <td>female</td>
-	            <td>Silay</td>
-	            <td>xxxxxxx</td>
-	            <td> <a href="/student-info" class="view">View</a></td>
-	          </tr>
-	          <tr>
-	            <td>Robert Janagap</td>
-	            <td>32</td>
-	            <td>female</td>
-	            <td>Silay</td>
-	            <td>xxxxxxx</td>
-	            <td> <a a href="/student-info" class="view">View</a></td>
-	          </tr>
-	        </tbody>
-	      </table>
-	    </div>
 	    <div class="registration_form row">
 	    	<h3>Registration Form</h3>
 	    	<h4>Personal Data</h4>
