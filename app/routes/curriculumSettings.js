@@ -8,7 +8,7 @@ router.get( '/',function ( req,res ){
     res.render( 'curriculumSettings' );
 
 } );
-//find course corresponds in its year
+//find department corresponds in its year
 router.get( '/:id',function ( req,res ){
 
     curriculums.find({school_year: req.params.id}, function(err, data){
@@ -20,9 +20,9 @@ router.get( '/:id',function ( req,res ){
 
 } );
 //add department
-router.post('/', function(req, res){
+router.post('/:id', function(req, res){
 	var newData = {
-		school_year : 2015,
+		school_year : req.params.id,
 	    department_name : req.body.depName,
 	    department_des : req.body.depDes
 	};
@@ -35,7 +35,7 @@ router.post('/', function(req, res){
 		res.json(data);
 	});
 });
-///add courses
+///add and delete courses
 router.put('/:id', function(req, res){
 	if (req.body.status){
 		curriculums.findByIdAndUpdate(req.params.id,{$pull:{courses:{_id:req.body._id}}}, function(err, data){
@@ -53,5 +53,3 @@ router.put('/:id', function(req, res){
 
 
 module.exports =router;
-//update course
-// db.curriculums.findOne()

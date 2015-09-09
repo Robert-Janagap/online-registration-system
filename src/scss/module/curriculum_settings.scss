@@ -1,26 +1,28 @@
-.curriculum_setting {
-	&_list{
-		background: #fff;
-		padding: 1.9rem 1.2rem;	
-		border-radius: 4px;
+.departmentList {
+	display: none;
+	&_items{
+
 	}
 }
 .department_settings {
 	border-bottom: 2px solid #ccc;
 	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
 	padding-bottom: 1.5rem;
 	width: 100%;
-	text-align: center;
 	table{
 		margin: 0 auto;
 	}
 }
 .newDepartment{
-	// display:none;
+	display:none;
 	position: fixed;
 	background: #fff;
 	z-index: 5;
 	left: 25%;
 	top: 20%;
 	padding: 1.5rem;
+	&--overlay{
+		display:none;
+	}
 }

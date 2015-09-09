@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div ng-include="'/views/header.ejs'"></div>
-	<div class="container" ng-controller= "curriculumsCtrl">
+	<div class="container boxShadow" ng-controller= "curriculumsCtrl">
 		<div class="twelve column">
 			<div class="curriculum_setting_list">
 				<a href="/administrator/curriculum">back</a>
@@ -21,7 +21,7 @@
 						<input type="text" ng-model="curYear">
 					</div>
 					<h4>Departments<span href="" class="content_title_btn newDepartment--show">Add</span></h4>
-					<div class="overlay"></div>
+					<div class="newDepartment--overlay overlay"></div>
 					<div class="newDepartment boxShadow six column">
 						<div class="input_groups">
 							<label for="">Department Name</label>
@@ -31,7 +31,7 @@
 							<label for="">Department Description</label>
 							<input type="text" ng-model="dep.depDes">
 						</div>
-						<div class="btn btn--blue" ng-click="addDep()">Add</div>
+						<div class="btn btn--blue" ng-click="addDep(curYear)">Add</div>
 					</div>
 					<div class="department_settings" ng-repeat="department in curriculum">
 						<div class="input_groups">
@@ -44,20 +44,28 @@
 							<thead>
 								<tr>
 									<th>
-										<label for="">Course code</label>
-										<input type="text" class="input_name" ng-model="dep.courseName">
+										<div class="input_groups">
+											<label for="">Course code</label>
+											<input type="text" class="input_name" ng-model="dep.courseName">
+										</div>
 									</th>
 									<th>
-										<label for="">Course description</label>
-										<input type="text" class="input_des" ng-model="dep.courseDes">
+										<div class="input_groups">
+											<label for="">Course description</label>
+											<input type="text" class="input_des" ng-model="dep.courseDes">
+										</div>
 									</th>
 									<th>
-										<label for="">years</label>
-										<input type="number" class="input_units" ng-model="dep.courseYears">
+										<div class="input_groups">
+											<label for="">years</label>
+											<input type="number" class="input_units" ng-model="dep.courseYears">
+										</div>
 									</th>
 									<th>
-										<label for="">terms</label>
-										<input type="number" class="input_units" ng-model="dep.courseTerms">
+										<div class="input_groups">
+											<label for="">terms</label>
+											<input type="number" class="input_units" ng-model="dep.courseTerms">
+										</div>
 									</th>
 									<th><button class="btn btn--blue" ng-click="addCourse(department._id, dep)">Add</button></th>
 									<th><button class="btn btn--green">Update</button></th>

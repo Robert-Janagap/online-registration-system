@@ -1,7 +1,11 @@
-.department_subjects{
+.course_subjects{
 	background: #fff;
 	padding: 20px;
 	border-radius: 4px;
+	position: fixed;
+	top: 5%;
+	z-index: 5;
+	display: none;
 	li{
 		display: inline-block;
 		span{

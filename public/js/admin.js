@@ -12,7 +12,11 @@
         $('.curriculum_year,.curriculum_add--overlay').toggle();
     });
 
-    $('.newDepartment--show').on('click', function(e){
+    $('.newDepartment--show, .newDepartment--overlay').on('click', function(e){
     	$('.newDepartment').toggle(300);
+        $('.newDepartment--overlay').slideToggle(200);
+    });
+    $('.departmentList--close').on('click', function(e){
+        $('.departmentList').slideUp();
     });
 } )( jQuery );

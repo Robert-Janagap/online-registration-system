@@ -2,14 +2,15 @@
 	overflow: hidden;
 	&_sidebar {
 		position: fixed;
-		height: 100%;
 		max-width: 285px;
 		background: #fff;
 		text-align: center;
 		border-radius: 4px;
-		padding-top: 1.25rem;
+		padding: 1.25rem 0;
+
 		&--fixed{
 			top: 0;
+			transition: all .5s ease-in-out;
 		}	
 		&Nav{
 			margin-top: 5%;
@@ -23,7 +24,7 @@
 				cursor: pointer;
 				transition: color .3s ease-in-out;
 				&:hover{
-					color: #28E607;
+					color: #41CC44;
 				}
 			}
 		}

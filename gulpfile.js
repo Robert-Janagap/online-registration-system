@@ -12,23 +12,8 @@ gulp.task( 'sass',function(){
     .pipe( gulp.dest( 'public/css/' ) );
 
 	} );
-///testing
-//gulp.task('develop', function(cb){
-//    var started = false;
-//    return nodemon({
-//        script: 'server.js',
- ///       ext: 'ejs js'
- //       })
-  //      .on('start', function(){
-  //          if(!started){
-  ///              cb();
- //               started = true;
- //           }
- //           })
-//    });
 
 gulp.task( 'sass-watch',[ 'sass' ],browserSync.reload );
-//gulp.task( 'nodemon-watch',[ 'develop' ],browserSync.reload );
 
 gulp.task( 'watching',function(){
 
@@ -36,6 +21,6 @@ gulp.task( 'watching',function(){
         proxy: 'localhost:3000'
     });
     //gulp.watch( 'app/views/**/*.html',[ 'nodemon-watch' ] );
-    gulp.watch( 'src/scss/**/*.scss',[ 'sass-watch' ] );
+    gulp.watch( 'src/scss/**/*.scss',[ 'sass' ] );
 	} );
 

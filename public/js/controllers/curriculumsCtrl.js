@@ -4,9 +4,9 @@ app.controller('curriculumsCtrl', ['$scope', '$http', function($scope, $http){
 	$http.get('/database').success(function(data){
 		//$scope.curriculum = data;
 	});
-	//get data dynamic
+	//get department dynamic
 	$scope.refresh = function(){
-		$http.get('/administrator/curriculum/settings/' + 2015).success(function(data){
+		$http.get('/administrator/curriculum/settings/' + 2016).success(function(data){
 			$scope.curriculum = data;
 			$scope.curYear = data[0].school_year;
 			$scope.dep = "";
@@ -14,9 +14,10 @@ app.controller('curriculumsCtrl', ['$scope', '$http', function($scope, $http){
 	}
 	$scope.refresh();
 	//add department
-	$scope.addDep = function(){
-		$http.post('/administrator/curriculum/settings', $scope.dep).success(function(data){
+	$scope.addDep = function(year){
+		$http.post('/administrator/curriculum/settings/'+year, $scope.dep).success(function(data){
 			$scope.refresh();
+			console.log(data);
 		});
 	}
 	//add course
@@ -38,4 +39,5 @@ app.controller('curriculumsCtrl', ['$scope', '$http', function($scope, $http){
 	$scope.editCourse = function(id){
 		console.log(id);
 	}
+
 }]);

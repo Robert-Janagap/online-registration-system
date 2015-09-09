@@ -9,10 +9,11 @@ var express =require( 'express' ),
 app.set( 'views',path.join( __dirname,'app/views' ) );
 app.set( 'view engine','ejs' );
 
-// mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
+mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
 //database
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
 var assestments = mongoose.model('assestments', require('./app/models/assestments.js'));
+var curriculumList = mongoose.model('curriculumList', require('./app/models/curriculumList.js'));
 
 //use middleware
 app.use( express.static( path.join( __dirname,'/public' ) ) );
@@ -21,7 +22,7 @@ app.use( bodyParser.urlencoded( { extended :true } ) );
 
 //define routes
 var administrator =require( './app/routes/administrator.js' ),
-	curriculum =require( './app/routes/curriculum.js' );
+	curriculum =require( './app/routes/curriculum.js' ),
 	curriculumSettings =require( './app/routes/curriculumSettings.js' ),
 	evaluator =require( './app/routes/evaluator.js' ),
 	studentInfo =require( './app/routes/studentInfo.js' ),
@@ -66,26 +67,21 @@ app.get( '/database/assestment',function ( req,res ) {
     } );
 
 } );
+app.get( '/database/curriculum-list',function ( req,res ) {
 
-var new_assest = new assestments({
-	typeOfFee: 'Misceleneous',
-    fees:[
-    	{
-    		fee_name: 'libarary',
-		    amount: 2000,
-		    date_created: 7-04-15
-    	},
-    	{
-    		fee_name: 'equipments',
-		    amount: 3000,
-		    date_created: 7-04-15
-    	}
-    ],
-    keywords:["libarary"] 
-})
-// new_assest.save(function(err,data){
-	
+    curriculumList.find( {},function ( err,data ) {
+
+        res.json( data );
+
+    } );
+
+} );
+
+// var curriculum_new = new curriculumList({
+// 	curriculumYear: 2017
 // });
+// curriculum_new.save()
+
 //server listening
 http.createServer( app ).listen( port,function() {
 
