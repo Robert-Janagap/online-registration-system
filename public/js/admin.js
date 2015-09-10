@@ -11,12 +11,17 @@
         event.preventDefault();
         $('.curriculum_year,.curriculum_add--overlay').toggle();
     });
-
+    // toggle curriculum info
     $('.newDepartment--show, .newDepartment--overlay').on('click', function(e){
     	$('.newDepartment').toggle(300);
         $('.newDepartment--overlay').slideToggle(200);
     });
+    // close curriculum info
     $('.departmentList--close').on('click', function(e){
         $('.departmentList').slideUp();
+    });
+    // close course subjects
+    $('.course_subjects--close').on('click', function(e){
+        $('.course_subjects').toggle();
     });
 } )( jQuery );

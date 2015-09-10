@@ -39,6 +39,7 @@
 		</div>
 	<!-- contents -->
 		<div class="nine column pull--right">
+			<!-- Curriculum list -->
 			<article class="content row boxShadow">
 				<div class="row">
 					<h3 class="content_title">Curriculum<span href="" class="department_add--show content_title_btn">Add</span></h3>
@@ -55,6 +56,7 @@
 					</div>
 				</div>
 			</article>
+			<!-- curriculum information -->
 			<article class="content row departmentList boxShadow">
 				<h3 class="content_title"><span>Curriculum {{curYear}}</span></h3>
 				<div class="btn--close departmentList--close">X</div>
@@ -74,11 +76,12 @@
 					</div>
 					<div class="department_settings row" ng-repeat="department in curriculum">
 						<div class="input_groups">
-							<input type="text" class="input_name" value="{{department.department_name}}">
+							<input type="text" class="input_des" value="{{department.department_name}}">
 						</div>
 						<div class="input_groups">
 							<input type="text" class="input_des" value="{{department.department_des}}">
 						</div>
+						<button class="btn btn--red" ng-click="deleteDep(department._id, curYear)">Delete</button>
 						<table>
 							<thead>
 								<tr>
@@ -115,14 +118,14 @@
 									<th>Course Code</th>
 									<th>Course description</th>
 									<th># of years</th>
-									<th># of terms</th>
+									<th>semester</th>
 								</tr>
 								<tr ng-repeat="course in department.courses">
 									<td>{{course.course_name}}</td>
 									<td>{{course.course_des}}</td>
 									<td>{{course.totalYears}}</td>
 									<td>{{course.totalTerms}}</td>
-									<td><button class="btn" ng-click="">subjects</button></td>
+									<td><show-subjects ng-click="getSubjects(course._id)"></show-subjects></td>
 									<td><button class="btn btn--orange" ng-click="editCourse(course._id)">Edit</button></td>
 									<td><button class="btn btn--red" ng-click="deleteCourse(department._id, course)">Delete</button></td>
 								</tr>
@@ -131,6 +134,7 @@
 					</div>
 				</form>
 			</article>
+			<!-- assestment view -->
 			<article class="content row boxShadow">
 				<div class="row">
 					<h3 class="content_title">Assestment<span href="" class="assestment--overlayShow content_title_btn ">Add</span></h3>
@@ -213,23 +217,78 @@
 			<a class="btn pull--right">Next</a>
 		</div>
 		<!-- course subjects -->
-		<div class="course_subjects">
+		<div class="course_subjects boxShadow">
+			<div class="btn--close course_subjects--close">X</div>
+			<span>{{courseName}}</span>
+			<span>{{courseDes}}</span>
 			<ul>
-				<li>
-					<span>1</span>
-				</li>
-				<li>
-					<span>2</span>
-				</li>
-				<li>
-					<span>3</span>
-				</li>
-				<li>
-					<span>4</span>
+				<li ng-repeat="courseYear in courseYears">
+					<div class="btn">{{courseYear}}</div>
+					<ul class="course_subjectsList">
+						<li ng-repeat="courseTerm in courseTerms">
+							<div class="btn" ng-click="findSubjects(courseYear,courseTerm)">{{courseTerm}} semester</div>
+							<table>
+								<thead>
+									<tr>
+										<th>
+											<div class="input_groups">
+												<label for="">Subject code</label>
+												<input type="text" class="input_name" ng-model="subject.subName">
+											</div>
+										</th>
+										<th>
+											<div class="input_groups">
+												<label for="">Description</label>
+												<input type="text" class="input_des" ng-model="subject.subDes">
+											</div>
+										</th>
+										<th>
+											<div class="input_groups">
+												<label for="">Units</label>
+												<input type="text" class="input_units" ng-model="subject.subUnits">
+											</div>
+										</th>
+										<th>
+											<div class="input_groups">
+												<label for="">Cost/Units</label>
+												<input type="text" class="input_units" ng-model="subject.subCpu">
+											</div>
+										</th>
+										<th>
+											<div class="input_groups">
+												<label for="">Pre-requisite</label>
+												<input type="text" class="input_preRequisite" ng-model="subject.subPreRequisite">
+											</div>
+										</th>
+										<th>
+											<button class="btn btn--blue" ng-click="addSubjects(departmentId,courseYear, courseTerm, courseName, courseDes, subject)">Add</button>
+										</th>
+										<th>
+											<button class="btn btn--green">Update</button>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat = "subject in subjects">
+										<td>{{subject.subject_name}}</td>
+										<td>{{subject.subject_des}}</td>
+										<td>{{subject.units}}</td>
+										<td>{{subject.cost_perUnits}}</td>
+										<td>{{subject.pre_requisite}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</li>
+					</ul>
 				</li>
 			</ul>
-			<div class="course_subjectsList">
-				<span>1st semester</span><span>2nd semester</span>
+			<!-- <div class="course_subjectsList">
+				<ul>
+					<li ng-repeat="courseTerm in courseTerms">
+						<div class="btn">{{courseTerm}} <s></s>emester</div>
+					</li>
+				</ul>
+				
 				<table>
 					<thead>
 						<tr>
@@ -254,7 +313,7 @@
 							<th>
 								<div class="input_groups">
 									<label for="">Cost/Units</label>
-									<input type="text" class="input_cpu">
+									<input type="text" class="input_units">
 								</div>
 							</th>
 							<th>
@@ -281,7 +340,7 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<div ng-include="'/views/footer.ejs'"></div>

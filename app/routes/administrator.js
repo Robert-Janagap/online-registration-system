@@ -3,7 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var assestments = mongoose.model('assestments');
 var curriculumList = mongoose.model('curriculumList');
-var curriculums = mongoose.model('curriculums')
+var curriculums = mongoose.model('curriculums');
+
 router.get('/', function( req, res) {
 	res.render('administrator');
 });
@@ -26,17 +27,6 @@ router.get('/curriculum-list', function( req, res) {
 	});
 });
 //for departments
-//find department corresponds in its year
-router.get( '/curriculumSel/:id',function ( req,res ){
-
-    curriculums.find({school_year: req.params.id}, function(err, data){
-		if(err){
-			return err;
-		}
-		res.json(data);
-	});
-
-} );
 //add department
 router.post('/curriculumSel/:id', function(req, res){
 	var newData = {
@@ -53,6 +43,12 @@ router.post('/curriculumSel/:id', function(req, res){
 		res.json(data);
 	});
 });
+// delete department
+router.delete('/curriculumSel/:id', function(req, res){
+	curriculums.findByIdAndRemove(req.params.id, function(err, data){
+		res.json(data);
+	})
+});
 ///add and delete courses
 router.put('/curriculumSel/:id', function(req, res){
 	if (req.body.status){
@@ -67,6 +63,33 @@ router.put('/curriculumSel/:id', function(req, res){
 		res.json(data);
 		});
 	}
+});
+// get course subjects
+router.get('/courseSubjects/:id', function(req, res){
+	curriculums.find({'courses._id':req.params.id}, {courses:{$elemMatch:{_id:req.params.id}}},function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+// add course subjects
+router.put('/courseSubjects/:id', function(req, res){
+	curriculums.findByIdAndUpdate(req.params.id,{$addToSet:{subjects:{course_name:req.body.course_name,course_des:req.body.course_des,year_level: req.body.year_level, term: req.body.term,subject_name:req.body.subject.subName,subject_des:req.body.subject.subDes,units:req.body.subject.subUnits,cost_perUnits:req.body.subject.subCpu,pre_requisite:req.body.subject.subPreRequisite}}} ,function(err, data){
+		if (err){
+			return err;
+		};
+		res.json(data);
+		});
+});
+// find subjects related in year and term
+router.post('/findSubjects', function(req, res){
+	curriculums.find({$and:[{'subjects.year_level':req.body.year},{'subjects.term':req.body.term}]}, function(err, data){
+		if (err){
+			return err;
+		};
+		res.json(data);
+		});
 });
 
 //for assestments

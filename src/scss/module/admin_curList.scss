@@ -7,7 +7,7 @@
 		position: relative;
 		&:hover{
 			.curriculum_box--overlay{
-				display: block;
+				opacity: 1;
 			}
 		}
 		&_btn{
@@ -20,6 +20,7 @@
 			text-shadow: 0 1px rgba(0,0,0,0.4);
 			border:1px solid #fff;
 			color: #fff;
+			transition: all .3s ease-in-out;
 			&:hover{
 				background: rgba(0,0,0,0.7);
 			}
@@ -30,7 +31,7 @@
 			}
 		}
 		&--overlay{
-			display: none;
+			opacity: 0;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -39,6 +40,7 @@
 			background: rgba(0,0,0,0.7);
 			z-index: 4;
 			color: #fff;
+			transition: all .3s ease-in-out;
 		}
 	}
 }

@@ -2,12 +2,14 @@
 	background: #fff;
 	padding: 20px;
 	border-radius: 4px;
-	position: fixed;
+	position: absolute;
 	top: 5%;
+	left: 2%;
 	z-index: 5;
 	display: none;
 	li{
 		display: inline-block;
+		margin-right: .8rem;
 		span{
 			background: #fff;
 			border: 1px solid #ccc;
@@ -15,5 +17,14 @@
 			margin: 10px;
 			display: inline-block;
 		}
+	}
+	th{
+		padding: 0 .4rem;
+	}
+	&List{
+		border: 1px solid #D5D5D5;
+		border-radius: 4px;
+		padding: 1rem .8rem;
+		margin-top: 1rem;
 	}
 }

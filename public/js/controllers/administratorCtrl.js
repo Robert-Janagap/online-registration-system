@@ -15,17 +15,23 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 		});	
 	}
 	//test
-	// $http.get('/administrator/curriculumSel/' + 2015).success(function(data){
-	// 		$scope.curriculum = data;
-	// 		$scope.curYear = data[0].school_year;
-	// 		$scope.dep = "";
-	// 	});	
+	$http.get('/administrator/curriculumSel/' + 2015).success(function(data){
+			$scope.curriculum = data;
+			$scope.curYear = data[0].school_year;
+			$scope.dep = "";
+		});	
 	//adding of departments
 	//add department
 	$scope.addDep = function(year){
 		$http.post('/administrator/curriculumSel/'+year, $scope.dep).success(function(data){
 			$scope.viewCur(year);
 			console.log(data);
+		});
+	}
+	// delete department
+	$scope.deleteDep = function(id, year){
+		$http.delete('/administrator/curriculumSel/'+id).success(function(data){
+			$scope.viewCur(year);
 		});
 	}
 	//add course
@@ -43,11 +49,54 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 			$scope.refresh();
 		});
 	}
+	// course subjects
+	$scope.getSubjects = function(id){
+		$http.get('/administrator/courseSubjects/'+ id).success(function(data){
+			var year = [],
+				terms = [];
+			for (var i = 1; data[0].courses[0].totalYears >= i; i++) {
+				
+				year.push(i);
+
+			};
+			for (var i = 1; data[0].courses[0].totalTerms >= i; i++) {
+				
+				terms.push(i);
+
+			};
+			$scope.courseYears = year;
+			$scope.courseTerms = terms;
+			$scope.courseName = data[0].courses[0].course_name;
+			$scope.courseDes = data[0].courses[0].course_des;
+			$scope.departmentId = data[0]._id;
+		});
+	}
+	// find subjects related in year and term
+	$scope.findSubjects = function(year, term){
+		var yearAndTerm = {year: year, term: term};
+		$http.post('/administrator/findSubjects', yearAndTerm).success(function(data){
+			console.log(data);
+		});
+	}
+	// add course subjects
+	$scope.addSubjects = function(id,year, term, courseName, courseDes, subject){
+		var year_level = {year_level: year};
+		var level_term = {term: term};
+		var course_name = {course_name: courseName};
+		var course_des = {course_des: courseDes};
+
+		var content={year_level: year,term: term,course_name: courseName,course_des: courseDes,subject};
+
+		$http.put('/administrator/courseSubjects/'+id,content).success(function(data){
+			console.log(data);
+		});
+
+		$scope.subject = "";
+	}
 	//edit course not done yet
 	$scope.editCourse = function(id){
 		console.log(id);
 	}
-
 
 	// get assestment
 	$http.get('/administrator/assestments').success(function(data){
@@ -92,6 +141,7 @@ app.directive('showFees', function(){
 		}
 	}
 });
+// show departments
 app.directive('showDepartments', function(){
 	return{
 		scope:{},
@@ -104,6 +154,22 @@ app.directive('showDepartments', function(){
 
 		       $('.departmentList').slideUp(300)
 		       $('.departmentList').slideDown(400);
+		    } );
+		}
+	}
+});
+// show course subjects
+app.directive('showSubjects', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<div>Subjects</div>",
+		link: function(scope, element, attrs){
+			element.addClass('btn');
+		 	element.on( 'click',function ( event ){
+
+		       $('.course_subjects').toggle();
+
 		    } );
 		}
 	}
