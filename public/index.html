@@ -1,0 +1,36 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<title>Administrator</title>
+<link rel="stylesheet" href="/css/main.css">
+<script src="/lib/jquery-2.1.4.min.js"></script>
+<script src="/lib/angular.min.js"></script>
+<script src="/lib/angular-route.min.js"></script>
+<!-- <script src="/js/controllers/curriculumsCtrl.js"></script> -->
+<script src="/js/appRoute.js"></script>
+<!-- controllers -->
+<script src="/js/controllers/homeCtrl.js"></script>
+<script src="/js/controllers/newsCtrl.js"></script>
+<script src="/js/controllers/alumniCtrl.js"></script>
+<!-- controllers in about nav -->
+<script src="/js/controllers/administrationCtrl.js"></script>
+<script src="/js/controllers/schoolInfoCtrl.js"></script>
+<script src="/js/controllers/supportServicesCtrl.js"></script>
+<!-- controllers in admission nav -->
+<script src="/js/controllers/adRequirementsCtrl.js"></script>
+<script src="/js/controllers/enProcedureCtrl.js"></script>
+<script src="/js/controllers/policiesCtrl.js"></script>
+<script src="/js/controllers/registrationCtrl.js"></script>
+<!-- controller in academics -->
+<script src="/js/controllers/coursesOfferedCtrl.js"></script>
+<script src="/js/controllers/eventsCalendarCtrl.js"></script>
+<!-- my plugins -->
+<script src="/js/sideBarFixed.js"></script>
+<script src="/js/admin.js"></script>
+<body ng-app="clientSideApp">
+	<div ng-include="'/views/header.ejs'"></div>
+	<div ng-view></div>
+	<div ng-include="'/views/footer.ejs'"></div>
+</body>
