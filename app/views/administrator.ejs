@@ -66,7 +66,7 @@
 					<div class="newDepartment boxShadow six column">
 						<div class="input_groups">
 							<label for="">Department Name</label>
-							<input type="text" ng-model="dep.depName" class="input_name">
+							<input type="text" ng-model="dep.depName" class="input_des">
 						</div>
 						<div class="input_groups">
 							<label for="">Department Description</label>
@@ -127,7 +127,7 @@
 									<td>{{course.totalTerms}}</td>
 									<td><show-subjects ng-click="getSubjects(course._id)"></show-subjects></td>
 									<td><button class="btn btn--orange" ng-click="editCourse(course._id)">Edit</button></td>
-									<td><button class="btn btn--red" ng-click="deleteCourse(department._id, course)">Delete</button></td>
+									<td><button class="btn btn--red" ng-click="deleteCourse(department._id, course,curYear)">Delete</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -179,7 +179,7 @@
 										</tr>
 										<tr ng-repeat="fee in fees.fees">
 											<td>{{fee.fee_name}}</td>
-											<td><span>P</span>{{fee.amount}}</td>
+											<td><span>P</span>{{fee.amount | number}}</td>
 											<td>{{fee.date_created}}</td>
 											<td><div class="btn btn--orange">Edit</div></td>
 											<td><div class="btn btn--red" ng-click="deleteFee(typeOfFee_id, fee)">Delete</div></td>
@@ -226,7 +226,7 @@
 					<div class="btn">{{courseYear}}</div>
 					<ul class="course_subjectsList">
 						<li ng-repeat="courseTerm in courseTerms">
-							<div class="btn" ng-click="findSubjects(courseYear,courseTerm)">{{courseTerm}} semester</div>
+							<div class="btn" ng-click="findSubjects(departmentId,courseYear,courseTerm,courseName)">{{courseTerm}} semester</div>
 							<table>
 								<thead>
 									<tr>

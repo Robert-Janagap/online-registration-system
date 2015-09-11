@@ -22,22 +22,16 @@ app.use( bodyParser.urlencoded( { extended :true } ) );
 
 //define routes
 var administrator =require( './app/routes/administrator.js' ),
-	curriculum =require( './app/routes/curriculum.js' ),
-	curriculumSettings =require( './app/routes/curriculumSettings.js' ),
 	evaluator =require( './app/routes/evaluator.js' ),
 	studentInfo =require( './app/routes/studentInfo.js' ),
 	findCourse =require( './app/routes/findCourse.js' ),
 	programCoordinator =require( './app/routes/programCoordinator.js' ),
 	setSchedule =require( './app/routes/setSchedule.js' ),
-	courseSubjects =require( './app/routes/courseSubjects.js' ),
 	recSubjects =require( './app/routes/recSubjects.js' );
 
 // page url
 //for admin
 app.use( '/administrator',administrator );
-app.use( '/administrator/curriculum',curriculum );
-app.use( '/administrator/curriculum/settings',curriculumSettings );
-app.use( '/administrator/curriculum/course-subjects',courseSubjects );
 //for staff
 app.use( '/evaluator',evaluator );
 app.use( '/program-coordinator',programCoordinator );

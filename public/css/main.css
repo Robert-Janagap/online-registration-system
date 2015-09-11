@@ -749,22 +749,6 @@ td {
   z-index: 4;
   display: none; }
 
-.department_mnt {
-  background: #fff;
-  border-radius: 4px;
-  padding: 15px 20px;
-  position: relative; }
-  .department_mnt_course {
-    height: 50px;
-    padding-bottom: 10px; }
-  .department_mnt_settings {
-    position: absolute;
-    top: 20px;
-    right: 20px; }
-
-.department_subjects--show {
-  cursor: pointer; }
-
 .curriculum_add--overlay {
   position: fixed;
   top: 0;
@@ -816,6 +800,9 @@ td {
     border-radius: 4px;
     padding: 1rem 0.8rem;
     margin-top: 1rem; }
+
+.departmentList {
+  display: none; }
 
 .department_settings {
   border-bottom: 2px solid #ccc;

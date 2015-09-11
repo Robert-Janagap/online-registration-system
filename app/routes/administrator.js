@@ -83,12 +83,13 @@ router.put('/courseSubjects/:id', function(req, res){
 		});
 });
 // find subjects related in year and term
-router.post('/findSubjects', function(req, res){
-	curriculums.find({$and:[{'subjects.year_level':req.body.year},{'subjects.term':req.body.term}]}, function(err, data){
+router.get('/findSubjects/:id', function(req, res){
+	console.log(req.params.id);
+	curriculums.findById(req.params.id, function(err, data){
 		if (err){
 			return err;
 		};
-		res.json(data);
+		res.json(data.subjects);
 		});
 });
 

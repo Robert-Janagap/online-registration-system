@@ -15,11 +15,11 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 		});	
 	}
 	//test
-	$http.get('/administrator/curriculumSel/' + 2015).success(function(data){
-			$scope.curriculum = data;
-			$scope.curYear = data[0].school_year;
-			$scope.dep = "";
-		});	
+	// $http.get('/administrator/curriculumSel/' + 2015).success(function(data){
+	// 		$scope.curriculum = data;
+	// 		$scope.curYear = data[0].school_year;
+	// 		$scope.dep = "";
+	// 	});	
 	//adding of departments
 	//add department
 	$scope.addDep = function(year){
@@ -41,12 +41,12 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 		});
 	}
 	//delete course
-	$scope.deleteCourse = function(id, course){
+	$scope.deleteCourse = function(id, course, year){
 		var status = 'delete';
 		course.status = status;
 
 		$http.put('/administrator/curriculumSel/'+ id, course).success(function(data){
-			$scope.refresh();
+			$scope.viewCur(year);
 		});
 	}
 	// course subjects
@@ -72,10 +72,17 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 		});
 	}
 	// find subjects related in year and term
-	$scope.findSubjects = function(year, term){
-		var yearAndTerm = {year: year, term: term};
-		$http.post('/administrator/findSubjects', yearAndTerm).success(function(data){
-			console.log(data);
+	$scope.findSubjects = function(id,year, term, courseName){
+		var yearAndTerm = {year: year, term: term, id:id, courseName:courseName};
+		$http.get('/administrator/findSubjects/' + id, yearAndTerm).success(function(data){
+			var object = [];
+			for (var i = data.length - 1; i >= 0; i--) {
+
+				if(data[i].course_name == courseName & data[i].year_level == year & data[i].term == term){
+					object.push(data[i]);
+				}
+			};    
+			$scope.subjects = object;
 		});
 	}
 	// add course subjects
