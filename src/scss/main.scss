@@ -35,10 +35,10 @@ header{
 	}
 	&_items{
 		transition: color .2s ease-in-out;
-		color: #222;
+		color: #4FC552;
 		font-weight: 500;
 		&:hover{
-			color: #41CC44;
+			color:  #3E9F40;
 		}
 	}
 	.navBar_sub{
@@ -56,10 +56,10 @@ header{
 		a{
 			display: block;	
 		    padding: 10px 0;
-		    color: #222;
+		    color: #41CC44;
 		    transition: color .2s ease-in-out;
 		    &:hover{
-				color: #41CC44;
+			    color: #222;
 			}
 		}
 	}
@@ -72,10 +72,10 @@ footer{
 .footer_nav{
 	padding-bottom: 25px;
 	a{
-		color: #333;
+		color: #222;
 		transition: color .2s ease-in-out;
 		&:hover{
-			color: #41CC44;
+			color: #4FC552;	
 		}
 	}
 	&_sub{
@@ -259,4 +259,11 @@ body{
 			}
 		}
 	}
+}
+// this is home page
+.test{
+	display: block;
+	width: 350px;
+	height: 350px;
+	background: red;
 }
