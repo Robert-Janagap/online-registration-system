@@ -12,6 +12,11 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 			$scope.dep = "";
 		});	
 	}
+	$scope.addCurriculum = function(year) {
+		$http.post('/administrator/newCurriculum/',year).success(function(data){
+			console.log(data);
+		});
+	}
 	//test
 	// $http.get('/administrator/curriculumSel/' + 2015).success(function(data){
 	// 		$scope.curriculum = data;
@@ -47,7 +52,7 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 			$scope.viewCur(year);
 		});
 	}
-	// course subjects
+	// course subjects year and terms
 	$scope.getSubjects = function(id){
 		$http.get('/administrator/courseSubjects/'+ id).success(function(data){
 			var year = [],
@@ -70,30 +75,51 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 		});
 	}
 	// find subjects related in year and term
-	$scope.findSubjects = function(id,year, term, courseName){
-		var yearAndTerm = {year: year, term: term, id:id, courseName:courseName};
-		$http.get('/administrator/findSubjects/' + id, yearAndTerm).success(function(data){
-			var object = [];
+	$scope.subjectInYear = function(year, id){
+		$http.get('/administrator/findSubjectsByYear/' + id).success(function(data){
+			var objects = [];
 			for (var i = data.length - 1; i >= 0; i--) {
-
-				if(data[i].course_name == courseName & data[i].year_level == year & data[i].term == term){
-					object.push(data[i]);
+				if(data[i].year_level === year){
+					objects.push(data[i]);
 				}
-			};    
-			$scope.subjects = object;
+			};
+
+			$scope.subjects = objects;
+		});
+		$scope.subjectsOfYear = year;
+	}
+	$scope.subjectWithTerm = function(term, id){
+		$http.get('/administrator/findSubjectsByYear/' + id).success(function(data){
+			var objects = [];
+			for (var i = data.length - 1; i >= 0; i--) {
+				if(data[i].year_level === $scope.subjectsOfYear && data[i].term === term){
+					objects.push(data[i]);
+				}
+			};
+			$scope.subjects = objects;
+
+		});
+		$scope.subjectsOfTerm = term;
+	}
+	// refresh
+	$scope.addSubjectRefresh = function(id){
+		$http.get('/administrator/findSubjectsByYear/' + id).success(function(data){
+			var objects = [];
+			for (var i = data.length - 1; i >= 0; i--) {
+				if(data[i].year_level === $scope.subjectsOfYear && data[i].term === $scope.subjectsOfTerm ){
+					objects.push(data[i]);
+				}
+			};
+			$scope.subjects = objects;
 		});
 	}
 	// add course subjects
 	$scope.addSubjects = function(id,year, term, courseName, courseDes, subject){
-		var year_level = {year_level: year};
-		var level_term = {term: term};
-		var course_name = {course_name: courseName};
-		var course_des = {course_des: courseDes};
 
-		var content={year_level: year,term: term,course_name: courseName,course_des: courseDes,subject};
+		var content={year_level: $scope.subjectsOfYear,term: $scope.subjectsOfTerm,course_name: courseName,course_des: courseDes,subject};
 
 		$http.put('/administrator/courseSubjects/'+id,content).success(function(data){
-			console.log(data);
+			$scope.addSubjectRefresh(id);
 		});
 
 		$scope.subject = "";

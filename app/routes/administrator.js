@@ -14,6 +14,16 @@ router.get('/curriculumSel/:id', function( req, res) {
 		res.json(data);
 	});
 });
+// add curriculum
+router.post('/newCurriculum', function(req, res){
+	var new_curriculum = new curriculumList({curriculumYear: req.body.curriculum_year});
+	new_curriculum.save(function(err, data){
+		if (err){
+			return err;
+		};
+		res.json(data);
+	});
+});
 //for curriculums list
 router.get('/curriculum-list', function( req, res) {
 	curriculumList.find({}, function(err, data){
@@ -79,8 +89,8 @@ router.put('/courseSubjects/:id', function(req, res){
 		res.json(data);
 		});
 });
-// find subjects related in year and term
-router.get('/findSubjects/:id', function(req, res){
+// find subjects related in year
+router.get('/findSubjectsByYear/:id', function(req, res){
 	console.log(req.params.id);
 	curriculums.findById(req.params.id, function(err, data){
 		if (err){
