@@ -1,5 +1,3 @@
-var app = angular.module('ors_app',[]);
-
 app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 	//get curriculum list
 	$http.get('/administrator/curriculum-list').success(function(data){
@@ -109,6 +107,11 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 	$http.get('/administrator/assestments').success(function(data){
 		$scope.assestments = data;
 	});
+	$scope.refreshAssestment = function(){
+		$http.get('/administrator/assestments').success(function(data){
+			$scope.assestments = data;
+		});
+	}
 	$scope.viewFees = function(id){
 		$http.get('/administrator/assestments/'+ id).success(function(data){
 			$scope.fees = data;
@@ -116,9 +119,20 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 			$scope.typeOfFee_id = data._id;
 		});
 	}
+	$scope.closeFees = function(){
+		$scope.fees = " ";
+		$scope.typeOfFee ="";
+		$scope.typeOfFee_id =""
+	}
 	$scope.newFee = function(id){
 		$http.put('/administrator/assestments/'+ id, $scope.fee).success(function(data){
+			$scope.fee = "";
 			$scope.viewFees(id);
+		});
+	}
+	$scope.addSchoolFee = function(feeName){
+		$http.post('/administrator/assestments', feeName).success(function(data){
+			$scope.refreshAssestment();
 		});
 	}
 	$scope.deleteFee = function(typeOfFee_id, fee){
@@ -129,6 +143,153 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 		});
 	}
 }]);
+// add curriculum
+app.directive('addCur', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<span>add</span>",
+		link: function(scope, element, attrs){
+			element.addClass('content_title_btn');
+		 	element.on( 'click',function ( event ){
+
+		        $('.curriculum_year,.curriculum_add--overlay').toggle();
+		    } );
+		}
+	}
+});
+// add department
+app.directive('addDepartment', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<span>add</span>",
+		link: function(scope, element, attrs){
+			element.addClass('content_title_btn');
+		 	element.on( 'click',function ( event ){
+
+		        $('.newDepartment').toggle();
+        		$('.newDepartment--overlay').toggle();
+
+		    } );
+		}
+	}
+});
+// close buttons
+// close add curriculum
+app.directive('closeaddCur', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<div>X</div>",
+		link: function(scope, element, attrs){
+			element.addClass('btn--close');
+		 	element.on( 'click',function ( event ){
+
+		        $('.curriculum_year,.curriculum_add--overlay').toggle();
+		        console.log('ok dokie');
+		    } );
+		}
+	}
+});
+// close departmentList
+app.directive('closedepartmentList', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<div>X</div>",
+		link: function(scope, element, attrs){
+			element.addClass('btn--close');
+		 	element.on( 'click',function ( event ){
+
+		        $('.departmentList').slideUp();
+
+		    } );
+		}
+	}
+});
+// close assestment fees
+app.directive('closefees', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<div>X</div>",
+		link: function(scope, element, attrs){
+			element.addClass('btn--close');
+		 	element.on( 'click',function ( event ){
+
+		        $( '.assestment--overlay' ).toggle();
+
+		    } );
+		}
+	}
+});
+// close add department module
+app.directive('closeaddDepartment', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<div>X</div>",
+		link: function(scope, element, attrs){
+			element.addClass('btn--close');
+		 	element.on( 'click',function ( event ){
+
+		        $('.newDepartment').toggle();
+        		$('.newDepartment--overlay').toggle();
+
+		    } );
+		}
+	}
+});
+// close school fees
+app.directive('closeSchoolFees', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<div>X</div>",
+		link: function(scope, element, attrs){
+			element.addClass('btn--close');
+		 	element.on( 'click',function ( event ){
+
+		        $( '.assestment_add, .assestment_add--overlay' ).toggle();
+
+		    } );
+		}
+	}
+});
+// close course subjects
+app.directive('closeCourseSubjects', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<div>X</div>",
+		link: function(scope, element, attrs){
+			element.addClass('btn--close');
+		 	element.on( 'click',function ( event ){
+
+		       $('.course_subjects, .overlay').toggle();
+
+		    } );
+		}
+	}
+});
+// open assestment fees
+app.directive('openfees', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<span>add</span>",
+		link: function(scope, element, attrs){
+			element.addClass('content_title_btn');
+		 	element.on( 'click',function ( event ){
+
+		        $( '.assestment_add, .assestment_add--overlay' ).toggle();
+
+		    } );
+		}
+	}
+});
+
 //showing assestment fees
 app.directive('showFees', function(){
 	return{
@@ -175,7 +336,7 @@ app.directive('showSubjects', function(){
 			element.addClass('btn');
 		 	element.on( 'click',function ( event ){
 
-		       $('.course_subjects').toggle();
+		       $('.course_subjects, .overlay').toggle();
 
 		    } );
 		}

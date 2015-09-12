@@ -5,9 +5,6 @@ var assestments = mongoose.model('assestments');
 var curriculumList = mongoose.model('curriculumList');
 var curriculums = mongoose.model('curriculums');
 
-router.get('/', function( req, res) {
-	res.render('administrator');
-});
 //for selected curriculum
 router.get('/curriculumSel/:id', function( req, res) {
 	curriculums.find({school_year: req.params.id}, function(err, data){
@@ -102,6 +99,18 @@ router.get('/assestments', function( req, res) {
 		res.json(data);
 	});
 });
+// add new school fees
+router.post('/assestments', function( req, res){
+	var newAssestment = new assestments({typeOfFee:req.body.name});
+
+	newAssestment.save(function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+// get fees of selected school fee
 router.get('/assestments/:id', function( req, res) {
 	assestments.findById(req.params.id, function(err, data){
 		if(err){
@@ -110,6 +119,7 @@ router.get('/assestments/:id', function( req, res) {
 		res.json(data);
 	});
 });
+// add and delete fees in school fee
 router.put('/assestments/:id', function( req, res) {
 	if (req.body.status){
 		assestments.findByIdAndUpdate(req.params.id,{$pull:{fees:{_id:req.body._id}}}, function(err, data){

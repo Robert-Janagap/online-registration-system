@@ -749,6 +749,17 @@ td {
   z-index: 4;
   display: none; }
 
+.assestment_add {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  z-index: 4;
+  background: #fff;
+  padding: 2rem;
+  display: none; }
+  .assestment_add--overlay {
+    display: none; }
+
 .curriculum_add--overlay {
   position: fixed;
   top: 0;

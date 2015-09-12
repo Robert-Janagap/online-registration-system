@@ -1,0 +1,284 @@
+<div class="curriculum_add--overlay"></div>
+<div class="container admin"  ng-controller="administratorCtrl">
+<!-- sidebar -->
+	<div class="three column admin_sidebar boxShadow ">
+		<div class="person">
+			<div class="person_image"><img src="img/me.png" alt=" Profile picture "></div>
+			<div class="person_name">Robert Janagap</div>
+			<div class="person_role">Administrator</div>
+		</div>
+		<div class="admin_sidebarNav">
+			<ul>
+				<li class="admin_sidebarNav--list">
+					<a class="admin_sidebarNav--item">Curriculum</a>
+				</li>
+				<li class="admin_sidebarNav--list">
+					<a class="admin_sidebarNav--item">Assestments</a>
+				</li>
+				<li class="admin_sidebarNav--list">
+					<a class="admin_sidebarNav--item">Reports</a>
+				</li>
+				<li class="admin_sidebarNav--list">
+					<a class="admin_sidebarNav--item">Blog</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+<!-- contents -->
+	<div class="nine column pull--right">
+		<!-- Curriculum list -->
+		<article class="content row boxShadow">
+			<div class="row">
+				<h3 class="content_title">Curriculum <add-cur></add-cur></h3>
+			</div>
+			<div ng-repeat="curriculumYear in curriculumList">
+				<div class="curriculum four column">
+					<div class="curriculum_box cf">
+						<div class="tag"><h3>{{curriculumYear.curriculumYear}}</h3></div>
+						<div class="tag">Curriculum</div>
+						<div class="curriculum_box--overlay">
+							<show-departments  ng-click="viewCur(curriculumYear.curriculumYear)"></show-departments>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+		<!-- curriculum information -->
+		<article class="content row departmentList boxShadow">
+			<h3 class="content_title"><span>Curriculum {{curYear}}</span></h3>
+			<closedepartment-list></closedepartment-list>
+			<form class="departmentList_items">
+				<h4>Departments <add-department></add-department></h4>
+				<div class="newDepartment--overlay overlay"></div>
+				<div class="newDepartment boxShadow six column">
+					<closeadd-department></closeadd-department>
+					<div class="input_groups">
+						<label for="">Department Name</label>
+						<input type="text" ng-model="dep.depName" class="input_des">
+					</div>
+					<div class="input_groups">
+						<label for="">Department Description</label>
+						<input type="text" ng-model="dep.depDes" class="input_des">
+					</div>
+					<div class="btn btn--blue" ng-click="addDep(curYear)">Add</div>
+				</div>
+				<div class="department_settings row" ng-repeat="department in curriculum">
+					<div class="input_groups">
+						<input type="text" class="input_des" value="{{department.department_name}}">
+					</div>
+					<div class="input_groups">
+						<input type="text" class="input_des" value="{{department.department_des}}">
+					</div>
+					<button class="btn btn--red" ng-click="deleteDep(department._id, curYear)">Delete</button>
+					<table>
+						<thead>
+							<tr>
+								<th>
+									<div class="input_groups">
+										<label for="">Course code</label>
+										<input type="text" class="input_name" ng-model="dep.courseName">
+									</div>
+								</th>
+								<th>
+									<div class="input_groups">
+										<label for="">Course description</label>
+										<input type="text" class="input_des" ng-model="dep.courseDes">
+									</div>
+								</th>
+								<th>
+									<div class="input_groups">
+										<label for="">years</label>
+										<input type="number" class="input_units" ng-model="dep.courseYears">
+									</div>
+								</th>
+								<th>
+									<div class="input_groups">
+										<label for="">terms</label>
+										<input type="number" class="input_units" ng-model="dep.courseTerms">
+									</div>
+								</th>
+								<th><button class="btn btn--blue" ng-click="addCourse(department._id, dep, curYear)">Add</button></th>
+								<th><button class="btn btn--green">Update</button></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>Course Code</th>
+								<th>Course description</th>
+								<th># of years</th>
+								<th>semester</th>
+							</tr>
+							<tr ng-repeat="course in department.courses">
+								<td>{{course.course_name}}</td>
+								<td>{{course.course_des}}</td>
+								<td>{{course.totalYears}}</td>
+								<td>{{course.totalTerms}}</td>
+								<td><show-subjects ng-click="getSubjects(course._id)"></show-subjects></td>
+								<td><button class="btn btn--orange" ng-click="editCourse(course._id)">Edit</button></td>
+								<td><button class="btn btn--red" ng-click="deleteCourse(department._id, course,curYear)">Delete</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</article>
+		<!-- assestment view -->
+		<article class="content row boxShadow">
+			<div class="row">
+				<h3 class="content_title">Assestment <openfees></openfees></h3>
+			</div>
+			<div class="assestment_add--overlay overlay"></div>
+			<div class="assestment_add boxShadow">
+				<close-school-fees></close-school-fees>
+				<div class="input_groups">
+					<label for="fee_label">Type of School Fee</label>
+					<input type="text" ng-model="schoolFee.name">
+				</div>
+				<div class="btn btn--blue" ng-click="addSchoolFee(schoolFee)">Save</div>
+			</div>
+			<div class="assestment">
+				<div class="assestment--overlay">
+					<form action="" class="assestment_form row">
+						<closefees ng-click="closeFees()"></closefees>
+						<div class="input_groups">
+							<label for="fee_label">Type of School Fee</label>
+							<input type="text" value="{{typeOfFee}}">
+						</div>
+						<div class="assestment_mtn row">
+							<table class=" twelve column">
+								<thead>
+									<tr>
+										<th>
+											<div class="input_groups">
+												<label for="fee_name">Fee name</label>
+												<input type="text" ng-model="fee.fee_name">
+											</div>
+										</th>
+										<th>
+											<div class="input_groups">
+												<label for="fee_amount">Fee amount</label>
+												<input type="text" ng-model="fee.amount">
+											</div>
+										</th>
+										<th>
+											<div class="btn btn--blue" ng-click="newFee(typeOfFee_id)">Add</div>
+										</th>
+										<th>
+											<div class="btn btn--green">Update</div>
+										</th>
+									</tr>
+								</thead>
+								<tbody class="assestment_mtn_body">
+									<tr>
+										<th>Name</th>
+										<th>Amount</th>
+										<th>date created</th>
+									</tr>
+									<tr ng-repeat="fee in fees.fees">
+										<td>{{fee.fee_name}}</td>
+										<td><span>P</span>{{fee.amount | number}}</td>
+										<td>{{fee.date_created}}</td>
+										<td><div class="btn btn--orange">Edit</div></td>
+										<td><div class="btn btn--red" ng-click="deleteFee(typeOfFee_id, fee)">Delete</div></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</form>
+				</div>
+				<table class="assestment_fees twelve column">
+					<thead>
+						<tr>
+							<th>Type of Fee</th>
+							<th>Total Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="fee in assestments">
+							<td>{{fee.typeOfFee}}</td>
+							<td><span>P</span>10,000</td>
+							<td><show-fees ng-click="viewFees(fee._id)"></show-fees></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</div>
+	<!-- adding of year -->
+	<div class="curriculum_year">
+		<closeadd-cur></closeadd-cur>
+		<div class="input_groups">
+			<label for="">Year</label>
+			<input type="text" class="input_units" ng-model="curriculum_new.school_year">
+		</div>
+		<a class="btn pull--right">Next</a>
+	</div>
+	<!-- course subjects -->
+	<div class="course_subjects boxShadow">
+		<div class="overlay"></div>
+		<close-course-subjects></close-course-subjects>
+		<span>{{courseName}}</span>
+		<span>{{courseDes}}</span>
+		<ul>
+			<li ng-repeat="courseYear in courseYears">
+				<div class="btn">{{courseYear}}</div>
+				<ul class="course_subjectsList">
+					<li ng-repeat="courseTerm in courseTerms">
+						<div class="btn" ng-click="findSubjects(departmentId,courseYear,courseTerm,courseName)">{{courseTerm}} semester</div>
+						<table>
+							<thead>
+								<tr>
+									<th>
+										<div class="input_groups">
+											<label for="">Subject code</label>
+											<input type="text" class="input_name" ng-model="subject.subName">
+										</div>
+									</th>
+									<th>
+										<div class="input_groups">
+											<label for="">Description</label>
+											<input type="text" class="input_des" ng-model="subject.subDes">
+										</div>
+									</th>
+									<th>
+										<div class="input_groups">
+											<label for="">Units</label>
+											<input type="text" class="input_units" ng-model="subject.subUnits">
+										</div>
+									</th>
+									<th>
+										<div class="input_groups">
+											<label for="">Cost/Units</label>
+											<input type="text" class="input_units" ng-model="subject.subCpu">
+										</div>
+									</th>
+									<th>
+										<div class="input_groups">
+											<label for="">Pre-requisite</label>
+											<input type="text" class="input_preRequisite" ng-model="subject.subPreRequisite">
+										</div>
+									</th>
+									<th>
+										<button class="btn btn--blue" ng-click="addSubjects(departmentId,courseYear, courseTerm, courseName, courseDes, subject)">Add</button>
+									</th>
+									<th>
+										<button class="btn btn--green">Update</button>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat = "subject in subjects">
+									<td>{{subject.subject_name}}</td>
+									<td>{{subject.subject_des}}</td>
+									<td>{{subject.units}}</td>
+									<td>{{subject.cost_perUnits}}</td>
+									<td>{{subject.pre_requisite}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

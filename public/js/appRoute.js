@@ -48,6 +48,10 @@ app.config(function($routeProvider){
 		.when('/alumni',{
 			templateUrl: 'views/alumni.html',
 			controller: 'alumniCtrl'
+		})//for users
+		.when('/administrator',{
+			templateUrl: 'views/administrator.html',
+			controller: 'administratorCtrl'
 		})
 		.otherwise({
 			templateUrl: 'views/home.html'
