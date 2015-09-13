@@ -26,7 +26,7 @@ header{
 	}
 	&_items{
 		transition: color .2s ease-in-out;
-		color: #222;
+		color: #333;
 		font-weight: 500;
 		&:hover{
 			color: #41CC44;
@@ -47,7 +47,7 @@ header{
 		a{
 			display: block;	
 		    padding: 10px 0;
-		    color: #222;
+		    color: #333;
 		    transition: color .2s ease-in-out;
 		    &:hover{
 				color: #41CC44;

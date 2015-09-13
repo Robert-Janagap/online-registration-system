@@ -899,7 +899,7 @@ header {
       display: block; }
   .nav_items {
     transition: color 0.2s ease-in-out;
-    color: #222;
+    color: #333;
     font-weight: 500; }
     .nav_items:hover {
       color: #41CC44; }
@@ -918,7 +918,7 @@ header {
     .nav .navBar_sub a {
       display: block;
       padding: 10px 0;
-      color: #222;
+      color: #333;
       transition: color 0.2s ease-in-out; }
       .nav .navBar_sub a:hover {
         color: #41CC44; }
