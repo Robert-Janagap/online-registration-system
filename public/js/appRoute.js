@@ -54,6 +54,6 @@ app.config(function($routeProvider){
 			controller: 'administratorCtrl'
 		})
 		.otherwise({
-			templateUrl: 'views/home.html'
+			redirectTo: 'views/home.html'
 		})
 });

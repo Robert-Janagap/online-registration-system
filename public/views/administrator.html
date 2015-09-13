@@ -59,6 +59,7 @@
 			<form class="departmentList_items">
 				<h4>Departments <add-department></add-department></h4>
 				<div class="newDepartment--overlay overlay"></div>
+				<!-- add departments -->
 				<div class="newDepartment boxShadow six column">
 					<closeadd-department></closeadd-department>
 					<div class="input_groups">
@@ -71,7 +72,60 @@
 					</div>
 					<div class="btn btn--blue" ng-click="addDep(curYear)">Add</div>
 				</div>
-				<div class="department_settings row" ng-repeat="department in curriculum">
+				<!-- test -->
+				<ul class="department_settings row" ng-repeat="department in curriculum">
+					<li ng-click="getCourses(department._id)"><span>{{department.department_name}}</span> <span>{{department.department_des}}</span><button class="btn btn--red" ng-click="deleteDep(department._id, curYear)">Delete</button></li>
+				</ul>
+				<table>
+					<thead>
+						<tr>
+							<th>
+								<div class="input_groups">
+									<label for="">Course code</label>
+									<input type="text" class="input_name" ng-model="dep.course_name">
+								</div>
+							</th>
+							<th>
+								<div class="input_groups">
+									<label for="">Course description</label>
+									<input type="text" class="input_des" ng-model="dep.course_des">
+								</div>
+							</th>
+							<th>
+								<div class="input_groups">
+									<label for="">years</label>
+									<input type="number" class="input_units" ng-model="dep.totalYears">
+								</div>
+							</th>
+							<th>
+								<div class="input_groups">
+									<label for="">terms</label>
+									<input type="number" class="input_units" ng-model="dep.totalTerms">
+								</div>
+							</th>
+							<th><button class="btn btn--blue" ng-click="addCourse(dep)">Add</button></th>
+							<th><button class="btn btn--green" ng-click="updateCourse(dep)">Update</button></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>Course Code</th>
+							<th>Course description</th>
+							<th># of years</th>
+							<th>semester</th>
+						</tr>
+						<tr ng-repeat="course in courses.courses">
+							<td>{{course.course_name}}</td>
+							<td>{{course.course_des}}</td>
+							<td>{{course.totalYears}}</td>
+							<td>{{course.totalTerms}}</td>
+							<td><show-subjects ng-click="getSubjects(course._id)"></show-subjects></td>
+							<td><button class="btn btn--orange" ng-click="editCourse(course._id)">Edit</button></td>
+							<td><button class="btn btn--red" ng-click="deleteCourse(course)">Delete</button></td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- <div class="department_settings row" ng-repeat="department in curriculum">
 					<div class="input_groups">
 						<input type="text" class="input_des" value="{{department.department_name}}">
 					</div>
@@ -85,25 +139,25 @@
 								<th>
 									<div class="input_groups">
 										<label for="">Course code</label>
-										<input type="text" class="input_name" ng-model="dep.courseName">
+										<input type="text" class="input_name" ng-model="dep.course_name">
 									</div>
 								</th>
 								<th>
 									<div class="input_groups">
 										<label for="">Course description</label>
-										<input type="text" class="input_des" ng-model="dep.courseDes">
+										<input type="text" class="input_des" ng-model="dep.course_des">
 									</div>
 								</th>
 								<th>
 									<div class="input_groups">
 										<label for="">years</label>
-										<input type="number" class="input_units" ng-model="dep.courseYears">
+										<input type="number" class="input_units" ng-model="dep.totalYears">
 									</div>
 								</th>
 								<th>
 									<div class="input_groups">
 										<label for="">terms</label>
-										<input type="number" class="input_units" ng-model="dep.courseTerms">
+										<input type="number" class="input_units" ng-model="dep.totalTerms">
 									</div>
 								</th>
 								<th><button class="btn btn--blue" ng-click="addCourse(department._id, dep, curYear)">Add</button></th>
@@ -128,7 +182,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>
+				</div> -->
 			</form>
 		</article>
 		<!-- assestment view -->

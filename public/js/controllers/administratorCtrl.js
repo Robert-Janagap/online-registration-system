@@ -1,15 +1,25 @@
 app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
-	//get curriculum list
+
+	/*
+	For curriculums
+	 */
+	
 	$http.get('/administrator/curriculum-list').success(function(data){
 		$scope.curriculumList = data;
 	});
 	$scope.viewCur = function(cursYear){
-		$scope.cursYear = cursYear;
 		
 		$http.get('/administrator/curriculumSel/' + cursYear).success(function(data){
-			$scope.curriculum = data;
-			$scope.curYear = data[0].school_year;
-			$scope.dep = "";
+			if(data.length){
+				$scope.curriculum = data;
+				$scope.curYear = data[0].school_year;
+				$scope.dep = "";
+				$scope.courses = "";
+			}else{
+				$scope.curYear = cursYear;
+				$scope.dep = "";
+				$scope.curriculum = "";
+			}
 		});	
 	}
 	$scope.addCurriculum = function(year) {
@@ -17,18 +27,15 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 			console.log(data);
 		});
 	}
-	//test
-	// $http.get('/administrator/curriculumSel/' + 2015).success(function(data){
-	// 		$scope.curriculum = data;
-	// 		$scope.curYear = data[0].school_year;
-	// 		$scope.dep = "";
-	// 	});	
-	//adding of departments
+
+	/**
+	 * For departments
+	 */
+	
 	//add department
 	$scope.addDep = function(year){
 		$http.post('/administrator/curriculumSel/'+year, $scope.dep).success(function(data){
 			$scope.viewCur(year);
-			console.log(data);
 		});
 	}
 	// delete department
@@ -37,22 +44,51 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 			$scope.viewCur(year);
 		});
 	}
+
+	/**
+	 * for courses
+	 */
+	//get courses
+	$scope.getCourses = function(dep_id){
+		$scope.dep ="";
+		$http.get('/administrator/department-courses/' + dep_id).success(function(data){
+			$scope.courses = data;
+			$scope.departmentId = data._id;
+		});	
+	}
 	//add course
-	$scope.addCourse = function(id, info, year){
-		$http.put('/administrator/curriculumSel/'+ id, info).success(function(data){
-			$scope.viewCur(year);
+	$scope.addCourse = function(new_course){
+		$http.put('/administrator/course/'+ $scope.departmentId, new_course).success(function(data){
+			$scope.getCourses($scope.departmentId);
 		});
 	}
 	//delete course
-	$scope.deleteCourse = function(id, course, year){
+	$scope.deleteCourse = function(course){
 		var status = 'delete';
 		course.status = status;
 
-		$http.put('/administrator/curriculumSel/'+ id, course).success(function(data){
-			$scope.viewCur(year);
+		$http.put('/administrator/course/'+ $scope.departmentId, course).success(function(data){
+			$scope.getCourses($scope.departmentId);
 		});
 	}
-	// course subjects year and terms
+	// edit course
+	$scope.editCourse = function(id){
+		$http.get('/administrator/course/' + id).success(function(data){
+			$scope.dep = data[0];
+		});
+	}
+	//update course
+	$scope.updateCourse = function(course){
+		$http.put('/administrator/update-course/'+ $scope.departmentId, course).success(function(data){
+			$scope.getCourses($scope.departmentId);
+		});
+	}
+
+	/**
+	 * for subjects
+	 */
+	
+	//get course subjects year and terms
 	$scope.getSubjects = function(id){
 		$http.get('/administrator/courseSubjects/'+ id).success(function(data){
 			var year = [],
@@ -113,7 +149,7 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 			$scope.subjects = objects;
 		});
 	}
-	// add course subjects
+	// add subjects
 	$scope.addSubjects = function(id,year, term, courseName, courseDes, subject){
 
 		var content={year_level: $scope.subjectsOfYear,term: $scope.subjectsOfTerm,course_name: courseName,course_des: courseDes,subject};
@@ -124,11 +160,11 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 
 		$scope.subject = "";
 	}
-	//edit course not done yet
-	$scope.editCourse = function(id){
-		console.log(id);
-	}
 
+	/**
+	 * for assestments
+	 */
+	
 	// get assestment
 	$http.get('/administrator/assestments').success(function(data){
 		$scope.assestments = data;
@@ -169,6 +205,9 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 		});
 	}
 }]);
+/**
+ * directives
+ */
 // add curriculum
 app.directive('addCur', function(){
 	return{

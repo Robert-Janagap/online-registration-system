@@ -33,7 +33,9 @@ router.get('/curriculum-list', function( req, res) {
 		res.json(data);
 	});
 });
-//for departments
+/**
+ * departments
+ */
 //add department
 router.post('/curriculumSel/:id', function(req, res){
 	var newData = {
@@ -56,14 +58,27 @@ router.delete('/curriculumSel/:id', function(req, res){
 		res.json(data);
 	})
 });
-///add and delete courses
-router.put('/curriculumSel/:id', function(req, res){
-	if (req.body.status){
+/**
+ * courses
+ */
+//get department courses
+router.get('/department-courses/:id', function(req, res){
+	curriculums.findById(req.params.id, function(err, data){
+		if (err){
+			return err;
+		};
+		res.json(data);
+	});
+});
+//add and delete courses
+router.put('/course/:id', function(req, res){
+	//delete course
+	if (req.body.status == "delete"){
 		curriculums.findByIdAndUpdate(req.params.id,{$pull:{courses:{_id:req.body._id}}}, function(err, data){
 			res.json(data);
 		});
-	}else{
-		curriculums.findByIdAndUpdate(req.params.id,{$addToSet:{courses:{course_name:req.body.courseName,course_des:req.body.courseDes,totalYears: req.body.courseYears, totalTerms: req.body.courseTerms}}} ,function(err, data){
+	}else{ //add course
+		curriculums.findByIdAndUpdate(req.params.id,{$addToSet:{courses:{course_name:req.body.course_name,course_des:req.body.course_des,totalYears: req.body.totalYears, totalTerms: req.body.totalTerms}}} ,function(err, data){
 		if (err){
 			return err;
 		};
@@ -71,6 +86,23 @@ router.put('/curriculumSel/:id', function(req, res){
 		});
 	}
 });
+router.put('/update-course/:id', function(req, res){
+	curriculums.findByIdAndUpdate({_id:req.params.id,courses:{$elemMatch:{course_name:req.body.course_name}}},{$set:{"courses.$.course_name":req.body.course_name}}, function(data){
+		console.log(data);
+	});
+});
+// edit courses
+router.get('/course/:id', function( req, res){
+	curriculums.find({'courses._id':req.params.id},{courses:{$elemMatch:{_id:req.params.id}}}, function(err, data){
+		if (err){
+			return err;
+		};
+		res.json(data[0].courses);
+	});
+});
+/**
+ * course subjects
+ */
 // get course subjects
 router.get('/courseSubjects/:id', function(req, res){
 	curriculums.find({'courses._id':req.params.id}, {courses:{$elemMatch:{_id:req.params.id}}},function(err, data){
