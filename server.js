@@ -3,31 +3,65 @@ var express =require( 'express' ),
 	path =require( 'path' ),
 	mongoose =require( 'mongoose' ),
 	bodyParser =require( 'body-parser' ),
+	passport = require('passport'),
+	localStrategy = require('passport-local').Strategy,
+	cookieParser = require('cookie-parser'),
+	session = require('express-session'),
 	app =express(),
 	port =process.env.PORT ||3000;
 //set config
 app.set( 'views',path.join( __dirname,'app/views' ) );
 app.set( 'view engine','ejs' );
 
+// connect to database
 mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
+
 //database
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
 var assestments = mongoose.model('assestments', require('./app/models/assestments.js'));
 var curriculumList = mongoose.model('curriculumList', require('./app/models/curriculumList.js'));
+var users = mongoose.model('userAccess', require('./app/models/userAccess.js'));
 
+// var admin = new users({username: 'admin', password: 'admin', name: 'Robert Janagap', roles: 'administrator'});
+// var evaluator = new users({username: 'eva', password: 'eva', name: 'Rhoi Abello', roles: 'program-coordinator'});
+// admin.save();
+// evaluator.save();
+// deprecated session middleware need to seach for updates
 //use middleware
 app.use( express.static( path.join( __dirname,'/public' ) ) );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended :true } ) );
+app.use(session({secret: 'This is the secret'}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+// authenticate the user login
+passport.use(new localStrategy(
+	function(username, password, done){
+		users.findOne({username: username, password: password}, function(err, user){
+			if(user){
+				return done(null, user);
+			}
+			return done(null, false, {message: 'unable to login'});
+		});
+	}
+));
+passport.serializeUser(function(user, done){
+	done(null, user);
+});
+passport.deserializeUser(function(user, done){
+	done(null, user);
+});
 
 //define routes
 var administrator =require( './app/routes/administrator.js' ),
 	evaluator =require( './app/routes/evaluator.js' ),
 	studentInfo =require( './app/routes/studentInfo.js' ),
 	findCourse =require( './app/routes/findCourse.js' ),
-	programCoordinator =require( './app/routes/programCoordinator.js' ),
 	setSchedule =require( './app/routes/setSchedule.js' ),
 	recSubjects =require( './app/routes/recSubjects.js' );
+// server side routes
+var programCoordinator =require( './app/routes/programCoordinator.js' )
 // client side routes
 var news = require('./app/routes/news.js');
 var index = require('./app/routes/index.js');
@@ -44,6 +78,8 @@ var enProcedure = require('./app/routes/enProcedure.js');
 // academics nav
 var eventsCalendar = require('./app/routes/eventsCalendar.js');
 var coursesOffered = require('./app/routes/coursesOffered.js');
+// login
+var login = require('./app/routes/login.js')
 
 // page url
 //for admin
@@ -74,9 +110,24 @@ app.use( '/enrollment-procedure',enProcedure );
 // academics nav
 app.use( '/courses-offered',coursesOffered );
 app.use( '/events-calendar',eventsCalendar );
+// login
+app.use( '/login',login );
+//log out
+app.post('/logout', function(req, res){
+	req.logOut();
+	res.send(200);
+});
 
+//authentication for database access
+var auth = function(req, res, next){
+	if(!req.isAuthenticated()){
+		res.send(401);
+	}else{
+		next();
+	}
+}
 // databases
-app.get( '/database',function ( req,res ) {
+app.get( '/database',auth,function ( req,res ) {
 
     curriculums.find( {},function ( err,data ) {
 
@@ -85,7 +136,7 @@ app.get( '/database',function ( req,res ) {
     } );
 
 } );
-app.get( '/database/assestment',function ( req,res ) {
+app.get( '/database/assestment',auth,function ( req,res ) {
 
     assestments.find( {},function ( err,data ) {
 
@@ -94,9 +145,18 @@ app.get( '/database/assestment',function ( req,res ) {
     } );
 
 } );
-app.get( '/database/curriculum-list',function ( req,res ) {
+app.get( '/database/curriculum-list',auth,function ( req,res ) {
 
     curriculumList.find( {},function ( err,data ) {
+
+        res.json( data );
+
+    } );
+
+} );
+app.get( '/database/users',auth,function ( req,res ) {
+
+    users.find( {},function ( err,data ) {
 
         res.json( data );
 

@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <nav class="nav">
+    <nav class="nav" ng-controller="navCtrl">
         <div class="container">
             <ul class="navBar">
                 <li class="nav_list"><a href="#/" class="nav_items">Home</a></li>
@@ -40,6 +40,10 @@
                 </li>
                 <li class="nav_list"><a href="#/news" class="nav_items">News</a></li>
                 <li class="nav_list"><a href="#/alumni" class="nav_items">Alumni</a></li>
+                <span ng-show="currentUser">
+                    <li class="nav_list"><a href="#/{{currentUser.roles}}" class="nav_items">Dashboard</a></li>
+                    <li class="nav_list"><a href="#/logout" class="nav_items" ng-click="logOut()">logout</a></li>
+                </span>
             </ul>
         </div>
     </nav>

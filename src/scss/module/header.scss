@@ -1,0 +1,89 @@
+header{
+	background: #127A04;
+	margin-bottom: 2rem;
+	color: #fff;
+	.header-content{
+		padding: 1rem 0 1.2rem 0;
+	}
+	.header-container{
+		margin-left: auto;
+		margin-right: auto;
+		width: 100%;
+		max-width: 393.33px;
+	}
+}
+.nav{
+	background: #116D05;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+	&_list{
+		display: inline-block;
+		padding:.5rem;
+		margin-right: 1rem;
+		position: relative;
+		&:hover > .navBar_sub{
+			display: block;
+		}
+	}
+	&_items{
+		transition: color .2s ease-in-out;
+		color: #222;
+		font-weight: 500;
+		&:hover{
+			color: #41CC44;
+		}
+	}
+	.navBar_sub{
+		background:#116D05;
+		position: absolute;
+		z-index: 4;
+		width: 180px;
+    	padding: 5px 15px;
+    	left: 0;
+    	margin-top: .5rem;
+    	display: none;
+    	border-radius: 0 0 4px 4px;
+    	box-shadow: 0 0 5px rgba(0,0,0,0.4);
+    	transition: all .8s ease-in-out;
+		a{
+			display: block;	
+		    padding: 10px 0;
+		    color: #222;
+		    transition: color .2s ease-in-out;
+		    &:hover{
+				color: #41CC44;
+			}
+		}
+	}
+}
+//logo
+.logo{
+	height: 80px;
+	width: 80px;
+	float: left;
+		.logo-img{
+			height: 80px;
+			background-size: 80px 80px;
+			background-image: url(/img/bcclogo.png);
+			background-repeat: no-repeat;
+		}
+}
+ .title{
+ 	max-height: 80px;
+ 	min-width: 300px;
+ 	text-align: center;
+	letter-spacing: 2px;
+		.title_republic{
+		 	font-size: .75rem;
+		 	padding-top: 9px;
+		 	font-weight: light;
+		 }
+
+		 .title_school {
+		 	font-size: 1.25rem;
+		 	font-weight: bold;
+		 }
+		 
+		 .title_city{
+		 	font-size: .8rem;
+		 }
+ }

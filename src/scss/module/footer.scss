@@ -1,0 +1,43 @@
+footer{
+	background: #127A04;
+	color: #222;
+	margin-top: 3rem;
+	box-shadow: 0 -2px 5px rgba(0,0,0,0.4);
+	a{
+		color: #333;
+		transition: color .2s ease-in-out;
+		&:hover{
+			color: #41CC44;
+		}
+	}
+}
+.footer_nav{
+	padding-bottom: 25px;
+	&_sub{
+		li{
+			padding: 5px 8px;;
+		}
+	}
+	&_list{
+		border-right: 1px solid #168707;
+		margin-right: .7rem;
+		p{
+			font-size: .8rem;
+			margin-top: 0;
+		}
+		.smLinks img{
+		width: 32px;
+		height: 32px;
+		margin-right: 5px;
+		}
+		&:last-child{
+			border-right: 0;
+			margin-right: 0;
+		}
+	}
+}
+.copyright{
+	background: #116D05;
+	font-size: .8rem;
+	padding: .5rem 0;
+}

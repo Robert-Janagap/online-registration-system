@@ -1,11 +1,11 @@
 <div class="curriculum_add--overlay"></div>
-<div class="container admin"  ng-controller="administratorCtrl">
+<div class="container admin">
 <!-- sidebar -->
 	<div class="three column admin_sidebar boxShadow ">
 		<div class="person">
 			<div class="person_image"><img src="img/me.png" alt=" Profile picture "></div>
-			<div class="person_name">Robert Janagap</div>
-			<div class="person_role">Administrator</div>
+			<div class="person_name">{{currentUser.name}}</div>
+			<div class="person_role">{{currentUser.roles}}</div>
 		</div>
 		<div class="admin_sidebarNav">
 			<ul>

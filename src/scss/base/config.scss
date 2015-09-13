@@ -11,12 +11,18 @@ body {
   font-weight: 400;
   line-height: 1.45;
   color: #333;
-  background: #D1D1D1;
+  background:{
+    image: url('/img/system_bg.png');
+  }
   margin: 0;
   padding: 0; }
 a{
   text-decoration: none;
   -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 label,
 a {

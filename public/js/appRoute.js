@@ -1,4 +1,5 @@
 var app = angular.module('clientSideApp',['ngRoute']);
+
 app.config(function($routeProvider){
 	$routeProvider
 		.when('/',{
@@ -48,12 +49,52 @@ app.config(function($routeProvider){
 		.when('/alumni',{
 			templateUrl: 'views/alumni.html',
 			controller: 'alumniCtrl'
+		})//login
+		.when('/login',{
+			templateUrl: 'views/login.html',
+			controller: 'loginCtrl'
 		})//for users
 		.when('/administrator',{
 			templateUrl: 'views/administrator.html',
-			controller: 'administratorCtrl'
+			controller: 'administratorCtrl',
+			resolve:{
+				logincheck: checkLogin
+			}
+		})
+		.when('/program-coordinator',{
+			templateUrl: 'views/programCoordinator.html',
+			controller: 'programCoordinatorCtrl',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.otherwise({
-			redirectTo: 'views/home.html'
+			redirectTo: '/'
 		})
 });
+
+var checkLogin = function($q, $timeout, $http, $location, $rootScope){
+	var deferred = $q.defer();
+	$http.get('/login/loggedin').success(function(data){
+		$rootScope.errorMessage = null;
+		//user is authenticated
+		if(data !=='0'){
+			$rootScope.currentUser = data;
+			deferred.resolve();
+		}else{ //user is not authenticated
+			$rootScope.errorMessage = "you need to log in";
+			deferred.reject();
+			$location.url('/login');
+		}
+	});
+	return deferred.promise;
+}
+// navigation links access
+app.controller('navCtrl',['$scope','$http','$location','$rootScope', function($scope, $http, $location, $rootScope){
+	$scope.logOut = function(){
+		$http.post('/logout').success(function(data){
+			$rootScope.currentUser = null;
+			$location.url('/')
+		});
+	}
+}]);

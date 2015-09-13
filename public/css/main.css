@@ -372,13 +372,17 @@ body {
   font-weight: 400;
   line-height: 1.45;
   color: #333;
-  background: #D1D1D1;
+  background-image: url("/img/system_bg.png");
   margin: 0;
   padding: 0; }
 
 a {
   text-decoration: none;
-  -webkit-user-select: none; }
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
 
 label,
 a {
@@ -416,15 +420,15 @@ ul {
 
 @font-face {
   font-family: 'lato';
-  src: url("lato-regular-webfont.eot");
-  src: url("lato-regular-webfont.eot?#iefix") format("embedded-opentype"), url("lato-regular-webfont.woff2") format("woff2"), url("lato-regular-webfont.woff") format("woff"), url("lato-regular-webfont.ttf") format("truetype"), url("lato-regular-webfont.svg#latoregular") format("svg");
+  src: url("/fonts/lato-regular-webfont.eot");
+  src: url("/fonts/lato-regular-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/lato-regular-webfont.woff2") format("woff2"), url("/fonts/lato-regular-webfont.woff") format("woff"), url("/fonts/lato-regular-webfont.ttf") format("truetype"), url("/fonts/lato-regular-webfont.svg#latoregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'merriweather';
-  src: url("merriweather-regular-webfont.eot");
-  src: url("merriweather-regular-webfont.eot?#iefix") format("embedded-opentype"), url("merriweather-regular-webfont.woff2") format("woff2"), url("merriweather-regular-webfont.woff") format("woff"), url("merriweather-regular-webfont.ttf") format("truetype"), url("merriweather-regular-webfont.svg#merriweatherregular") format("svg");
+  src: url("/fonts/merriweather-regular-webfont.eot");
+  src: url("/fonts/merriweather-regular-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/merriweather-regular-webfont.woff2") format("woff2"), url("/fonts/merriweather-regular-webfont.woff") format("woff"), url("/fonts/merriweather-regular-webfont.ttf") format("truetype"), url("/fonts/merriweather-regular-webfont.svg#merriweatherregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -657,7 +661,7 @@ td {
     background: #fff;
     text-align: center;
     border-radius: 4px;
-    padding: 1.25rem 0; }
+    padding: 1.2rem 0; }
     .admin_sidebar--fixed {
       top: 0;
       transition: all 0.5s ease-in-out; }
@@ -679,7 +683,8 @@ td {
   margin-bottom: 2rem;
   padding: 15px 20px;
   border-radius: 4px;
-  position: relative; }
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6); }
   .content_title {
     margin: 0;
     margin-bottom: 2rem; }
@@ -870,11 +875,6 @@ td {
     padding: 1rem 0.8rem;
     text-align: center; }
 
-.registration_form {
-  background: #fff;
-  padding: 0 10px;
-  margin-top: 30px; }
-
 header {
   background: #127A04;
   margin-bottom: 2rem;
@@ -889,7 +889,7 @@ header {
 
 .nav {
   background: #116D05;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); }
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); }
   .nav_list {
     display: inline-block;
     padding: .5rem;
@@ -923,37 +923,6 @@ header {
       .nav .navBar_sub a:hover {
         color: #41CC44; }
 
-footer {
-  background: #127A04;
-  color: #222;
-  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.4); }
-
-.footer_nav {
-  padding-bottom: 25px; }
-  .footer_nav a {
-    color: #333;
-    transition: color 0.2s ease-in-out; }
-    .footer_nav a:hover {
-      color: #41CC44; }
-  .footer_nav_sub li {
-    padding: 5px 8px; }
-  .footer_nav_list {
-    border-right: 1px solid #168707;
-    padding: 0;
-    margin-right: .30%; }
-    .footer_nav_list p {
-      font-size: .8rem;
-      margin-top: 0; }
-    .footer_nav_list .smLinks img {
-      width: 32px;
-      height: 32px;
-      margin-right: 5px; }
-    .footer_nav_list:last-child {
-      border-right: 0; }
-
-body {
-  background-image: url("/img/system_bg.png"); }
-
 .logo {
   height: 80px;
   width: 80px;
@@ -967,7 +936,8 @@ body {
 .title {
   max-height: 80px;
   min-width: 300px;
-  text-align: center; }
+  text-align: center;
+  letter-spacing: 2px; }
   .title .title_republic {
     font-size: .75rem;
     padding-top: 9px;
@@ -978,78 +948,49 @@ body {
   .title .title_city {
     font-size: .8rem; }
 
-.menu {
-  height: 20px;
-  width: 100%; }
+footer {
+  background: #127A04;
+  color: #222;
+  margin-top: 3rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.4); }
+  footer a {
+    color: #333;
+    transition: color 0.2s ease-in-out; }
+    footer a:hover {
+      color: #41CC44; }
 
-.follow-links {
-  float: right;
-  background-color: lightgreen;
-  padding-top: 3px; }
+.footer_nav {
+  padding-bottom: 25px; }
+  .footer_nav_sub li {
+    padding: 5px 8px; }
+  .footer_nav_list {
+    border-right: 1px solid #168707;
+    margin-right: .7rem; }
+    .footer_nav_list p {
+      font-size: .8rem;
+      margin-top: 0; }
+    .footer_nav_list .smLinks img {
+      width: 32px;
+      height: 32px;
+      margin-right: 5px; }
+    .footer_nav_list:last-child {
+      border-right: 0;
+      margin-right: 0; }
 
-.footer-content {
-  padding-top: 15px;
-  padding-bottom: 5px;
-  background-color: lightgreen; }
-  .footer-content span {
-    font-weight: bold;
-    font-size: 1.1rem; }
-  .footer-content .copyright {
-    padding-top: 15px;
-    font-size: .9rem;
-    font-weight: bold; }
+.copyright {
+  background: #116D05;
+  font-size: .8rem;
+  padding: .5rem 0; }
 
-.pad-bot {
-  padding-bottom: 5px; }
+.login {
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 200px; }
+  .login label, .login input {
+    display: block;
+    margin-bottom: .8rem; }
 
-.contact ul, .admission ul,
-.about ul, .academics ul {
-  margin: 0;
-  padding: 0; }
-
-.contact li, .admission ul li, .about ul li,
-.academics ul li {
-  list-style-type: none; }
-
-.admission a, .about a,
-.academics a {
-  text-decoration: none; }
-
-.contact-info a {
-  font-size: .9rem; }
-
-.links {
-  width: 100%;
-  width: 200px;
-  margin-top: 10px; }
-  .links ul {
-    margin-bottom: 0; }
-    .links ul li {
-      list-style-type: none;
-      display: block;
-      display: inline-block;
-      margin-left: 5px; }
-      .links ul li a {
-        text-decoration: none; }
-        .links ul li a img {
-          height: 25px; }
-
-.follow-links {
-  width: 100%;
-  text-align: right;
-  float: right;
-  width: 200px; }
-  .follow-links ul {
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-bottom: 0;
-    padding: 0; }
-    .follow-links ul li {
-      list-style-type: none;
-      display: block;
-      float: right;
-      padding-left: 5px; }
-      .follow-links ul li a {
-        text-decoration: none; }
-        .follow-links ul li a img {
-          height: 25px; }
+.registration_form {
+  background: #fff;
+  padding: 0 10px;
+  margin-top: 30px; }
