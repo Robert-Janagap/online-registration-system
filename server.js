@@ -31,7 +31,11 @@ var users = mongoose.model('userAccess', require('./app/models/userAccess.js'));
 app.use( express.static( path.join( __dirname,'/public' ) ) );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended :true } ) );
-app.use(session({secret: 'This is the secret'}));
+app.use(session({
+	secret: 'This is the secret',
+	resave: false,
+  	saveUninitialized: true
+}));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
