@@ -58,14 +58,9 @@ passport.deserializeUser(function(user, done){
 });
 
 //define routes
-var administrator =require( './app/routes/administrator.js' ),
-	evaluator =require( './app/routes/evaluator.js' ),
-	studentInfo =require( './app/routes/studentInfo.js' ),
-	findCourse =require( './app/routes/findCourse.js' ),
-	setSchedule =require( './app/routes/setSchedule.js' ),
-	recSubjects =require( './app/routes/recSubjects.js' );
+var administrator =require( './app/routes/administrator.js' );
 // server side routes
-var programCoordinator =require( './app/routes/programCoordinator.js' )
+var programCoordinator =require( './app/routes/programCoordinator.js' );
 // client side routes
 var news = require('./app/routes/news.js');
 var index = require('./app/routes/index.js');
@@ -89,14 +84,10 @@ var login = require('./app/routes/login.js')
 //for admin
 app.use( '/administrator',administrator );
 //for staff
-app.use( '/evaluator',evaluator );
 app.use( '/program-coordinator',programCoordinator );
-app.use( '/program-coordinator/set-schedule',setSchedule );
 
 //evaluator
-app.use( '/student-info',studentInfo );
-app.use( '/school-courses',findCourse );
-app.use( '/subjects-recommended',recSubjects );
+
 
 // client side
 app.use( '/',index );
@@ -116,6 +107,7 @@ app.use( '/courses-offered',coursesOffered );
 app.use( '/events-calendar',eventsCalendar );
 // login
 app.use( '/login',login );
+
 //log out
 app.post('/logout', function(req, res){
 	req.logOut();

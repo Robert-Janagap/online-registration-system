@@ -68,6 +68,34 @@ app.config(function($routeProvider){
 			// 	logincheck: checkLogin
 			// }
 		})
+		.when('/evaluator',{
+			templateUrl: 'views/evaluator.html',
+			controller: 'evaluatorCtrl',
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
+		})
+		.when('/registrar',{
+			templateUrl: 'views/registrar.html',
+			controller: 'registrarCtrl',
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
+		})
+		.when('/teacher',{
+			templateUrl: 'views/teacher.html',
+			controller: 'teacherCtrl',
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
+		})
+		.when('/student',{
+			templateUrl: 'views/student.html',
+			controller: 'studentCtrl',
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
+		})
 		.otherwise({
 			redirectTo: '/'
 		})
