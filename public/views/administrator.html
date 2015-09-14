@@ -1,5 +1,5 @@
 <div class="curriculum_add--overlay"></div>
-<div class="container admin">
+<div class="container">
 <!-- sidebar -->
 	<div class="three column admin_sidebar boxShadow ">
 		<div class="person">
@@ -27,7 +27,7 @@
 <!-- contents -->
 	<div class="nine column pull--right">
 		<!-- Curriculum list -->
-		<article class="content row boxShadow">
+		<article class="content row">
 			<div class="row">
 				<h3 class="content_title">Curriculum <add-cur></add-cur></h3>
 			</div>
@@ -53,7 +53,7 @@
 			<a class="btn pull--right" ng-click="addCurriculum(curriculum_new)">Save</a>
 		</div>
 		<!-- curriculum information -->
-		<article class="content row departmentList boxShadow">
+		<article class="content row departmentList">
 			<h3 class="content_title"><span>Curriculum {{curYear}}</span></h3>
 			<closedepartment-list></closedepartment-list>
 			<form class="departmentList_items">
@@ -128,7 +128,7 @@
 			</form>
 		</article>
 		<!-- assestment view -->
-		<article class="content row boxShadow">
+		<article class="content row">
 			<div class="row">
 				<h3 class="content_title">Assestment <openfees></openfees></h3>
 			</div>
@@ -208,11 +208,61 @@
 				</table>
 			</div>
 		</article>
-		<article class="content">
-			
+		<!-- faculty and staff -->
+		<article class="content row facultyStaff">
+			<h3 class="content_title">Faculty and Staff <faculty-stuff></faculty-stuff></h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Role</th>
+						<th>Username</th>
+						<th>Password</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="user in userList">
+						<td>{{user.name}}</td>
+						<td>{{user.roles}}</td>
+						<td>{{user.username}}</td>
+						<td>{{user.password}}</td>
+						<td><div class="btn btn--orange">Edit</div></td>
+						<td><div class="btn btn--red" ng-click="deleteUser(user._id)">Delete</div></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="addFacultyStaff boxShadow three column">
+				<h4>Add user</h4>
+				<close-faculty-stuff></close-faculty-stuff>
+				<div class="input_groups">
+					<label for="">Full Name</label>
+					<input type="text" ng-model="user.name">
+				</div>
+				<div class="input_groups">
+					<label for="">Username</label>
+					<input type="text" ng-model="user.username">
+				</div>
+				<div class="input_groups">
+					<label for="">Password</label>
+					<input type="password" ng-model="user.password">
+				</div>
+				<div class="addFacultyStaff_roles">
+					<div class="small">Role</div>
+					<select name="" id="" ng-model="user.roles">
+						<option value="">--select role--</option>
+						<option value="teacher">Teacher</option>
+						<option value="program-evaluator">Program Evaluator</option>
+						<option value="subject-evaluator">Subject Evaluator</option>
+						<option value="registrar">Registrar</option>
+						<option value="program-coordinator">Program Coordinator</option>
+						<option value="administrator">Administrator</option>
+					</select>
+				</div>
+				<button ng-click="addUser(user)" class="pull--right">Save</button>
+			</div>
 		</article>
 	</div>
-
+	
 	<!-- course subjects -->
 	<div class="course_subjects boxShadow">
 		<div class="overlay"></div>

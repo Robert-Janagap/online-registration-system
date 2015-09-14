@@ -7,6 +7,6 @@ var	userAccess  =new mongoose.Schema( {
     password: String,
     name: String,
     roles:String
-},{ collection : 'userAccess' } );
+},{ collection : 'users' } );
 
 module.exports = userAccess;

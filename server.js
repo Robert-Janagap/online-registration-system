@@ -20,13 +20,13 @@ mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
 var assestments = mongoose.model('assestments', require('./app/models/assestments.js'));
 var curriculumList = mongoose.model('curriculumList', require('./app/models/curriculumList.js'));
-var users = mongoose.model('userAccess', require('./app/models/userAccess.js'));
+var users = mongoose.model('users', require('./app/models/users.js'));
 
 // var admin = new users({username: 'admin', password: 'admin', name: 'Robert Janagap', roles: 'administrator'});
 // var evaluator = new users({username: 'eva', password: 'eva', name: 'Rhoi Abello', roles: 'program-coordinator'});
 // admin.save();
 // evaluator.save();
-// deprecated session middleware need to seach for updates
+
 //use middleware
 app.use( express.static( path.join( __dirname,'/public' ) ) );
 app.use( bodyParser.json() );
@@ -119,13 +119,13 @@ app.use( '/login',login );
 //log out
 app.post('/logout', function(req, res){
 	req.logOut();
-	res.send(200);
+	res.sendStatus(200);
 });
 
 //authentication for database access
 var auth = function(req, res, next){
 	if(!req.isAuthenticated()){
-		res.send(401);
+		res.sendStatus(401);
 	}else{
 		next();
 	}
@@ -158,7 +158,7 @@ app.get( '/database/curriculum-list',auth,function ( req,res ) {
     } );
 
 } );
-app.get( '/database/users',auth,function ( req,res ) {
+app.get( '/database/users',function ( req,res ) {
 
     users.find( {},function ( err,data ) {
 

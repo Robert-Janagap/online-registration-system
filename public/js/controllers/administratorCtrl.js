@@ -1,5 +1,23 @@
 app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
-
+	/*
+	testing
+	 */
+	$scope.refreshUsers = function(){
+		$http.get('/administrator/users').success(function(data){
+			$scope.userList = data; 
+		});
+	}
+	$scope.refreshUsers();
+	$scope.addUser = function(user){
+		$http.post('/administrator/newUser/', user).success(function(data){
+			$scope.refreshUsers();
+		});
+	}
+	$scope.deleteUser = function(user_id){
+		$http.delete('/administrator/deleteUser/'+user_id).success(function(data){
+			$scope.refreshUsers();
+		});
+	}
 	/*
 	For curriculums
 	 */
@@ -338,6 +356,22 @@ app.directive('closeCourseSubjects', function(){
 		}
 	}
 });
+// close  staff and teacher modal
+app.directive('closeFacultyStuff', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<div>X</div>",
+		link: function(scope, element, attrs){
+			element.addClass('btn--close');
+		 	element.on( 'click',function ( event ){
+
+		       $('.addFacultyStaff, .overlay').toggle();
+
+		    } );
+		}
+	}
+});
 // open assestment fees
 app.directive('openfees', function(){
 	return{
@@ -402,6 +436,22 @@ app.directive('showSubjects', function(){
 		 	element.on( 'click',function ( event ){
 
 		       $('.course_subjects, .overlay').toggle();
+
+		    } );
+		}
+	}
+});
+// open  staff and teacher modal
+app.directive('facultyStuff', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		template: "<span>add</span>",
+		link: function(scope, element, attrs){
+			element.addClass('content_title_btn');
+		 	element.on( 'click',function ( event ){
+
+		       $('.addFacultyStaff, .overlay').toggle();
 
 		    } );
 		}

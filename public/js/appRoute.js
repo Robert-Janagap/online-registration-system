@@ -64,9 +64,9 @@ app.config(function($routeProvider){
 		.when('/program-coordinator',{
 			templateUrl: 'views/programCoordinator.html',
 			controller: 'programCoordinatorCtrl',
-			resolve:{
-				logincheck: checkLogin
-			}
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.otherwise({
 			redirectTo: '/'
