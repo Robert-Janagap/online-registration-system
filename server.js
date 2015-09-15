@@ -122,8 +122,9 @@ var auth = function(req, res, next){
 		next();
 	}
 }
+// use auth for restricting user to see the db
 // databases
-app.get( '/database',auth,function ( req,res ) {
+app.get( '/database',function ( req,res ) {
 
     curriculums.find( {},function ( err,data ) {
 
@@ -141,7 +142,7 @@ app.get( '/database/assestment',auth,function ( req,res ) {
     } );
 
 } );
-app.get( '/database/curriculum-list',auth,function ( req,res ) {
+app.get( '/database/curriculum-list',function ( req,res ) {
 
     curriculumList.find( {},function ( err,data ) {
 

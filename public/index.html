@@ -5,6 +5,12 @@
 <meta name="keywords" content="">
 <title>Administrator</title>
 <link rel="stylesheet" href="/css/main.css">
+<body ng-app="clientSideApp">
+
+	<div ng-include="'/views/header.ejs'"></div>
+	<div ng-view></div>
+	<div ng-include="'/views/footer.ejs'"></div>
+
 <script src="/lib/jquery-2.1.4.min.js"></script>
 <script src="/lib/angular.min.js"></script>
 <script src="/lib/angular-route.min.js"></script>
@@ -37,8 +43,5 @@
 <!-- my plugins -->
 <script src="/js/sideBarFixed.js"></script>
 <script src="/js/admin.js"></script>
-<body ng-app="clientSideApp">
-	<div ng-include="'/views/header.ejs'"></div>
-	<div ng-view></div>
-	<div ng-include="'/views/footer.ejs'"></div>
+
 </body>

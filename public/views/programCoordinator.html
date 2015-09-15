@@ -22,7 +22,19 @@
 				<label for="">search course</label>
 				<input type="text">
 			</div>
+			<div>
+				<label for="">Filter by:</label>
+				<select name="" id="" ng-change = "selectCurYear(selCurYear)" ng-model="selCurYear">
+					<option value="">--curriculum year--</option>
+					<option value="{{curriculums.curriculumYear}}" ng-repeat = "curriculums in curriculumList">{{curriculums.curriculumYear}}</option>
+				</select>
+				<select name="" id="" ng-change = "selectDep(selDep)" ng-model="selDep">
+					<option value="">--department--</option>
+					<option value="{{department._id}}" ng-repeat = "department in curriculum">{{department.department_name}}</option>
+				</select>
+			</div>
 			<table>
+				<caption ng-show="department_name"><h4>{{department_name}}</h4></caption>
 				<thead>
 					<tr>
 						<th>Year</th>
@@ -32,28 +44,23 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>3</td>
-						<td>2</td>
-						<td>BSIT</td>
-						<td>Bachelor of information technology</td>
-						<td><a href="" class="btn">Set Schedule</a></td>
-						<td><div class="btn">Print</div></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>2</td>
-						<td>BSIT</td>
-						<td>Bachelor of information technology</td>
-						<td><a href="" class="btn">Set Schedule</a></td>
+					<tr ng-repeat = "course in courses">
+						<td>{{course.totalYears}}</td>
+						<td>{{course.totalTerms}}</td>
+						<td>{{course.course_name}}</td>
+						<td>{{course.course_des}}</td>
+						<td><open-class-sched></open-class-sched></td>
 						<td><div class="btn">Print</div></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<div class="twelve column setSchedule">
-		<div class="content">
+	<!-- course class schedule -->
+	<div class="overlay"></div>
+	<div class="container column">
+		<div class="content setSchedule eleven column">
+			<close-class-sched></close-class-sched>
 			<div class="content_title">
 				<h3>Set Schedule</h3>
 			</div>

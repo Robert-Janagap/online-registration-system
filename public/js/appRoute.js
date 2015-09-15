@@ -57,9 +57,9 @@ app.config(function($routeProvider){
 		.when('/administrator',{
 			templateUrl: 'views/administrator.html',
 			controller: 'administratorCtrl',
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/program-coordinator',{
 			templateUrl: 'views/programCoordinator.html',
@@ -71,30 +71,30 @@ app.config(function($routeProvider){
 		.when('/evaluator',{
 			templateUrl: 'views/evaluator.html',
 			controller: 'evaluatorCtrl',
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/registrar',{
 			templateUrl: 'views/registrar.html',
 			controller: 'registrarCtrl',
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/teacher',{
 			templateUrl: 'views/teacher.html',
 			controller: 'teacherCtrl',
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/student',{
 			templateUrl: 'views/student.html',
 			controller: 'studentCtrl',
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.otherwise({
 			redirectTo: '/'
