@@ -1,11 +1,12 @@
 .course_subjects{
-	background: #fff;
 	padding: 20px;
 	border-radius: 4px;
+	background: #fff;
 	position: fixed;
 	top: 5%;
 	z-index: 5;
 	display: none;
+	transition: all .3s ease-in-out;
 	li{
 		display: inline-block;
 		margin-right: .8rem;

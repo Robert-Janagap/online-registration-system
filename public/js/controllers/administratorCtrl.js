@@ -2,10 +2,12 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 	/*
 	testing
 	 */
+	// add users
 	$scope.refreshUsers = function(){
 		$http.get('/administrator/users').success(function(data){
 			$scope.userList = data; 
 		});
+		$scope.user = null;
 	}
 	$scope.refreshUsers();
 	$scope.addUser = function(user){
@@ -126,6 +128,7 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 			$scope.courseName = data[0].courses[0].course_name;
 			$scope.courseDes = data[0].courses[0].course_des;
 			$scope.departmentId = data[0]._id;
+			$scope.subjects = null;
 		});
 	}
 	// find subjects related in year and term
@@ -133,11 +136,10 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 		$http.get('/administrator/findSubjectsByYear/' + id).success(function(data){
 			var objects = [];
 			for (var i = data.length - 1; i >= 0; i--) {
-				if(data[i].year_level === year){
+				if(data[i].year_level === year && $scope.courseName === data[i].course_name){
 					objects.push(data[i]);
 				}
 			};
-
 			$scope.subjects = objects;
 		});
 		$scope.subjectsOfYear = year;
@@ -146,7 +148,7 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 		$http.get('/administrator/findSubjectsByYear/' + id).success(function(data){
 			var objects = [];
 			for (var i = data.length - 1; i >= 0; i--) {
-				if(data[i].year_level === $scope.subjectsOfYear && data[i].term === term){
+				if(data[i].year_level === $scope.subjectsOfYear && data[i].term === term && $scope.courseName === data[i].course_name){
 					objects.push(data[i]);
 				}
 			};

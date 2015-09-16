@@ -17,3 +17,18 @@
 .boxShadow {
 	box-shadow: 0 0 8px rgba(0,0,0,0.4);
 }
+.modal{
+	border-radius: 4px;
+	background: #fff;
+	position: fixed;
+	top: 5%;
+	z-index: 5;
+	display: block;
+}
+.show{
+	opacity: 1;
+	transition: opacity .3s ease-in-out;
+}
+.hide{
+	opacity: 0;
+}

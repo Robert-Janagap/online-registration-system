@@ -49,7 +49,7 @@
 						<td>{{course.totalTerms}}</td>
 						<td>{{course.course_name}}</td>
 						<td>{{course.course_des}}</td>
-						<td><open-class-sched></open-class-sched></td>
+						<td><open-class-sched ng-click="getSubjects(course._id)"></open-class-sched></td>
 						<td><div class="btn">Print</div></td>
 					</tr>
 				</tbody>
@@ -58,25 +58,64 @@
 	</div>
 	<!-- course class schedule -->
 	<div class="overlay"></div>
-	<div class="container column">
-		<div class="content setSchedule eleven column">
-			<close-class-sched></close-class-sched>
-			<div class="content_title">
-				<h3>Set Schedule</h3>
+	<div class="course_subjects content eleven column">
+		<close-class-sched></close-class-sched>
+		<div class="content_title">
+			<h3>Set Schedule</h3>
+		</div>
+		<span>{{courseName}}</span>
+		<span>{{courseDes}}</span>
+		<ul>
+			<li ng-repeat="courseYear in courseYears">
+				<div class="btn" ng-click="subjectInYear(courseYear,departmentId)">{{courseYear}}</div>
+			</li>
+		</ul>
+		<div class="course_subjectsList">
+			<ul>
+				<li ng-repeat="courseTerm in courseTerms">
+					<div class="btn" ng-click="subjectWithTerm(courseTerm,departmentId)">{{courseTerm}} semester</div>
+				</li>
+			</ul>
+			<div class="addSection"  ng-show="termClick">
+				<div class="input_groups">
+					<label for="">Section</label>
+					<input type="text"  class="input_name" ng-model="section.section">
+				</div>
+				<div class="btn" ng-click="addSection(section)">add</div>
 			</div>
-			<div>
-				Course:<span>BSIT</span>
-				Course description:<span>Bachelor of information technology</span>
-				year: <span>2</span>
-				term: <span>2</span>
-			</div>
-			<div class="input_groups">
-				<label for="">Section</label>
-				<input type="text">
-			</div>
-			<table>
+			<ul>
+				<li ng-repeat = "section in sections">
+					<div class="btn" ng-click="pickSection(section)">{{section.section}}</div>
+				</li>
+			</ul>
+			
+			<table ng-show="schedules">
+				<caption><h5>{{sectionName}}</h5></caption>
 				<thead>
 					<tr>
+						<th>Subject Code</th>
+						<th>Subject Description</th>
+						<th>Units</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat = "subject in subjects">
+						<td>{{subject.subject_name}}</td>
+						<td>{{subject.subject_des}}</td>
+						<td>{{subject.units}}</td>
+						<td><set-schedule ng-click="setSched(subject)" ng-show="sectionClick"></set-schedule></td>
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<caption ng-show="schedules"><h5>Class Schedule</h5></caption>
+				<thead>
+					<tr ng-show="!schedules">
+						<th>Subject Code</th>
+						<th>Subject Description</th>
+						<th>Units</th>
+					</tr>
+					<tr ng-show="schedules">
 						<th>Subject Code</th>
 						<th>Subject Description</th>
 						<th>Units</th>
@@ -84,44 +123,60 @@
 						<th>Day</th>
 						<th>Rm. no.</th>
 						<th>Instructor</th>
-						<th><div class="btn">Add</div></th>
-						<th><div class="btn">Update</div></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Addprog</td>
-						<td>Advance Programming</td>
-						<td>3</td>
-						<td>
-							<div class="input_groups">
-								<label for="">Time</label>
-								<input type="text" class="input_units">
-							</div>
-						</td>
-						<td>
-							<div class="input_groups">
-								<label for="">Day</label>
-								<input type="text" class="input_units">
-							</div>
-						</td>
-						<td>
-							<div class="input_groups">
-								<label for="">Rm. no.</label>
-								<input type="text" class="input_units">
-							</div>
-						</td>
-						<td>
-							<div class="input_groups">
-								<label for="">Instructor</label>
-								<input type="text" class="input_name">
-							</div>
-						</td>
-						<td><div class="btn">edit</div></td>
-						<td><div class="btn">delete</div></td>
+					<tr ng-repeat = "subject in subjects" ng-show="!schedules">
+						<td>{{subject.subject_name}}</td>
+						<td>{{subject.subject_des}}</td>
+						<td>{{subject.units}}</td>
+					</tr>
+					<tr ng-repeat = "subject in schedules" ng-show="schedules">
+						<td>{{subject.subject_name}}</td>
+						<td>{{subject.subject_des}}</td>
+						<td>{{subject.units}}</td>
+						<td>{{subject.time}}</td>
+						<td>{{subject.days}}</td>
+						<td>{{subject.room}}</td>
+						<td>{{subject.instructor}}</td>
+						<!-- <td><set-schedule ng-click="setSched(subject)" ng-show="sectionClick"></set-schedule></td> -->
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
+	<div class="modal content six column setSchedule">
+		<back-to-courses></back-to-courses>
+		<div>
+			<div class="input_groups">
+				<label for="">Time</label>
+				<input type="text" class="input_units" ng-model="subjectSchedule.schedule_time">
+			</div>
+			<div class="input_groups">
+				<label for="">Day</label>
+				<input type="text" class="input_units" ng-model="subjectSchedule.day">
+			</div>
+			<div class="input_groups">
+				<label for="">Rm. no.</label>
+				<input type="text" class="input_units" ng-model="subjectSchedule.room">
+			</div>
+			<span>Instructor: {{subjectSchedule.teacher}}</span>
+		</div>
+		<div class="searchTeacher">
+			<div class="input_groups">
+				<label for="">Search for Teacher</label>
+				<input type="text" class="input_des">
+			</div>
+			<table>
+				<tr>
+					<th>Teacher Name</th>
+				</tr>
+				<tr ng-repeat = "teacher in teachers">
+					<td>{{teacher.name}}</td>
+					<td><div class="btn" ng-click="pickTeacher(teacher)">Select</div></td>
+				</tr>
+			</table>
+		</div>
+		<div class="btn pull--right" ng-click="saveSched(subjectSchedule)">Save</div>
+	</div> 
 </div>

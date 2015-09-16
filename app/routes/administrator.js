@@ -123,9 +123,8 @@ router.put('/courseSubjects/:id', function(req, res){
 		res.json(data);
 		});
 });
-// find subjects related in year
+// find subjects related in year and term
 router.get('/findSubjectsByYear/:id', function(req, res){
-	console.log(req.params.id);
 	curriculums.findById(req.params.id, function(err, data){
 		if (err){
 			return err;

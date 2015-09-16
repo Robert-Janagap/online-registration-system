@@ -57,9 +57,9 @@ app.config(function($routeProvider){
 		.when('/administrator',{
 			templateUrl: 'views/administrator.html',
 			controller: 'administratorCtrl',
-			resolve:{
-				logincheck: checkLogin
-			}
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/program-coordinator',{
 			templateUrl: 'views/programCoordinator.html',

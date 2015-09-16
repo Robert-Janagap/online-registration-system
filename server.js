@@ -21,11 +21,7 @@ var curriculums = mongoose.model('curriculums', require('./app/models/curriculum
 var assestments = mongoose.model('assestments', require('./app/models/assestments.js'));
 var curriculumList = mongoose.model('curriculumList', require('./app/models/curriculumList.js'));
 var users = mongoose.model('users', require('./app/models/users.js'));
-
-// var admin = new users({username: 'admin', password: 'admin', name: 'Robert Janagap', roles: 'administrator'});
-// var evaluator = new users({username: 'eva', password: 'eva', name: 'Rhoi Abello', roles: 'program-coordinator'});
-// admin.save();
-// evaluator.save();
+var classSchedules = mongoose.model('classSchedules', require('./app/models/classSchedules.js'));
 
 //use middleware
 app.use( express.static( path.join( __dirname,'/public' ) ) );
@@ -39,6 +35,7 @@ app.use(session({
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
+
 // authenticate the user login
 passport.use(new localStrategy(
 	function(username, password, done){
@@ -58,8 +55,8 @@ passport.deserializeUser(function(user, done){
 });
 
 //define routes
-var administrator =require( './app/routes/administrator.js' );
 // server side routes
+var administrator =require( './app/routes/administrator.js' );
 var programCoordinator =require( './app/routes/programCoordinator.js' );
 // client side routes
 var news = require('./app/routes/news.js');
@@ -78,7 +75,7 @@ var enProcedure = require('./app/routes/enProcedure.js');
 var eventsCalendar = require('./app/routes/eventsCalendar.js');
 var coursesOffered = require('./app/routes/coursesOffered.js');
 // login
-var login = require('./app/routes/login.js')
+var login = require('./app/routes/login.js');
 
 // page url
 //for admin
@@ -154,6 +151,15 @@ app.get( '/database/curriculum-list',function ( req,res ) {
 app.get( '/database/users',function ( req,res ) {
 
     users.find( {},function ( err,data ) {
+
+        res.json( data );
+
+    } );
+
+} );
+app.get( '/database/class-schedule',function ( req,res ) {
+
+    classSchedules.find( {},function ( err,data ) {
 
         res.json( data );
 
