@@ -22,6 +22,7 @@ var assestments = mongoose.model('assestments', require('./app/models/assestment
 var curriculumList = mongoose.model('curriculumList', require('./app/models/curriculumList.js'));
 var users = mongoose.model('users', require('./app/models/users.js'));
 var classSchedules = mongoose.model('classSchedules', require('./app/models/classSchedules.js'));
+var preEnrolledStudents = mongoose.model('preEnrolledStudents', require('./app/models/preEnrolledStudents.js'));
 
 //use middleware
 app.use( express.static( path.join( __dirname,'/public' ) ) );
@@ -58,6 +59,7 @@ passport.deserializeUser(function(user, done){
 // server side routes
 var administrator =require( './app/routes/administrator.js' );
 var programCoordinator =require( './app/routes/programCoordinator.js' );
+var evaluator =require( './app/routes/evaluator.js' );
 // client side routes
 var news = require('./app/routes/news.js');
 var index = require('./app/routes/index.js');
@@ -78,12 +80,12 @@ var coursesOffered = require('./app/routes/coursesOffered.js');
 var login = require('./app/routes/login.js');
 
 // page url
-//for admin
-app.use( '/administrator',administrator );
-//for staff
-app.use( '/program-coordinator',programCoordinator );
 
-//evaluator
+//Server side
+app.use( '/administrator',administrator );
+app.use( '/program-coordinator',programCoordinator );
+app.use( '/evaluator',evaluator );
+
 
 
 // client side
@@ -160,6 +162,15 @@ app.get( '/database/users',function ( req,res ) {
 app.get( '/database/class-schedule',function ( req,res ) {
 
     classSchedules.find( {},function ( err,data ) {
+
+        res.json( data );
+
+    } );
+
+} );
+app.get( '/database/new-students',function ( req,res ) {
+
+    preEnrolledStudents.find( {},function ( err,data ) {
 
         res.json( data );
 

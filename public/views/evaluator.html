@@ -20,62 +20,63 @@
 		</div>
 	</div>
     <div class="nine column pull--right">
-    	<div class="search_student row">
-	      <div class="input_groups">
-	        <input type="search"/>
-	        <label>Search Student</label>
-	      </div>
-	      <table>
-	        <thead>
-	          <tr>
-	            <th>Name</th>
-	            <th>Age</th>
-	            <th>Gender</th>
-	            <th>Address</th>
-	            <th>Contact no.</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          <tr>
-	            <td>Mark Carumba</td>
-	            <td>32</td>
-	            <td>female</td>
-	            <td>Murcia cadiz talisay stree.t no.8</td>
-	            <td>xxxxxxx</td>
-	            <td> <a href="" class="view">View</a></td>
-	            <td> <a href="" class="view">subjects</a></td>
-	          </tr>
-	          <tr>
-	            <td>Rhoi Abello</td>
-	            <td>32</td>
-	            <td>female</td>
-	            <td>Silay</td>
-	            <td>xxxxxxx</td>
-	            <td> <a href="" class="view">View</a></td>
-	            <td> <a href="" class="view">subjects</a></td>
-	          </tr>
-	          <tr>
-	            <td>Anthony Abellar</td>
-	            <td>32</td>
-	            <td>female</td>
-	            <td>Silay</td>
-	            <td>xxxxxxx</td>
-	            <td> <a href="" class="view">View</a></td>
-	            <td> <a href="" class="view">subjects</a></td>
-	          </tr>
-	          <tr>
-	            <td>Robert Janagap</td>
-	            <td>32</td>
-	            <td>female</td>
-	            <td>Silay</td>
-	            <td>xxxxxxx</td>
-	            <td> <a a href="" class="view">View</a></td>
-	            <td> <a href="" class="view">subjects</a></td>
-	          </tr>
-	        </tbody>
-	      </table>
-	    </div>
+		<div class="search_student row">
+			<div class="input_groups">
+				<input type="search"/>
+				<label>Search for old students</label>
+			</div>
+			<table>
+				<thead>
+				  <tr>
+				    <th>Name</th>
+				    <th>Age</th>
+				    <th>Gender</th>
+				    <th>Address</th>
+				    <th>Contact no.</th>
+				  </tr>
+				</thead>
+			<tbody>
+				<tr>
+					<td>Mark Carumba</td>
+					<td>32</td>
+					<td>female</td>
+					<td>Murcia cadiz talisay stree.t no.8</td>
+					<td>xxxxxxx</td>
+					<td> <a href="" class="view">View</a></td>
+					<td> <a href="" class="view">subjects</a></td>
+				</tr>
+			</tbody>
+			</table>
+		</div>
 	    <div class="registration_form row">
+	    	<!-- search for new students -->
+			<div class="search_student row">
+				<div class="input_groups">
+					<input type="search"/>
+					<label>Search for new students</label>
+				</div>
+				<table>
+					<thead>
+					  <tr>
+					    <th>Name</th>
+					    <th>Age</th>
+					    <th>Gender</th>
+					    <th>Address</th>
+					    <th>Contact no.</th>
+					  </tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="newStudent in newStudents">
+							<td>{{newStudent.first_name}} {{newStudent.middle_name}} {{newStudent.last_name}}</td>
+							<td>{{newStudent.age}}</td>
+							<td>{{newStudent.gender}}</td>
+							<td>{{newStudent.address}}</td>
+							<td>{{newStudent.contact}}</td>
+							<td> <a href="" class="view">Information</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 	    	<h3>Registration Form</h3>
 	    	<h4>Personal Data</h4>
 	    	<input-group>
@@ -95,8 +96,11 @@
 	    		<label>Age</label>
 	    	</input-group>
 	    	<input-group>
-	    		<input type="text" ng-model="newStudent.gender">
-	    		<label>Gender</label>
+	    		<span>Gender:</span>
+	    		<span>Male</span>
+	    		<input type="checkbox" ng-model="newStudent.gender" ng-true-value="'male'">
+	    		<span>Female</span>
+	    		<input type="checkbox" ng-model="newStudent.gender" ng-true-value="'female'">
 	    	</input-group>
 	    	<input-group>
 	    		<input type="text" ng-model="newStudent.address">
@@ -115,8 +119,15 @@
 	    		<label>Nationality</label>
 	    	</input-group>
 	    	<input-group>
-	    		<input type="text" ng-model="newStudent.civil_status">
-	    		<label>civil status</label>
+	    		<span>Civil Status:</span>
+	    		<span>Single</span>
+	    		<input type="checkbox" ng-model="newStudent.civil_status" ng-true-value="'single'">
+	    		<span>Married</span>
+	    		<input type="checkbox" ng-model="newStudent.civil_status" ng-true-value="'married'">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.religion">
+	    		<label>Religion</label>
 	    	</input-group>
 	    	<input-group>
 	    		<input type="email" ng-model="newStudent.email">
@@ -140,8 +151,15 @@
 	    	</input-group>
 	    	<h4>school attended</h4>
 	    	<input-group>
-	    		<input type="text" ng-model="newStudent.high_Educ_Att">
-	    		<label>Highest Educational Attended</label>
+	    		<label></label>
+	    		<select name="" id="" ng-model="newStudent.high_Educ_Att">
+	    			<option value="">--Highest Educational Attended--</option>
+	    			<option value="high-school">High School</option>
+	    			<option value="college">College</option>
+	    			<option value="vocational">Vocational</option>
+	    			<option value="masteral">Masteral</option>
+	    			<option value="doctorate">Doctorate</option>
+	    		</select>
 	    	</input-group>
 	    	<input-group>
 	    		<input type="text" ng-model="newStudent.prev_school">
