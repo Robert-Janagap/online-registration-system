@@ -1,2 +1,8 @@
-{"__v":NumberInt(0),"_id":{"$oid":"55f578cd959e917013262754"},"name":"Robert Janagap","password":"admin","roles":"administrator","username":"admin"}
-{"__v":NumberInt(0),"_id":{"$oid":"55f578cd959e917013262755"},"name":"Rhoi Abello","password":"eva","roles":"program-coordinator","username":"eva"}
+{"__v":NumberInt(0),"_id":{"$oid":"55f6adef1b05e008164c0e22"},"name":"Robert Janagap","password":"admin","roles":"administrator","username":"admin"}
+{"__v":NumberInt(0),"_id":{"$oid":"55f6adef1b05e008164c0e23"},"name":"Rhoi Abello","password":"eva","roles":"program-coordinator","username":"eva"}
+{"__v":NumberInt(0),"_id":{"$oid":"55f80610a15e8f2c1e715de9"},"name":"mark carumba","password":"test","roles":"evaluator","username":"test"}
+{"__v":NumberInt(0),"_id":{"$oid":"55f8068e917bcfac1ee0dad2"},"name":"jv venus","password":"try","roles":"registrar","username":"try"}
+{"__v":NumberInt(0),"_id":{"$oid":"55f806d0917bcfac1ee0dad3"},"name":"faith gwapa","password":"gwapa","roles":"teacher","username":"gwapa"}
+{"__v":NumberInt(0),"_id":{"$oid":"55f93fd6f327154813005c8b"},"name":"wizard","password":"wizardz","roles":"teacher","username":"wizardz"}
+{"__v":NumberInt(0),"_id":{"$oid":"55f94025ba844b981463ceb8"},"name":"venus","password":"venus","roles":"teacher","username":"venus"}
+{"__v":NumberInt(0),"_id":{"$oid":"55f9403dba844b981463ceb9"},"name":"iohr","password":"zeno","roles":"teacher","username":"zeno"}
