@@ -64,6 +64,7 @@ app.config(function($routeProvider){
 		.when('/program-coordinator',{
 			templateUrl: 'views/programCoordinator.html',
 			controller: 'programCoordinatorCtrl',
+			title: 'program-coordinator'
 			// resolve:{
 			// 	logincheck: checkLogin
 			// }
@@ -71,30 +72,30 @@ app.config(function($routeProvider){
 		.when('/evaluator',{
 			templateUrl: 'views/evaluator.html',
 			controller: 'evaluatorCtrl',
-			resolve:{
-				logincheck: checkLogin
-			}
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/registrar',{
 			templateUrl: 'views/registrar.html',
 			controller: 'registrarCtrl',
-			resolve:{
-				logincheck: checkLogin
-			}
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/teacher',{
 			templateUrl: 'views/teacher.html',
 			controller: 'teacherCtrl',
-			resolve:{
-				logincheck: checkLogin
-			}
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/student',{
 			templateUrl: 'views/student.html',
 			controller: 'studentCtrl',
-			resolve:{
-				logincheck: checkLogin
-			}
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.otherwise({
 			redirectTo: '/'
@@ -126,3 +127,35 @@ app.controller('navCtrl',['$scope','$http','$location','$rootScope', function($s
 		});
 	}
 }]);
+
+// app.controller('appHeaderCtrl',['$scope','$http','$location','$rootScope',function($scope, $http, $location, $rootScope){
+// 		console.log('ok');
+// 		$scope.$on('$routeChangeSuccess', function (event, data) {
+// 	        $scope.pageTitle = data.title;
+// 	        console.log(data);
+// 	    });
+// }]);
+
+app.directive('inputGroup', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		link: function(scope, element, attrs){
+			element.addClass('input_groups')
+	       $('.input_groups input').on('focusout',function(){
+		    var input = $(this).val();
+    		
+			    if(input === "") {
+			      
+			      $(this).removeClass('has--value');
+			      
+			    } else {
+
+			      $(this).addClass('has--value');
+			      
+			    }
+			});
+
+		}
+	}
+});

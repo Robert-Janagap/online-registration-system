@@ -16,13 +16,14 @@
 			</ul>
 		</div>
 	</div>
-	<div class="nine column  pull--right">
+
+	<div class="nine column  pull--right curriculumCourses">
 		<div class="content">
-			<div class="input_groups">
+			<input-group>
+				<input type="text" ng-model="searchCourses">
 				<label for="">search course</label>
-				<input type="text">
-			</div>
-			<div>
+			</input-group>
+			<div class="curriculumFilter">
 				<label for="">Filter by:</label>
 				<select name="" id="" ng-change = "selectCurYear(selCurYear)" ng-model="selCurYear">
 					<option value="">--curriculum year--</option>
@@ -44,7 +45,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat = "course in courses">
+					<tr ng-repeat = "course in courses | filter: searchCourses">
 						<td>{{course.totalYears}}</td>
 						<td>{{course.totalTerms}}</td>
 						<td>{{course.course_name}}</td>
@@ -77,10 +78,10 @@
 				</li>
 			</ul>
 			<div class="addSection"  ng-show="termClick">
-				<div class="input_groups">
-					<label for="">Section</label>
+				<input-group>
 					<input type="text"  class="input_name" ng-model="section.section">
-				</div>
+					<label for="">Section</label>
+				</input-group>
 				<div class="btn" ng-click="addSection(section)">add</div>
 			</div>
 			<ul>
@@ -139,39 +140,38 @@
 						<td>{{subject.days}}</td>
 						<td>{{subject.room}}</td>
 						<td>{{subject.instructor}}</td>
-						<!-- <td><set-schedule ng-click="setSched(subject)" ng-show="sectionClick"></set-schedule></td> -->
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 	<div class="modal content six column setSchedule">
-		<back-to-courses></back-to-courses>
+		<back-to-courses ng-click="viewLastSched"></back-to-courses>
 		<div>
-			<div class="input_groups">
-				<label for="">Time</label>
+			<input-group>
 				<input type="text" class="input_units" ng-model="subjectSchedule.schedule_time">
-			</div>
-			<div class="input_groups">
-				<label for="">Day</label>
+				<label for="">Time</label>
+			</input-group>
+			<input-group>
 				<input type="text" class="input_units" ng-model="subjectSchedule.day">
-			</div>
-			<div class="input_groups">
-				<label for="">Rm. no.</label>
+				<label for="">Day</label>
+			</input-group>
+			<input-group>
 				<input type="text" class="input_units" ng-model="subjectSchedule.room">
-			</div>
-			<span>Instructor: {{subjectSchedule.teacher}}</span>
+				<label for="">Rm. no.</label>
+			</input-group>
+			<span>Instructor: {{teacher}}</span>
 		</div>
 		<div class="searchTeacher">
-			<div class="input_groups">
+			<input-group>
+				<input type="text" class="input_des" ng-model = "searchTeacher">
 				<label for="">Search for Teacher</label>
-				<input type="text" class="input_des">
-			</div>
+			</input-group>
 			<table>
 				<tr>
 					<th>Teacher Name</th>
 				</tr>
-				<tr ng-repeat = "teacher in teachers">
+				<tr ng-repeat = "teacher in teachers | filter:searchTeacher">
 					<td>{{teacher.name}}</td>
 					<td><div class="btn" ng-click="pickTeacher(teacher)">Select</div></td>
 				</tr>

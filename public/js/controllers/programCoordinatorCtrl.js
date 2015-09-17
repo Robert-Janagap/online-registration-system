@@ -125,7 +125,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 		$scope.sectionsRefresh();
 
 	}
-	// get class schedule
+	// get sections and class schedules
 	$scope.sectionsRefresh = function(){
 		$http.get('/program-coordinator/section').success(function(section){
 			var sections =[];
@@ -135,6 +135,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 				}
 			};
 			$scope.sections = sections;
+
 		});
 	}
 	// get teacher
@@ -147,10 +148,6 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 		};
 		$scope.teachers = teachers;
 	});
-	// teacher selected
-	$scope.pickTeacher = function(teacher){
-		$scope.subjectSchedule.teacher = teacher.name;
-	}
 	// add section
 	$scope.addSection = function(section){
 		var newSection = {
@@ -161,6 +158,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 		}
 		$http.post('/program-coordinator/section', newSection).success(function(section){
 			$scope.section = null;
+			$scope.sectionsRefresh();
 		});
 	}
 	// pick section
@@ -168,7 +166,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 		$scope.selectedSection = section._id;
 		$scope.sectionName = section.section;
 		$scope.sectionClick = true;
-
+		$scope.lastSched = section;
 		var schedules = [];
 
 		for (var b = section.schedule.length - 1; b >= 0; b--) {
@@ -188,10 +186,6 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 
 		$scope.schedules = schedules;
 	}
-	// set schedule in selected subject
-	$scope.setSched = function(subject){
-		$scope.selectedSubject = subject;
-	}
 	// save schedule
 	$scope.saveSched = function(schedule){
     	var newSchedule = {
@@ -201,11 +195,24 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 			schedule_time: schedule.schedule_time,
 			days: schedule.day,
 			room: schedule.room,
-			instructor: schedule.teacher
+			instructor: $scope.teacher
     	}
     	$http.put('/program-coordinator/newSchedule/' + $scope.selectedSection, newSchedule).success(function(newSchedule){
     		$scope.subjectSchedule = null;
+    		$scope.teacher = null;
+    		$scope.sectionsRefresh();
     	});
+	}
+	$scope.viewLastSched = function(){
+		$scope.schedules = null;
+	}
+	// teacher selected
+	$scope.pickTeacher = function(teacher){
+		$scope.teacher = teacher.name;
+	}
+	// set schedule in selected subject
+	$scope.setSched = function(subject){
+		$scope.selectedSubject = subject;
 	}
 }]);
 

@@ -46,10 +46,10 @@
 		<!-- adding of year -->
 		<div class="curriculum_year">
 			<closeadd-cur></closeadd-cur>
-			<div class="input_groups">
-				<label for="">Year</label>
+			<input-group>
 				<input type="text" class="input_units" ng-model="curriculum_new.curriculum_year">
-			</div>
+				<label for="">Year</label>
+			</input-group>
 			<a class="btn pull--right" ng-click="addCurriculum(curriculum_new)">Save</a>
 		</div>
 		<!-- curriculum information -->
@@ -62,14 +62,14 @@
 				<!-- add departments -->
 				<div class="newDepartment boxShadow six column">
 					<closeadd-department></closeadd-department>
-					<div class="input_groups">
-						<label for="">Department Name</label>
+					<input-group>
 						<input type="text" ng-model="dep.depName" class="input_des">
-					</div>
-					<div class="input_groups">
-						<label for="">Department Description</label>
+						<label for="">Department Name</label>
+	    			</input-group>
+					<input-group>
 						<input type="text" ng-model="dep.depDes" class="input_des">
-					</div>
+						<label for="">Department Description</label>
+					</input-group>
 					<div class="btn btn--blue" ng-click="addDep(curYear)">Add</div>
 				</div>
 				<!-- test -->
@@ -80,28 +80,28 @@
 					<thead>
 						<tr>
 							<th>
-								<div class="input_groups">
-									<label for="">Course code</label>
+								<input-group>
 									<input type="text" class="input_name" ng-model="dep.course_name">
-								</div>
+									<label for="">Course code</label>
+								</input-group>
 							</th>
 							<th>
-								<div class="input_groups">
-									<label for="">Course description</label>
+								<input-group>
 									<input type="text" class="input_des" ng-model="dep.course_des">
-								</div>
+									<label for="">Course description</label>
+								</input-group>
 							</th>
 							<th>
-								<div class="input_groups">
-									<label for="">years</label>
+								<input-group>
 									<input type="number" class="input_units" ng-model="dep.totalYears">
-								</div>
+									<label for="">years</label>
+								</input-group>
 							</th>
 							<th>
-								<div class="input_groups">
-									<label for="">terms</label>
+								<input-group>
 									<input type="number" class="input_units" ng-model="dep.totalTerms">
-								</div>
+									<label for="">terms</label>
+								</input-group>
 							</th>
 							<th><button class="btn btn--blue" ng-click="addCourse(dep)">Add</button></th>
 							<th><button class="btn btn--green" ng-click="updateCourse(dep)">Update</button></th>
@@ -135,35 +135,35 @@
 			<div class="assestment_add--overlay overlay"></div>
 			<div class="assestment_add boxShadow">
 				<close-school-fees></close-school-fees>
-				<div class="input_groups">
-					<label for="fee_label">Type of School Fee</label>
+				<input-group>
 					<input type="text" ng-model="schoolFee.name">
-				</div>
+					<label for="fee_label">Type of School Fee</label>
+				</input-group>
 				<div class="btn btn--blue" ng-click="addSchoolFee(schoolFee)">Save</div>
 			</div>
 			<div class="assestment">
 				<div class="assestment--overlay">
 					<form action="" class="assestment_form row">
 						<closefees ng-click="closeFees()"></closefees>
-						<div class="input_groups">
-							<label for="fee_label">Type of School Fee</label>
+						<input-group>
 							<input type="text" value="{{typeOfFee}}">
-						</div>
+							<label for="fee_label">Type of School Fee</label>
+						</input-group>
 						<div class="assestment_mtn row">
 							<table class=" twelve column">
 								<thead>
 									<tr>
 										<th>
-											<div class="input_groups">
-												<label for="fee_name">Fee name</label>
+											<input-group>
 												<input type="text" ng-model="fee.fee_name">
-											</div>
+												<label for="fee_name">Fee name</label>
+											</input-group>
 										</th>
 										<th>
-											<div class="input_groups">
-												<label for="fee_amount">Fee amount</label>
+											<input-group>
 												<input type="text" ng-model="fee.amount">
-											</div>
+												<label for="fee_amount">Fee amount</label>
+											</input-group>
 										</th>
 										<th>
 											<div class="btn btn--blue" ng-click="newFee(typeOfFee_id)">Add</div>
@@ -234,18 +234,18 @@
 			<div class="addFacultyStaff boxShadow three column">
 				<h4>Add user</h4>
 				<close-faculty-stuff></close-faculty-stuff>
-				<div class="input_groups">
-					<label for="">Full Name</label>
+				<input-group>
 					<input type="text" ng-model="user.name">
-				</div>
-				<div class="input_groups">
-					<label for="">Username</label>
+					<label for="">Full Name</label>
+				</input-group>
+				<input-group>
 					<input type="text" ng-model="user.username">
-				</div>
-				<div class="input_groups">
-					<label for="">Password</label>
+					<label for="">Username</label>
+				</input-group>
+				<input-group>
 					<input type="password" ng-model="user.password">
-				</div>
+					<label for="">Password</label>
+				</input-group>
 				<div class="addFacultyStaff_roles">
 					<div class="small">Role</div>
 					<select name="" id="" ng-model="user.roles">
@@ -289,34 +289,34 @@
 							Term
 						</th>
 						<th>
-							<div class="input_groups">
-								<label for="">Subject code</label>
+							<input-group>
 								<input type="text" class="input_name" ng-model="subject.subName">
-							</div>
+								<label for="">Subject code</label>
+							</input-group>
 						</th>
 						<th>
-							<div class="input_groups">
-								<label for="">Description</label>
+							<input-group>
 								<input type="text" class="input_des" ng-model="subject.subDes">
-							</div>
+								<label for="">Description</label>
+							</input-group>
 						</th>
 						<th>
-							<div class="input_groups">
-								<label for="">Units</label>
+							<input-group>
 								<input type="text" class="input_units" ng-model="subject.subUnits">
-							</div>
+								<label for="">Units</label>
+							</input-group>
 						</th>
 						<th>
-							<div class="input_groups">
-								<label for="">Cost/Units</label>
+							<input-group>
 								<input type="text" class="input_units" ng-model="subject.subCpu">
-							</div>
+								<label for="">Cost/Units</label>
+							</input-group>
 						</th>
 						<th>
-							<div class="input_groups">
-								<label for="">Pre-requisite</label>
+							<input-group>
 								<input type="text" class="input_preRequisite" ng-model="subject.subPreRequisite">
-							</div>
+								<label for="">Pre-requisite</label>
+							</input-group>
 						</th>
 						<th>
 							<button class="btn btn--blue" ng-click="addSubjects(departmentId,courseYear, courseTerm, courseName, courseDes, subject)">Add</button>

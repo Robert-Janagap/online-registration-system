@@ -8,7 +8,10 @@
 		<div class="admin_sidebarNav">
 			<ul>
 				<li class="admin_sidebarNav--list">
-					<a href="" class="admin_sidebarNav--item">Course info</a>
+					<a href="" class="admin_sidebarNav--item">Student List</a>
+				</li>
+				<li class="admin_sidebarNav--list">
+					<a href="" class="admin_sidebarNav--item">Courses</a>
 				</li>
 				<li class="admin_sidebarNav--list">
 					<a class="admin_sidebarNav--item">Registration</a>
@@ -19,8 +22,8 @@
     <div class="nine column pull--right">
     	<div class="search_student row">
 	      <div class="input_groups">
+	        <input type="search"/>
 	        <label>Search Student</label>
-	        <input type="text"/>
 	      </div>
 	      <table>
 	        <thead>
@@ -75,92 +78,97 @@
 	    <div class="registration_form row">
 	    	<h3>Registration Form</h3>
 	    	<h4>Personal Data</h4>
-	    	<div class="input_groups">
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.first_name">
 	    		<label>First name</label>
-	    		<input type="text">
-	    	</div>
-			<div class="input_groups">
+	    	</input-group>
+			<input-group>
+	    		<input type="text" ng-model="newStudent.last_name">
 	    		<label>Last name</label>
-	    		<input type="text">
-	    	</div>
-			<div class="input_groups">
+	    	</input-group>
+			<input-group>
+	    		<input type="text" ng-model="newStudent.middle_name">
 	    		<label>Middle name</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="Number" ng-model="newStudent.age">
+	    		<label>Age</label>
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.gender">
 	    		<label>Gender</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.address">
 	    		<label>Address</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="number" ng-model="newStudent.contact">
 	    		<label>Contact no.</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="date" ng-model="newStudent.date">
 	    		<label>Date of Birth</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.nationality">
 	    		<label>Nationality</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.civil_status">
 	    		<label>civil status</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="email" ng-model="newStudent.email">
 	    		<label>email</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.mother_name">
 	    		<label>mother's name</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.mother_occupation">
 	    		<label>mother's Occupation</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.father_name">
 	    		<label>Father's name</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.father_occupation">
 	    		<label>Father's Occupation</label>
-	    		<input type="text">
-	    	</div>
+	    	</input-group>
 	    	<h4>school attended</h4>
-	    	<div class="input_groups">
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.high_Educ_Att">
 	    		<label>Highest Educational Attended</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.prev_school">
 	    		<label>previous school</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.prev_school_add">
 	    		<label>school address</label>
-	    		<input type="text">
-	    	</div>
+	    	</input-group>
 	    	<h4>Guardian</h4>
-	    	<div class="input_groups">
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.guardian_name">
 	    		<label>Guardian name</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.guardian_add">
 	    		<label>address</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="number" ng-model="newStudent.guardian_contact">
 	    		<label>contact no.</label>
-	    		<input type="text">
-	    	</div>
-	    	<div class="input_groups">
+	    	</input-group>
+	    	<input-group>
+	    		<input type="text" ng-model="newStudent.guardian_rel">
 	    		<label>relationship</label>
-	    		<input type="text">
-	    	</div>
+	    	</input-group>
+	    	<div class="btn" ng-click="addNewStudent(newStudent)">Save</div>
 	    </div>
 	</div>
 	<div class="twelve column findCurriculum_courses">

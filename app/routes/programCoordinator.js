@@ -49,7 +49,7 @@ router.get('/courseSubjects/:id', function(req, res){
 		res.json(data);
 	});
 });
-// get sections
+// get sections and class schedules
 router.get('/section', function(req, res){
 	classSchedules.find({},function(err, data){
 		if (err){
