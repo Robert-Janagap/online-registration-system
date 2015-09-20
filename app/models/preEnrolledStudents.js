@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var router = express.Router();
 
 var	preEnrolledStudents  =new mongoose.Schema( {
+   prefferedCourse: String, //application data
    first_name: String,//personal info
    middle_name: String,
    last_name: String,

@@ -60,6 +60,7 @@ passport.deserializeUser(function(user, done){
 var administrator =require( './app/routes/administrator.js' );
 var programCoordinator =require( './app/routes/programCoordinator.js' );
 var evaluator =require( './app/routes/evaluator.js' );
+var registrar =require( './app/routes/registrar.js' );
 // client side routes
 var news = require('./app/routes/news.js');
 var index = require('./app/routes/index.js');
@@ -85,8 +86,7 @@ var login = require('./app/routes/login.js');
 app.use( '/administrator',administrator );
 app.use( '/program-coordinator',programCoordinator );
 app.use( '/evaluator',evaluator );
-
-
+app.use('/registrar', registrar);
 
 // client side
 app.use( '/',index );
@@ -125,7 +125,7 @@ var auth = function(req, res, next){
 // databases
 app.get( '/database',function ( req,res ) {
 
-    curriculums.find( {},function ( err,data ) {
+    curriculums.find({},function ( err,data ) {
 
         res.json( data );
 

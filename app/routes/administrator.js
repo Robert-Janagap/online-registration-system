@@ -27,12 +27,21 @@ router.post('/newCurriculum', function(req, res){
 });
 //for curriculums list
 router.get('/curriculum-list', function( req, res) {
-	curriculumList.find({}, function(err, data){
+	curriculumList.aggregate({$sort:{curriculumYear:-1}}, function(err, data){
 		if(err){
 			return err;
 		}
 		res.json(data);
-	});
+	})
+});
+// current Curriculum
+router.get('/currentCurriculum', function( req, res){
+	curriculumList.aggregate({$sort:{curriculumYear:-1}}, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data[0]);
+	})
 });
 /**
  * departments

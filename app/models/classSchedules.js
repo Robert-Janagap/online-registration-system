@@ -9,13 +9,14 @@ var	classSchedules  =new mongoose.Schema( {
    section: String,
    schedule:[
       {
-         subject_code: String,
+         subject_name: String,
          subject_des: String,
          units: Number,
          time: String,
          days: String,
          room: String,
-         instructor: String
+         instructor: String,
+         section: String
       }
    ]
 },{ collection : 'classSchedules' } );

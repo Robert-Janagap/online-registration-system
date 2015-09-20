@@ -1,5 +1,7 @@
 var app = angular.module('clientSideApp',['ngRoute']);
-
+/*
+	restart the curriculum
+ */
 app.config(function($routeProvider){
 	$routeProvider
 		.when('/',{
@@ -58,7 +60,7 @@ app.config(function($routeProvider){
 			templateUrl: 'views/administrator.html',
 			controller: 'administratorCtrl',
 			// resolve:{
-			// 	logincheck: checkLogin
+			// 	// logincheck: checkLogin
 			// }
 		})
 		.when('/program-coordinator',{
@@ -73,7 +75,7 @@ app.config(function($routeProvider){
 			templateUrl: 'views/evaluator.html',
 			controller: 'evaluatorCtrl',
 			// resolve:{
-			// 	logincheck: checkLogin
+			// 	// logincheck: checkLogin
 			// }
 		})
 		.when('/registrar',{
@@ -102,6 +104,7 @@ app.config(function($routeProvider){
 		})
 });
 
+// check if the user login
 var checkLogin = function($q, $timeout, $http, $location, $rootScope){
 	var deferred = $q.defer();
 	$http.get('/login/loggedin').success(function(data){
@@ -118,7 +121,7 @@ var checkLogin = function($q, $timeout, $http, $location, $rootScope){
 	});
 	return deferred.promise;
 }
-// navigation links access
+// logout
 app.controller('navCtrl',['$scope','$http','$location','$rootScope', function($scope, $http, $location, $rootScope){
 	$scope.logOut = function(){
 		$http.post('/logout').success(function(data){
@@ -136,26 +139,47 @@ app.controller('navCtrl',['$scope','$http','$location','$rootScope', function($s
 // 	    });
 // }]);
 
+/*
+	global directives
+ */
+// for input group animation
 app.directive('inputGroup', function(){
 	return{
 		scope:{},
 		restrict:"E",
 		link: function(scope, element, attrs){
-			element.addClass('input_groups')
-	       $('.input_groups input').on('focusout',function(){
-		    var input = $(this).val();
-    		
-			    if(input === "") {
-			      
-			      $(this).removeClass('has--value');
-			      
-			    } else {
+			element.addClass('input_groups');
 
-			      $(this).addClass('has--value');
+			$('.input_groups input').on('focusout',function(){
+			var input = $(this).val();
+
+			    if(input == "") {
+
+			   		$(this).removeClass('has--value');
+			      
+			    } else{
+
+			    	$(this).addClass('has--value');
 			      
 			    }
 			});
 
+		}
+	}
+});
+// toggle student information
+app.directive('toggleStudentInfo', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		link: function(scope, element, attrs){
+		 	(element.text() !=="X") ? element.addClass('btn'):element.addClass('btn--close');
+			
+		 	element.on( 'click',function ( event ){
+
+				$('.student_info').toggle();
+		   		$('.overlay').toggle();
+		    } );
 		}
 	}
 });

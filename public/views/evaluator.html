@@ -1,4 +1,5 @@
 <div class="container">
+	<div class="overlay"></div>
 	<div class="three column admin_sidebar">
 		<div class="person">
 			<div class="person_image"><img src="img/me.png" alt=" Profile picture "></div>
@@ -52,32 +53,39 @@
 	    	<!-- search for new students -->
 			<div class="search_student row">
 				<div class="input_groups">
-					<input type="search"/>
+					<input type="search" ng-model="searchNewstudents"/>
 					<label>Search for new students</label>
 				</div>
 				<table>
 					<thead>
 					  <tr>
+					  	<th>Student No.</th>
 					    <th>Name</th>
-					    <th>Age</th>
-					    <th>Gender</th>
 					    <th>Address</th>
 					    <th>Contact no.</th>
 					  </tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="newStudent in newStudents">
+						<tr ng-repeat="newStudent in newStudents | filter:searchNewstudents">
+							<td>{{newStudent.student_no}}</td>
 							<td>{{newStudent.first_name}} {{newStudent.middle_name}} {{newStudent.last_name}}</td>
-							<td>{{newStudent.age}}</td>
-							<td>{{newStudent.gender}}</td>
 							<td>{{newStudent.address}}</td>
 							<td>{{newStudent.contact}}</td>
-							<td> <a href="" class="view">Information</a></td>
+							<td>
+								<toggle-student-info ng-click="viewInfo(newStudent._id)">Information</toggle-student-info>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 	    	<h3>Registration Form</h3>
+	   		<h4>Application data</h4>
+	   		<input-group>
+	    		<select name="" id="" ng-model="newStudent.prefferedCourse">
+	    			<option value="">--Select Courses--</option>
+	    			<option value="{{course.course_name}}" ng-repeat="course in courses">{{course.course_name}}</option>
+	    		</select>
+	    	</input-group>
 	    	<h4>Personal Data</h4>
 	    	<input-group>
 	    		<input type="text" ng-model="newStudent.first_name">
@@ -149,7 +157,7 @@
 	    		<input type="text" ng-model="newStudent.father_occupation">
 	    		<label>Father's Occupation</label>
 	    	</input-group>
-	    	<h4>school attended</h4>
+	    	<h4>Educational Background</h4>
 	    	<input-group>
 	    		<label></label>
 	    		<select name="" id="" ng-model="newStudent.high_Educ_Att">
@@ -189,134 +197,83 @@
 	    	<div class="btn" ng-click="addNewStudent(newStudent)">Save</div>
 	    </div>
 	</div>
-	<div class="twelve column findCurriculum_courses">
-		<div class="course_view">
-			<h3>Find course info</h3>
-			<div class="selectBar">
-			    <span>Department</span>
-			    <select>
-			      <option>ICT</option>
-			      <option>Arts and science</option>
-			      <option>engineering</option>
-			    </select>
-			</div>
-			<div class="selectBar">
-		    <span>Course</span>
-			    <select>
-			      <option>BSIT</option>
-			      <option>BSOA</option>
-			      <option>BSAT</option>
-			    </select>
-		    </div>
-		    <div class="selectBar">
-			    <span>Year</span>
-			    <select>
-			      <option>1</option>
-			      <option>2</option>
-			      <option>3</option>
-			      <option>4</option>
-			    </select>
-		    </div>
-		    <div class="selectBar">
-			    <span>Term</span>
-			    <select>
-			      <option>1</option>
-			      <option>2</option>
-			    </select>
-		    </div>
-		    <h4>Course Information</h4>
-		    <table class="courses">
-			    <thead>
-			      <tr>
-			        <th>Year</th>
-			        <th>term</th>
-			        <th>course code</th>
-			        <th>course des</th>
-			        <th>subject code</th>
-			        <th>subject des</th>
-			        <th>pre-requisite</th>
-			        <th>units</th>
-			        <th>cost/units</th>
-			        <th>tuition</th>
-			      </tr>
-			    </thead>
-			    <tbody>
-			      <tr>
-			        <td>1</td>
-			        <td>1</td>
-			        <td>BSIT</td>
-			        <td>Bachelor of information technology</td>
-			        <td>
-			          <div class="subject_code">Addprog</div>
-			          <div class="subject_code">addbase</div>
-			          <div class="subject_code">addbase</div>
-			          <div class="subject_code">Addprog</div>
-			        </td>
-			        <td> 
-			          <div class="subject_des">addvance programming</div>
-			          <div class="subject_des">addvance programming</div>
-			          <div class="subject_des">addvance programming</div>
-			          <div class="subject_des">addvance programming</div>
-			        </td>
-			        <td> 
-			          <div class="subject_des">pre-requisite</div>
-			          <div class="subject_des">pre-requisite</div>
-			          <div class="subject_des">pre-requisite</div>
-			          <div class="subject_des">pre-requisite</div>
-			        </td>
-			        <td> 
-			          <div class="units">3</div>
-			          <div class="units">3</div>
-			          <div class="units">3</div>
-			          <div class="units">3</div>
-			        </td>
-			        <td>
-			          <div class="cpu">30</div>
-			          <div class="cpu">30</div>
-			          <div class="cpu">30</div>
-			          <div class="cpu">30</div>
-			        </td>
-			        <td> 
-			          <div class="tuition">P1800</div>
-			          <div class="tuition">P1800</div>
-			          <div class="tuition">P1800</div>
-			          <div class="tuition">P1800</div>
-			        </td>
-			      </tr>
-			      <tr>
-			        <td>1</td>
-			        <td>2</td>
-			        <td>BSIT</td>
-			        <td>Bachelor of information technology</td>
-			        <td>
-			          <div class="subject_code">Addprog</div>
-			          <div class="subject_code">addbase</div>
-			        </td>
-			        <td> 
-			          <div class="subject_des">addvance programming</div>
-			          <div class="subject_des">addvance programming</div>
-			        </td>
-			         <td> 
-			          <div class="subject_des">pre-requisite</div>
-			          <div class="subject_des">pre-requisite</div>
-			        </td>
-			        <td> 
-			          <div class="units">3</div>
-			          <div class="units">3</div>
-			        </td>
-			        <td>
-			          <div class="cpu">30</div>
-			          <div class="cpu">30</div>
-			        </td>
-			        <td> 
-			          <div class="tuition">P1800</div>
-			          <div class="tuition">P1800</div>
-			        </td>
-			      </tr>
-			    </tbody>
+	<div class="course_subjects boxShadow">
+		<span>{{courseName}}</span>
+		<span>{{courseDes}}</span>
+		<ul>
+			<li ng-repeat="courseYear in courseYears">
+				<div class="btn" ng-click="subjectInYear(courseYear,departmentId)">{{courseYear}}</div>
+			</li>
+		</ul>
+		<div class="course_subjectsList">
+			<ul>
+				<li ng-repeat="courseTerm in courseTerms">
+					<div class="btn" ng-click="subjectWithTerm(courseTerm,departmentId)">{{courseTerm}} semester</div>
+				</li>
+			</ul>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							Year
+						</th>
+						<th>
+							Term
+						</th>
+						<th>
+							<input-group>
+								<input type="text" class="input_name" ng-model="subject.subName">
+								<label for="">Subject code</label>
+							</input-group>
+						</th>
+						<th>
+							<input-group>
+								<input type="text" class="input_des" ng-model="subject.subDes">
+								<label for="">Description</label>
+							</input-group>
+						</th>
+						<th>
+							<input-group>
+								<input type="text" class="input_units" ng-model="subject.subUnits">
+								<label for="">Units</label>
+							</input-group>
+						</th>
+						<th>
+							<input-group>
+								<input type="text" class="input_units" ng-model="subject.subCpu">
+								<label for="">Cost/Units</label>
+							</input-group>
+						</th>
+						<th>
+							<input-group>
+								<input type="text" class="input_preRequisite" ng-model="subject.subPreRequisite">
+								<label for="">Pre-requisite</label>
+							</input-group>
+						</th>
+						<th>
+							<button class="btn btn--blue" ng-click="addSubjects(departmentId,courseYear, courseTerm, courseName, courseDes, subject)">Add</button>
+						</th>
+						<th>
+							<button class="btn btn--green">Update</button>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat = "subject in subjects">
+						<td>{{subject.year_level}}</td>
+						<td>{{subject.term}}</td>
+						<td>{{subject.subject_name}}</td>
+						<td>{{subject.subject_des}}</td>
+						<td>{{subject.units}}</td>
+						<td>{{subject.cost_perUnits}}</td>
+						<td>{{subject.pre_requisite}}</td>
+						<td><div class="btn btn--orange">Edit</div></td>
+						<td><div class="btn btn--red">Delete</div></td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
-	</div>
+	</div> 
 	<div class="twelve column content student_subjects">
 		<span>Name:</span><span>Robert Janagap</span>
 		<span>course:</span><span>BSIT</span>
@@ -347,70 +304,72 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="student_info twelve column">
+	<div class="student_info eleven column modal">
+		<toggle-student-info ng-click="viewInfo(new)">X</toggle-student-info>
         <div class="student_info_details row">
-            <h3>Student Information</h3>
+        	<h4>Student No:{{newStudentInfo.student_no}}</h4>
+        	<h3>Student Information</h3>
             <div class="block">
-          		<span class="caption">Student Name</span><span>Robert Janagap</span>
+          		<span class="caption">Student Name</span><span>{{newStudentInfo.first_name}} {{newStudentInfo.middle_name}} {{newStudentInfo.last_name}}</span>
             </div>
             <div class="block">
-              <span>Age</span><span>20</span>
+              <span>Age</span><span>{{newStudentInfo.age}}</span>
             </div>
             <div class="block">
-              <span>Gender</span><span>Male</span>
+              <span>Gender</span><span>{{newStudentInfo.gender}}</span>
             </div>
             <div class="block">
-              <span>Address</span><span>Talisay City</span>
+              <span>Address</span><span>{{newStudentInfo.address}}</span>
             </div>
             <div class="block">
-              <span>Contact No.</span><span>xxxxxx</span>
+              <span>Contact No.</span><span>{{newStudentInfo.contact}}</span>
             </div>
             <div class="block">
-              <span>Date of Birth</span><span>11-06-1994</span>
+              <span>Date of Birth</span><span>{{newStudentInfo.birthday}}</span>
             </div>
             <div class="block">
-              <span>Nationality</span><span>Filifino</span>
+              <span>Nationality</span><span>{{newStudentInfo.nationality}}</span>
             </div>
             <div class="block">
-              <span>civil status</span><span>Single</span>
+              <span>civil status</span><span>{{newStudentInfo.civil_status}}</span>
             </div>
             <div class="block">
-              <span>Email</span><span>xxx@gmail.com</span>
+              <span>Email</span><span>{{newStudentInfo.email}}</span>
             </div>
             <div class="block">
-              <span>Mother's name</span><span>trythis</span>
+              <span>Mother's name</span><span>{{newStudentInfo.mother_name}}</span>
             </div>
             <div class="block">
-              <span>Mother's Occupation</span><span>housewife</span>
+              <span>Mother's Occupation</span><span>{{newStudentInfo.mother_occupation}}</span>
             </div>
             <div class="block">
-              <span>father's name</span><span>testing</span>
+              <span>father's name</span><span>{{newStudentInfo.father_name}}</span>
             </div>
             <div class="block">
-              <span>father's Occupation</span><span>househusband</span>
+              <span>father's Occupation</span><span>{{newStudentInfo.father_occupation}}</span>
             </div>
             <h3>School Attended</h3>
             <div class="block">
-              <span>Highest Educational Attended</span><span>College</span>
+              <span>Highest Educational Attended</span><span>{{newStudentInfo.high_Educ_Att}}</span>
             </div>
             <div class="block">
-              <span>Previous School</span><span>STI</span>
+              <span>Previous School</span><span>{{newStudentInfo.prev_school}}</span>
             </div>
             <div class="block">
-              <span>School Address</span><span>Cadiz city</span>
+              <span>School Address</span><span>{{newStudentInfo.prev_school_add}}</span>
             </div>
             <h3>Guardian</h3>
             <div class="block">
-              <span>Guardian name</span><span>Guardian</span>
+              <span>Guardian name</span><span>{{newStudentInfo.guardian_name}}</span>
             </div>
             <div class="block">
-              <span>Address</span><span>silay city</span>
+              <span>Address</span><span>{{newStudentInfo.guardian_add}}</span>
             </div>
             <div class="block">
-          		<span>Contact no.</span><span>xxxxxx</span>
+          		<span>Contact no.</span><span>{{newStudentInfo.guardian_contact}}</span>
             </div>
             <div class="block">
-            	<span>Relationship</span><span>Sister</span>
+            	<span>Relationship</span><span>{{newStudentInfo.guardian_rel}}</span>
             </div>
         </div>
     </div>

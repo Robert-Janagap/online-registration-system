@@ -66,17 +66,20 @@
 		</div>
 		<span>{{courseName}}</span>
 		<span>{{courseDes}}</span>
+		<!-- course years -->
 		<ul>
 			<li ng-repeat="courseYear in courseYears">
 				<div class="btn" ng-click="subjectInYear(courseYear,departmentId)">{{courseYear}}</div>
 			</li>
 		</ul>
 		<div class="course_subjectsList">
+			<!-- course terms -->
 			<ul>
 				<li ng-repeat="courseTerm in courseTerms">
 					<div class="btn" ng-click="subjectWithTerm(courseTerm,departmentId)">{{courseTerm}} semester</div>
 				</li>
 			</ul>
+			<!-- add section -->
 			<div class="addSection"  ng-show="termClick">
 				<input-group>
 					<input type="text"  class="input_name" ng-model="section.section">
@@ -84,13 +87,14 @@
 				</input-group>
 				<div class="btn" ng-click="addSection(section)">add</div>
 			</div>
+			<!-- sections -->
 			<ul>
-				<li ng-repeat = "section in sections">
-					<div class="btn" ng-click="pickSection(section)">{{section.section}}</div>
+				<li ng-repeat = "sectionList in sections">
+					<div class="btn" ng-click="pickSection(sectionList)">{{sectionList.section}}</div>
 				</li>
 			</ul>
-			
-			<table ng-show="schedules">
+			<!-- show if section Selected subject without schedule -->
+			<table ng-show="schedule">
 				<caption><h5>{{sectionName}}</h5></caption>
 				<thead>
 					<tr>
@@ -104,19 +108,33 @@
 						<td>{{subject.subject_name}}</td>
 						<td>{{subject.subject_des}}</td>
 						<td>{{subject.units}}</td>
+						<!-- show subject schedule button if section click -->
 						<td><set-schedule ng-click="setSched(subject)" ng-show="sectionClick"></set-schedule></td>
 					</tr>
 				</tbody>
 			</table>
-			<table>
-				<caption ng-show="schedules"><h5>Class Schedule</h5></caption>
+			<!-- show if not yet selected the section subjects with schedule -->
+			<table ng-show="!schedule">
 				<thead>
-					<tr ng-show="!schedules">
+					<tr>
 						<th>Subject Code</th>
 						<th>Subject Description</th>
 						<th>Units</th>
 					</tr>
-					<tr ng-show="schedules">
+				</thead>
+				<body>
+					<tr ng-repeat = "subject in subjects" ng-show="!schedule">
+						<td>{{subject.subject_name}}</td>
+						<td>{{subject.subject_des}}</td>
+						<td>{{subject.units}}</td>
+					</tr>
+				</body>
+			</table>
+			<!-- show if section selected -->
+			<table ng-show="schedule">
+				<caption><h5>Class Schedule</h5></caption>
+				<thead>
+					<tr>
 						<th>Subject Code</th>
 						<th>Subject Description</th>
 						<th>Units</th>
@@ -127,12 +145,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat = "subject in subjects" ng-show="!schedules">
-						<td>{{subject.subject_name}}</td>
-						<td>{{subject.subject_des}}</td>
-						<td>{{subject.units}}</td>
-					</tr>
-					<tr ng-repeat = "subject in schedules" ng-show="schedules">
+					<tr ng-repeat = "subject in schedule.schedule">
 						<td>{{subject.subject_name}}</td>
 						<td>{{subject.subject_des}}</td>
 						<td>{{subject.units}}</td>
@@ -140,13 +153,15 @@
 						<td>{{subject.days}}</td>
 						<td>{{subject.room}}</td>
 						<td>{{subject.instructor}}</td>
+						<td><div class="btn" ng-click="deleteSchedule(subject)">Delete</div></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
+	<!-- save subject schedule -->
 	<div class="modal content six column setSchedule">
-		<back-to-courses ng-click="viewLastSched"></back-to-courses>
+		<back-to-courses ng-click="viewLastSched()"></back-to-courses>
 		<div>
 			<input-group>
 				<input type="text" class="input_units" ng-model="subjectSchedule.schedule_time">

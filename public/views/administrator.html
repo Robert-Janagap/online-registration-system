@@ -72,39 +72,38 @@
 					</input-group>
 					<div class="btn btn--blue" ng-click="addDep(curYear)">Add</div>
 				</div>
-				<!-- test -->
 				<ul class="department_settings row" ng-repeat="department in curriculum">
 					<li ng-click="getCourses(department._id)"><span>{{department.department_name}}</span> <span>{{department.department_des}}</span><button class="btn btn--red" ng-click="deleteDep(department._id, curYear)">Delete</button></li>
 				</ul>
 				<table>
 					<thead>
 						<tr>
-							<th>
+							<td>
 								<input-group>
 									<input type="text" class="input_name" ng-model="dep.course_name">
 									<label for="">Course code</label>
 								</input-group>
-							</th>
-							<th>
+							</td>
+							<td>
 								<input-group>
 									<input type="text" class="input_des" ng-model="dep.course_des">
 									<label for="">Course description</label>
 								</input-group>
-							</th>
-							<th>
+							</td>
+							<td>
 								<input-group>
 									<input type="number" class="input_units" ng-model="dep.totalYears">
 									<label for="">years</label>
 								</input-group>
-							</th>
-							<th>
+							</td>
+							<td>
 								<input-group>
 									<input type="number" class="input_units" ng-model="dep.totalTerms">
 									<label for="">terms</label>
 								</input-group>
-							</th>
-							<th><button class="btn btn--blue" ng-click="addCourse(dep)">Add</button></th>
-							<th><button class="btn btn--green" ng-click="updateCourse(dep)">Update</button></th>
+							</td>
+							<td><button class="btn btn--blue" ng-click="addCourse(dep)">Add</button></td>
+							<td><button class="btn btn--green" ng-click="updateCourse(dep)">Update</button></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -153,24 +152,24 @@
 							<table class=" twelve column">
 								<thead>
 									<tr>
-										<th>
+										<td>
 											<input-group>
 												<input type="text" ng-model="fee.fee_name">
 												<label for="fee_name">Fee name</label>
 											</input-group>
-										</th>
-										<th>
+										</td>
+										<td>
 											<input-group>
 												<input type="text" ng-model="fee.amount">
 												<label for="fee_amount">Fee amount</label>
 											</input-group>
-										</th>
-										<th>
+										</td>
+										<td>
 											<div class="btn btn--blue" ng-click="newFee(typeOfFee_id)">Add</div>
-										</th>
-										<th>
+										</td>
+										<td>
 											<div class="btn btn--green">Update</div>
-										</th>
+										</td>
 									</tr>
 								</thead>
 								<tbody class="assestment_mtn_body">
@@ -288,42 +287,42 @@
 						<th>
 							Term
 						</th>
-						<th>
+						<td>
 							<input-group>
 								<input type="text" class="input_name" ng-model="subject.subName">
 								<label for="">Subject code</label>
 							</input-group>
-						</th>
-						<th>
+						</td>
+						<td>
 							<input-group>
 								<input type="text" class="input_des" ng-model="subject.subDes">
 								<label for="">Description</label>
 							</input-group>
-						</th>
-						<th>
+						</td>
+						<td>
 							<input-group>
 								<input type="text" class="input_units" ng-model="subject.subUnits">
 								<label for="">Units</label>
 							</input-group>
-						</th>
-						<th>
+						</td>
+						<td>
 							<input-group>
 								<input type="text" class="input_units" ng-model="subject.subCpu">
 								<label for="">Cost/Units</label>
 							</input-group>
-						</th>
-						<th>
+						</td>
+						<td>
 							<input-group>
 								<input type="text" class="input_preRequisite" ng-model="subject.subPreRequisite">
 								<label for="">Pre-requisite</label>
 							</input-group>
-						</th>
-						<th>
+						</td>
+						<td>
 							<button class="btn btn--blue" ng-click="addSubjects(departmentId,courseYear, courseTerm, courseName, courseDes, subject)">Add</button>
-						</th>
-						<th>
+						</td>
+						<td>
 							<button class="btn btn--green">Update</button>
-						</th>
+						</td>
 					</tr>
 				</thead>
 				<tbody>

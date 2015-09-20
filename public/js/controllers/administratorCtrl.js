@@ -1,4 +1,4 @@
-app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
+app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
 	/*
 	testing
 	 */
@@ -20,10 +20,13 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 			$scope.refreshUsers();
 		});
 	}
+	// current curriculum
+	$http.get('/administrator/currentCurriculum').success(function(currentCurriculum){
+		$currentCur = currentCurriculum.curriculumYear;
+	});
 	/*
 	For curriculums
 	 */
-	
 	$http.get('/administrator/curriculum-list').success(function(data){
 		$scope.curriculumList = data;
 	});
@@ -70,11 +73,11 @@ app.controller('administratorCtrl', ['$scope', '$http', function($scope, $http){
 	 */
 	//get courses
 	$scope.getCourses = function(dep_id){
-		$scope.dep ="";
 		$http.get('/administrator/department-courses/' + dep_id).success(function(data){
 			$scope.courses = data;
 			$scope.departmentId = data._id;
 		});	
+		$scope.dep =null;
 	}
 	//add course
 	$scope.addCourse = function(new_course){

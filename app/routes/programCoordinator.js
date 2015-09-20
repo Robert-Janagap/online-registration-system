@@ -73,10 +73,19 @@ router.post('/section', function(req, res){
 		res.json(data);
 	});
 });
+// get schedule
+router.get('/sectionSchedule/:id', function(req,res){
+	classSchedules.findById(req.params.id, function(err, data){
+		if (err){
+			return err;
+		};
+		res.json(data);
+	});
+})
 // add schedule
 router.put('/newSchedule/:id', function(req, res){
 	classSchedules.findByIdAndUpdate(req.params.id, {$addToSet:{schedule:{
-		subject_code: req.body.subject_code,
+		subject_name: req.body.subject_name,
 		subject_des: req.body.subject_des,
 		units: req.body.units,
 		time: req.body.schedule_time,
@@ -90,5 +99,14 @@ router.put('/newSchedule/:id', function(req, res){
 		res.json(data);
 	});
 
+});
+// delete Schedule
+router.put('/deleteSchedule/:id', function(req, res){
+	classSchedules.findByIdAndUpdate(req.params.id,{$pull:{schedule:{_id:req.body._id}}} ,function(err, data){
+			if (err){
+			return err;
+			};
+			res.json(data);
+	});
 });
 module.exports = router;
