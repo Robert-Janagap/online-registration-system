@@ -21,40 +21,12 @@
 		</div>
 	</div>
     <div class="nine column pull--right">
-		<div class="search_student row">
-			<div class="input_groups">
-				<input type="search"/>
-				<label>Search for old students</label>
-			</div>
-			<table>
-				<thead>
-				  <tr>
-				    <th>Name</th>
-				    <th>Age</th>
-				    <th>Gender</th>
-				    <th>Address</th>
-				    <th>Contact no.</th>
-				  </tr>
-				</thead>
-			<tbody>
-				<tr>
-					<td>Mark Carumba</td>
-					<td>32</td>
-					<td>female</td>
-					<td>Murcia cadiz talisay stree.t no.8</td>
-					<td>xxxxxxx</td>
-					<td> <a href="" class="view">View</a></td>
-					<td> <a href="" class="view">subjects</a></td>
-				</tr>
-			</tbody>
-			</table>
-		</div>
 	    <div class="registration_form row">
 	    	<!-- search for new students -->
 			<div class="search_student row">
 				<div class="input_groups">
-					<input type="search" ng-model="searchNewstudents"/>
-					<label>Search for new students</label>
+					<input type="search" ng-model="searchStudents"/>
+					<label>Search Student</label>
 				</div>
 				<table>
 					<thead>
@@ -66,13 +38,13 @@
 					  </tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="newStudent in newStudents | filter:searchNewstudents">
-							<td>{{newStudent.student_no}}</td>
-							<td>{{newStudent.first_name}} {{newStudent.middle_name}} {{newStudent.last_name}}</td>
-							<td>{{newStudent.address}}</td>
-							<td>{{newStudent.contact}}</td>
+						<tr ng-repeat="student in students | filter:searchStudents">
+							<td>{{student.student_no}}</td>
+							<td>{{student.first_name}} {{student.middle_name}} {{student.last_name}}</td>
+							<td>{{student.address}}</td>
+							<td>{{student.contact}}</td>
 							<td>
-								<toggle-student-info ng-click="viewInfo(newStudent._id)">Information</toggle-student-info>
+								<toggle-student-info ng-click="viewInfo(student._id)">Information</toggle-student-info>
 							</td>
 						</tr>
 					</tbody>
@@ -80,11 +52,26 @@
 			</div>
 	    	<h3>Registration Form</h3>
 	   		<h4>Application data</h4>
+	   		<!-- student course choice -->
 	   		<input-group>
-	    		<select name="" id="" ng-model="newStudent.prefferedCourse">
+	    		<select name="" id="" ng-model="newStudent.course_name">
 	    			<option value="">--Select Courses--</option>
-	    			<option value="{{course.course_name}}" ng-repeat="course in courses">{{course.course_name}}</option>
+	    			<option value="{{course.course_name}}" ng-repeat="course in courses">{{course.course_name}}--{{course.course_des}}</option>
 	    		</select>
+	    	</input-group>
+	    	<input-group>
+	    		<ul>
+	    			<li><input type="checkbox" ng-model="newStudent.year_level" ng-true-value=1>1st</li>
+	    			<li><input type="checkbox" ng-model="newStudent.year_level" ng-true-value=2>2nd</li>
+	    			<li><input type="checkbox" ng-model="newStudent.year_level" ng-true-value=3>3rd</li>
+	    			<li><input type="checkbox" ng-model="newStudent.year_level" ng-true-value=4>4th</li>
+	    		</ul>
+	    	</input-group>
+	    	<input-group>
+	    		<ul>
+	    			<li><input type="checkbox" ng-model="newStudent.term" ng-true-value=1>1st semester</li>
+	    			<li><input type="checkbox" ng-model="newStudent.term" ng-true-value=2>2nd semester</li>
+	    		</ul>
 	    	</input-group>
 	    	<h4>Personal Data</h4>
 	    	<input-group>
@@ -307,69 +294,69 @@
 	<div class="student_info eleven column modal">
 		<toggle-student-info ng-click="viewInfo(new)">X</toggle-student-info>
         <div class="student_info_details row">
-        	<h4>Student No:{{newStudentInfo.student_no}}</h4>
+        	<h4>Student No:{{studentInfo.student_no}}</h4>
         	<h3>Student Information</h3>
             <div class="block">
-          		<span class="caption">Student Name</span><span>{{newStudentInfo.first_name}} {{newStudentInfo.middle_name}} {{newStudentInfo.last_name}}</span>
+          		<span class="caption">Student Name</span><span>{{studentInfo.first_name}} {{studentInfo.middle_name}} {{studentInfo.last_name}}</span>
             </div>
             <div class="block">
-              <span>Age</span><span>{{newStudentInfo.age}}</span>
+              <span>Age</span><span>{{studentInfo.age}}</span>
             </div>
             <div class="block">
-              <span>Gender</span><span>{{newStudentInfo.gender}}</span>
+              <span>Gender</span><span>{{studentInfo.gender}}</span>
             </div>
             <div class="block">
-              <span>Address</span><span>{{newStudentInfo.address}}</span>
+              <span>Address</span><span>{{studentInfo.address}}</span>
             </div>
             <div class="block">
-              <span>Contact No.</span><span>{{newStudentInfo.contact}}</span>
+              <span>Contact No.</span><span>{{studentInfo.contact}}</span>
             </div>
             <div class="block">
-              <span>Date of Birth</span><span>{{newStudentInfo.birthday}}</span>
+              <span>Date of Birth</span><span>{{studentInfo.birthday}}</span>
             </div>
             <div class="block">
-              <span>Nationality</span><span>{{newStudentInfo.nationality}}</span>
+              <span>Nationality</span><span>{{studentInfo.nationality}}</span>
             </div>
             <div class="block">
-              <span>civil status</span><span>{{newStudentInfo.civil_status}}</span>
+              <span>civil status</span><span>{{studentInfo.civil_status}}</span>
             </div>
             <div class="block">
-              <span>Email</span><span>{{newStudentInfo.email}}</span>
+              <span>Email</span><span>{{studentInfo.email}}</span>
             </div>
             <div class="block">
-              <span>Mother's name</span><span>{{newStudentInfo.mother_name}}</span>
+              <span>Mother's name</span><span>{{studentInfo.mother_name}}</span>
             </div>
             <div class="block">
-              <span>Mother's Occupation</span><span>{{newStudentInfo.mother_occupation}}</span>
+              <span>Mother's Occupation</span><span>{{studentInfo.mother_occupation}}</span>
             </div>
             <div class="block">
-              <span>father's name</span><span>{{newStudentInfo.father_name}}</span>
+              <span>father's name</span><span>{{studentInfo.father_name}}</span>
             </div>
             <div class="block">
-              <span>father's Occupation</span><span>{{newStudentInfo.father_occupation}}</span>
+              <span>father's Occupation</span><span>{{studentInfo.father_occupation}}</span>
             </div>
             <h3>School Attended</h3>
             <div class="block">
-              <span>Highest Educational Attended</span><span>{{newStudentInfo.high_Educ_Att}}</span>
+              <span>Highest Educational Attended</span><span>{{studentInfo.high_Educ_Att}}</span>
             </div>
             <div class="block">
-              <span>Previous School</span><span>{{newStudentInfo.prev_school}}</span>
+              <span>Previous School</span><span>{{studentInfo.prev_school}}</span>
             </div>
             <div class="block">
-              <span>School Address</span><span>{{newStudentInfo.prev_school_add}}</span>
+              <span>School Address</span><span>{{studentInfo.prev_school_add}}</span>
             </div>
             <h3>Guardian</h3>
             <div class="block">
-              <span>Guardian name</span><span>{{newStudentInfo.guardian_name}}</span>
+              <span>Guardian name</span><span>{{studentInfo.guardian_name}}</span>
             </div>
             <div class="block">
-              <span>Address</span><span>{{newStudentInfo.guardian_add}}</span>
+              <span>Address</span><span>{{studentInfo.guardian_add}}</span>
             </div>
             <div class="block">
-          		<span>Contact no.</span><span>{{newStudentInfo.guardian_contact}}</span>
+          		<span>Contact no.</span><span>{{studentInfo.guardian_contact}}</span>
             </div>
             <div class="block">
-            	<span>Relationship</span><span>{{newStudentInfo.guardian_rel}}</span>
+            	<span>Relationship</span><span>{{studentInfo.guardian_rel}}</span>
             </div>
         </div>
     </div>

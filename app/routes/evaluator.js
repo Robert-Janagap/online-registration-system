@@ -1,31 +1,49 @@
 var express =require( 'express' ),
 	router =express.Router(),
-	mongoose = require('mongoose');
-	preEnrolledStudents = mongoose.model('preEnrolledStudents'),
+	mongoose = require('mongoose'),
 	curriculumList = mongoose.model('curriculumList'),
-	curriculums = mongoose.model('curriculums');
+	curriculums = mongoose.model('curriculums'),
+	studentList = mongoose.model('studentList');
+	studentSchoolInfo = mongoose.model('studentSchoolInfo');
+
 // add new student
-router.post( '/newStudent',function ( req,res ){
-	var newStudent = new preEnrolledStudents(req.body);
-	newStudent.save(function(err, data){
+router.post( '/student',function ( req,res ){
+	// for student list db
+	var new_student = new studentList(req.body);
+	new_student.save(function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+
+} );
+
+//add student School Info
+router.post( '/student-school-info',function ( req,res ){
+	var new_studentSchoolInfo = new studentSchoolInfo(req.body);
+	console.log(req.body);
+	new_studentSchoolInfo.save(function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+
+} );
+// get student list
+router.get( '/students',function ( req,res ){
+	studentList.find({}, function(err, data){
 		if(err){
 			return err;
 		}
 		res.json(data);
 	});
 } );
-// get new student list
-router.get( '/newStudents',function ( req,res ){
-	preEnrolledStudents.find({}, function(err, data){
-		if(err){
-			return err;
-		}
-		res.json(data);
-	});
-} );
-// get new student info
-router.get('/newStudentInfo/:id', function( req,res ){
-	preEnrolledStudents.findById(req.params.id, function(err, data){
+
+// get student info
+router.get('/student-info/:id', function( req,res ){
+	studentList.findById(req.params.id, function(err, data){
 		if(err){
 			return err;
 		}

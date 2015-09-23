@@ -27,9 +27,12 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 	/*
 	For curriculums
 	 */
-	$http.get('/administrator/curriculum-list').success(function(data){
-		$scope.curriculumList = data;
-	});
+	$scope.refreshCurList = function(){
+		$http.get('/administrator/curriculum-list').success(function(data){
+			$scope.curriculumList = data;
+		});
+	}
+	$scope.refreshCurList();
 	$scope.viewCur = function(cursYear){
 		
 		$http.get('/administrator/curriculumSel/' + cursYear).success(function(data){
@@ -47,7 +50,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 	}
 	$scope.addCurriculum = function(year) {
 		$http.post('/administrator/newCurriculum/',year).success(function(data){
-			console.log(data);
+			$scope.refreshCurList();
 		});
 	}
 
@@ -165,11 +168,12 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$http.get('/administrator/findSubjectsByYear/' + id).success(function(data){
 			var objects = [];
 			for (var i = data.length - 1; i >= 0; i--) {
-				if(data[i].year_level === $scope.subjectsOfYear && data[i].term === $scope.subjectsOfTerm ){
+				if(data[i].year_level === $scope.subjectsOfYear && data[i].term === $scope.subjectsOfTerm && $scope.courseName === data[i].course_name){
 					objects.push(data[i]);
 				}
 			};
 			$scope.subjects = objects;
+			$scope.subject = "";
 		});
 	}
 	// add subjects
@@ -181,7 +185,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			$scope.addSubjectRefresh(id);
 		});
 
-		$scope.subject = "";
+		
 	}
 
 	/**

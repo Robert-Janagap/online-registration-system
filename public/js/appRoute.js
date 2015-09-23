@@ -6,67 +6,81 @@ app.config(function($routeProvider){
 	$routeProvider
 		.when('/',{
 			templateUrl: 'views/home.html',
-			controller: 'homeCtrl'
+			controller: 'homeCtrl',
+			title: 'Bacolod City College'
 		})//for about nav
 		.when('/administration',{
 			templateUrl: 'views/administration.html',
-			controller: 'administrationCtrl'
+			controller: 'administrationCtrl',
+			title: 'Administration'
 		})
 		.when('/school-info',{
 			templateUrl: 'views/schoolInfo.html',
-			controller: 'schoolInfoCtrl'
+			controller: 'schoolInfoCtrl',
+			title: 'School Info'
 		})
 		.when('/support-services',{
 			templateUrl: 'views/supportServices.html',
-			controller: 'supportServicesCtrl'
+			controller: 'supportServicesCtrl',
+			title: 'Support Services'
 		})//for admission nav
 		.when('/registration',{
 			templateUrl: 'views/registration.html',
-			controller: 'registrationCtrl'
+			controller: 'registrationCtrl',
+			title: 'Registration'
 		})
 		.when('/admission-requirements',{
 			templateUrl: 'views/admissionRequirements.html',
-			controller: 'adRequirementsCtrl'
+			controller: 'adRequirementsCtrl',
+			title: 'Admission Requirements'
 		})
 		.when('/enrollment-procedure',{
 			templateUrl: 'views/enrollmentProcedure.html',
-			controller: 'enProcedureCtrl'
+			controller: 'enProcedureCtrl',
+			title: 'Enrollment Procedure'
 		})
 		.when('/policies',{
 			templateUrl: 'views/policies.html',
-			controller: 'policiesCtrl'
+			controller: 'policiesCtrl',
+			title: 'Policies'
 		})//for academics nav
 		.when('/courses-offered',{
 			templateUrl: 'views/coursesOffered.html',
-			controller: 'coursesOfferedCtrl'
+			controller: 'coursesOfferedCtrl',
+			title: 'Courses Offered'
 		})
 		.when('/events-calendar',{
 			templateUrl: 'views/eventsCalendar.html',
-			controller: 'eventsCalendarCtrl'
+			controller: 'eventsCalendarCtrl',
+			title: 'Events Calendar'
 		})
 		.when('/news',{
 			templateUrl: 'views/news.html',
-			controller: 'newsCtrl'
+			controller: 'newsCtrl',
+			title: 'News'
 		})
 		.when('/alumni',{
 			templateUrl: 'views/alumni.html',
-			controller: 'alumniCtrl'
+			controller: 'alumniCtrl',
+			title: 'Alumni'
 		})//login
 		.when('/login',{
 			templateUrl: 'views/login.html',
-			controller: 'loginCtrl'
+			controller: 'loginCtrl',
+			title: 'Login'
 		})//for users
 		.when('/administrator',{
 			templateUrl: 'views/administrator.html',
 			controller: 'administratorCtrl',
+			title: 'Administrator'
 			// resolve:{
-			// 	// logincheck: checkLogin
+			// 	logincheck: checkLogin
 			// }
 		})
 		.when('/program-coordinator',{
 			templateUrl: 'views/programCoordinator.html',
 			controller: 'programCoordinatorCtrl',
-			title: 'program-coordinator'
+			title: 'Program Coordinator'
 			// resolve:{
 			// 	logincheck: checkLogin
 			// }
@@ -74,13 +88,15 @@ app.config(function($routeProvider){
 		.when('/evaluator',{
 			templateUrl: 'views/evaluator.html',
 			controller: 'evaluatorCtrl',
+			title: 'Evaluator'
 			// resolve:{
-			// 	// logincheck: checkLogin
+			// 	logincheck: checkLogin
 			// }
 		})
 		.when('/registrar',{
 			templateUrl: 'views/registrar.html',
 			controller: 'registrarCtrl',
+			title: 'Registrar'
 			// resolve:{
 			// 	logincheck: checkLogin
 			// }
@@ -88,6 +104,7 @@ app.config(function($routeProvider){
 		.when('/teacher',{
 			templateUrl: 'views/teacher.html',
 			controller: 'teacherCtrl',
+			title: 'Teacher'
 			// resolve:{
 			// 	logincheck: checkLogin
 			// }
@@ -95,6 +112,7 @@ app.config(function($routeProvider){
 		.when('/student',{
 			templateUrl: 'views/student.html',
 			controller: 'studentCtrl',
+			title: 'Student'
 			// resolve:{
 			// 	logincheck: checkLogin
 			// }
@@ -149,6 +167,10 @@ app.directive('inputGroup', function(){
 		restrict:"E",
 		link: function(scope, element, attrs){
 			element.addClass('input_groups');
+			
+			if($('.input_groups input').val() === null) {
+				$(this).removeClass('has--value');
+			}
 
 			$('.input_groups input').on('focusout',function(){
 			var input = $(this).val();
@@ -183,3 +205,9 @@ app.directive('toggleStudentInfo', function(){
 		}
 	}
 });
+// add dynamic title page
+app.run(['$location', '$rootScope', function($location, $rootScope){
+	$rootScope.$on('$routeChangeSuccess', function(event, current, previous){
+		$rootScope.title = current.$$route.title;
+	});
+}]);

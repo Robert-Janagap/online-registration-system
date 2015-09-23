@@ -3,9 +3,12 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var	preEnrolledStudents = mongoose.model('preEnrolledStudents');
 var classSchedules = mongoose.model('classSchedules');
-// get pre enrolled students
-router.get('/preEnrolledStudents', function( req, res) {
-	preEnrolledStudents.find({}, function(err, data){
+var studentList = mongoose.model('studentList');
+var studentSchoolInfo = mongoose.model('studentSchoolInfo');
+
+// get student list
+router.get('/students', function( req, res) {
+	studentList.find({}, function(err, data){
 		if(err){
 			return err;
 		}
@@ -13,20 +16,46 @@ router.get('/preEnrolledStudents', function( req, res) {
 	});
 });
 // get student info
-router.get('/student/:id', function( req,res ){
-	preEnrolledStudents.findById(req.params.id, function(err, data){
+router.get('/student-info/:id', function( req,res ){
+	studentList.findById(req.params.id, function(err, data){
 		if(err){
 			return err;
 		}
 		res.json(data);
 	});
 });
-/**
- * find the old student if none find the new student
- */
+// get student school info
+router.get('/school-info/:id', function( req,res ){
+	studentSchoolInfo.findOne({student_no:req.params.id}, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+// find section based on course, year, and term
+router.get('/student-section/:course', function(req, res){
+	classSchedules.find({course_name:req.params.course}, function( err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+// find section schedules
+router.get('/class-schedule/:id', function(req, res){
+	classSchedules.findById(req.params.id, function( err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+
+
 // set student Schedule
 router.get('/studentSchedule/:id', function(req, res){
-	preEnrolledStudents.findById(req.params.id, function(err, data){
+	studentList.findById(req.params.id, function(err, data){
 		if(err){
 			return err;
 		}
@@ -34,7 +63,6 @@ router.get('/studentSchedule/:id', function(req, res){
 	});
 });
 router.get('/studentSubjectSchedule/:id', function(req, res){
-	console.log(req.params.id);
 	classSchedules.find({course_name:req.params.id}, function(err, data){
 		if(err){
 			return err;
@@ -42,5 +70,6 @@ router.get('/studentSubjectSchedule/:id', function(req, res){
 		res.json(data);
 	});
 });
+
 
 module.exports = router;

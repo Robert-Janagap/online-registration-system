@@ -87,7 +87,9 @@ router.put('/newSchedule/:id', function(req, res){
 	classSchedules.findByIdAndUpdate(req.params.id, {$addToSet:{schedule:{
 		subject_name: req.body.subject_name,
 		subject_des: req.body.subject_des,
+		section: req.body.section,
 		units: req.body.units,
+		cost_perUnits: req.body.cpu,
 		time: req.body.schedule_time,
 		days: req.body.days,
 		room: req.body.room,

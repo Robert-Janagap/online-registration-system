@@ -23,6 +23,8 @@ var curriculumList = mongoose.model('curriculumList', require('./app/models/curr
 var users = mongoose.model('users', require('./app/models/users.js'));
 var classSchedules = mongoose.model('classSchedules', require('./app/models/classSchedules.js'));
 var preEnrolledStudents = mongoose.model('preEnrolledStudents', require('./app/models/preEnrolledStudents.js'));
+var studentList = mongoose.model('studentList', require('./app/models/studentList.js'));
+var studentSchoolInfo = mongoose.model('studentSchoolInfo', require('./app/models/studentSchoolInfo.js'));
 
 //use middleware
 app.use( express.static( path.join( __dirname,'/public' ) ) );
@@ -177,7 +179,24 @@ app.get( '/database/new-students',function ( req,res ) {
     } );
 
 } );
+app.get( '/database/student-list',function ( req,res ) {
 
+    studentList.find( {},function ( err,data ) {
+
+        res.json( data );
+
+    } );
+
+} );
+app.get( '/database/student-school-info',function ( req,res ) {
+
+    studentSchoolInfo.find( {},function ( err,data ) {
+
+        res.json( data );
+
+    } );
+
+} );
 //server listening
 http.createServer( app ).listen( port,function() {
 

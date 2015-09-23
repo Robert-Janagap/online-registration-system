@@ -220,7 +220,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="user in userList">
+					<tr ng-repeat="user in userList | orderBy:'name'">
 						<td>{{user.name}}</td>
 						<td>{{user.roles}}</td>
 						<td>{{user.username}}</td>

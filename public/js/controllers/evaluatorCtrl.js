@@ -1,33 +1,51 @@
 app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', function($scope, $http, $filter,$rootScope){
-	// add new student
-	// how to get the year in system
-	// how to get the current curriculum by finding the highest year
+	// School year
+	var currentYear = new Date().getFullYear();
+	var nextYear = new Date().getFullYear() + 1;
+	
+
 	$scope.addNewStudent = function(newStudent){
 		// correct the format of Date of Birth
 		var birthday = $filter('date')(newStudent.date, "yyyy-MM-dd");
 		// for student random number
-		var student_no = Math.floor((Math.random()*9000000 ) + 1000000) + Math.floor((Math.random()*999999 ) + 1000000);
+		var student_no = Math.floor((Math.random()*9000000 ) + 999999) + Math.floor((Math.random()*9999 ) + 99);
+		// for school year and curriculum
+		newStudent.school_year = currentYear + '-' + nextYear;
+		newStudent.curriculum = $currentCur;
 		
 		newStudent.birthday = birthday;
 		newStudent.student_no = student_no;
+		newStudent.enrolled = false;
 
-		$http.post('/evaluator/newStudent', newStudent).success(function(data){
-			$scope.newStudent = null;
-			$scope.viewNewStudents();
+		// get the course description
+		for (var i = $scope.courses.length - 1; i >= 0; i--) {
+			if($scope.courses[i].course_name == newStudent.course_name){
+				newStudent.course_des = $scope.courses[i].course_des;
+			}
+		};
+		// add new student
+		$http.post('/evaluator/student', newStudent).success(function(data){
+			console.log(data);
+			$scope.newStudent = "";
+		});
+		// add student info
+		$http.post('/evaluator/student-school-info', newStudent).success(function(data){
+			console.log(data);
 		});
 	}
+
 	//view new students 
 	$scope.viewNewStudents = function(){
-		$http.get('/evaluator/newStudents').success(function(newStudents){
-			$scope.newStudents = newStudents;
+		$http.get('/evaluator/students').success(function(students){
+			$scope.students = students;
 		})
 	}
 	$scope.viewNewStudents();
 
 	// view specific new student information
-	$scope.viewInfo = function(newStudentInfo_id){
-		$http.get('/evaluator/newStudentInfo/' + newStudentInfo_id).success(function(newStudentInfo){
-			$scope.newStudentInfo = newStudentInfo;
+	$scope.viewInfo = function(student_id){
+		$http.get('/evaluator/student-info/' + student_id).success(function(studentInfo){
+			$scope.studentInfo = studentInfo;
 		});
 	}
 	// current curriculum

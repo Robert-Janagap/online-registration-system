@@ -11,6 +11,8 @@ var	classSchedules  =new mongoose.Schema( {
       {
          subject_name: String,
          subject_des: String,
+         section: String,
+         cost_perUnits: Number,
          units: Number,
          time: String,
          days: String,

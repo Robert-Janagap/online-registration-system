@@ -37,74 +37,78 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat = "students in studentList | filter:searchStudent">
-						<td>{{students.student_no}}</td>
-						<td>{{students.first_name}} {{students.middle_name}} {{students.last_name}}</td>
-						<td><toggle-student-info ng-click="viewInfo(students._id)">Information</toggle-student-info></td>
-						<td><div class="btn" ng-click="studentSchedule(students._id)">Schedule</div></td>
+					<tr ng-repeat = "student in students | filter:searchStudent">
+						<td>{{student.student_no}}</td>
+						<td>{{student.first_name}} {{student.middle_name}} {{student.last_name}}</td>
+						<td><toggle-student-info ng-click="viewInfo(student._id)">Information</toggle-student-info></td>
+						<td><div class="btn" ng-click="studentSchedule(student._id)">Schedule</div></td>
 					</tr>
 				</tbody>
 			</table>
 		</article>
-		<article class="content row">
+		<!-- ng-show="studentInfo" -->
+		<article class="content row" >
 			<div class="scheduling">
-				<div class="scheduling_studentInfo" ng-show="studentInfo">
+				<div class="scheduling_studentInfo">
 					<div class="btn--close" ng-click="closeStudentInfo()">X</div>
 					<ul>
 						<li>
 							<span>School Year:</span>
-							<span>2015-2016</span>
+							<span>{{studentSchoolInfo.school_year}}</span>
 						</li>
 						<li>
 							<span>First Name:</span>
-							<span>{{studentInfo.first_name}}</span>
+							<span>{{student.first_name}}</span>
 						</li>
 						<li>
 							<span>Last Name:</span>
-							<span>{{studentInfo.last_name}}</span>
+							<span>{{student.last_name}}</span>
 						</li>
 						<li>
 							<span>Middle Name:</span>
-							<span>{{studentInfo.middle_name}}</span>
+							<span>{{student.middle_name}}</span>
 						</li>
 						<li>
 							<span>Student no.:</span>
-							<span>{{studentInfo.student_no}}</span>
+							<span>{{student.student_no}}</span>
 						</li>
 						<li>
 							<span>Course:</span>
-							<span>{{studentInfo.prefferedCourse}}</span>
+							<span>{{studentSchoolInfo.course_name}}</span>
 						</li>
 						<li>
 							<input-group>
-								<input type="text">
-								<label for="">Status</label>
-							</input-group>
-						</li>
-						<li>
-							<input-group>
-								<input type="number" class="input_units" min="1" max="5">
+								<input type="number" class="input_units" min="1" max="5" value="{{studentSchoolInfo.year_level}}">
 								<label for="">Year Level</label>
 							</input-group>
 						</li>
 						<li>
 							<input-group>
-								<input type="number" class="input_units" min="1" max="3">
+								<input type="number" class="input_units" min="1" max="3" value="{{studentSchoolInfo.term}}">
 								<label for="">Semester</label>
 							</input-group>
 						</li>
 						<li>
-							<input-group>
-								<input type="text">
-								<label for="">Section</label>
-							</input-group>
+							<select name="" id="" ng-model="studentSchoolInfo.status">
+								<option value="">--select status--</option>
+								<option value="regular">Regular</option>
+								<option value="irregular">Irregular</option>
+							</select>
+						</li>
+						<li>
+							<select name="" id="" ng-model="studentSchoolInfo.sectionId">
+								<option value="">--Select Section--</option>
+								<option value="{{section._id}}" ng-repeat="section in sectionList">{{section.section}}</option>
+							</select>
 						</li>
 					</ul>
+					<div class="btn" ng-click="enrollStudent(studentSchoolInfo.sectionId)">Next</div>
 				</div>
 				<div class="studentSchedule">
+					<h4>Subject Schedule</h4>
 					<div class="studentSchedule_search">
 						<input-group>
-							<input type="text">
+							<input type="text" ng-model="searchSchedule">
 							<label for="">Search subjects schedule</label>
 						</input-group>
 						<div class="studentSchedule_searchSubjects">
@@ -121,24 +125,21 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="subjectSchedule in subjectSchedules.schedule">
-										<td>{{subjectSchedule.subject_code}}</td>
-									</tr>
-									<!-- <tr>
-										<td>{{subjectSchedule.section}}</td>
-										<td>{{subjectSchedule.units}}</td>
-										<td>{{subjectSchedule.units}}</td>
-										<td>{{subjectSchedule.units}}</td>
-										<td>{{subjectSchedule.units}}</td>
-										<td>{{subjectSchedule.units}}</td>
-										<td>{{subjectSchedule.units}}</td>
+									<tr ng-repeat="schedule in sectionSchedules.schedule | filter:searchSchedule">
+										<td>{{schedule.subject_name}}</td>
+										<td>{{schedule.units}}</td>
+										<td>{{schedule.section}}</td>
+										<td>{{schedule.days}}</td>
+										<td>{{schedule.time}}</td>
+										<td>{{schedule.room}}</td>
+										<td>{{schedule.instructor}}</td>
 										<td><div class="btn">Select</div></td>
-									</tr> -->
+									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<h4>Class Schedule</h4>
+					<h4>Student Schedule</h4>
 					<table>
 						<thead>
 							<tr>
@@ -163,6 +164,7 @@
 							</tr>
 						</tbody>
 					</table>
+					<div class="btn">Save</div>
 				</div>
 			</div>
 		</article>
@@ -171,69 +173,69 @@
 	<div class="student_info eleven column modal">
 		<toggle-student-info ng-click="viewInfo(new)">X</toggle-student-info>
         <div class="student_info_details row">
-        	<h4>Student No:{{student.student_no}}</h4>
+        	<h4>Student No:{{studentInfo.student_no}}</h4>
         	<h3>Student Information</h3>
             <div class="block">
-          		<span class="caption">Student Name</span><span>{{student.first_name}} {{student.middle_name}} {{student.last_name}}</span>
+          		<span class="caption">Student Name</span><span>{{studentInfo.first_name}} {{studentInfo.middle_name}} {{studentInfo.last_name}}</span>
             </div>
             <div class="block">
-              <span>Age</span><span>{{student.age}}</span>
+              <span>Age</span><span>{{studentInfo.age}}</span>
             </div>
             <div class="block">
-              <span>Gender</span><span>{{student.gender}}</span>
+              <span>Gender</span><span>{{studentInfo.gender}}</span>
             </div>
             <div class="block">
-              <span>Address</span><span>{{student.address}}</span>
+              <span>Address</span><span>{{studentInfo.address}}</span>
             </div>
             <div class="block">
-              <span>Contact No.</span><span>{{student.contact}}</span>
+              <span>Contact No.</span><span>{{studentInfo.contact}}</span>
             </div>
             <div class="block">
-              <span>Date of Birth</span><span>{{student.birthday}}</span>
+              <span>Date of Birth</span><span>{{studentInfo.birthday}}</span>
             </div>
             <div class="block">
-              <span>Nationality</span><span>{{student.nationality}}</span>
+              <span>Nationality</span><span>{{studentInfo.nationality}}</span>
             </div>
             <div class="block">
-              <span>civil status</span><span>{{student.civil_status}}</span>
+              <span>civil status</span><span>{{studentInfo.civil_status}}</span>
             </div>
             <div class="block">
-              <span>Email</span><span>{{student.email}}</span>
+              <span>Email</span><span>{{studentInfo.email}}</span>
             </div>
             <div class="block">
-              <span>Mother's name</span><span>{{student.mother_name}}</span>
+              <span>Mother's name</span><span>{{studentInfo.mother_name}}</span>
             </div>
             <div class="block">
-              <span>Mother's Occupation</span><span>{{student.mother_occupation}}</span>
+              <span>Mother's Occupation</span><span>{{studentInfo.mother_occupation}}</span>
             </div>
             <div class="block">
-              <span>father's name</span><span>{{student.father_name}}</span>
+              <span>father's name</span><span>{{studentInfo.father_name}}</span>
             </div>
             <div class="block">
-              <span>father's Occupation</span><span>{{student.father_occupation}}</span>
+              <span>father's Occupation</span><span>{{studentInfo.father_occupation}}</span>
             </div>
             <h3>School Attended</h3>
             <div class="block">
-              <span>Highest Educational Attended</span><span>{{student.high_Educ_Att}}</span>
+              <span>Highest Educational Attended</span><span>{{studentInfo.high_Educ_Att}}</span>
             </div>
             <div class="block">
-              <span>Previous School</span><span>{{student.prev_school}}</span>
+              <span>Previous School</span><span>{{studentInfo.prev_school}}</span>
             </div>
             <div class="block">
-              <span>School Address</span><span>{{student.prev_school_add}}</span>
+              <span>School Address</span><span>{{studentInfo.prev_school_add}}</span>
             </div>
             <h3>Guardian</h3>
             <div class="block">
-              <span>Guardian name</span><span>{{student.guardian_name}}</span>
+              <span>Guardian name</span><span>{{studentInfo.guardian_name}}</span>
             </div>
             <div class="block">
-              <span>Address</span><span>{{student.guardian_add}}</span>
+              <span>Address</span><span>{{studentInfo.guardian_add}}</span>
             </div>
             <div class="block">
-          		<span>Contact no.</span><span>{{student.guardian_contact}}</span>
+          		<span>Contact no.</span><span>{{studentInfo.guardian_contact}}</span>
             </div>
             <div class="block">
-            	<span>Relationship</span><span>{{student.guardian_rel}}</span>
+            	<span>Relationship</span><span>{{studentInfo.guardian_rel}}</span>
             </div>
         </div>
     </div>

@@ -220,6 +220,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
     		subject_name: $scope.selectedSubject.subject_name,
 			subject_des: $scope.selectedSubject.subject_des,
 			units: $scope.selectedSubject.units,
+			cpu: $scope.selectedSubject.cost_perUnits,
 			schedule_time: schedule.schedule_time,
 			days: schedule.day,
 			room: schedule.room,
@@ -234,7 +235,6 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 	}
 	// delete schedule
 	$scope.deleteSchedule = function(schedule){
-		console.log(schedule);
 		$http.put('/program-coordinator/deleteSchedule/'+ $scope.section_id, schedule).success(function(data){
 			$scope.refreshClassScheduling($scope.selectedSection);
 		});

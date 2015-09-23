@@ -4,6 +4,9 @@ var router = express.Router();
 
 var	preEnrolledStudents  =new mongoose.Schema( {
    prefferedCourse: String, //application data
+   prefferedCourse_des: String,
+   prefferedYear: Number,
+   prefferedTerm: Number,
    first_name: String,//personal info
    middle_name: String,
    last_name: String,
