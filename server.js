@@ -22,7 +22,6 @@ var assestments = mongoose.model('assestments', require('./app/models/assestment
 var curriculumList = mongoose.model('curriculumList', require('./app/models/curriculumList.js'));
 var users = mongoose.model('users', require('./app/models/users.js'));
 var classSchedules = mongoose.model('classSchedules', require('./app/models/classSchedules.js'));
-var preEnrolledStudents = mongoose.model('preEnrolledStudents', require('./app/models/preEnrolledStudents.js'));
 var studentList = mongoose.model('studentList', require('./app/models/studentList.js'));
 var studentSchoolInfo = mongoose.model('studentSchoolInfo', require('./app/models/studentSchoolInfo.js'));
 

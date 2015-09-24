@@ -19,7 +19,7 @@ var studentSchoolInfo  =new mongoose.Schema( {
             subject_name: String,
             subject_des: String,
             units: Number,
-            days: Number,
+            days: String,
             time: String,
             room: String,
             instructor: String,
