@@ -112,10 +112,10 @@ app.config(function($routeProvider){
 		.when('/student',{
 			templateUrl: 'views/student.html',
 			controller: 'studentCtrl',
-			title: 'Student'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Student',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.otherwise({
 			redirectTo: '/'

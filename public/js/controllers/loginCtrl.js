@@ -2,7 +2,7 @@ app.controller('loginCtrl', ['$scope', '$http','$location','$rootScope', functio
 	$scope.login = function(user){
 		$http.post('/login', user).success(function(data){
 			$rootScope.currentUser = data;
-			userRoutes = ["administrator", "evaluator", "registrar", "teacher", "program-coordinator"];
+			userRoutes = ["administrator", "evaluator", "registrar", "teacher", "program-coordinator", "student"];
 			for (var i = userRoutes.length - 1; i >= 0; i--) {
 				
 				if(data.roles == userRoutes[i]){

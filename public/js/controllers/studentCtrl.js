@@ -1,10 +1,11 @@
-app.controller('studentCtrl', ['$scope', '$http', function($scope, $http){
+app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
 	// view curriculum subjects
 	// view grades
 	// view assestment and tuition
 	
 	// get student schedules
-	var student_id = 5950521;
+	var student_id = $rootScope.currentUser.username;
+	console.log(student_id);
 	$http.get('/student/studentSchedules/' + student_id).success(function(schedules){
 		$scope.schedules = schedules;
 		$scope.getSubjects(schedules);
