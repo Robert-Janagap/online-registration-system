@@ -216,7 +216,6 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 	}
 	// save schedule
 	$scope.saveSched = function(schedule){
-		console.log($scope.selectedSubject);
     	var newSchedule = {
     		subject_name: $scope.selectedSubject.subject_name,
 			subject_des: $scope.selectedSubject.subject_des,
@@ -307,7 +306,6 @@ app.directive('backToCourses', function(){
 	return{
 		scope:{},
 		restrict:"E",
-		template: "<div>Back</div>",
 		link: function(scope, element, attrs){
 			element.addClass('btn');
 		 	element.on( 'click',function ( event ){

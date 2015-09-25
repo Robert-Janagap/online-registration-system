@@ -46,8 +46,8 @@
 				</tbody>
 			</table>
 		</article>
-		<!-- ng-show="studentInfo" -->
-		<article class="content row" >
+		<!--  -->
+		<article class="content row" ng-show="studentInfo">
 			<div class="scheduling">
 				<div class="scheduling_studentInfo">
 					<div class="btn--close" ng-click="closeStudentInfo()">X</div>
@@ -104,9 +104,10 @@
 					</ul>
 					<div class="btn" ng-click="enrollStudent(studentSchoolInfo.sectionId,studentSchoolInfo)">Next</div>
 				</div>
+				
 				<div class="studentSchedule">
-					<h4>Subject Schedule</h4>
-					<div class="studentSchedule_search">
+					<div class="studentSchedule_search" ng-show="showSchedule">
+						<h4>Subject Schedule</h4>
 						<input-group>
 							<input type="text" ng-model="searchSchedule">
 							<label for="">Search subjects schedule</label>
@@ -133,39 +134,42 @@
 										<td>{{schedule.time}}</td>
 										<td>{{schedule.room}}</td>
 										<td>{{schedule.instructor}}</td>
-										<td><div class="btn">Select</div></td>
+										<td ng-show="studentRegular" ng-click="irregularSchedule(schedule)"><div class="btn">Select</div></td>
 									</tr>
 								</tbody>
 							</table>
-							<div class="btn" ng-click="subjectSchedule()">Next</div>
+							<div class="btn" ng-click="back()" ng-show="!studentRegular">Back</div>
+							<div class="btn" ng-click="subjectSchedule()" ng-show="!studentRegular">Save</div>
 						</div>
 					</div>
-					<h4>Student Schedule</h4>
-					<table>
-						<thead>
-							<tr>
-								<th>Subject Code</th>
-								<th>Units</th>
-								<th>Section</th>
-								<th>Days</th>
-								<th>Time</th>
-								<th>Room no.</th>
-								<th>Instructor</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Addbase</td>
-								<td>3</td>
-								<td>BSIT3a</td>
-								<td>mwf</td>
-								<td>9:00am-10:00am</td>
-								<td>css03</td>
-								<td>Wizard</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="btn">Save</div>
+					<div class="subjectSchedule"  ng-show="studentRegular">
+						<table>
+							<caption>Subject Schedule</caption>
+							<thead>
+								<tr>
+									<th>Subject Code</th>
+									<th>Units</th>
+									<th>Section</th>
+									<th>Days</th>
+									<th>Time</th>
+									<th>Room no.</th>
+									<th>Instructor</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat ="schedule in irregularSchedules">
+									<td>{{schedule.subject_name}}</td>
+									<td>{{schedule.units}}</td>
+									<td>{{schedule.section_name}}</td>
+									<td>{{schedule.days}}</td>
+									<td>{{schedule.time}}</td>
+									<td>{{schedule.room}}</td>
+									<td>{{schedule.instructor}}</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="btn">Save</div>
+					</div>
 				</div>
 			</div>
 		</article>

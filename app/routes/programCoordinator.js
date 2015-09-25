@@ -93,7 +93,8 @@ router.put('/newSchedule/:id', function(req, res){
 		time: req.body.schedule_time,
 		days: req.body.days,
 		room: req.body.room,
-		instructor: req.body.instructor
+		instructor: req.body.instructor,
+		done: true
 	}}}, function(err, data){
 		if (err){
 			return err;

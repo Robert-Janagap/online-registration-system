@@ -32,6 +32,8 @@ app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', funct
 		$http.post('/evaluator/student-school-info', newStudent).success(function(data){
 			console.log(data);
 		});
+
+		$scope.viewNewStudents();
 	}
 
 	//view new students 

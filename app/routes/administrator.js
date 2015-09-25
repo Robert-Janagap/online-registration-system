@@ -172,7 +172,10 @@ router.get('/findSubjectsByYear/:id', function(req, res){
 		});
 });
 
-//for assestments
+/**
+ * Assestments
+ */
+
 router.get('/assestments', function( req, res) {
 	assestments.find({}, function(err, data){
 		if(err){
@@ -216,6 +219,19 @@ router.put('/assestments/:id', function( req, res) {
 		});
 	}
 });
+router.delete('/deleteAssestment/:id', function(req,res){
+	assestments.findByIdAndRemove(req.params.id, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+
+/**
+ * Users
+ */
+
 // get users list
 router.get('/users', function(req, res){
 	users.find({}, function(err, data){

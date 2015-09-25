@@ -18,7 +18,8 @@ var	classSchedules  =new mongoose.Schema( {
          days: String,
          room: String,
          instructor: String,
-         section: String
+         section: String,
+         done: Boolean
       }
    ]
 },{ collection : 'classSchedules' } );

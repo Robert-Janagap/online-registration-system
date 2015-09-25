@@ -66,10 +66,10 @@ router.put('/enroll-student/:id', function( req, res){
 
 })
 
-//student schedules
+//student schedules regular
 router.put('/student-schedules/:id', function( req, res){
     var data = req.body;
-    console.log(data);
+
 	studentSchoolInfo.findByIdAndUpdate(req.params.id, {$addToSet:{schedule:{section_name:data.section_name,subject_name: data.subject_name,subject_des: data.subject_des,units: data.units,instructor: data.instructor,room: data.room,year_level: data.year_level,term: data.term,time: data.time,days: data.days, cost_perUnits: data.cost_perUnits}}}, function(err, data){
 		if(err){	
 			return err;
@@ -77,7 +77,17 @@ router.put('/student-schedules/:id', function( req, res){
 		res.json(data);
 	});
 
-})
+});
+//student schedules irregular
+router.get('/studentIrregular-schedules/:id', function( req, res){
+    studentSchoolInfo.findById(req.params.id, function(err, data){
+    	if(err){
+			return err;
+		}
+		res.json(data.schedule);
+    });
+    
+});
 
 // find student curriculum subjects
 router.get('/student-curriculum/:id', function(req, res){

@@ -21,7 +21,7 @@
 		</div>
 	</div>
     <div class="nine column pull--right">
-	    <div class="registration_form row">
+    	<article class="content row">
 	    	<!-- search for new students -->
 			<div class="search_student row">
 				<div class="input_groups">
@@ -38,7 +38,7 @@
 					  </tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="student in students | filter:searchStudents">
+						<tr ng-repeat="student in students | filter:searchStudents | limitTo: 10">
 							<td>{{student.student_no}}</td>
 							<td>{{student.first_name}} {{student.middle_name}} {{student.last_name}}</td>
 							<td>{{student.address}}</td>
@@ -50,6 +50,8 @@
 					</tbody>
 				</table>
 			</div>
+    	</article>
+	    <div class="registration_form row">
 	    	<h3>Registration Form</h3>
 	   		<h4>Application data</h4>
 	   		<!-- student course choice -->

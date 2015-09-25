@@ -263,6 +263,11 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			$scope.viewFees(typeOfFee_id);
 		});
 	}
+	$scope.deleteAssestment = function(fee_id){
+		$http.delete('/administrator/deleteAssestment/' + fee_id).success(function(data){
+			$scope.refreshAssestment();
+		});
+	}
 }]);
 /**
  * directives
@@ -305,13 +310,15 @@ app.directive('closeaddCur', function(){
 	return{
 		scope:{},
 		restrict:"E",
-		template: "<div>X</div>",
 		link: function(scope, element, attrs){
-			element.addClass('btn--close');
+			if(element.text() == "X"){
+				element.addClass('btn--close');
+			}
+
 		 	element.on( 'click',function ( event ){
 
 		        $('.curriculum_year,.curriculum_add--overlay').toggle();
-		        console.log('ok dokie');
+
 		    } );
 		}
 	}
@@ -370,9 +377,10 @@ app.directive('closeSchoolFees', function(){
 	return{
 		scope:{},
 		restrict:"E",
-		template: "<div>X</div>",
 		link: function(scope, element, attrs){
-			element.addClass('btn--close');
+			if(element.text() == "X"){
+				element.addClass('btn--close');
+			}
 		 	element.on( 'click',function ( event ){
 
 		        $( '.assestment_add, .assestment_add--overlay' ).toggle();
