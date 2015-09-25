@@ -66,7 +66,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 						curriculumSubjects.push(curriculum[i].subjects[b]);
 						// add student curriculum subjects
 						$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculum[i].subjects[b]).success(function(student){
-							console.log(student);
+							
 						});
 
 					}
@@ -85,7 +85,6 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 		};
 
 		$http.post('/registrar/student-access', userAccess).success(function(data){
-			console.log(data);
 		});
 
 	}
@@ -93,7 +92,6 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 	$scope.subjectSchedule = function(){
 		var sectionSchedules =  $scope.sectionSchedules;
 		var id = $scope.studentSchoolInfo._id; 
-
 		var schedules = [];
 		for (var i = sectionSchedules.schedule.length - 1; i >= 0; i--) {
 
@@ -102,6 +100,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			    subject_name:  sectionSchedules.schedule[i].subject_name,
 			    subject_des:  sectionSchedules.schedule[i].subject_des,
 			    units:  sectionSchedules.schedule[i].units,
+			    cost_perUnits:  sectionSchedules.schedule[i].cost_perUnits,
 			    days:  sectionSchedules.schedule[i].days,
 			    time:  sectionSchedules.schedule[i].time,
 			    room:  sectionSchedules.schedule[i].room,

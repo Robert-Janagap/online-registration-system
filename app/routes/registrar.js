@@ -69,8 +69,8 @@ router.put('/enroll-student/:id', function( req, res){
 //student schedules
 router.put('/student-schedules/:id', function( req, res){
     var data = req.body;
-
-	studentSchoolInfo.findByIdAndUpdate(req.params.id, {$addToSet:{schedule:{section_name:req.body.section_name,subject_name: req.body.subject_name,subject_des: req.body.subject_des,units: req.body.units,instructor: req.body.instructor,room: req.body.room,year_level: req.body.year_level,term: req.body.term,time: req.body.time,days: req.body.days }}}, function(err, data){
+    console.log(data);
+	studentSchoolInfo.findByIdAndUpdate(req.params.id, {$addToSet:{schedule:{section_name:data.section_name,subject_name: data.subject_name,subject_des: data.subject_des,units: data.units,instructor: data.instructor,room: data.room,year_level: data.year_level,term: data.term,time: data.time,days: data.days, cost_perUnits: data.cost_perUnits}}}, function(err, data){
 		if(err){	
 			return err;
 		}

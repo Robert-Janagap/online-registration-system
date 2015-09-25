@@ -5,10 +5,10 @@ var sourcemap = require('gulp-sourcemaps');
 
 gulp.task( 'sass',function(){
 
-    return gulp.src( 'src/scss/main.scss' )
-    .pipe(sourcemap.init())
-        .pipe( plumber() )
-        .pipe( sass() )
+return gulp.src( 'src/scss/main.scss' )
+	.pipe(sourcemap.init())
+    	.pipe( plumber() )
+    	.pipe( sass() )
     .pipe(sourcemap.write())
     .pipe( gulp.dest( 'public/css/' ) );
 
@@ -17,5 +17,6 @@ gulp.task( 'sass',function(){
 gulp.task( 'watching',function(){
     gulp.watch( 'src/scss/**/*.scss',[ 'sass' ] );
 	} );
-gulp.task('default', ['watching'])
+
+gulp.task('default', ['watching']);
 

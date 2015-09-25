@@ -18,6 +18,7 @@ var studentSchoolInfo  =new mongoose.Schema( {
             section_name: String,
             subject_name: String,
             subject_des: String,
+            cost_perUnits: Number,
             units: Number,
             days: String,
             time: String,

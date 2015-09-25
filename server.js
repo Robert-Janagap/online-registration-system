@@ -62,6 +62,8 @@ var administrator =require( './app/routes/administrator.js' );
 var programCoordinator =require( './app/routes/programCoordinator.js' );
 var evaluator =require( './app/routes/evaluator.js' );
 var registrar =require( './app/routes/registrar.js' );
+var student =require( './app/routes/student.js' );
+
 // client side routes
 var news = require('./app/routes/news.js');
 var index = require('./app/routes/index.js');
@@ -88,6 +90,7 @@ app.use( '/administrator',administrator );
 app.use( '/program-coordinator',programCoordinator );
 app.use( '/evaluator',evaluator );
 app.use('/registrar', registrar);
+app.use('/student', student);
 
 // client side
 app.use( '/',index );

@@ -216,6 +216,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 	}
 	// save schedule
 	$scope.saveSched = function(schedule){
+		console.log($scope.selectedSubject);
     	var newSchedule = {
     		subject_name: $scope.selectedSubject.subject_name,
 			subject_des: $scope.selectedSubject.subject_des,
