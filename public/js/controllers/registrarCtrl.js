@@ -60,8 +60,8 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			
 			// enroll student
 			school_info.enrolled = true;
-			$http.put('/registrar/enroll-student/' + school_info.student_no, school_info).success(function(data){
-			});
+			// $http.put('/registrar/enroll-student/' + school_info.student_no, school_info).success(function(data){
+			// });
 			
 		}else{//if he she is regular
 			// utilities
@@ -70,9 +70,9 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			
 			// enroll student
 			school_info.enrolled = true;
-			$http.put('/registrar/enroll-student/' + school_info.student_no, school_info).success(function(data){
+			// $http.put('/registrar/enroll-student/' + school_info.student_no, school_info).success(function(data){
 			
-			});
+			// });
 
 			//get curriculum subjects based on student course year and term
 			$http.get('/registrar/student-curriculum/' + school_info.curriculum).success(function(curriculum){
@@ -102,9 +102,9 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			name : studentAccess.first_name + " " + studentAccess.middle_name + " " + studentAccess.last_name,
 			roles : "student"
 		};
-
-		$http.post('/registrar/student-access', userAccess).success(function(data){
-		});
+		// add user
+		// $http.post('/registrar/student-access', userAccess).success(function(data){
+		// });
 
 		// utilities
 		$scope.showSchedule = true;
@@ -127,11 +127,17 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			    room:  sectionSchedules.schedule[i].room,
 			    instructor:  sectionSchedules.schedule[i].instructor,
 			    year_level:  sectionSchedules.year_level,
-		        term:  sectionSchedules.term
+		        term:  sectionSchedules.term,
+		        course_name:  $scope.studentSchoolInfo.course_name,
+		        student_no: $scope.studentSchoolInfo.student_no
 		    }
-			$http.put('/registrar/student-schedules/' + id, setSchedule).success(function(schedules){
-				console.log(schedules);
-			})
+		    // add student schedule
+			// $http.put('/registrar/student-schedules/' + id, setSchedule).success(function(schedules){
+
+			// })
+			$http.put('/registrar/teacher-students/' + sectionSchedules.schedule[i].instructor, setSchedule).success(function(studentList){
+				console.log(studentList);
+			});
 		}; 
 	}
 	// add student schedule for irregular

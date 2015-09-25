@@ -88,6 +88,25 @@ router.get('/studentIrregular-schedules/:id', function( req, res){
     });
     
 });
+// add student list in teacher
+router.put('/teacher-students/:id', function(req, res){
+	console.log(req.params.id);
+	console.log(req.body);
+	users.findOneAndUpdate({name:req.params.id}, {$addToSet:{studentList:{
+		subject_name: req.body.subject_name,
+		section: req.body.section_name,
+		units: req.body.units,
+        student_no: req.body.student_no,
+        course_name: req.body.course_name,
+        year_level: req.body.year_level,
+        term: req.body.term,
+	}}}, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
 
 // find student curriculum subjects
 router.get('/student-curriculum/:id', function(req, res){

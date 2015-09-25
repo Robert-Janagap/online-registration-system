@@ -1,1 +1,100 @@
-<h1>Hi im {{test}}</h1>
+<div class="container">
+	<div class="three column admin_sidebar boxShadow ">
+		<div class="person">
+			<div class="person_image"><img src="img/me.png" alt=" Profile picture "></div>
+			<div class="person_name">{{currentUser.name}}</div>
+			<div class="person_role">{{currentUser.roles}}</div>
+		</div>
+		<div class="admin_sidebarNav">
+			<ul>
+				<li class="admin_sidebarNav--list">
+					<a class="admin_sidebarNav--item">Curriculum</a>
+				</li>
+				<li class="admin_sidebarNav--list">
+					<a class="admin_sidebarNav--item">Assestments</a>
+				</li>
+				<li class="admin_sidebarNav--list">
+					<a class="admin_sidebarNav--item">Faculty and Staff</a>
+				</li>
+				<li class="admin_sidebarNav--list">
+					<a class="admin_sidebarNav--item">Blog</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="nine column pull--right">
+		<div class="content row">
+			<h4>Class Schedule</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>Subject Code</th>
+						<th>Section</th>
+						<th>Days</th>
+						<th>Time</th>
+						<th>Room no.</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat = "classSchedule in classSchedules">
+						<td>{{classSchedule.subject_name}}</td>
+						<td>{{classSchedule.section}}</td>
+						<td>{{classSchedule.days}}</td>
+						<td>{{classSchedule.time}}</td>
+						<td>{{classSchedule.room}}</td>
+						<td><div class="btn" ng-click="getStudents(classSchedule)">Student List</div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="content row">
+			<h4>Student List</h4>
+			<table>
+				<caption>Subject Code</caption>
+				<thead>
+					<tr>
+						<th>Student Name</th>
+						<th>Course Code</th>
+						<th>Prelim</th>
+						<th>Midterm</th>
+						<th>Pre-final</th>
+						<th>Final</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Robert Jangap</td>
+						<td>BSIT</td>
+						<td>90</td>
+						<td>90</td>
+						<td>90</td>
+						<td>90</td>
+						<td><div class="btn">Add Grades</div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="modal" style="top:25%; left: 25%; padding:20px;">
+		<div class="btn--close">X</div>
+		<h4>Robert Janagap</h4>
+		<h3>Grades</h3>
+		<input_group>
+			<input type="number" class="input_units">
+			<label for="">Prelim</label>
+		</input_group>
+		<input_group>
+			<input type="number" class="input_units">
+			<label for="">Midterm</label>
+		</input_group>
+		<input_group>
+			<input type="number" class="input_units">
+			<label for="">Pre-Final</label>
+		</input_group>
+		<input_group>
+			<input type="number" class="input_units">
+			<label for="">Final</label>
+		</input_group>
+		<div class="btn">Save</div>
+	</div>
+</div>

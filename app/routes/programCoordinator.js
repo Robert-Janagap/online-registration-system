@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var curriculum = mongoose.model('curriculums');
 var curriculumList = mongoose.model('curriculumList');
 var classSchedules = mongoose.model('classSchedules');
+var users = mongoose.model('users');
+
 // get all curriculum
 router.get('/curriculum', function(req, res){
 	curriculum.find({}, function(err, data){
@@ -103,6 +105,26 @@ router.put('/newSchedule/:id', function(req, res){
 	});
 
 });
+// add teacher schedule
+router.put('/teacher-schedules/:id', function(req, res){
+	users.findByIdAndUpdate(req.params.id, {$addToSet:{schedules:{
+		subject_name: req.body.subject_name,
+		subject_des: req.body.subject_des,
+		section: req.body.section,
+		units: req.body.units,
+		time: req.body.schedule_time,
+		days: req.body.days,
+		room: req.body.room
+	}}}, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+
+
+
 // delete Schedule
 router.put('/deleteSchedule/:id', function(req, res){
 	classSchedules.findByIdAndUpdate(req.params.id,{$pull:{schedule:{_id:req.body._id}}} ,function(err, data){

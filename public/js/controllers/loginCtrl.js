@@ -8,7 +8,7 @@ app.controller('loginCtrl', ['$scope', '$http','$location','$rootScope', functio
 				if(data.roles == userRoutes[i]){
 					$location.url('/' + userRoutes[i]);
 				}
-		
+			
 			};
 		});
 		

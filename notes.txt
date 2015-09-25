@@ -4,4 +4,4 @@
  * check for errors
  * design the client side
  * avoid duplication of schedule with the same subject
- */
+ */SMSmusUG

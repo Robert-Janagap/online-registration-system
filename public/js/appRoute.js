@@ -112,10 +112,10 @@ app.config(function($routeProvider){
 		.when('/student',{
 			templateUrl: 'views/student.html',
 			controller: 'studentCtrl',
-			title: 'Student',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Student'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.otherwise({
 			redirectTo: '/'
@@ -148,14 +148,6 @@ app.controller('navCtrl',['$scope','$http','$location','$rootScope', function($s
 		});
 	}
 }]);
-
-// app.controller('appHeaderCtrl',['$scope','$http','$location','$rootScope',function($scope, $http, $location, $rootScope){
-// 		console.log('ok');
-// 		$scope.$on('$routeChangeSuccess', function (event, data) {
-// 	        $scope.pageTitle = data.title;
-// 	        console.log(data);
-// 	    });
-// }]);
 
 /*
 	global directives

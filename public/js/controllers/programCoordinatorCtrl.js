@@ -226,13 +226,20 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 			room: schedule.room,
 			instructor: $scope.teacher,
 			section: $scope.sectionName
-    	}
+    	};
+    	// add schedule in student
     	$http.put('/program-coordinator/newSchedule/' + $scope.selectedSection, newSchedule).success(function(newSchedule){
     		$scope.subjectSchedule = null;
     		$scope.teacher = null;
     		$scope.refreshClassScheduling($scope.selectedSection);
     	});
+    	
+    	// add schedule in teacher
+    	$http.put('/program-coordinator/teacher-schedules/' + $scope.teacher_id, newSchedule).success(function(classSchedules){
+			console.log(classSchedules);
+		});
 	}
+
 	// delete schedule
 	$scope.deleteSchedule = function(schedule){
 		$http.put('/program-coordinator/deleteSchedule/'+ $scope.section_id, schedule).success(function(data){
@@ -256,6 +263,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 	// teacher selected
 	$scope.pickTeacher = function(teacher){
 		$scope.teacher = teacher.name;
+		$scope.teacher_id = teacher._id;
 	}
 }]);
 
