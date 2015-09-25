@@ -24,6 +24,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 	$http.get('/administrator/currentCurriculum').success(function(currentCurriculum){
 		$currentCur = currentCurriculum.curriculumYear;
 	});
+
 	/*
 	For curriculums
 	 */
@@ -33,6 +34,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		});
 	}
 	$scope.refreshCurList();
+	// refresh adding of departments
 	$scope.viewCur = function(cursYear){
 		
 		$http.get('/administrator/curriculumSel/' + cursYear).success(function(data){
@@ -53,7 +55,15 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			$scope.refreshCurList();
 		});
 	}
-
+	$scope.deleteCur = function(curriculum){
+		// delete the curriculum
+		$http.delete('/administrator/deleteCurriculum/' + curriculum._id).success(function(data){
+			$scope.refreshCurList();
+		});
+		// delete its departments
+		$http.delete('/administrator/deleteCurriculumDep/' + 2015 ).success(function(data){
+		});
+	}
 	/**
 	 * For departments
 	 */
@@ -96,6 +106,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$http.put('/administrator/course/'+ $scope.departmentId, course).success(function(data){
 			$scope.getCourses($scope.departmentId);
 		});
+
 	}
 	// edit course
 	$scope.editCourse = function(id){
@@ -113,7 +124,18 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 	/**
 	 * for subjects
 	 */
-	
+	// refresh subjects in year
+	$scope.refreshSubjects = function(department_id){
+		$http.get('/administrator/findSubjectsByYear/' + department_id).success(function(data){
+			var objects = [];
+			for (var i = data.length - 1; i >= 0; i--) {
+				if(data[i].year_level === $scope.subjectsOfYear && $scope.courseName === data[i].course_name){
+					objects.push(data[i]);
+				}
+			};
+			$scope.subjects = objects;
+		});
+	}
 	//get course subjects year and terms
 	$scope.getSubjects = function(id){
 		$http.get('/administrator/courseSubjects/'+ id).success(function(data){
@@ -148,7 +170,10 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			};
 			$scope.subjects = objects;
 		});
+		// utilities
 		$scope.subjectsOfYear = year;
+		$scope.semesterClick = false;
+		$scope.yearClick = true;
 	}
 	$scope.subjectWithTerm = function(term, id){
 		$http.get('/administrator/findSubjectsByYear/' + id).success(function(data){
@@ -161,7 +186,9 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			$scope.subjects = objects;
 
 		});
+		// utilities
 		$scope.subjectsOfTerm = term;
+		$scope.semesterClick = true;
 	}
 	// refresh
 	$scope.addSubjectRefresh = function(id){
@@ -183,11 +210,16 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 
 		$http.put('/administrator/courseSubjects/'+id,content).success(function(data){
 			$scope.addSubjectRefresh(id);
+		});	
+	}
+	// delete subjects
+	$scope.deleteSubject = function(department_id,subject){
+
+		$http.put('/administrator/deleteSubjects/'+ department_id, subject).success(function(data){
+			$scope.refreshSubjects(department_id);
 		});
 
-		
 	}
-
 	/**
 	 * for assestments
 	 */
@@ -422,7 +454,6 @@ app.directive('showDepartments', function(){
 	return{
 		scope:{},
 		restrict:"E",
-		template: "<div>View</div>",
 		link: function(scope, element, attrs){
 			element.addClass('curriculum_box_btn');
 			element.addClass('btn');

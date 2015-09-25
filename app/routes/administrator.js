@@ -15,6 +15,9 @@ router.get('/curriculumSel/:id', function( req, res) {
 		res.json(data);
 	});
 });
+/**
+ * Curriculum
+ */
 // add curriculum
 router.post('/newCurriculum', function(req, res){
 	var new_curriculum = new curriculumList({curriculumYear: req.body.curriculum_year});
@@ -28,6 +31,24 @@ router.post('/newCurriculum', function(req, res){
 //for curriculums list
 router.get('/curriculum-list', function( req, res) {
 	curriculumList.aggregate({$sort:{curriculumYear:-1}}, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	})
+});
+//delete curriculum
+router.delete('/deleteCurriculum/:id', function( req, res) {
+	curriculumList.findByIdAndRemove(req.params.id, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	})
+});
+//delete curriculum and its departments
+router.delete('/deleteCurriculumDep/:id', function( req, res) {
+	curriculums.remove({school_year:req.params.id}, function(err, data){
 		if(err){
 			return err;
 		}
@@ -130,6 +151,15 @@ router.put('/courseSubjects/:id', function(req, res){
 			return err;
 		};
 		res.json(data);
+		});
+});
+// delete course subjects
+router.put('/deleteSubjects/:id', function(req, res){
+	curriculums.findByIdAndUpdate(req.params.id,{$pull:{subjects:{_id:req.body._id}}}, function(err, data){
+			if (err){
+				return err;
+			};
+			res.json(data);
 		});
 });
 // find subjects related in year and term

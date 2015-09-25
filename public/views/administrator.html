@@ -1,5 +1,11 @@
 <div class="curriculum_add--overlay"></div>
 <div class="container">
+<!-- utilities -->
+	<!-- <div class="notification">
+		<div class="content">
+			<p>Ok successfully delete</p>
+		</div>
+	</div> -->
 <!-- sidebar -->
 	<div class="three column admin_sidebar boxShadow ">
 		<div class="person">
@@ -37,7 +43,8 @@
 						<div class="tag"><h3>{{curriculumYear.curriculumYear}}</h3></div>
 						<div class="tag">Curriculum</div>
 						<div class="curriculum_box--overlay">
-							<show-departments  ng-click="viewCur(curriculumYear.curriculumYear)"></show-departments>
+							<show-departments  ng-click="viewCur(curriculumYear.curriculumYear)">View</show-departments>
+							<closedepartment-list ng-click="deleteCur(curriculumYear)"></closedepartment-list>
 						</div>
 					</div>
 				</div>
@@ -265,8 +272,8 @@
 	<div class="overlay"></div>
 	<div class="course_subjects boxShadow">
 		<close-course-subjects></close-course-subjects>
-		<span>{{courseName}}</span>
-		<span>{{courseDes}}</span>
+		<span>Course: {{courseName}}</span>
+		<span>Course Title: {{courseDes}}</span>
 		<ul>
 			<li ng-repeat="courseYear in courseYears">
 				<div class="btn" ng-click="subjectInYear(courseYear,departmentId)">{{courseYear}}</div>
@@ -279,7 +286,7 @@
 				</li>
 			</ul>
 			<table>
-				<thead>
+				<thead ng-show="semesterClick">
 					<tr>
 						<th>
 							Year
@@ -326,6 +333,15 @@
 					</tr>
 				</thead>
 				<tbody>
+					<tr ng-show="yearClick">
+						<th>Year</th>
+						<th>Term</th>
+						<th>Subject Code</th>
+						<th>Subject Title</th>
+						<th>Unit</th>
+						<th>Cost/units</th>
+						<th>Pre-requisite</th>
+					</tr>
 					<tr ng-repeat = "subject in subjects">
 						<td>{{subject.year_level}}</td>
 						<td>{{subject.term}}</td>
@@ -334,8 +350,11 @@
 						<td>{{subject.units}}</td>
 						<td>{{subject.cost_perUnits}}</td>
 						<td>{{subject.pre_requisite}}</td>
-						<td><div class="btn btn--orange">Edit</div></td>
-						<td><div class="btn btn--red">Delete</div></td>
+						<td>
+							<div class="btn btn--orange">Edit</div>
+							<div class="btn btn--red" ng-click="deleteSubject(departmentId,subject)">Delete</div>
+
+						</td>
 					</tr>
 				</tbody>
 			</table>
