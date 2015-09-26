@@ -79,18 +79,25 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$http.delete('/administrator/curriculumSel/'+id).success(function(data){
 			$scope.viewCur(year);
 		});
+		$scope.departmentClick = false;
 	}
-
+	// close departments
+	$scope.closeDepartments = function(){
+		$scope.courses = "";
+		$scope.department_code = null;
+	}
 	/**
 	 * for courses
 	 */
 	//get courses
-	$scope.getCourses = function(dep_id){
+	$scope.getCourses = function(dep_id, department){
 		$http.get('/administrator/department-courses/' + dep_id).success(function(data){
 			$scope.courses = data;
 			$scope.departmentId = data._id;
 		});	
 		$scope.dep =null;
+		$scope.departmentClick = true;
+		$scope.department_code = department.department_name;
 	}
 	//add course
 	$scope.addCourse = function(new_course){
@@ -277,9 +284,10 @@ app.directive('addCur', function(){
 	return{
 		scope:{},
 		restrict:"E",
-		template: "<span>add</span>",
+		template: "<span>+</span>",
 		link: function(scope, element, attrs){
-			element.addClass('content_title_btn');
+			element.addClass('btn');
+			element.addClass('btn--blue');
 		 	element.on( 'click',function ( event ){
 
 		        $('.curriculum_year,.curriculum_add--overlay').toggle();
@@ -292,9 +300,10 @@ app.directive('addDepartment', function(){
 	return{
 		scope:{},
 		restrict:"E",
-		template: "<span>add</span>",
+		template: "<span>+</span>",
 		link: function(scope, element, attrs){
-			element.addClass('content_title_btn');
+			element.addClass('btn');
+			element.addClass('btn--blue');
 		 	element.on( 'click',function ( event ){
 
 		        $('.newDepartment').toggle();
@@ -426,9 +435,10 @@ app.directive('openfees', function(){
 	return{
 		scope:{},
 		restrict:"E",
-		template: "<span>add</span>",
+		template: "<span>+</span>",
 		link: function(scope, element, attrs){
-			element.addClass('content_title_btn');
+			element.addClass('btn');
+			element.addClass('btn--blue');
 		 	element.on( 'click',function ( event ){
 
 		        $( '.assestment_add, .assestment_add--overlay' ).toggle();
@@ -494,9 +504,10 @@ app.directive('facultyStuff', function(){
 	return{
 		scope:{},
 		restrict:"E",
-		template: "<span>add</span>",
+		template: "<span>+</span>",
 		link: function(scope, element, attrs){
-			element.addClass('content_title_btn');
+			element.addClass('btn');
+			element.addClass('btn--blue');
 		 	element.on( 'click',function ( event ){
 
 		       $('.addFacultyStaff, .overlay').toggle();

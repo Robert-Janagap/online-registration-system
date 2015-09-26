@@ -62,7 +62,7 @@
 		<!-- curriculum information -->
 		<article class="content row departmentList">
 			<h3 class="content_title"><span>Curriculum {{curYear}}</span></h3>
-			<closedepartment-list></closedepartment-list>
+			<closedepartment-list ng-click="closeDepartments"></closedepartment-list>
 			<form class="departmentList_items">
 				<h4>Departments <add-department></add-department></h4>
 				<div class="newDepartment--overlay overlay"></div>
@@ -80,9 +80,10 @@
 					<div class="btn btn--blue" ng-click="addDep(curYear)">Add</div>
 				</div>
 				<ul class="department_settings row" ng-repeat="department in curriculum">
-					<li ng-click="getCourses(department._id)"><span>{{department.department_name}}</span> <span>{{department.department_des}}</span><button class="btn btn--red" ng-click="deleteDep(department._id, curYear)">Delete</button></li>
+					<li ng-click="getCourses(department._id,department)"><span>{{department.department_name}}</span> <span>{{department.department_des}}</span><button class="btn btn--red" ng-click="deleteDep(department._id, curYear)">X</button></li>
 				</ul>
-				<table>
+				<table ng-show="departmentClick">
+					<caption>{{department_code}}</caption>
 					<thead>
 						<tr>
 							<td>
