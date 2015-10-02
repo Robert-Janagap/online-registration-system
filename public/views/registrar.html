@@ -47,7 +47,7 @@
 			</table>
 		</article>
 		<!-- student schedule -->
-		<article class="content row" ng-show="studentInfo">
+		<article class="content row" ng-show="student_schedule">
 			<div class="scheduling">
 				<div class="scheduling_studentInfo">
 					<div class="btn--close" ng-click="closeStudentInfo()">X</div>
@@ -112,6 +112,7 @@
 							<input type="text" ng-model="searchSchedule">
 							<label for="">Search subjects schedule</label>
 						</input-group>
+						<span class="error_message">{{errorStudentSchedule}}</span>
 						<div class="studentSchedule_searchSubjects">
 							<table>
 								<thead>
@@ -134,7 +135,7 @@
 										<td>{{schedule.time}}</td>
 										<td>{{schedule.room}}</td>
 										<td>{{schedule.instructor}}</td>
-										<td ng-show="studentRegular" ng-click="irregularSchedule(schedule)"><div class="btn">Select</div></td>
+										<td><div class="btn btn--blue" ng-show="studentRegular" ng-click="irregularSchedule(schedule)">+</div></td>
 									</tr>
 								</tbody>
 							</table>
@@ -165,6 +166,7 @@
 									<td>{{schedule.time}}</td>
 									<td>{{schedule.room}}</td>
 									<td>{{schedule.instructor}}</td>
+									<td><div class="btn btn--red" ng-click="deleteIrregSchedule(schedule)">-</div></td>
 								</tr>
 							</tbody>
 						</table>
@@ -176,7 +178,7 @@
 	</div>
 	<!-- students Information -->
 	<div class="student_info eleven column modal">
-		<toggle-student-info ng-click="viewInfo(new)">X</toggle-student-info>
+		<toggle-student-info>X</toggle-student-info>
         <div class="student_info_details row">
         	<h4>Student No:{{studentInfo.student_no}}</h4>
         	<h3>Student Information</h3>

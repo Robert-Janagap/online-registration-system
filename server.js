@@ -138,7 +138,7 @@ app.get( '/database',function ( req,res ) {
     } );
 
 } );
-app.get( '/database/assestment',auth,function ( req,res ) {
+app.get( '/database/assestment',function ( req,res ) {
 
     assestments.find( {},function ( err,data ) {
 

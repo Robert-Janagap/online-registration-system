@@ -3,5 +3,5 @@
  * check for update function
  * check for errors
  * design the client side
- * avoid duplication of schedule with the same subject
+ * how to give null text after the error message
  */SMSmusUG

@@ -1,7 +1,4 @@
 app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
-	/*
-	testing
-	 */
 	// add users
 	$scope.refreshUsers = function(){
 		$http.get('/administrator/users').success(function(data){
@@ -12,7 +9,13 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 	$scope.refreshUsers();
 	$scope.addUser = function(user){
 		$http.post('/administrator/newUser/', user).success(function(data){
-			$scope.refreshUsers();
+			if(data != null){
+				$scope.refreshUsers();
+				$scope.user = "";
+				$scope.errorUser="";
+			}else{
+				$scope.errorUser = "User " + user.name + " already exist";
+			}
 		});
 	}
 	$scope.deleteUser = function(user_id){
@@ -49,12 +52,21 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 				$scope.curriculum = "";
 			}
 		});	
+		$scope.departmentClick = false;
 	}
+	//add curriculum year 
 	$scope.addCurriculum = function(year) {
 		$http.post('/administrator/newCurriculum/',year).success(function(data){
-			$scope.refreshCurList();
+			if(data != null){
+				$scope.refreshCurList();
+				$scope.curriculumError = ""
+			}else{
+				$scope.curriculumError = year.curriculum_year + " " + "curriculum is already exist.";
+			}
+			$scope.curriculum_new.curriculum_year = "";
 		});
 	}
+	// delete curriculum
 	$scope.deleteCur = function(curriculum){
 		// delete the curriculum
 		$http.delete('/administrator/deleteCurriculum/' + curriculum._id).success(function(data){
@@ -79,12 +91,11 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$http.delete('/administrator/curriculumSel/'+id).success(function(data){
 			$scope.viewCur(year);
 		});
-		$scope.departmentClick = false;
 	}
 	// close departments
 	$scope.closeDepartments = function(){
 		$scope.courses = "";
-		$scope.department_code = null;
+		$scope.department_code = "";
 	}
 	/**
 	 * for courses
@@ -232,14 +243,20 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 	 */
 	
 	// get assestment
-	$http.get('/administrator/assestments').success(function(data){
-		$scope.assestments = data;
-	});
 	$scope.refreshAssestment = function(){
 		$http.get('/administrator/assestments').success(function(data){
+			// view total amount of fees
+			for (var i = data.length - 1; i >= 0; i--) {
+				var totalAmount = 0;
+				for (var b = data[i].fees.length - 1; b >= 0; b--) {
+					totalAmount += data[i].fees[b].amount;
+					data[i].totalAmount = totalAmount;
+				};
+			};
 			$scope.assestments = data;
 		});
 	}
+	$scope.refreshAssestment();
 	$scope.viewFees = function(id){
 		$http.get('/administrator/assestments/'+ id).success(function(data){
 			$scope.fees = data;
@@ -256,11 +273,19 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$http.put('/administrator/assestments/'+ id, $scope.fee).success(function(data){
 			$scope.fee = "";
 			$scope.viewFees(id);
+			$scope.refreshAssestment();
 		});
 	}
 	$scope.addSchoolFee = function(feeName){
 		$http.post('/administrator/assestments', feeName).success(function(data){
-			$scope.refreshAssestment();
+			if(data != null){
+				$scope.refreshAssestment();
+				$scope.errorAssestment = null;
+				$scope.schoolFee = "";
+			}else{
+				$scope.errorAssestment = "school fee name already exist please try other name";
+				$scope.schoolFee = "";
+			}
 		});
 	}
 	$scope.deleteFee = function(typeOfFee_id, fee){
@@ -268,6 +293,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		fee.status = status;
 		$http.put('/administrator/assestments/'+ typeOfFee_id, fee).success(function(data){
 			$scope.viewFees(typeOfFee_id);
+			$scope.refreshAssestment();
 		});
 	}
 	$scope.deleteAssestment = function(fee_id){
@@ -415,21 +441,7 @@ app.directive('closeCourseSubjects', function(){
 	}
 });
 // close  staff and teacher modal
-app.directive('closeFacultyStuff', function(){
-	return{
-		scope:{},
-		restrict:"E",
-		template: "<div>X</div>",
-		link: function(scope, element, attrs){
-			element.addClass('btn--close');
-		 	element.on( 'click',function ( event ){
 
-		       $('.addFacultyStaff, .overlay').toggle();
-
-		    } );
-		}
-	}
-});
 // open assestment fees
 app.directive('openfees', function(){
 	return{
@@ -504,10 +516,13 @@ app.directive('facultyStuff', function(){
 	return{
 		scope:{},
 		restrict:"E",
-		template: "<span>+</span>",
 		link: function(scope, element, attrs){
-			element.addClass('btn');
-			element.addClass('btn--blue');
+			if(element.text() == "X"){
+				element.addClass('btn--close');
+			}else{
+				element.addClass('btn');
+				element.addClass('btn--blue');
+			}
 		 	element.on( 'click',function ( event ){
 
 		       $('.addFacultyStaff, .overlay').toggle();

@@ -84,6 +84,23 @@ router.get('/sectionSchedule/:id', function(req,res){
 		res.json(data);
 	});
 })
+// find subject
+router.put('/find-subject/:id', function( req, res){
+	var subject;
+	classSchedules.findOne({section:req.params.id}, function(err, data){
+		if(err){
+			return err;
+		};
+
+		for (var i = data.schedule.length - 1; i >= 0; i--) {
+			if(data.schedule[i].subject_name == req.body.subject_name){
+				subject = data.schedule[i].subject_name;
+			} 
+		};
+		res.json(subject);
+	});
+
+});
 // add schedule
 router.put('/newSchedule/:id', function(req, res){
 	classSchedules.findByIdAndUpdate(req.params.id, {$addToSet:{schedule:{
@@ -96,6 +113,7 @@ router.put('/newSchedule/:id', function(req, res){
 		days: req.body.days,
 		room: req.body.room,
 		instructor: req.body.instructor,
+		instructor_id: req.body.instructor_id,
 		done: true
 	}}}, function(err, data){
 		if (err){
@@ -134,4 +152,14 @@ router.put('/deleteSchedule/:id', function(req, res){
 			res.json(data);
 	});
 });
+// delete teacher Schedule
+router.put('/delete-teacher-schedule/:id', function(req, res){
+	users.findByIdAndUpdate(req.params.id,{$pull:{schedules:{$and:[{time:req.body.time},{days:req.body.days}]}}} ,function(err, data){
+			if (err){
+			return err;
+			};
+			res.json(data);
+	});
+});
+
 module.exports = router;

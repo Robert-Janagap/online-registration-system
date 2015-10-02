@@ -66,19 +66,31 @@ router.put('/enroll-student/:id', function( req, res){
 
 })
 
-//student schedules regular
+//student schedules regular or irregular
 router.put('/student-schedules/:id', function( req, res){
     var data = req.body;
-
-	studentSchoolInfo.findByIdAndUpdate(req.params.id, {$addToSet:{schedule:{section_name:data.section_name,subject_name: data.subject_name,subject_des: data.subject_des,units: data.units,instructor: data.instructor,room: data.room,year_level: data.year_level,term: data.term,time: data.time,days: data.days, cost_perUnits: data.cost_perUnits}}}, function(err, data){
+    studentSchoolInfo.findOne({$and:[{_id:req.params.id},{'schedule.subject_name': req.body.subject_name}]}, function(err, schedule){
+    	if(schedule == null){
+			studentSchoolInfo.findByIdAndUpdate(req.params.id, {$addToSet:{schedule:{section_name:data.section_name,subject_name: data.subject_name,subject_des: data.subject_des,units: data.units,instructor: data.instructor,room: data.room,year_level: data.year_level,term: data.term,time: data.time,days: data.days, cost_perUnits: data.cost_perUnits}}}, function(err, data){
+				if(err){	
+					return err;
+				}
+				res.json(data);
+			});
+		}else{
+			res.json(null);
+		}
+	});
+});
+router.put('/delete-student-schedules/:id', function( req, res){
+	studentSchoolInfo.findByIdAndUpdate(req.params.id, {$pull:{schedule:{_id:req.body._id}}}, function(err,data){
 		if(err){	
 			return err;
 		}
 		res.json(data);
 	});
-
 });
-//student schedules irregular
+//get student schedules irregular
 router.get('/studentIrregular-schedules/:id', function( req, res){
     studentSchoolInfo.findById(req.params.id, function(err, data){
     	if(err){
@@ -90,8 +102,6 @@ router.get('/studentIrregular-schedules/:id', function( req, res){
 });
 // add student list in teacher
 router.put('/teacher-students/:id', function(req, res){
-	console.log(req.params.id);
-	console.log(req.body);
 	users.findOneAndUpdate({name:req.params.id}, {$addToSet:{studentList:{
 		subject_name: req.body.subject_name,
 		section: req.body.section_name,

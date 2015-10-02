@@ -1,9 +1,5 @@
-app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $http){
-	/**
-	 * note 
-	 * 1.kulang pa search for teacher
-	 * 2. search for different kind of inputs
-	 */
+app.controller('programCoordinatorCtrl', ['$scope', '$http', '$filter', function($scope, $http, $filter){
+	
 	// get curriculum list
 	$http.get('/program-coordinator/curriculum-list').success(function(curriculumList){
 		$scope.curriculumList = curriculumList;
@@ -35,6 +31,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 		if(!year){
 			$scope.refreshCourses();
 			$scope.department_name = null;
+			$scope.curriculumSel = false;
 		}
 		$http.get('/program-coordinator/curriculum-courses/' + year ).success(function(curriculum){
 			$scope.getCourses(curriculum);
@@ -42,6 +39,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 			if($scope.department_name){
 				$scope.department_name = null;
 			}
+			$scope.curriculumSel = true;
 		});
 	}
 	// get department courses
@@ -90,31 +88,8 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 			$scope.subjects = null;
 
 		});
-	}
-	// refresh after adding of schedule
-	$scope.refreshGetSubjects = function(){
-		$http.get('/administrator/courseSubjects/'+ $scope.courseId).success(function(data){
-			var year = [],
-				terms = [];
-			for (var i = 1; data[0].courses[0].totalYears >= i; i++) {
-				
-				year.push(i);
-
-			};
-			for (var i = 1; data[0].courses[0].totalTerms >= i; i++) {
-				
-				terms.push(i);
-
-			};
-
-			// get course years and terms by department
-			$scope.departmentId = data[0]._id;
-			// course id
-			$scope.courseId = data[0].courses[0]._id;
-			// refresh the course subject if he/she choose other course
-			$scope.subjects = null;
-
-		});
+		$scope.schedule = false;
+		$scope.viewSchedule = false;
 	}
 	// find subjects related in year and term
 	$scope.subjectInYear = function(year, department_id){//subject in year
@@ -134,8 +109,10 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 		$scope.termClick = false;
 		$scope.sections = null;
 		$scope.sectionName = null;
+		$scope.errorSchedule = false;
 		// dont show the class schedule
 		$scope.schedule = false;
+		$scope.viewSchedule = false;
 
 	}
 	$scope.subjectWithTerm = function(term, department_id){//subject in term
@@ -154,8 +131,10 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 		$scope.sectionClick = false;
 		$scope.sectionName = null;
 		$scope.termClick = true;
+		$scope.errorSchedule = false;
 		// dont show the class schedule
-		$scope.schedule = false;
+		$scope.schedule = true;
+		$scope.viewSchedule = false;
 		// get sections
 		$scope.sectionsRefresh();
 
@@ -196,6 +175,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 			$scope.schedule = section;
 			$scope.section_id = section._id;
 		});
+		$scope.errorSchedule = false;
 	}
 	// pick section
 	$scope.pickSection = function(section){
@@ -203,51 +183,66 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', function($scope, $h
 		$scope.selectedSection = section._id;
 		$scope.sectionName = section.section;
 		$scope.sectionClick = true;
-
 		$scope.refreshClassScheduling(section._id);
-		
+		$scope.viewSchedule = true;
 	}
 	/*
 	Scheduling
 	 */
 	// set schedule in selected subject
-	$scope.setSched = function(subject){
-		$scope.selectedSubject = subject;
+	$scope.setSched = function(subject_info){
+		$http.put('/program-coordinator/find-subject/' + $scope.sectionName, subject_info).success(function(subject){
+			if(subject){
+				$scope.errorSchedule = $scope.sectionName + " " + subject + ' have schedule already';
+				$scope.scheduleConflict = false;
+			}else{
+				$scope.selectedSubject = subject_info;
+				$scope.scheduleConflict = true;
+			}
+		});
 	}
 	// save schedule
 	$scope.saveSched = function(schedule){
+		// correct the time format
+		var schedule_time =  $filter('date')(schedule.schedule_time1, "h:mm a") + '-' + $filter('date')(schedule.schedule_time2, "h:mm a");
     	var newSchedule = {
     		subject_name: $scope.selectedSubject.subject_name,
 			subject_des: $scope.selectedSubject.subject_des,
 			units: $scope.selectedSubject.units,
 			cpu: $scope.selectedSubject.cost_perUnits,
-			schedule_time: schedule.schedule_time,
+			schedule_time: schedule_time,
 			days: schedule.day,
 			room: schedule.room,
 			instructor: $scope.teacher,
+			instructor_id: $scope.teacher_id,
 			section: $scope.sectionName
     	};
+
     	// add schedule in student
     	$http.put('/program-coordinator/newSchedule/' + $scope.selectedSection, newSchedule).success(function(newSchedule){
     		$scope.subjectSchedule = null;
     		$scope.teacher = null;
     		$scope.refreshClassScheduling($scope.selectedSection);
     	});
-    	
     	// add schedule in teacher
     	$http.put('/program-coordinator/teacher-schedules/' + $scope.teacher_id, newSchedule).success(function(classSchedules){
-			console.log(classSchedules);
+			
 		});
+    	
+    	$scope.scheduleConflict = false;
 	}
-
 	// delete schedule
 	$scope.deleteSchedule = function(schedule){
+
 		$http.put('/program-coordinator/deleteSchedule/'+ $scope.section_id, schedule).success(function(data){
 			$scope.refreshClassScheduling($scope.selectedSection);
 		});
+
+		$http.put('/program-coordinator/delete-teacher-schedule/'+ schedule.instructor_id, schedule).success(function(data){
+		});
 	}
 	$scope.viewLastSched = function(){
-		$scope.refreshClassScheduling($scope.selSection);
+		$scope.scheduleConflict = false;
 	}
 	
 	// get teachers
@@ -292,20 +287,6 @@ app.directive('closeClassSched', function(){
 		 	element.on( 'click',function ( event ){
 
 		       $('.course_subjects, .overlay').toggle();
-		    } );
-		}
-	}
-});
-app.directive('setSchedule', function(){
-	return{
-		scope:{},
-		restrict:"E",
-		template: "<div>set schedule</div>",
-		link: function(scope, element, attrs){
-			element.addClass('btn');
-		 	element.on( 'click',function ( event ){
-		 		$('.setSchedule').toggleClass('show');
-		 		$('.course_subjects').toggle();
 		    } );
 		}
 	}

@@ -20,12 +20,18 @@ router.get('/curriculumSel/:id', function( req, res) {
  */
 // add curriculum
 router.post('/newCurriculum', function(req, res){
-	var new_curriculum = new curriculumList({curriculumYear: req.body.curriculum_year});
-	new_curriculum.save(function(err, data){
-		if (err){
-			return err;
-		};
-		res.json(data);
+	curriculumList.findOne({curriculumYear: req.body.curriculum_year} , function(err,data){
+		if(data == null) {
+			var new_curriculum = new curriculumList({curriculumYear: req.body.curriculum_year});
+			new_curriculum.save(function(err, data){
+				if (err){
+					return err;
+				};
+				res.json(data);
+			});
+		}else{
+			res.json(null);
+		}
 	});
 });
 //for curriculums list
@@ -106,6 +112,9 @@ router.put('/course/:id', function(req, res){
 	//delete course
 	if (req.body.status == "delete"){
 		curriculums.findByIdAndUpdate(req.params.id,{$pull:{courses:{_id:req.body._id}}}, function(err, data){
+			if (err){
+				return err;
+			};
 			res.json(data);
 		});
 	}else{ //add course
@@ -186,13 +195,19 @@ router.get('/assestments', function( req, res) {
 });
 // add new school fees
 router.post('/assestments', function( req, res){
-	var newAssestment = new assestments({typeOfFee:req.body.name});
+	assestments.findOne({typeOfFee: req.body.name}, function(err, data){
+		if(data == null){
+			var newAssestment = new assestments({typeOfFee:req.body.name});
 
-	newAssestment.save(function(err, data){
-		if(err){
-			return err;
+			newAssestment.save(function(err, data){
+				if(err){
+					return err;
+				}
+				res.json(data);
+			});
+		}else{
+			res.json(null);
 		}
-		res.json(data);
 	});
 });
 // get fees of selected school fee
@@ -243,12 +258,18 @@ router.get('/users', function(req, res){
 });
 // add User staff or faculty
 router.post('/newUser', function(req, res){
-	var new_user = new users(req.body);
-	new_user.save(function(err, data){
-		if(err){
-			return err;
+	users.findOne({name: req.body.name}, function(err, data){
+		if(data == null){
+			var new_user = new users(req.body);
+			new_user.save(function(err, data){
+				if(err){
+					return err;
+				}
+				res.json(data);
+			});
+		}else{
+			res.json(null);
 		}
-		res.json(data);
 	});
 });
 // delete User staff or faculty
