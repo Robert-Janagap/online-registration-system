@@ -41,7 +41,7 @@
 						<td>{{student.student_no}}</td>
 						<td>{{student.first_name}} {{student.middle_name}} {{student.last_name}}</td>
 						<td><toggle-student-info ng-click="viewInfo(student._id)">Information</toggle-student-info></td>
-						<td><div class="btn" ng-click="studentSchedule(student._id)">Schedule</div></td>
+						<td><div class="btn" ng-click="studentSchedule(student._id)">enroll</div></td>
 					</tr>
 				</tbody>
 			</table>
@@ -170,9 +170,16 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="btn">Save</div>
+						<div class="btn" ng-click="saveIrregularSched()">Save</div>
 					</div>
 				</div>
+			</div>
+		</article>
+		<article class="content row"  ng-show="studentEnrolled">
+			<div class="btn--close" ng-click="closeErrorMessageEnrolled()">X</div>
+			<div>
+				<span>{{student.first_name}} {{student.last_name}} {{studentSchoolInfo.course_name}}</span>
+				<h4>already enrolled</h4>
 			</div>
 		</article>
 	</div>

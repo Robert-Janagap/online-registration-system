@@ -26,7 +26,8 @@ var	userAccess  =new mongoose.Schema( {
             student_no: Number,
             year_level: Number,
             term: Number,
-            units: Number
+            units: Number,
+            student_name: String
         }
     ]
 },{ collection : 'users' } );

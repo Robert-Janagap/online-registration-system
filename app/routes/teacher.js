@@ -15,7 +15,7 @@ router.get('/class-schedules/:id', function(req, res){
 		if(err){
 			return err;
 		}
-		res.json(data.schedules);
+		res.json(data);
 	});
 });
 
@@ -24,7 +24,7 @@ router.get('/student-list/:id', function(req, res){
 		if(err){
 			return err;
 		}
-		res.json(data.studentList);
+		res.json(data);
 	});
 });
 

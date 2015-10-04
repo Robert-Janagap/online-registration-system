@@ -23,6 +23,43 @@
 		</div>
 	</div>
 	<div class="nine column pull--right">
+		<!-- course class schedule in this year -->
+		<article class="content row">
+			<h4>BSIT Class Schedule</h4>
+			<ul>
+				<li ng-repeat= "year in course_years">
+					<div class="btn">{{year}}</div>
+				</li>
+			</ul>
+			<table>
+				<caption>Class Schedule</caption>
+				<thead>
+					<tr>
+						<th>Subject Code</th>
+						<th>Subject Title</th>
+						<th>Units</th>
+						<th>Section</th>
+						<th>Days</th>
+						<th>Time</th>
+						<th>Rm. no.</th>
+						<th>Instructor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat = "schedule in schedules">
+						<td>{{schedule.subject_name}}</td>
+						<td>{{schedule.subject_des}}</td>
+						<td>{{schedule.units}}</td>
+						<td>{{schedule.section_name}}</td>
+						<td>{{schedule.days}}</td>
+						<td>{{schedule.time}}</td>
+						<td>{{schedule.room}}</td>
+						<td>{{schedule.instructor}}</td>
+						<td><div class="btn">Reserved</div></td>
+					</tr>
+				</tbody>
+			</table>
+		</article>
 		<!-- student schedule -->
 		<article class="content row">
 			<div class="studentSchedule">
@@ -87,7 +124,7 @@
 							<td></td>
 							<td></td>
 							<td></td>
-							<td>tuition: {{tuition}}</td>
+							<td>tuition: {{tuition | number}}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -109,7 +146,7 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td>Total Amount: {{assestment.totalAmount}}</td>
+							<td>Total Amount: P {{assestment.totalAmount | number}}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -157,13 +194,17 @@
 		<article class="content row">
 			<div class="studentCurriculum">
 				filter by:
-				<select name="" id="">
+				<select name="" id="" ng-change = "subjectInYear(courseSelYear)" ng-model="courseSelYear">
 					<option value="">--year--</option>
+					<option value="{{course_year}}" ng-repeat="course_year in course_years">{{course_year}}</option>
 				</select>
-				<select name="" id="">
+				<select name="" id="" ng-change = "subjectInTerm(courseSelTerm)" ng-model="courseSelTerm" ng-show="sel_course_year">
 					<option value="">--term--</option>
+					<option value="{{course_term}}" ng-repeat="course_term in course_terms">{{course_term}}</option>
 				</select>
-				<h5>1st year - 2nd term </h5>
+
+				<h4 ng-show="sel_course_year">Year: {{sel_course_year}} Term: {{sel_course_term}}</h4>
+				
 				<table>
 					<caption>Course Subjects</caption>
 					<thead>

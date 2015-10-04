@@ -62,9 +62,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Robert Jangap</td>
-						<td>BSIT</td>
+					<tr ng-repeat = "students in studentList">
+						<td>{{students.student_name}}</td>
+						<td>{{students.course_name}}</td>
 						<td>90</td>
 						<td>90</td>
 						<td>90</td>

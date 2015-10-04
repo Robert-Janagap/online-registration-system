@@ -82,6 +82,7 @@ router.put('/student-schedules/:id', function( req, res){
 		}
 	});
 });
+// delete specific schedule for irregular
 router.put('/delete-student-schedules/:id', function( req, res){
 	studentSchoolInfo.findByIdAndUpdate(req.params.id, {$pull:{schedule:{_id:req.body._id}}}, function(err,data){
 		if(err){	
@@ -90,6 +91,16 @@ router.put('/delete-student-schedules/:id', function( req, res){
 		res.json(data);
 	});
 });
+// delete teacher student
+router.put('/delete-teacher-student/:id', function( req, res){
+	users.update({name:req.body.instructor}, {$pull:{studentList:{student_no: req.params.id}}}, function(err,data){
+		if(err){	
+			return err;
+		}
+		res.json(data);
+	});
+});
+
 //get student schedules irregular
 router.get('/studentIrregular-schedules/:id', function( req, res){
     studentSchoolInfo.findById(req.params.id, function(err, data){
@@ -110,6 +121,7 @@ router.put('/teacher-students/:id', function(req, res){
         course_name: req.body.course_name,
         year_level: req.body.year_level,
         term: req.body.term,
+        student_name: req.body.student_name,
 	}}}, function(err, data){
 		if(err){
 			return err;
@@ -153,6 +165,16 @@ router.post('/student-access', function(req, res){
 router.get('/studentSchedule/:id', function(req, res){
 	studentList.findById(req.params.id, function(err, data){
 		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+
+// check if student enrolled
+router.get('/student-enrolled/:id', function( req, res){
+	studentSchoolInfo.findOne({student_no: req.params.id}, function(err , data){
+		if (err) {
 			return err;
 		}
 		res.json(data);
