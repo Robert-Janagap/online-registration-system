@@ -1,8 +1,4 @@
 /**
- * Make a notification
  * check for update function
- * check for errors
- * design the client side
- * how to give null text after the error message
- * student subject in curriculum does not add all
+ * how to pass query in http get
  */SMSmusUG

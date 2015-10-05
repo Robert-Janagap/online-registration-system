@@ -20,5 +20,10 @@ app.controller('teacherCtrl', ['$scope', '$http', function($scope, $http){
 			};
 			$scope.studentList = studentsList;
 		});
+		$scope.subject_code = classSchedule.subject_name;
+	}
+	// utilities
+	$scope.closeStudentList = function(){
+		$scope.studentList = false;
 	}
 }]);

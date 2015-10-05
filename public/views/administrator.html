@@ -245,7 +245,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="user in userList | orderBy:'roles'| filter:searchUser | limitTo: 5 ">
+					<tr ng-repeat="user in userList | orderBy:'roles'| filter:searchUser | limitTo: 15 ">
 						<td>{{user.name}}</td>
 						<td>{{user.roles}}</td>
 						<td>{{user.username}}</td>

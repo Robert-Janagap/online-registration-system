@@ -3,48 +3,74 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	// get course years and term
 	// filter course subjects based on yeaer and term
 
-
-
-
 	// student_id
 	// var student_id = $rootScope.currentUser.username;
 	// testing
-	var student_id = 3468425;
+	var student_id = 4248671;
 	
 	// get student schedules
 	$http.get('/student/studentSchedules/' + student_id).success(function(student){
 		$scope.schedules = student.schedule;
+		$scope.student_schoolInfo = student
+
+		// show reserved subject btn for irregular student only
+		if (student.status == "regular") {
+			$scope.regular = true;
+		};
 
 		// functions
 		$scope.getSubjects(student.schedule);
 		$scope.getUnits(student.schedule);
 		$scope.filterCourses(student.curriculum, student);
+
 	});
+	// by year level schedule
+	$scope.year_level_schedules = function(year){
+		$http.get('/student/course-schedules/' + year).success(function(schedules){
+			var course_schedules = [];
+			for (var i = schedules.length - 1; i >= 0; i--) {
+				// the one is the 1 sem its statis find a way to be dynamic
+				if(schedules[i].term == 1){
+					for (var b = schedules[i].schedule.length - 1; b >= 0; b--) {
+						course_schedules.push(schedules[i].schedule[b]);
+					};
+				}
+
+			};
+			$scope.course_schedules= course_schedules;
+		});
+	}
 
 	// get course years and terms
-	$scope.filterCourses = function(curriculu_year, student){
+	$scope.filterCourses = function(curriculum_year, student){
 
 		var years = [];
 		var terms = [];
-		$http.put('/student/course-yearsAndTerms/' + curriculu_year).success(function(curriculum){
-			for (var i = curriculum.courses.length - 1; i >= 0; i--) {
+		$http.post('/student/course-yearsAndTerms/' + curriculum_year, student).success(function(curriculum){
+			for (var i = curriculum.length - 1; i >= 0; i--) {
 
-				if(curriculum.courses[i].course_name == student.course_name){
+				for (var b = curriculum[i].courses.length - 1; b >= 0; b--) {
 
-					$scope.courseInfo = curriculum.courses[i];
+					if(curriculum[i].courses[b].course_name == student.course_name){
 
-					for (var i = 1; $scope.courseInfo.totalYears >= i; i++) {
-						years.push(i);
-					};
+						$scope.courseInfo = curriculum[i].courses[b];
 
-					for (var i = 1; $scope.courseInfo.totalTerms >= i; i++) {
-						terms.push(i);
-					};
-					
-					$scope.course_years = years;
-					$scope.course_terms = terms;
-				}
+						for (var i = 1; $scope.courseInfo.totalYears >= i; i++) {
+							years.push(i);
+						};
+
+						for (var i = 1; $scope.courseInfo.totalTerms >= i; i++) {
+							terms.push(i);
+						};
+						
+						$scope.course_years = years;
+						$scope.course_terms = terms;
+					}	
+
+				};
+				
 			};
+			
 		});
 	}
 	// get subject in year
@@ -61,6 +87,7 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 		$scope.subjects = subjects.subjects;
 
 		$scope.getTuition($scope.subjects);
+
 	});
 	// view tuition
 	$scope.getTuition = function(subjects){

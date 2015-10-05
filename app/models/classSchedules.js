@@ -19,7 +19,6 @@ var	classSchedules  =new mongoose.Schema( {
          room: String,
          instructor: String,
          instructor_id: String,
-         section: String,
          done: Boolean
       }
    ]

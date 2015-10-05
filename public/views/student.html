@@ -24,15 +24,15 @@
 	</div>
 	<div class="nine column pull--right">
 		<!-- course class schedule in this year -->
-		<article class="content row">
+		<article class="content row s_course_schedule">
 			<h4>BSIT Class Schedule</h4>
 			<ul>
 				<li ng-repeat= "year in course_years">
-					<div class="btn">{{year}}</div>
+					<div class="btn" ng-click="year_level_schedules(year)">{{year}}</div>
 				</li>
 			</ul>
 			<table>
-				<caption>Class Schedule</caption>
+				<caption>Class Schedules</caption>
 				<thead>
 					<tr>
 						<th>Subject Code</th>
@@ -46,16 +46,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat = "schedule in schedules">
+					<tr ng-repeat = "schedule in course_schedules">
 						<td>{{schedule.subject_name}}</td>
 						<td>{{schedule.subject_des}}</td>
 						<td>{{schedule.units}}</td>
-						<td>{{schedule.section_name}}</td>
+						<td>{{schedule.section}}</td>
 						<td>{{schedule.days}}</td>
 						<td>{{schedule.time}}</td>
 						<td>{{schedule.room}}</td>
 						<td>{{schedule.instructor}}</td>
-						<td><div class="btn">Reserved</div></td>
+						<td><div class="btn btn--blue" ng-show="!regular">+</div></td>
 					</tr>
 				</tbody>
 			</table>
@@ -193,7 +193,7 @@
 		<!-- student curriculum -->
 		<article class="content row">
 			<div class="studentCurriculum">
-				filter by:
+				Subjects in Year:
 				<select name="" id="" ng-change = "subjectInYear(courseSelYear)" ng-model="courseSelYear">
 					<option value="">--year--</option>
 					<option value="{{course_year}}" ng-repeat="course_year in course_years">{{course_year}}</option>
@@ -208,6 +208,8 @@
 				<table>
 					<caption>Course Subjects</caption>
 					<thead>
+						<th>Year</th>
+						<th>Term</th>
 						<th>subject Code</th>
 						<th>subject Title</th>
 						<th>Units</th>
@@ -217,7 +219,9 @@
 						<th>pre-requisite</th>
 					</thead>
 					<tbody>
-						<tr ng-repeat = "subject in subjects | limitTo:10 | orderBy:'subject_name'">
+						<tr ng-repeat = "subject in subjects | limitTo:10 | orderBy:'year_level'">
+							<td>{{subject.year_level}}</td>
+							<td>{{subject.term}}</td>
 							<td>{{subject.subject_name}}</td>
 							<td>{{subject.subject_des}}</td>
 							<td>{{subject.units}}</td>
