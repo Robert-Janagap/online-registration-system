@@ -72,54 +72,54 @@ app.config(function($routeProvider){
 		.when('/administrator',{
 			templateUrl: 'views/administrator.html',
 			controller: 'administratorCtrl',
-			title: 'Administrator'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Administrator',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/program-coordinator',{
 			templateUrl: 'views/programCoordinator.html',
 			controller: 'programCoordinatorCtrl',
-			title: 'Program Coordinator'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Program Coordinator',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/evaluator',{
 			templateUrl: 'views/evaluator.html',
 			controller: 'evaluatorCtrl',
-			title: 'Evaluator'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Evaluator',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/registrar',{
 			templateUrl: 'views/registrar.html',
 			controller: 'registrarCtrl',
-			title: 'Registrar'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Registrar',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/teacher',{
 			templateUrl: 'views/teacher.html',
 			controller: 'teacherCtrl',
-			title: 'Teacher'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Teacher',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/student',{
 			templateUrl: 'views/student.html',
 			controller: 'studentCtrl',
-			title: 'Student'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Student',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.otherwise({
 			redirectTo: '/'
-		})
+		});
 });
 
 // check if the user login
@@ -138,15 +138,15 @@ var checkLogin = function($q, $timeout, $http, $location, $rootScope){
 		}
 	});
 	return deferred.promise;
-}
+};
 // logout
 app.controller('navCtrl',['$scope','$http','$location','$rootScope', function($scope, $http, $location, $rootScope){
 	$scope.logOut = function(){
 		$http.post('/logout').success(function(data){
 			$rootScope.currentUser = null;
-			$location.url('/')
+			$location.url('/');
 		});
-	}
+	};
 }]);
 
 /*
@@ -167,7 +167,7 @@ app.directive('inputGroup', function(){
 			$('.input_groups input').on('focusout',function(){
 			var input = $(this).val();
 
-			    if(input == "") {
+			    if(input === "") {
 
 			   		$(this).removeClass('has--value');
 			      
@@ -179,7 +179,7 @@ app.directive('inputGroup', function(){
 			});
 
 		}
-	}
+	};
 });
 // toggle student information
 app.directive('toggleStudentInfo', function(){
@@ -187,7 +187,7 @@ app.directive('toggleStudentInfo', function(){
 		scope:{},
 		restrict:"E",
 		link: function(scope, element, attrs){
-		 	(element.text() !=="X") ? element.addClass('btn'):element.addClass('btn--close');
+		 	var x = (element.text() !=="X") ? element.addClass('btn'):element.addClass('btn--close');
 			
 		 	element.on( 'click',function ( event ){
 
@@ -195,7 +195,7 @@ app.directive('toggleStudentInfo', function(){
 		   		$('.overlay').toggle();
 		    } );
 		}
-	}
+	};
 });
 // add dynamic title page
 app.run(['$location', '$rootScope', function($location, $rootScope){

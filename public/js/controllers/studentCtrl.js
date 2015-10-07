@@ -4,19 +4,20 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	// filter course subjects based on yeaer and term
 
 	// student_id
-	// var student_id = $rootScope.currentUser.username;
+	var student_id = $rootScope.currentUser.username;
+	
 	// testing
-	var student_id = 4248671;
+	// var student_id = 4248671;
 	
 	// get student schedules
 	$http.get('/student/studentSchedules/' + student_id).success(function(student){
 		$scope.schedules = student.schedule;
-		$scope.student_schoolInfo = student
+		$scope.student_schoolInfo = student;
 
 		// show reserved subject btn for irregular student only
 		if (student.status == "regular") {
 			$scope.regular = true;
-		};
+		}
 
 		// functions
 		$scope.getSubjects(student.schedule);
@@ -33,13 +34,13 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 				if(schedules[i].term == 1){
 					for (var b = schedules[i].schedule.length - 1; b >= 0; b--) {
 						course_schedules.push(schedules[i].schedule[b]);
-					};
+					}
 				}
 
-			};
+			}
 			$scope.course_schedules= course_schedules;
 		});
-	}
+	};
 
 	// get course years and terms
 	$scope.filterCourses = function(curriculum_year, student){
@@ -55,32 +56,32 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 
 						$scope.courseInfo = curriculum[i].courses[b];
 
-						for (var i = 1; $scope.courseInfo.totalYears >= i; i++) {
-							years.push(i);
-						};
+						for (var y = 1; $scope.courseInfo.totalYears >= y; y++) {
+							years.push(y);
+						}
 
-						for (var i = 1; $scope.courseInfo.totalTerms >= i; i++) {
-							terms.push(i);
-						};
+						for (var x = 1; $scope.courseInfo.totalTerms >= x; x++) {
+							terms.push(x);
+						}
 						
 						$scope.course_years = years;
 						$scope.course_terms = terms;
 					}	
 
-				};
+				}
 				
-			};
+			}
 			
 		});
-	}
+	};
 	// get subject in year
 	$scope.subjectInYear = function(year){
 		$scope.sel_course_year = year;
-	}
+	};
 	// get subject in term
 	$scope.subjectInTerm = function(term){
 		$scope.sel_course_term = term;
-	}
+	};
 
 	// view curriculum subjects;
 	$http.get('/student/studentSubjects/' + student_id).success(function(subjects){
@@ -95,23 +96,23 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 
 		for (var i = subjects.length - 1; i >= 0; i--) {
 			tuition += (subjects[i].units *  subjects[i].cost_perUnits);
-		};
+		}
 		$scope.tuition =  tuition;
-	}
+	};
 	$scope.getUnits = function(schedules){
 		var units = 0;
 
 		for (var i = schedules.length - 1; i >= 0; i--) {
 			units += schedules[i].units;
-		};
+		}
 
 		$scope.totalUnits =  units;
-	}
+	};
 	$scope.getSubjects = function(schedules){
 		var units = 0;
 
 		$scope.totalSubjects =  schedules.length;
-	}
+	};
 
 	// view assestment
 	$http.get('/student/studentAssetment').success(function(assestments){
@@ -120,8 +121,8 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 			for (var b = assestments[i].fees.length - 1; b >= 0; b--) {
 				totalAmount += assestments[i].fees[b].amount;
 				assestments[i].totalAmount = totalAmount;
-			};
-		};
+			}
+		}
 		$scope.assestments = assestments;
 	});
 

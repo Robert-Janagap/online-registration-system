@@ -4,5 +4,5 @@ app.controller('enProcedureCtrl', ['$scope', '$http', function($scope, $http){
 		$http.post('/enrollment-procedure', test).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

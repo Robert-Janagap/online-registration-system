@@ -10,7 +10,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 		$http.get('/registrar/student-info/' + student_id).success(function(studentInfo){
 			$scope.studentInfo = studentInfo;
 		});
-	}
+	};
 
 	// set student Schedule and enroll student
 	$scope.studentSchedule = function(student_id){
@@ -27,7 +27,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 				
 
 				$http.get('/registrar/student-enrolled/'+ $scope.studentSchoolInfo.student_no).success(function(student){
-					if(student.enrolled == false){
+					if(student.enrolled === false){
 						$scope.student_schedule = true;
 						$scope.studentEnrolled = false;
 					}else{
@@ -45,14 +45,14 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 							if(sections[i].term == data.term && sections[i].year_level == data.year_level){
 								sectionList.push(sections[i]);
 							}
-						};
+						}
 					$scope.sectionList = sectionList;
 				});
 
 			});
 
 		});
-	}
+	};
 
 	// find section schedule, add and find student curriculum subjects, student user access
 	$scope.enrollStudent = function(section_id,school_info){
@@ -81,14 +81,14 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 						if(curriculum[i].subjects[b].course_name == school_info.course_name){
 
 							curriculumSubjects.push(curriculum[i].subjects[b]);
-							// add student curriculum subjects
-							$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculum[i].subjects[b]).success(function(student){
-								
-							});
 
 						}
-					};
-				};
+					}
+				}
+				// add student curriculum subjects
+				$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculumSubjects).success(function(student){
+					
+				});
 			});
 
 		}else{//regular student
@@ -110,14 +110,14 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 					for (var b = curriculum[i].subjects.length - 1; b >= 0; b--) {
 						if(curriculum[i].subjects[b].course_name == school_info.course_name){
 							curriculumSubjects.push(curriculum[i].subjects[b]);
-							// add student curriculum subjects
-							$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculum[i].subjects[b]).success(function(student){
-								
-							});
 
 						}
-					};
-				};
+					}
+				}
+				// add student curriculum subjects
+				$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculumSubjects).success(function(student){
+					
+				});
 			});
 		}
 
@@ -139,7 +139,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 		// utilities
 		$scope.showSchedule = true;
 
-	}
+	};
 	// add student schedule if regular
 	$scope.subjectSchedule = function(){
 		var sectionSchedules =  $scope.sectionSchedules;
@@ -164,18 +164,18 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 		        course_name:  $scope.studentSchoolInfo.course_name,
 		        student_no: $scope.studentSchoolInfo.student_no,
 		        student_name: student_name
-		    }
+		    };
 		    // add student schedule
 			$http.put('/registrar/student-schedules/' + id, setSchedule).success(function(schedules){
 
-			})
+			});
 			// add to teacher student list
 			$http.put('/registrar/teacher-students/' + sectionSchedules.schedule[i].instructor, setSchedule).success(function(studentList){
 				console.log(studentList);
 			});
-		}; 
+		} 
 		$scope.student_schedule = false;
-	}
+	};
 	// add student schedule for irregular
 	$scope.irregularSchedule = function(schedule){
 		var id = $scope.studentSchoolInfo._id;
@@ -199,7 +199,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 
 	    // add student schedule
 		$http.put('/registrar/student-schedules/' + id, setSchedule).success(function(schedules){
-			if(schedules != null){
+			if(schedules !== null){
 				$scope.refreshIrregSched();
 				// add to teacher student list
 				$http.put('/registrar/teacher-students/' + schedule.instructor, setSchedule).success(function(studentList){
@@ -209,7 +209,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 				$scope.errorStudentSchedule = schedule.subject_name + " schedule is already selected";
 			}
 		});
-	}
+	};
 	// delete schedule for irregular student
 	$scope.deleteIrregSchedule = function(schedule){
 		var student_id = $scope.studentSchoolInfo._id;
@@ -223,27 +223,27 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 		// delete teacher student
 		$http.put('/registrar/delete-teacher-student/' + student_no, schedule).success(function(data){
 		});
-	}
+	};
 
 	$scope.refreshIrregSched = function(){
 		$http.get('/registrar/studentIrregular-schedules/' + $scope.studentSchoolInfo._id).success(function(schedules){
 			$scope.irregularSchedules = schedules;
 		});
-	}
+	};
 	// utilities
 	$scope.back = function(){
 		$scope.showSchedule = false;
-	}
+	};
 	// close StudentInfo
 	$scope.closeStudentInfo = function(){
 		$scope.student_schedule = false;
-	}
+	};
 
 	$scope.saveIrregularSched = function(){
 		$scope.student_schedule = false;
-	}
+	};
 
 	$scope.closeErrorMessageEnrolled = function(){
 		$scope.studentEnrolled = false;
-	}
+	};
 }]);

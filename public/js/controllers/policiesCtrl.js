@@ -4,5 +4,5 @@ app.controller('policiesCtrl', ['$scope', '$http', function($scope, $http){
 		$http.post('/policies', test).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

@@ -4,5 +4,5 @@ app.controller('eventsCalendarCtrl', ['$scope', '$http', function($scope, $http)
 		$http.post('/events-calendar', test).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

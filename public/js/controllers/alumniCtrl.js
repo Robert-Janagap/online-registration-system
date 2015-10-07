@@ -4,5 +4,5 @@ app.controller('alumniCtrl', ['$scope', '$http', function($scope, $http){
 		$http.post('/alumni', fit).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

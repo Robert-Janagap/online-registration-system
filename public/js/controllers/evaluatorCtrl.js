@@ -22,7 +22,7 @@ app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', funct
 			if($scope.courses[i].course_name == newStudent.course_name){
 				newStudent.course_des = $scope.courses[i].course_des;
 			}
-		};
+		}
 		// add new student
 		$http.post('/evaluator/student', newStudent).success(function(data){
 			console.log(data);
@@ -34,14 +34,14 @@ app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', funct
 		});
 
 		$scope.viewNewStudents();
-	}
+	};
 
 	//view new students 
 	$scope.viewNewStudents = function(){
 		$http.get('/evaluator/students').success(function(students){
 			$scope.students = students;
-		})
-	}
+		});
+	};
 	$scope.viewNewStudents();
 
 	// view specific new student information
@@ -49,7 +49,7 @@ app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', funct
 		$http.get('/evaluator/student-info/' + student_id).success(function(studentInfo){
 			$scope.studentInfo = studentInfo;
 		});
-	}
+	};
 	// current curriculum
 	$http.get('/evaluator/currentCurriculum').success(function(currentCurriculum){
 		$currentCur = currentCurriculum.curriculumYear;
@@ -58,7 +58,7 @@ app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', funct
 			var courses = [];
 			for (var i = department.length - 1; i >= 0; i--) {
 				courses.push.apply(courses, department[i].courses);
-			};
+			}
 			$scope.courses = courses;
 		});
 	});

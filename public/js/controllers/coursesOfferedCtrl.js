@@ -4,5 +4,5 @@ app.controller('coursesOfferedCtrl', ['$scope', '$http', function($scope, $http)
 		$http.post('/courses-offered', test).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

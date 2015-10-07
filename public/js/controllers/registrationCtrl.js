@@ -4,5 +4,5 @@ app.controller('registrationCtrl', ['$scope', '$http', function($scope, $http){
 		$http.post('/registration', test).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

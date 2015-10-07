@@ -4,5 +4,5 @@ app.controller('administrationCtrl', ['$scope', '$http', function($scope, $http)
 		$http.post('/administration', test).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

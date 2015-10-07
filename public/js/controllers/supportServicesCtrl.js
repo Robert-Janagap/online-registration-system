@@ -4,5 +4,5 @@ app.controller('supportServicesCtrl', ['$scope', '$http', function($scope, $http
 		$http.post('/support-services', info).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

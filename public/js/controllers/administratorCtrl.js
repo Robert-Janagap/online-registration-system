@@ -5,11 +5,11 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			$scope.userList = data; 
 		});
 		$scope.user = null;
-	}
+	};
 	$scope.refreshUsers();
 	$scope.addUser = function(user){
 		$http.post('/administrator/newUser/', user).success(function(data){
-			if(data != null){
+			if(data !== null){
 				$scope.refreshUsers();
 				$scope.user = "";
 				$scope.errorUser="";
@@ -17,12 +17,12 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 				$scope.errorUser = "User " + user.name + " already exist";
 			}
 		});
-	}
+	};
 	$scope.deleteUser = function(user_id){
 		$http.delete('/administrator/deleteUser/'+user_id).success(function(data){
 			$scope.refreshUsers();
 		});
-	}
+	};
 	// current curriculum
 	$http.get('/administrator/currentCurriculum').success(function(currentCurriculum){
 		$currentCur = currentCurriculum.curriculumYear;
@@ -35,7 +35,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$http.get('/administrator/curriculum-list').success(function(data){
 			$scope.curriculumList = data;
 		});
-	}
+	};
 	$scope.refreshCurList();
 	// refresh adding of departments
 	$scope.viewCur = function(cursYear){
@@ -53,19 +53,19 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			}
 		});	
 		$scope.departmentClick = false;
-	}
+	};
 	//add curriculum year 
 	$scope.addCurriculum = function(year) {
 		$http.post('/administrator/newCurriculum/',year).success(function(data){
-			if(data != null){
+			if(data !== null){
 				$scope.refreshCurList();
-				$scope.curriculumError = ""
+				$scope.curriculumError = "";
 			}else{
 				$scope.curriculumError = year.curriculum_year + " " + "curriculum is already exist.";
 			}
 			$scope.curriculum_new.curriculum_year = "";
 		});
-	}
+	};
 	// delete curriculum
 	$scope.deleteCur = function(curriculum){
 		// delete the curriculum
@@ -75,7 +75,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		// delete its departments
 		$http.delete('/administrator/deleteCurriculumDep/' + 2015 ).success(function(data){
 		});
-	}
+	};
 	/**
 	 * For departments
 	 */
@@ -85,18 +85,18 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$http.post('/administrator/curriculumSel/'+year, $scope.dep).success(function(data){
 			$scope.viewCur(year);
 		});
-	}
+	};
 	// delete department
 	$scope.deleteDep = function(id, year){
 		$http.delete('/administrator/curriculumSel/'+id).success(function(data){
 			$scope.viewCur(year);
 		});
-	}
+	};
 	// close departments
 	$scope.closeDepartments = function(){
 		$scope.courses = "";
 		$scope.department_code = "";
-	}
+	};
 	/**
 	 * for courses
 	 */
@@ -109,13 +109,13 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$scope.dep =null;
 		$scope.departmentClick = true;
 		$scope.department_code = department.department_name;
-	}
+	};
 	//add course
 	$scope.addCourse = function(new_course){
 		$http.put('/administrator/course/'+ $scope.departmentId, new_course).success(function(data){
 			$scope.getCourses($scope.departmentId);
 		});
-	}
+	};
 	//delete course
 	$scope.deleteCourse = function(course){
 		var status = 'delete';
@@ -125,19 +125,19 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			$scope.getCourses($scope.departmentId);
 		});
 
-	}
+	};
 	// edit course
 	$scope.editCourse = function(id){
 		$http.get('/administrator/course/' + id).success(function(data){
 			$scope.dep = data[0];
 		});
-	}
+	};
 	//update course
 	$scope.updateCourse = function(course){
 		$http.put('/administrator/update-course/'+ $scope.departmentId, course).success(function(data){
 			$scope.getCourses($scope.departmentId);
 		});
-	}
+	};
 
 	/**
 	 * for subjects
@@ -150,10 +150,10 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 				if(data[i].year_level === $scope.subjectsOfYear && $scope.courseName === data[i].course_name){
 					objects.push(data[i]);
 				}
-			};
+			}
 			$scope.subjects = objects;
 		});
-	}
+	};
 	//get course subjects year and terms
 	$scope.getSubjects = function(id){
 		$http.get('/administrator/courseSubjects/'+ id).success(function(data){
@@ -163,12 +163,12 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 				
 				year.push(i);
 
-			};
-			for (var i = 1; data[0].courses[0].totalTerms >= i; i++) {
+			}
+			for (var x = 1; data[0].courses[0].totalTerms >= x; x++) {
 				
-				terms.push(i);
+				terms.push(x);
 
-			};
+			}
 			$scope.courseYears = year;
 			$scope.courseTerms = terms;
 			$scope.courseName = data[0].courses[0].course_name;
@@ -176,7 +176,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			$scope.departmentId = data[0]._id;
 			$scope.subjects = null;
 		});
-	}
+	};
 	// find subjects related in year and term
 	$scope.subjectInYear = function(year, id){
 		$http.get('/administrator/findSubjectsByYear/' + id).success(function(data){
@@ -185,7 +185,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 				if(data[i].year_level === year && $scope.courseName === data[i].course_name){
 					objects.push(data[i]);
 				}
-			};
+			}
 			$scope.subjects = objects;
 		});
 		// utilities
@@ -200,7 +200,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 				if(data[i].year_level === $scope.subjectsOfYear && data[i].term === term && $scope.courseName === data[i].course_name){
 					objects.push(data[i]);
 				}
-			};
+			}
 			$scope.subjects = objects;
 
 		});
@@ -217,7 +217,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 				if(data[i].year_level === $scope.subjectsOfYear && data[i].term === $scope.subjectsOfTerm && $scope.courseName === data[i].course_name){
 					objects.push(data[i]);
 				}
-			};
+			}
 			$scope.subjects = objects;
 			$scope.subject = "";
 		});
@@ -243,7 +243,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$http.put('/administrator/courseSubjects/'+id, content).success(function(data){
 			$scope.addSubjectRefresh(id);
 		});	
-	}
+	};
 	// delete subjects
 	$scope.deleteSubject = function(department_id,subject){
 
@@ -281,7 +281,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 	$scope.closeFees = function(){
 		$scope.fees = " ";
 		$scope.typeOfFee ="";
-		$scope.typeOfFee_id =""
+		$scope.typeOfFee_id ="";
 	};
 	$scope.newFee = function(id){
 		$http.put('/administrator/assestments/'+ id, $scope.fee).success(function(data){
@@ -292,7 +292,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 	};
 	$scope.addSchoolFee = function(feeName){
 		$http.post('/administrator/assestments', feeName).success(function(data){
-			if(data != null){
+			if(data !== null){
 				$scope.refreshAssestment();
 				$scope.errorAssestment = null;
 				$scope.schoolFee = "";
@@ -314,7 +314,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$http.delete('/administrator/deleteAssestment/' + fee_id).success(function(data){
 			$scope.refreshAssestment();
 		});
-	}
+	};
 }]);
 /**
  * directives
@@ -333,7 +333,7 @@ app.directive('addCur', function(){
 		        $('.curriculum_year,.curriculum_add--overlay').toggle();
 		    } );
 		}
-	}
+	};
 });
 // add department
 app.directive('addDepartment', function(){
@@ -351,7 +351,7 @@ app.directive('addDepartment', function(){
 
 		    } );
 		}
-	}
+	};
 });
 // close buttons
 // close add curriculum
@@ -370,7 +370,7 @@ app.directive('closeaddCur', function(){
 
 		    } );
 		}
-	}
+	};
 });
 // close departmentList
 app.directive('closedepartmentList', function(){
@@ -386,7 +386,7 @@ app.directive('closedepartmentList', function(){
 
 		    } );
 		}
-	}
+	};
 });
 // close assestment fees
 app.directive('closefees', function(){
@@ -402,7 +402,7 @@ app.directive('closefees', function(){
 
 		    } );
 		}
-	}
+	};
 });
 // close add department module
 app.directive('closeaddDepartment', function(){
@@ -419,7 +419,7 @@ app.directive('closeaddDepartment', function(){
 
 		    } );
 		}
-	}
+	};
 });
 // close school fees
 app.directive('closeSchoolFees', function(){
@@ -436,7 +436,7 @@ app.directive('closeSchoolFees', function(){
 
 		    } );
 		}
-	}
+	};
 });
 // close course subjects
 app.directive('closeCourseSubjects', function(){
@@ -452,7 +452,7 @@ app.directive('closeCourseSubjects', function(){
 
 		    } );
 		}
-	}
+	};
 });
 // close  staff and teacher modal
 
@@ -471,7 +471,7 @@ app.directive('openfees', function(){
 
 		    } );
 		}
-	}
+	};
 });
 
 //showing assestment fees
@@ -491,7 +491,7 @@ app.directive('showFees', function(){
 
 		    } );
 		}
-	}
+	};
 });
 // show departments
 app.directive('showDepartments', function(){
@@ -503,11 +503,11 @@ app.directive('showDepartments', function(){
 			element.addClass('btn');
 		 	element.on( 'click',function ( event ){
 
-		       $('.departmentList').slideUp(300)
+		       $('.departmentList').slideUp(300);
 		       $('.departmentList').slideDown(400);
 		    } );
 		}
-	}
+	};
 });
 // show course subjects
 app.directive('showSubjects', function(){
@@ -523,7 +523,7 @@ app.directive('showSubjects', function(){
 
 		    } );
 		}
-	}
+	};
 });
 // open  staff and teacher modal
 app.directive('facultyStuff', function(){
@@ -543,5 +543,5 @@ app.directive('facultyStuff', function(){
 
 		    } );
 		}
-	}
+	};
 });

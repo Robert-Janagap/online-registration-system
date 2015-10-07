@@ -4,5 +4,5 @@ app.controller('newsCtrl', ['$scope', '$http', function($scope, $http){
 		$http.post('/news', test).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

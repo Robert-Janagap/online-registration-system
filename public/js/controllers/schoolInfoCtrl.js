@@ -4,5 +4,5 @@ app.controller('schoolInfoCtrl', ['$scope', '$http', function($scope, $http){
 		$http.post('/school-info', test).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

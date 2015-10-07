@@ -4,5 +4,5 @@ app.controller('homeCtrl', ['$scope', '$http', function($scope, $http){
 		$http.post('/', fit).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

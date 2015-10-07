@@ -4,5 +4,5 @@ app.controller('adRequirementsCtrl', ['$scope', '$http', function($scope, $http)
 		$http.post('/admission-requirements', test).success(function(data){
 			console.log(data);
 		});		
-	}
+	};
 }]);

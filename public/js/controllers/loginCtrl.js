@@ -9,8 +9,8 @@ app.controller('loginCtrl', ['$scope', '$http','$location','$rootScope', functio
 					$location.url('/' + userRoutes[i]);
 				}
 			
-			};
+			}
 		});
 		
-	}
+	};
 }]);

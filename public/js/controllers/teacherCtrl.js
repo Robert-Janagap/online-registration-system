@@ -1,15 +1,21 @@
-app.controller('teacherCtrl', ['$scope', '$http', function($scope, $http){
-	// get class schedules
-	// get student list
+app.controller('teacherCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
 	// add grades
-	var id = '560e1d954da6c4a40b0ec3c3';
 	
-	$http.get('/teacher/class-schedules/' + id).success(function(classSchedules){
-		$scope.classSchedules = classSchedules.schedules;
+	var name = $rootScope.currentUser.username;
+	
+	// find teacher and its schedule
+	$http.get('/teacher/find-teacher/' + name).success(function(teacher){
+		$scope.teacherId = teacher._id;
+		
+		$http.get('/teacher/class-schedules/' + teacher._id).success(function(classSchedules){
+			$scope.classSchedules = classSchedules.schedules;
+		});
+
 	});
 
+
 	$scope.getStudents = function(classSchedule){	
-		$http.get('/teacher/student-list/' + id).success(function(students){
+		$http.get('/teacher/student-list/' + $scope.teacherId).success(function(students){
 			var studentsList = [];
 			for (var i = students.studentList.length - 1; i >= 0; i--) {
 				
@@ -17,13 +23,13 @@ app.controller('teacherCtrl', ['$scope', '$http', function($scope, $http){
 					studentsList.push(students.studentList[i]);
 				}
 			
-			};
+			}
 			$scope.studentList = studentsList;
 		});
 		$scope.subject_code = classSchedule.subject_name;
-	}
+	};
 	// utilities
 	$scope.closeStudentList = function(){
 		$scope.studentList = false;
-	}
+	};
 }]);
