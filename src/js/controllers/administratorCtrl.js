@@ -1,4 +1,4 @@
-app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
+app.controller('adminCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
 	// add users
 	$scope.refreshUsers = function(){
 		$http.get('/administrator/users').success(function(data){

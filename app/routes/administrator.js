@@ -6,6 +6,9 @@ var curriculumList = mongoose.model('curriculumList');
 var curriculums = mongoose.model('curriculums');
 var users = mongoose.model('users');
 
+router.get('/', function(req, res){
+	res.render('index',{});
+})
 //for selected curriculum
 router.get('/curriculumSel/:id', function( req, res) {
 	curriculums.find({school_year: req.params.id}, function(err, data){
@@ -155,7 +158,7 @@ router.get('/courseSubjects/:id', function(req, res){
 });
 // add course subjects
 router.put('/courseSubjects/:id', function(req, res){
-	curriculums.findByIdAndUpdate(req.params.id,{$addToSet:{subjects:{course_name:req.body.course_name,course_des:req.body.course_des,year_level: req.body.year_level, term: req.body.term,subject_name:req.body.subject.subName,subject_des:req.body.subject.subDes,units:req.body.subject.subUnits,cost_perUnits:req.body.subject.subCpu,pre_requisite:req.body.subject.subPreRequisite}}} ,function(err, data){
+	curriculums.findByIdAndUpdate(req.params.id,{$addToSet:{subjects:{course_name:req.body.course_name,course_des:req.body.course_des,year_level: req.body.year_level, term: req.body.term,subject_name:req.body.subject_name,subject_des:req.body.subject_des,units:req.body.units,cost_perUnits:req.body.cost_perUnits,pre_requisite:req.body.pre_requisite}}} ,function(err, data){
 		if (err){
 			return err;
 		};
