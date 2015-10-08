@@ -7,6 +7,7 @@ var express =require( 'express' ),
 	localStrategy = require('passport-local').Strategy,
 	cookieParser = require('cookie-parser'),
 	session = require('express-session'),
+	compression = require('compression')
 	app =express(),
 	port =process.env.PORT ||3000;
 	
@@ -51,6 +52,8 @@ app.use(session({
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(compression());
+
 
 // authenticate the user login
 passport.use(new localStrategy(
