@@ -17,6 +17,7 @@ app.set( 'view engine','ejs' );
 // connect to database
 mongoose.connect("mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mong
 olab.com:47602/heroku_6sh77jbx");
+
 // mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
 
 //database
@@ -205,8 +206,8 @@ app.get( '/database/student-school-info',function ( req,res ) {
 
 } );
 //server listening
-http.createServer( app ).listen( port,function() {
+// http.createServer( app ).listen( port,function() {
 
-    console.log( 'the server now listen at port ' +port );
+//     console.log( 'the server now listen at port ' +port );
 
-} );
+// } );
