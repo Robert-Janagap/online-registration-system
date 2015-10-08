@@ -15,9 +15,20 @@ app.set( 'views',path.join( __dirname,'app/views' ) );
 app.set( 'view engine','ejs' );
 
 // connect to database
-// mongoose.connect("mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mong
-// olab.com:47602/heroku_6sh77jbx");
-// mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
+//mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mongolab.com:47602/heroku_6sh77jbx
+
+// mongoose.connect('mongodb://127.0.0.1/onlineRegistrationSystem');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mongolab.com:47602/heroku_6sh77jbx');
+
+// var pg = require('pg');
+
+// app.get('/db', function (request, response) {
+//   pg.connect('mongodb://127.0.0.1/onlineRegistrationSystem', function(err, client, done) {
+	
+// 	mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
+    
+//   });
+// })
 
 //database
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
@@ -204,6 +215,30 @@ app.get( '/database/student-school-info',function ( req,res ) {
     } );
 
 } );
+
+app.get('/createAdmin', function(req, res){
+	users.findOne({roles:'administrator'}, function(err, data){
+		if(err){
+			return err;
+		}
+		if(data){
+			console.log('may admin');
+		}else{
+
+			var admin = new users({
+			 username: "admin",
+			 password: "admin",
+			 name: "BCC Administrator",
+			 roles:"administrator"
+			});
+
+			admin.save(function(err, data){
+				console.log(data);
+			});
+		}
+	});
+});
+
 //server listening
 http.createServer( app ).listen( port,function() {
 
