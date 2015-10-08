@@ -17,7 +17,7 @@ app.set( 'view engine','ejs' );
 // connect to database
 // mongoose.connect("mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mong
 // olab.com:47602/heroku_6sh77jbx");
-mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
+// mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
 
 //database
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
