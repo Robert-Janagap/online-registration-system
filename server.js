@@ -41,6 +41,7 @@ var studentList = mongoose.model('studentList', require('./app/models/studentLis
 var studentSchoolInfo = mongoose.model('studentSchoolInfo', require('./app/models/studentSchoolInfo.js'));
 
 //use middleware
+app.use(compression());
 app.use( express.static( path.join( __dirname,'/production' ) ) );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended :true } ) );
@@ -52,7 +53,6 @@ app.use(session({
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(compression());
 
 
 // authenticate the user login
