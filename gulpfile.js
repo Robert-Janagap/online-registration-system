@@ -20,7 +20,7 @@ gulp.task( 'sass',function(){
 		.pipe(sourcemap.init())
 	    	.pipe( sass({outputStyle: 'compressed'}) )
 	    	.pipe( prefixer('last 2 version') )
-	    .pipe(sourcemap.write())
+	    .pipe(sourcemap.write({addComment: false}))
 	    .pipe( gulp.dest( 'public/css/' ) );
 
 	} );
@@ -34,7 +34,7 @@ gulp.task( 'sass-minify',function(){
 	    	.pipe( sass({outputStyle: 'compressed'}) )
 	    	.pipe( prefixer('last 2 version') )
 	    	.pipe( rename({suffix: '.min'}) )
-	    .pipe(sourcemap.write())
+	    .pipe(sourcemap.write({addComment: false}))
 	    .pipe( gulp.dest( 'production/css/' ) );
 
 	} );
@@ -49,7 +49,7 @@ gulp.task( 'js',function(){
 	    	.pipe(ngAnnotate())
 	    	.pipe(uglify())
 	    	//.pipe(rename({suffix:'.min'}))
-	    .pipe(sourcemap.write())
+	    .pipe(sourcemap.write({addComment: false}))
 	    .pipe( gulp.dest( 'production/js' ) );
 
 	} );
