@@ -15,7 +15,8 @@ app.set( 'views',path.join( __dirname,'app/views' ) );
 app.set( 'view engine','ejs' );
 
 // connect to database
-mongoose.connect("mongodb://robert_janagap:janagaprainhard01@ds033133.mongolab.com:33133/online_registration_system");
+mongoose.connect("mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mong
+olab.com:47602/heroku_6sh77jbx");
 // mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
 
 //database
