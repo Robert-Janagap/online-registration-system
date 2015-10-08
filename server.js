@@ -15,7 +15,7 @@ app.set( 'views',path.join( __dirname,'app/views' ) );
 app.set( 'view engine','ejs' );
 
 // connect to database
-mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
+// mongoose.connect("mongodb://robert_janagap:janagaprainhard01@ds033133.mongolab.com:33133/online_registration_system");
 
 //database
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
