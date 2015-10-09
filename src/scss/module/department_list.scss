@@ -34,3 +34,12 @@
 		display:none;
 	}
 }
+.updateDepartment {
+	display:none;
+	position: fixed;
+	background: #fff;
+	z-index: 5;
+	left: 25%;
+	top: 20%;
+	padding: 1.5rem;
+}

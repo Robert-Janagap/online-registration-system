@@ -198,14 +198,16 @@
 					<option value="">--year--</option>
 					<option value="{{course_year}}" ng-repeat="course_year in course_years">{{course_year}}</option>
 				</select>
-				<select name="" id="" ng-change = "subjectInTerm(courseSelTerm)" ng-model="courseSelTerm" ng-show="sel_course_year">
+				<select name="" id="" ng-change = "subjectInTerm(courseSelTerm)" ng-model="courseSelTerm" ng-show="selCourseLevel">
 					<option value="">--term--</option>
 					<option value="{{course_term}}" ng-repeat="course_term in course_terms">{{course_term}}</option>
 				</select>
 
 				<h4 ng-show="sel_course_year">Year: {{sel_course_year}} Term: {{sel_course_term}}</h4>
+
+				<h3 ng-show="!selCourseLevel">select year and term to view subjects</h3>
 				
-				<table>
+				<table ng-show="selCourseLevel">
 					<caption>Course Subjects</caption>
 					<thead>
 						<th>Year</th>
@@ -219,7 +221,7 @@
 						<th>pre-requisite</th>
 					</thead>
 					<tbody>
-						<tr ng-repeat = "subject in subjects | limitTo:10 | orderBy:'year_level'">
+						<tr ng-repeat = "subject in courseSubjects | orderBy:'term'">
 							<td>{{subject.year_level}}</td>
 							<td>{{subject.term}}</td>
 							<td>{{subject.subject_name}}</td>

@@ -72,50 +72,50 @@ app.config(function($routeProvider){
 		.when('/administrator',{
 			templateUrl: 'views/administrator.html',
 			controller: 'administratorCtrl',
-			title: 'Administrator',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Administrator'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/program-coordinator',{
 			templateUrl: 'views/programCoordinator.html',
 			controller: 'programCoordinatorCtrl',
-			title: 'Program Coordinator',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Program Coordinator'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/evaluator',{
 			templateUrl: 'views/evaluator.html',
 			controller: 'evaluatorCtrl',
-			title: 'Evaluator',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Evaluator'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/registrar',{
 			templateUrl: 'views/registrar.html',
 			controller: 'registrarCtrl',
-			title: 'Registrar',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Registrar'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/teacher',{
 			templateUrl: 'views/teacher.html',
 			controller: 'teacherCtrl',
-			title: 'Teacher',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Teacher'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/student',{
 			templateUrl: 'views/student.html',
 			controller: 'studentCtrl',
-			title: 'Student',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Student'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.otherwise({
 			redirectTo: '/'

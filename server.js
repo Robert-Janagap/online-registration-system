@@ -10,26 +10,15 @@ var express =require( 'express' ),
 	compression = require('compression')
 	app =express(),
 	port =process.env.PORT ||3000;
-	
-// //set config
-app.set( 'views',path.join( __dirname,'app/views' ) );
-app.set( 'view engine','ejs' );
 
 // connect to database
-//mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mongolab.com:47602/heroku_6sh77jbx
 
-// mongoose.connect('mongodb://127.0.0.1/onlineRegistrationSystem');
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mongolab.com:47602/heroku_6sh77jbx');
+//local
+mongoose.connect('mongodb://127.0.0.1/onlineRegistrationSystem');
 
-// var pg = require('pg');
+//web
+// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mongolab.com:47602/heroku_6sh77jbx');
 
-// app.get('/db', function (request, response) {
-//   pg.connect('mongodb://127.0.0.1/onlineRegistrationSystem', function(err, client, done) {
-	
-// 	mongoose.connect( 'mongodb://127.0.0.1/onlineRegistrationSystem' );
-    
-//   });
-// })
 
 //database
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
@@ -42,7 +31,7 @@ var studentSchoolInfo = mongoose.model('studentSchoolInfo', require('./app/model
 
 //use middleware
 app.use(compression());
-app.use( express.static( path.join( __dirname,'/production' ) ) );
+app.use( express.static( path.join( __dirname,'/public' ) ) );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended :true } ) );
 app.use(session({
@@ -218,14 +207,14 @@ app.get( '/database/student-school-info',function ( req,res ) {
     } );
 
 } );
-
+//to generate admin if not exist
 app.get('/createAdmin', function(req, res){
 	users.findOne({roles:'administrator'}, function(err, data){
 		if(err){
 			return err;
 		}
 		if(data){
-			console.log('may admin');
+			console.log('welcome in BCC');
 		}else{
 
 			var admin = new users({
@@ -236,7 +225,7 @@ app.get('/createAdmin', function(req, res){
 			});
 
 			admin.save(function(err, data){
-				console.log(data);
+				
 			});
 		}
 	});

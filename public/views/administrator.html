@@ -70,7 +70,7 @@
 			<form class="departmentList_items">
 
 				<h4>Departments <add-department></add-department></h4>
-
+				<span class="error_message" ng-show="errorMessage">{{errorMessage}}</span>
 				<div class="newDepartment--overlay overlay"></div>
 
 				<!-- add departments -->
@@ -86,9 +86,27 @@
 					</input-group>
 					<div class="btn btn--blue" ng-click="addDep(curYear)">Add</div>
 				</div>
+				<!-- update department -->
+				<div class="updateDepartment boxShadow six column">
+					<update-department class="btn--close">X</update-department>
+					<input-group>
+						<input type="text" ng-model="setDep.department_name" class="input_des">
+						<label for="">Department Name</label>
+	    			</input-group>
+					<input-group>
+						<input type="text" ng-model="setDep.department_des" class="input_des">
+						<label for="">Department Description</label>
+					</input-group>
+					<update-department class="btn btn--blue" ng-click="updateDep(setDep)">Update</update-department>
+				</div>
 				<!-- department list -->
 				<ul class="department_settings row" ng-repeat="department in curriculum">
-					<li ng-click="getCourses(department._id,department)"><span>{{department.department_name}}</span> <span>{{department.department_des}}</span><button class="btn btn--red" ng-click="deleteDep(department._id, curYear)">X</button></li>
+					<li ng-click="getCourses(department._id,department)">
+					<span>{{department.department_name}}</span>
+					<span>{{department.department_des}}</span>
+					<button class="btn btn--red" ng-click="deleteDep(department._id, curYear)">X</button>
+					<update-department class="btn btn--orange" ng-click="editDep(department)">edit</update-department>
+					</li>
 				</ul>
 
 				<table ng-show="departmentClick">
@@ -179,7 +197,7 @@
 										</td>
 										<td>
 											<input-group>
-												<input type="text" ng-model="fee.amount">
+												<input type="number" ng-model="fee.amount">
 												<label for="fee_amount">Fee amount</label>
 											</input-group>
 										</td>
@@ -187,7 +205,7 @@
 											<div class="btn btn--blue" ng-click="newFee(typeOfFee_id)">Add</div>
 										</td>
 										<td>
-											<div class="btn btn--green">Update</div>
+											<div class="btn btn--green" ng-click="updateFee(fee)">Update</div>
 										</td>
 									</tr>
 								</thead>
@@ -197,12 +215,12 @@
 										<th>Amount</th>
 										<th>date created</th>
 									</tr>
-									<tr ng-repeat="fee in fees.fees">
-										<td>{{fee.fee_name}}</td>
-										<td><span>P</span>{{fee.amount | number}}</td>
-										<td>{{fee.date_created}}</td>
-										<td><div class="btn btn--orange">Edit</div></td>
-										<td><div class="btn btn--red" ng-click="deleteFee(typeOfFee_id, fee)">Delete</div></td>
+									<tr ng-repeat="studentFee in fees.fees">
+										<td>{{studentFee.fee_name}}</td>
+										<td><span>P</span>{{studentFee.amount | number}}</td>
+										<td>{{studentFee.date_created}}</td>
+										<td><div class="btn btn--orange" ng-click="editFee(studentFee)">Edit</div></td>
+										<td><div class="btn btn--red" ng-click="deleteFee(typeOfFee_id, studentFee)">Delete</div></td>
 									</tr>
 								</tbody>
 							</table>

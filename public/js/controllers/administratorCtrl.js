@@ -272,6 +272,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 	};
 	$scope.refreshAssestment();
 	$scope.viewFees = function(id){
+		$scope.feesTypeId = id;
 		$http.get('/administrator/assestments/'+ id).success(function(data){
 			$scope.fees = data;
 			$scope.typeOfFee = data.typeOfFee;
@@ -282,12 +283,16 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$scope.fees = " ";
 		$scope.typeOfFee ="";
 		$scope.typeOfFee_id ="";
+		$scope.fee = "";
 	};
 	$scope.newFee = function(id){
+		$scope.fee.created = new Date().toDateString();
+
 		$http.put('/administrator/assestments/'+ id, $scope.fee).success(function(data){
 			$scope.fee = "";
 			$scope.viewFees(id);
 			$scope.refreshAssestment();
+
 		});
 	};
 	$scope.addSchoolFee = function(feeName){
@@ -315,6 +320,26 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			$scope.refreshAssestment();
 		});
 	};
+	/**
+	 * testing
+	 */
+	$scope.editDep = function(department){
+		$scope.setDep = department;
+
+	};
+	$scope.updateDep = function(department){
+		$http.put('/administrator/update-department/'+ department._id, department).success(function(data){
+		});
+	};
+	$scope.editFee = function(fee){
+		$scope.fee = fee;
+	};
+	$scope.updateFee = function(fee){
+		$http.put('/administrator/update-assestment/'+ $scope.feesTypeId, fee).success(function(data){
+			$scope.refreshAssestment();
+			$scope.fee = "";
+		});
+	}
 }]);
 /**
  * directives
@@ -542,6 +567,19 @@ app.directive('facultyStuff', function(){
 		       $('.addFacultyStaff, .overlay').toggle();
 
 		    } );
+		}
+	};
+});
+
+app.directive('updateDepartment', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		link: function(scope, element, attrs){
+			element.on('click', function(){
+				$('.updateDepartment').toggle();
+				$('.overlay').toggle();
+			});
 		}
 	};
 });

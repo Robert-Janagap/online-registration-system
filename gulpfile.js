@@ -15,7 +15,7 @@ var minifyHtml = require('gulp-minify-html');
 //styles
 gulp.task( 'sass',function(){
 
-	return gulp.src( './src/scss/main.scss' )
+	return gulp.src( './src/scss/**/*.scss' )
 	    .pipe( plumber() )
 		.pipe(sourcemap.init())
 	    	.pipe( sass({outputStyle: 'compressed'}) )

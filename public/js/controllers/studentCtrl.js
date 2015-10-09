@@ -4,10 +4,10 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	// filter course subjects based on yeaer and term
 
 	// student_id
-	var student_id = $rootScope.currentUser.username;
+	// var student_id = $rootScope.currentUser.username;
 	
 	// testing
-	// var student_id = 4248671;
+	var student_id = 4208416;
 	
 	// get student schedules
 	$http.get('/student/studentSchedules/' + student_id).success(function(student){
@@ -23,7 +23,7 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 		$scope.getSubjects(student.schedule);
 		$scope.getUnits(student.schedule);
 		$scope.filterCourses(student.curriculum, student);
-
+		$scope.getTuition(student.schedule);
 	});
 	// by year level schedule
 	$scope.year_level_schedules = function(year){
@@ -74,22 +74,38 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 			
 		});
 	};
+	$scope.getCourseSubjects = function(year, term){
+
+		var subjectsByYear = [];
+
+		$http.get('/student/studentSubjects/' + student_id).success(function(student){
+			if(!term){
+				for (var i = student.subjects.length - 1; i >= 0; i--) {
+					if(student.subjects[i].year_level == year){
+						subjectsByYear.push(student.subjects[i]);
+					}
+				}
+			}else{
+				for (var i = student.subjects.length - 1; i >= 0; i--) {
+					if(student.subjects[i].year_level == year && student.subjects[i].term == term){
+						subjectsByYear.push(student.subjects[i]);
+					}
+				}
+			}
+			$scope.courseSubjects = subjectsByYear;
+		});
+
+	}
 	// get subject in year
 	$scope.subjectInYear = function(year){
-		$scope.sel_course_year = year;
+		$scope.selCourseLevel = year
+		$scope.getCourseSubjects(year);
 	};
-	// get subject in term
+	// get subjects in year with term
 	$scope.subjectInTerm = function(term){
-		$scope.sel_course_term = term;
+		$scope.getCourseSubjects($scope.selCourseLevel, term);
 	};
 
-	// view curriculum subjects;
-	$http.get('/student/studentSubjects/' + student_id).success(function(subjects){
-		$scope.subjects = subjects.subjects;
-
-		$scope.getTuition($scope.subjects);
-
-	});
 	// view tuition
 	$scope.getTuition = function(subjects){
 		var tuition = 0;

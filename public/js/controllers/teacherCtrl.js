@@ -1,7 +1,9 @@
 app.controller('teacherCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
 	// add grades
 	
-	var name = $rootScope.currentUser.username;
+	// var name = $rootScope.currentUser.username;
+	// 
+	var name = "bb";
 	
 	// find teacher and its schedule
 	$http.get('/teacher/find-teacher/' + name).success(function(teacher){
@@ -32,4 +34,36 @@ app.controller('teacherCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	$scope.closeStudentList = function(){
 		$scope.studentList = false;
 	};
+	//students grade
+	$scope.studentGrade = function(grading){
+
+		$scope.gradingTerm = grading;
+
+	}
+	$scope.gradings = ["Prelim", "Midterm", "Pre-final", "Final"];
+	// add students grade
+	$scope.studentsGrades = [];
+	$scope.inputGrades = function(students){
+		students.gradingTerm = $scope.gradingTerm;
+		$scope.studentsGrades.push(students);
+	}
+	$scope.saveGrades = function(){
+		console.log($scope.studentsGrades);
+		$scope.studentsGrades = [];
+		// for (var i = $scope.studentsGrades.length - 1; i >= 0; i--) {
+		// 	$http.post
+		// };
+	}	
 }]);
+
+app.directive('studentGrades', function(){
+	return{
+		scope:{},
+		link: function(scope, element, attrs){
+			element.on('click', function(){
+				$('.student_grades').toggle();
+				$('.overlay').toggle();
+			});
+		}
+	};
+});

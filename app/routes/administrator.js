@@ -6,9 +6,6 @@ var curriculumList = mongoose.model('curriculumList');
 var curriculums = mongoose.model('curriculums');
 var users = mongoose.model('users');
 
-router.get('/', function(req, res){
-	res.render('index',{});
-})
 //for selected curriculum
 router.get('/curriculumSel/:id', function( req, res) {
 	curriculums.find({school_year: req.params.id}, function(err, data){
@@ -229,7 +226,7 @@ router.put('/assestments/:id', function( req, res) {
 			res.json(data);
 		});
 	}else{
-		assestments.findByIdAndUpdate(req.params.id,{$addToSet:{fees:{fee_name:req.body.fee_name,amount:req.body.amount, data_created: new Date()}}}, function(err, data){
+		assestments.findByIdAndUpdate(req.params.id,{$addToSet:{fees:{fee_name:req.body.fee_name,amount:req.body.amount, date_created: req.body.created}}}, function(err, data){
 			if(err){
 				return err;
 			}
@@ -283,5 +280,30 @@ router.delete('/deleteUser/:id', function(req, res){
 		}
 		res.json(data);
 	});
+});
+
+
+/**
+ *	testing 
+ */
+
+router.put('/update-department/:id', function(req, res){
+	curriculums.findByIdAndUpdate(req.params.id, {$set:{department_name: req.body.department_name, department_des: req.body.department_des}}, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+
+router.put('/update-assestment/:id', function(req, res){
+
+	assestments.update({_id:req.params.id, 'fees._id':req.body._id}, {$set:{"fees.$.fee_name": req.body.fee_name, "fees.$.amount": req.body.amount}}, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+	
 });
 module.exports = router;
