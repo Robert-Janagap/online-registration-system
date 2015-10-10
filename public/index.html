@@ -6,20 +6,20 @@
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<title ng-bind="title"></title>
-	<!-- <link rel="stylesheet" href="/css/main.min.css">	 -->
-	<link rel="stylesheet" href="/css/main.css">	
+	<link rel="stylesheet" href="/css/main.min.css">	
+	<!-- <link rel="stylesheet" href="/css/main.css">	 -->
 </head>
 <body>
 
-<div ng-include="'/views/header.html'"></div>
-<!-- <div ng-include="'/views/header.min.html'"></div> -->
+<!-- <div ng-include="'/views/header.html'"></div> -->
+<div ng-include="'/views/header.min.html'"></div>
 <div ng-view></div>
 
-<div ng-include="'/views/footer.html'"></div>
-<!-- <div ng-include="'/views/footer.min.html'"></div> -->
+<!-- <div ng-include="'/views/footer.html'"></div> -->
+<div ng-include="'/views/footer.min.html'"></div>
 
 <!-- development -->
-<script src="/lib/jquery-2.1.4.min.js"></script>
+<!-- <script src="/lib/jquery-2.1.4.min.js"></script>
 <script src="/lib/angular.min.js"></script>
 <script src="/lib/angular-route.min.js"></script>
 <script src="/lib/sideBarFixed.js"></script>
@@ -44,9 +44,9 @@
 <script src="/js/controllers/registrarCtrl.js"></script>
 <script src="/js/controllers/teacherCtrl.js"></script>
 <script src="/js/controllers/studentCtrl.js"></script>
-
+ -->
 <!-- production -->
-<!-- <script src="/js/app.js"></script> -->
+<script src="/js/app.min.js"></script>
 
 </body>
 </html>

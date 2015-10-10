@@ -48,7 +48,7 @@ gulp.task( 'js',function(){
 	    	.pipe(concat('app.js'))
 	    	.pipe(ngAnnotate())
 	    	.pipe(uglify())
-	    	//.pipe(rename({suffix:'.min'}))
+	    	.pipe(rename({suffix:'.min'}))
 	    .pipe(sourcemap.write({addComment: false}))
 	    .pipe( gulp.dest( 'production/js' ) );
 
@@ -59,7 +59,7 @@ gulp.task('html', function(){
 	return gulp.src('./public/**/*.html')
 		.pipe(htmlify())
 		.pipe(minifyHtml())
-		//.pipe(rename({suffix:'.min'}))
+		.pipe(rename({suffix:'.min'}))
 		.pipe(gulp.dest('production/'));
 });
 
