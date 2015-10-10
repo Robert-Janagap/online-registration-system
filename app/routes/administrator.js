@@ -127,20 +127,26 @@ router.put('/course/:id', function(req, res){
 	}
 });
 // test
+// update courses
 router.put('/update-course/:id', function(req, res){
-	curriculums.findByIdAndUpdate({_id:req.params.id,courses:{$elemMatch:{course_name:req.body.course_name}}},{$set:{"courses.$.course_name":req.body.course_name}}, function(data){
-		console.log(data);
-	});
+	curriculums.update({
+		_id:req.params.id, "courses._id": req.body._id},
+		{$set:{"courses.$.course_name":req.body.course_name, 
+		"courses.$.course_des":req.body.course_des, 
+		"courses.$.totalYears":req.body.totalYears,
+		"courses.$.totalTerms":req.body.totalTerms}}, function(err, data){
+
+			if(err){
+
+				return err;
+
+			};
+
+			res.json(data);
+
+		});
 });
-// edit courses
-router.get('/course/:id', function( req, res){
-	curriculums.find({'courses._id':req.params.id},{courses:{$elemMatch:{_id:req.params.id}}}, function(err, data){
-		if (err){
-			return err;
-		};
-		res.json(data[0].courses);
-	});
-});
+
 /**
  * course subjects
  */
@@ -305,5 +311,22 @@ router.put('/update-assestment/:id', function(req, res){
 		res.json(data);
 	});
 	
+});
+
+router.put('/update-subject/:id', function(req, res){
+	console.log(req.body);
+	console.log(req.params.id);
+	curriculums.update({_id:req.params.id, "subjects._id": req.body.id}, {$set:{
+		"subjects.$.subject_name": req.body.subName,
+		"subjects.$.subject_des": req.body.subDes,
+		"subjects.$.units": req.body.subUnits,
+		"subjects.$.cost_perUnits": req.body.subCpu,
+		"subjects.$.pre_requisite": req.body.subPreRequisite
+	}}, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	})
 });
 module.exports = router;

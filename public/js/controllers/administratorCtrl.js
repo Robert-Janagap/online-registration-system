@@ -73,7 +73,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			$scope.refreshCurList();
 		});
 		// delete its departments
-		$http.delete('/administrator/deleteCurriculumDep/' + 2015 ).success(function(data){
+		$http.delete('/administrator/deleteCurriculumDep/' + curriculum.curriculumYear ).success(function(data){
 		});
 	};
 	/**
@@ -127,15 +127,14 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 
 	};
 	// edit course
-	$scope.editCourse = function(id){
-		$http.get('/administrator/course/' + id).success(function(data){
-			$scope.dep = data[0];
-		});
+	$scope.editCourse = function(course){
+		$scope.dep = course
 	};
 	//update course
 	$scope.updateCourse = function(course){
 		$http.put('/administrator/update-course/'+ $scope.departmentId, course).success(function(data){
 			$scope.getCourses($scope.departmentId);
+			$scope.dep = "";
 		});
 	};
 
@@ -339,7 +338,25 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			$scope.refreshAssestment();
 			$scope.fee = "";
 		});
-	}
+	};
+	$scope.editSubject = function(subject){
+		var editSub = {
+			id: subject._id,
+			subName:subject.subject_name,
+			subDes:subject.subject_des,
+			subUnits:subject.units,
+			subCpu:subject.cost_perUnits,
+			subPreRequisite:subject.pre_requisite
+		}
+		$scope.subject = editSub;
+	};
+	$scope.updateSubject = function(departmentId, subject){
+		$http.put('/administrator/update-subject/'+ departmentId, subject).success(function(data){
+			$scope.addSubjectRefresh(departmentId);
+			$scope.subject = "";
+		});
+	};
+
 }]);
 /**
  * directives
