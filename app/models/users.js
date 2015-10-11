@@ -15,7 +15,10 @@ var	userAccess  =new mongoose.Schema( {
 			units:Number,
 			time:String,
 			days:String,
-			room: String
+			room: String,
+            course_name: String,
+            year_level: Number,
+            term: Number
     	}
     ],
     studentList: [

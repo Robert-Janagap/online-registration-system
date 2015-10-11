@@ -56,5 +56,24 @@ router.post('/course-yearsAndTerms/:id', function( req, res) {
 	});
 
 });
-
+// save student request
+router.post('/subjects-request/:id', function(req, res){
+	console.log(req.params.id);
+	console.log(req.body);
+	studentSchoolInfo.update({student_no:req.params.id}, {$addToSet:{request:{
+		section_name: req.body.section,
+        subject_name: req.body.subject_name, 
+        subject_des: req.body.subject_des,
+        units: req.body.units,
+        days: req.body.days,
+        time: req.body.time,
+        room: req.body.room,
+        instructor: req.body.instructor
+	}}},function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
 module.exports = router;

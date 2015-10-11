@@ -134,7 +134,10 @@ router.put('/teacher-schedules/:id', function(req, res){
 		units: req.body.units,
 		time: req.body.schedule_time,
 		days: req.body.days,
-		room: req.body.room
+		room: req.body.room,
+		course_name:  req.body.course_name,
+		year_level:  req.body.year_level,
+		term:  req.body.term
 	}}}, function(err, data){
 		if(err){
 			return err;

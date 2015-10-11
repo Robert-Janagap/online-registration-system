@@ -55,10 +55,45 @@
 						<td>{{schedule.time}}</td>
 						<td>{{schedule.room}}</td>
 						<td>{{schedule.instructor}}</td>
-						<td><div class="btn btn--blue" ng-show="!regular">+</div></td>
+						<td><div class="btn btn--blue" ng-show="!regular" ng-click="requestSched(schedule)" ng-model="">+</div></td>
+						<!-- <td><input type="checkbox" ng-show="!regular" ng-checked="requestSched(schedule)"></td> -->
 					</tr>
 				</tbody>
 			</table>
+		</article>
+		<!-- request subject schedule -->
+		<article class="content row">
+			<div class="btn--close">X</div>
+			<h4>Your subjects schedule request</h4>
+			<table>
+				<caption>Class Schedule</caption>
+				<thead>
+					<tr>
+						<th>Subject Code</th>
+						<th>Subject Title</th>
+						<th>Units</th>
+						<th>Section</th>
+						<th>Days</th>
+						<th>Time</th>
+						<th>Rm. no.</th>
+						<th>Instructor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat = "schedule in requested_schedules">
+						<td>{{schedule.subject_name}}</td>
+						<td>{{schedule.subject_des}}</td>
+						<td>{{schedule.units}}</td>
+						<td>{{schedule.section}}</td>
+						<td>{{schedule.days}}</td>
+						<td>{{schedule.time}}</td>
+						<td>{{schedule.room}}</td>
+						<td>{{schedule.instructor}}</td>
+						<td><div class="btn btn--red" ng-show="!regular" ng-click="removeReq(schedule)">-</div></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="btn btn--blue pull--right" ng-click="saveRequest()">Save</div>
 		</article>
 		<!-- student schedule -->
 		<article class="content row">

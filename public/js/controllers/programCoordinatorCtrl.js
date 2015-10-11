@@ -200,8 +200,8 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', '$filter', function
 				$scope.scheduleConflict = true;
 				$scope.status = false;
 			}
-			console.log(subject);
 		});
+		console.log(subject_info);
 	};
 	// save schedule
 	$scope.saveSched = function(schedule){
@@ -217,7 +217,10 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', '$filter', function
 			room: schedule.room,
 			instructor: $scope.teacher,
 			instructor_id: $scope.teacher_id,
-			section: $scope.sectionName
+			section: $scope.sectionName,
+			course_name:  $scope.selectedSubject.course_name,
+			year_level:  $scope.selectedSubject.year_level,
+			term:  $scope.selectedSubject.term
     	};
 
     	// add schedule in student

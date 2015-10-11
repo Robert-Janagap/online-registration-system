@@ -27,6 +27,18 @@ var studentSchoolInfo  =new mongoose.Schema( {
             year_level: Number,
             term: Number
         }
+    ],
+    request:[
+        {
+            section_name: String,
+            subject_name: String, 
+            subject_des: String,
+            units: Number,
+            days: String,
+            time: String,
+            room: String,
+            instructor: String,
+        }
     ]
 },{ collection : 'studentSchoolInfo' } );
 

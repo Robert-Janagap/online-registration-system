@@ -29,6 +29,7 @@
 			<table>
 				<thead>
 					<tr>
+						<th>Course Code</th>
 						<th>Subject Code</th>
 						<th>Section</th>
 						<th>Days</th>
@@ -38,6 +39,7 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat = "classSchedule in classSchedules">
+						<td>{{classSchedule.course_name}}</td>
 						<td>{{classSchedule.subject_name}}</td>
 						<td>{{classSchedule.section}}</td>
 						<td>{{classSchedule.days}}</td>

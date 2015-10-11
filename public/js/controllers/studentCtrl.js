@@ -7,7 +7,7 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	// var student_id = $rootScope.currentUser.username;
 	
 	// testing
-	var student_id = 6239048;
+	var student_id = 3816206;
 	
 	// get student schedules
 	$http.get('/student/studentSchedules/' + student_id).success(function(student){
@@ -24,6 +24,7 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 		$scope.getUnits(student.schedule);
 		$scope.filterCourses(student.curriculum, student);
 		$scope.getTuition(student.schedule);
+		$scope.getGrades(student, student_id)
 	});
 	// by year level schedule
 	$scope.year_level_schedules = function(year){
@@ -74,6 +75,7 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 			
 		});
 	};
+	// get curriculum subjects
 	$scope.getCourseSubjects = function(year, term){
 
 		var subjectsByYear = [];
@@ -100,11 +102,12 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	// get subject in year
 	$scope.subjectInYear = function(year){
 		$scope.selCourseLevel = year
-		$scope.getCourseSubjects(year);
+		$scope.getCourseSubjects(year, 0);
 	};
 	// get subjects in year with term
 	$scope.subjectInTerm = function(term){
-		$scope.getCourseSubjects($scope.selCourseLevel, term);
+		year = $scope.selCourseLevel;
+		$scope.getCourseSubjects(year, term);
 	};
 
 	// view tuition
@@ -144,22 +147,51 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	});
 
 	// view student grades
-	$http.get('/student/studentSubjects/' + student_id).success(function(student){
+	$scope.getGrades = function(student_schoolInfo, student_id){
+		$http.get('/student/studentSubjects/' + student_id).success(function(student){
 
-		var studentSchedule = $scope.student_schoolInfo;
-		var studentGrades = [];
-		for (var i = studentSchedule.schedule.length - 1; i >= 0; i--) {
-			
-			for (var x = student.subjects.length - 1; x >= 0; x--) {
+			var studentSchedule = student_schoolInfo;
+			var studentGrades = [];
+			for (var i = studentSchedule.schedule.length - 1; i >= 0; i--) {
 				
-				if(studentSchedule.schedule[i].subject_name === student.subjects[x].subject_name){
-					studentGrades.push(student.subjects[x])
+				for (var x = student.subjects.length - 1; x >= 0; x--) {
+					
+					if(studentSchedule.schedule[i].subject_name === student.subjects[x].subject_name){
+						studentGrades.push(student.subjects[x])
+					}
+
 				}
 
 			}
+			$scope.studentGrades = studentGrades;
 
-		}
-		$scope.studentGrades = studentGrades;
+		});
+	};
 
-	});
+	// student subjects request
+	$scope.requested_schedules = [];
+	$scope.requestSched = function(schedule){
+		$scope.requested_schedules.push(schedule);
+		console.log(schedule);
+	};
+	$scope.removeReq = function(schedule){
+		var reqList = $scope.requested_schedules;
+
+		var removeReq = reqList.filter(function(element){
+			
+			return element.subject_name !== schedule.subject_name;
+
+		});
+		$scope.requested_schedules = removeReq;
+	};
+	$scope.saveRequest = function(){
+		var subjectRequest = $scope.requested_schedules;
+		console.log(subjectRequest);
+		subjectRequest.forEach(function(element, index){		
+			$http.post('/student/subjects-request/' + student_id, element).success(function(data){
+				console.log(data);
+			})
+		});
+
+	};
 }]);
