@@ -3,7 +3,7 @@ app.controller('teacherCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	
 	// var name = $rootScope.currentUser.username;
 	// 
-	var name = "bb";
+	var name = "aa";
 	
 	// find teacher and its schedule
 	$http.get('/teacher/find-teacher/' + name).success(function(teacher){
@@ -21,13 +21,15 @@ app.controller('teacherCtrl', ['$scope', '$http','$rootScope', function($scope, 
 			var studentsList = [];
 			for (var i = students.studentList.length - 1; i >= 0; i--) {
 				
-				if(students.studentList[i].section == classSchedule.section && students.studentList[i].subject_name == classSchedule.subject_name){
+				if(students.studentList[i].section === classSchedule.section && students.studentList[i].subject_name === classSchedule.subject_name){
 					studentsList.push(students.studentList[i]);
 				}
 			
 			}
 			$scope.studentList = studentsList;
+
 		});
+		// for table caption
 		$scope.subject_code = classSchedule.subject_name;
 	};
 	// utilities
@@ -40,19 +42,25 @@ app.controller('teacherCtrl', ['$scope', '$http','$rootScope', function($scope, 
 		$scope.gradingTerm = grading;
 
 	}
-	$scope.gradings = ["Prelim", "Midterm", "Pre-final", "Final"];
+	$scope.gradings = ["Prelim", "Midterm", "PreFinal", "Final"];
 	// add students grade
 	$scope.studentsGrades = [];
 	$scope.inputGrades = function(students){
 		students.gradingTerm = $scope.gradingTerm;
+		students.teacher_id = $scope.teacherId;
+
 		$scope.studentsGrades.push(students);
+
 	}
 	$scope.saveGrades = function(){
-		console.log($scope.studentsGrades);
-		$scope.studentsGrades = [];
-		// for (var i = $scope.studentsGrades.length - 1; i >= 0; i--) {
-		// 	$http.post
-		// };
+
+		var studentsGrade = $scope.studentsGrades;
+
+		studentsGrade.forEach(function(element, index){
+			$http.put('/teacher/students-grade/' + element.student_no, element).success(function(data){
+				$scope.students = "";
+			})
+		});
 	}	
 }]);
 

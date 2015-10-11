@@ -14,10 +14,10 @@ var express =require( 'express' ),
 // connect to database
 
 //local
-// mongoose.connect('mongodb://127.0.0.1/onlineRegistrationSystem');
+mongoose.connect('mongodb://127.0.0.1/onlineRegistrationSystem');
 
 //web
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mongolab.com:47602/heroku_6sh77jbx');
+// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mongolab.com:47602/heroku_6sh77jbx');
 
 
 //database
@@ -31,7 +31,7 @@ var studentSchoolInfo = mongoose.model('studentSchoolInfo', require('./app/model
 
 //use middleware
 app.use(compression());
-app.use( express.static( path.join( __dirname,'/production' ) ) );
+app.use( express.static( path.join( __dirname,'/public' ) ) );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended :true } ) );
 app.use(session({

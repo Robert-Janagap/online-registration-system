@@ -142,12 +142,26 @@ router.get('/student-curriculum/:id', function(req, res){
 
 // add student curriculum subjects
 router.put('/student-subjects/:id', function(req, res){
-	studentList.findByIdAndUpdate(req.params.id,{$addToSet:{subjects:{subject_name: req.body.subject_name,subject_des: req.body.subject_des,units: req.body.units,year_level: req.body.year_level,term: req.body.term, cost_perUnits:req.body.cost_perUnits, pre_requisite:req.body.pre_requisite}}}, function( err, data){
+
+	studentList.findByIdAndUpdate(req.params.id,{
+		$addToSet:{
+			subjects:{
+				subject_name: req.body.subject_name,
+				subject_des: req.body.subject_des,
+				units: req.body.units,
+				year_level: req.body.year_level,
+				term: req.body.term, 
+				cost_perUnits:req.body.cost_perUnits, 
+				pre_requisite:req.body.pre_requisite
+			}
+		}
+	}, function( err, data){
 		if(err){
 			return err;
 		}
 		res.json(data);
 	});
+	
 });
 // add student user Access
 router.post('/student-access', function(req, res){

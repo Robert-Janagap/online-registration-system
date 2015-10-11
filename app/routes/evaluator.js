@@ -22,7 +22,6 @@ router.post( '/student',function ( req,res ){
 //add student School Info
 router.post( '/student-school-info',function ( req,res ){
 	var new_studentSchoolInfo = new studentSchoolInfo(req.body);
-	console.log(req.body);
 	new_studentSchoolInfo.save(function(err, data){
 		if(err){
 			return err;

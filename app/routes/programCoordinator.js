@@ -87,13 +87,15 @@ router.get('/sectionSchedule/:id', function(req,res){
 // find subject
 router.put('/find-subject/:id', function( req, res){
 	var subject;
-	classSchedules.findOne({section:req.params.id}, function(err, data){
+	console.log(req.body);
+	console.log(req.params.id);
+	classSchedules.findOne({section:req.params.id, term: req.body.term}, function(err, data){
 		if(err){
 			return err;
 		};
 
 		for (var i = data.schedule.length - 1; i >= 0; i--) {
-			if(data.schedule[i].subject_name == req.body.subject_name){
+			if(data.schedule[i].subject_name === req.body.subject_name){
 				subject = data.schedule[i].subject_name;
 			} 
 		};

@@ -7,7 +7,7 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	// var student_id = $rootScope.currentUser.username;
 	
 	// testing
-	var student_id = 4208416;
+	var student_id = 6239048;
 	
 	// get student schedules
 	$http.get('/student/studentSchedules/' + student_id).success(function(student){
@@ -31,7 +31,7 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 			var course_schedules = [];
 			for (var i = schedules.length - 1; i >= 0; i--) {
 				// the one is the 1 sem its statis find a way to be dynamic
-				if(schedules[i].term == 1){
+				if(schedules[i].term === $scope.student_schoolInfo.term){
 					for (var b = schedules[i].schedule.length - 1; b >= 0; b--) {
 						course_schedules.push(schedules[i].schedule[b]);
 					}
@@ -79,6 +79,7 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 		var subjectsByYear = [];
 
 		$http.get('/student/studentSubjects/' + student_id).success(function(student){
+
 			if(!term){
 				for (var i = student.subjects.length - 1; i >= 0; i--) {
 					if(student.subjects[i].year_level == year){
@@ -142,4 +143,23 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 		$scope.assestments = assestments;
 	});
 
+	// view student grades
+	$http.get('/student/studentSubjects/' + student_id).success(function(student){
+
+		var studentSchedule = $scope.student_schoolInfo;
+		var studentGrades = [];
+		for (var i = studentSchedule.schedule.length - 1; i >= 0; i--) {
+			
+			for (var x = student.subjects.length - 1; x >= 0; x--) {
+				
+				if(studentSchedule.schedule[i].subject_name === student.subjects[x].subject_name){
+					studentGrades.push(student.subjects[x])
+				}
+
+			}
+
+		}
+		$scope.studentGrades = studentGrades;
+
+	});
 }]);

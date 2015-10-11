@@ -105,7 +105,7 @@
 					<div class="btn" ng-click="enrollStudent(studentSchoolInfo.sectionId,studentSchoolInfo)">Next</div>
 				</div>
 				
-				<div class="studentSchedule">
+				<div class="studentSchedule" ng-show="showSchedule">
 					<div class="studentSchedule_search" ng-show="showSchedule">
 						<h4>Subject Schedule</h4>
 						<input-group ng-show="studentRegular">
@@ -175,6 +175,7 @@
 				</div>
 			</div>
 		</article>
+		<!-- error message -->
 		<article class="content row"  ng-show="studentEnrolled">
 			<div class="btn--close" ng-click="closeErrorMessageEnrolled()">X</div>
 			<div>
@@ -182,6 +183,7 @@
 				<h4>already enrolled</h4>
 			</div>
 		</article>
+
 	</div>
 	<!-- students Information -->
 	<div class="student_info eleven column modal">

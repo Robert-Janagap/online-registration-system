@@ -11,7 +11,6 @@ var jshint = require('gulp-jshint');
 var jshintSylish = require('jshint-stylish');
 var htmlify = require('gulp-angular-htmlify');
 var minifyHtml = require('gulp-minify-html');
-
 //styles
 gulp.task( 'sass',function(){
 

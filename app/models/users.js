@@ -27,7 +27,11 @@ var	userAccess  =new mongoose.Schema( {
             year_level: Number,
             term: Number,
             units: Number,
-            student_name: String
+            student_name: String,
+            Prelim: Number,
+            Midterm: Number,
+            PreFinal: Number,
+            Final: Number
         }
     ]
 },{ collection : 'users' } );

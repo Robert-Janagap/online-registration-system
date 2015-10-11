@@ -160,8 +160,7 @@
 				<thead>
 					<tr>
 						<th>Subject Code</th>
-						<th>Section</th>
-						<th>Instructor</th>
+						<th>units</th>
 						<th>Prelim</th>
 						<th>Midterm</th>
 						<th>Pre-Final</th>
@@ -169,23 +168,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Addprog</td>
-						<td>bsit-1a</td>
-						<td>Robert</td>
-						<td>80</td>
-						<td>90</td>
-						<td>100</td>
-						<td>95</td>
-					</tr>
-					<tr>
-						<td>Addprog</td>
-						<td>bsit-1a</td>
-						<td>Robert</td>
-						<td>80</td>
-						<td>90</td>
-						<td>100</td>
-						<td>95</td>
+					<tr ng-repeat = "grade in studentGrades">
+						<td>{{grade.subject_name}}</td>
+						<td>{{grade.units}}</td>
+						<td>{{grade.Prelim}}</td>
+						<td>{{grade.Midterm}}</td>
+						<td>{{grade.PreFinal}}</td>
+						<td>{{grade.Final}}</td>
 					</tr>
 				</tbody>
 			</table>

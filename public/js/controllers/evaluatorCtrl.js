@@ -3,6 +3,14 @@ app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', funct
 	var currentYear = new Date().getFullYear();
 	var nextYear = new Date().getFullYear() + 1;
 	
+	//view new students 
+	$scope.viewNewStudents = function(){
+		$http.get('/evaluator/students').success(function(students){
+			$scope.students = students;
+		});
+	};
+
+	$scope.viewNewStudents();
 
 	$scope.addNewStudent = function(newStudent){
 		// correct the format of Date of Birth
@@ -25,24 +33,14 @@ app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', funct
 		}
 		// add new student
 		$http.post('/evaluator/student', newStudent).success(function(data){
-			console.log(data);
 			$scope.newStudent = "";
 		});
 		// add student info
 		$http.post('/evaluator/student-school-info', newStudent).success(function(data){
-			console.log(data);
+			$scope.viewNewStudents();
 		});
 
-		$scope.viewNewStudents();
 	};
-
-	//view new students 
-	$scope.viewNewStudents = function(){
-		$http.get('/evaluator/students').success(function(students){
-			$scope.students = students;
-		});
-	};
-	$scope.viewNewStudents();
 
 	// view specific new student information
 	$scope.viewInfo = function(student_id){

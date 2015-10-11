@@ -36,10 +36,10 @@ var studentList  =new mongoose.Schema( {
             units: Number,
             cost_perUnits: Number,
             pre_requisite: String,
-            prelim: Number,
-            midterm: Number,
-            pre_final: Number,
-            finals: Number
+            Prelim: Number,
+            Midterm: Number,
+            PreFinal: Number,
+            Final: Number
         }
     ]
 },{ collection : 'studentList' } );

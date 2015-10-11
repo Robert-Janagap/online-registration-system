@@ -80,15 +80,14 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 					for (var b = curriculum[i].subjects.length - 1; b >= 0; b--) {
 						if(curriculum[i].subjects[b].course_name == school_info.course_name){
 
-							curriculumSubjects.push(curriculum[i].subjects[b]);
+							// add student curriculum subjects
+							$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculum[i].subjects[b]).success(function(student){
+							});
 
 						}
 					}
 				}
-				// add student curriculum subjects
-				$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculumSubjects).success(function(student){
-					
-				});
+				
 			});
 
 		}else{//regular student
@@ -103,21 +102,20 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			
 			});
 
-			//get curriculum subjects based on student course year and term
+			//get curriculum subjects
 			$http.get('/registrar/student-curriculum/' + school_info.curriculum).success(function(curriculum){
 				var curriculumSubjects = [];
 				for (var i = curriculum.length - 1; i >= 0; i--) {
 					for (var b = curriculum[i].subjects.length - 1; b >= 0; b--) {
 						if(curriculum[i].subjects[b].course_name == school_info.course_name){
-							curriculumSubjects.push(curriculum[i].subjects[b]);
+							
+							// add student curriculum subjects
+							$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculum[i].subjects[b]).success(function(student){
+							});
 
 						}
 					}
 				}
-				// add student curriculum subjects
-				$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculumSubjects).success(function(student){
-					
-				});
 			});
 		}
 
@@ -171,7 +169,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			});
 			// add to teacher student list
 			$http.put('/registrar/teacher-students/' + sectionSchedules.schedule[i].instructor, setSchedule).success(function(studentList){
-				console.log(studentList);
+				
 			});
 		} 
 		$scope.student_schedule = false;

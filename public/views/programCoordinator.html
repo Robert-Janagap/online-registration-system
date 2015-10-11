@@ -157,7 +157,8 @@
 						<td>{{subject.days}}</td>
 						<td>{{subject.room}}</td>
 						<td>{{subject.instructor}}</td>
-						<td><div class="btn" ng-click="deleteSchedule(subject)">Delete</div></td>
+						<td><div class="btn" ng-click="editSchedule(subject)">Edit</div></td>
+						<td><div class="btn btn--red" ng-click="deleteSchedule(subject)">-</div></td>
 					</tr>
 				</tbody>
 			</table>
@@ -201,6 +202,7 @@
 				</tr>
 			</table>
 		</div>
-		<div class="btn" ng-click="saveSched(subjectSchedule)">Save</div>
+		<div class="btn pull--right" ng-click="saveSched(subjectSchedule)" ng-show="!status">Save</div>
+		<div class="btn pull--right" ng-click="updateSched(subjectSchedule)" ng-show="status">Update</div>
 	</div> 
 </div>

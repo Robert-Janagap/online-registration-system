@@ -198,7 +198,9 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', '$filter', function
 			}else{
 				$scope.selectedSubject = subject_info;
 				$scope.scheduleConflict = true;
+				$scope.status = false;
 			}
+			console.log(subject);
 		});
 	};
 	// save schedule
@@ -243,8 +245,24 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', '$filter', function
 	};
 	$scope.viewLastSched = function(){
 		$scope.scheduleConflict = false;
+		$scope.status = false;
 	};
-	
+	// edit schedule
+	$scope.editSchedule = function(schedule){
+		console.log(schedule);
+		var sched = {
+			day: schedule.days,
+			room: schedule.room
+		}
+		$scope.subjectSchedule = sched;
+		$scope.teacher = schedule.instructor;
+		$scope.scheduleConflict = true;
+		$scope.status = true;
+	};
+	// update Schedule
+	$scope.updateSched = function(schedule){
+		// $http.put('/program-coordinator/update-schedule')
+	}
 	// get teachers
 	$http.get('/administrator/users').success(function(data){
 		var teachers =[];
@@ -260,6 +278,7 @@ app.controller('programCoordinatorCtrl', ['$scope', '$http', '$filter', function
 		$scope.teacher = teacher.name;
 		$scope.teacher_id = teacher._id;
 	};
+	
 }]);
 
 app.directive('openClassSched', function(){

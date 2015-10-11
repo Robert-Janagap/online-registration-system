@@ -48,8 +48,7 @@
 				</tbody>
 			</table>
 		</div>
-		<!--  ng-show="studentList" -->
-		<div class="content row">
+		<div class="content row" ng-show="studentList">
 			<h4>Student List</h4>
 			<div class="btn--close" ng-click="closeStudentList()">X</div>
 			<table>
@@ -67,10 +66,10 @@
 					<tr ng-repeat = "students in studentList">
 						<td>{{students.student_name}}</td>
 						<td>{{students.course_name}}</td>
-						<td>90</td>
-						<td>90</td>
-						<td>90</td>
-						<td>90</td>
+						<td>{{students.Prelim}}</td>
+						<td>{{students.Midterm}}</td>
+						<td>{{students.PreFinal}}</td>
+						<td>{{students.Final}}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -97,6 +96,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<div class="btn--blue btn pull--right" ng-click="saveGrades()">save</div>
+		<student-grades class="btn--blue btn pull--right" ng-click="saveGrades()">save</student-grades>
 	</div>
 </div>
