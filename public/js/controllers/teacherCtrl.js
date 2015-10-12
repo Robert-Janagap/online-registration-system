@@ -61,6 +61,7 @@ app.controller('teacherCtrl', ['$scope', '$http','$rootScope', function($scope, 
 				$scope.students = "";
 			})
 		});
+		$scope.studentList = false;
 	}	
 }]);
 
