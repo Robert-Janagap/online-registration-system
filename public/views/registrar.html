@@ -29,6 +29,7 @@
 				<input type="text" ng-model="searchStudent">
 				<label for="">Search student</label>
 			</input-group>
+			<span class="small">student list limits to 15</span>
 			<table>
 				<thead>
 					<tr>
@@ -37,7 +38,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat = "student in students | filter:searchStudent">
+					<tr ng-repeat = "student in students | filter:searchStudent | limitTo:15">
 						<td>{{student.student_no}}</td>
 						<td>{{student.first_name}} {{student.middle_name}} {{student.last_name}}</td>
 						<td><toggle-student-info ng-click="viewInfo(student._id)">Information</toggle-student-info></td>

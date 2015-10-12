@@ -4,10 +4,10 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	// filter course subjects based on yeaer and term
 
 	// student_id
-	// var student_id = $rootScope.currentUser.username;
+	var student_id = $rootScope.currentUser.username;
 	
 	// testing
-	var student_id = 3816206;
+	// var student_id = 3816206;
 	
 	// get student schedules
 	$http.get('/student/studentSchedules/' + student_id).success(function(student){
