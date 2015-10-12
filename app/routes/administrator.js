@@ -118,7 +118,7 @@ router.put('/course/:id', function(req, res){
 			res.json(data);
 		});
 	}else{ //add course
-		curriculums.findByIdAndUpdate(req.params.id,{$addToSet:{courses:{course_name:req.body.course_name,course_des:req.body.course_des,totalYears: req.body.totalYears, totalTerms: req.body.totalTerms}}} ,function(err, data){
+		curriculums.findByIdAndUpdate(req.params.id,{$addToSet:{courses:{course_name:req.body.course_name,course_des:req.body.course_des,totalYears: req.body.totalYears, totalTerms: 2}}} ,function(err, data){
 		if (err){
 			return err;
 		};

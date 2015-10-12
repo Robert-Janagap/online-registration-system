@@ -9,9 +9,22 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 	$scope.viewInfo = function(student_id){
 		$http.get('/registrar/student-info/' + student_id).success(function(studentInfo){
 			$scope.studentInfo = studentInfo;
-		});
-	};
+			var studentGrades = [];
+			for (var i = studentInfo.subjects.length - 1; i >= 0; i--) {
+				 if(studentInfo.subjects[i].Prelim){
+				 	studentGrades.push(studentInfo.subjects[i]);
+				 }
+			};
 
+			$http.get('/registrar/student-request/' + studentInfo.student_no).success(function(student){
+				$scope.schoolInfo = student;
+				$scope.scheduleReq = student.request;
+			});
+			$scope.studentGrades = studentGrades;
+		});
+
+
+	};
 	// set student Schedule and enroll student
 	$scope.studentSchedule = function(student_id){
 		$scope.student_id = student_id;
@@ -75,6 +88,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 
 			//get curriculum subjects based on student course year and term
 			$http.get('/registrar/student-curriculum/' + school_info.curriculum).success(function(curriculum){
+				$scope.yearAndTerms(curriculum);
 				var curriculumSubjects = [];
 				for (var i = curriculum.length - 1; i >= 0; i--) {
 					for (var b = curriculum[i].subjects.length - 1; b >= 0; b--) {
@@ -244,4 +258,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 	$scope.closeErrorMessageEnrolled = function(){
 		$scope.studentEnrolled = false;
 	};
+	$scope.getStudentReq = function(){
+
+	}
 }]);

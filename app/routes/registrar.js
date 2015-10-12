@@ -195,4 +195,13 @@ router.get('/student-enrolled/:id', function( req, res){
 	});
 });
 
+// student schedule request
+router.get('/student-request/:id', function(req, res){
+	studentSchoolInfo.findOne({student_no: req.params.id}, function(err , data){
+		if (err) {
+			return err;
+		}
+		res.json(data);
+	});
+});
 module.exports = router;

@@ -58,8 +58,6 @@ router.post('/course-yearsAndTerms/:id', function( req, res) {
 });
 // save student request
 router.post('/subjects-request/:id', function(req, res){
-	console.log(req.params.id);
-	console.log(req.body);
 	studentSchoolInfo.update({student_no:req.params.id}, {$addToSet:{request:{
 		section_name: req.body.section,
         subject_name: req.body.subject_name, 
@@ -75,5 +73,47 @@ router.post('/subjects-request/:id', function(req, res){
 		}
 		res.json(data);
 	});
+
 });
+
+// update student request
+router.put('/subjects-request/:id', function(req, res){
+	studentSchoolInfo.update({student_no:req.params.id}, {$addToSet:{request:{
+		section_name: req.body.section,
+        subject_name: req.body.subject_name, 
+        subject_des: req.body.subject_des,
+        units: req.body.units,
+        days: req.body.days,
+        time: req.body.time,
+        room: req.body.room,
+        instructor: req.body.instructor
+	}}},function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+
+});
+
+// delete request
+router.put('/request-delete/:id', function(req, res){
+	studentSchoolInfo.update({student_no:req.params.id}, {$unset:{request:1}}, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+
+// get student request list
+router.get('/request-list/:id', function(req, res){
+	studentSchoolInfo.findOne({student_no: req.params.id}, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+
 module.exports = router;

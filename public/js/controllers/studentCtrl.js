@@ -31,7 +31,6 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 		$http.get('/student/course-schedules/' + year).success(function(schedules){
 			var course_schedules = [];
 			for (var i = schedules.length - 1; i >= 0; i--) {
-				// the one is the 1 sem its statis find a way to be dynamic
 				if(schedules[i].term === $scope.student_schoolInfo.term){
 					for (var b = schedules[i].schedule.length - 1; b >= 0; b--) {
 						course_schedules.push(schedules[i].schedule[b]);
@@ -171,10 +170,12 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	// student subjects request
 	$scope.requested_schedules = [];
 	$scope.requestSched = function(schedule){
+		
 		$scope.requested_schedules.push(schedule);
-		console.log(schedule);
+		
 	};
 	$scope.removeReq = function(schedule){
+
 		var reqList = $scope.requested_schedules;
 
 		var removeReq = reqList.filter(function(element){
@@ -185,13 +186,46 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 		$scope.requested_schedules = removeReq;
 	};
 	$scope.saveRequest = function(){
+
 		var subjectRequest = $scope.requested_schedules;
-		console.log(subjectRequest);
+
+		$http.put('/student/request-delete/' + student_id).success(function(data){
+			$scope.request = false;
+		});
+
 		subjectRequest.forEach(function(element, index){		
 			$http.post('/student/subjects-request/' + student_id, element).success(function(data){
-				console.log(data);
+				$scope.request = false;
 			})
 		});
 
 	};
+	$scope.closeReq = function(){
+		$scope.request = false;
+	}
+	$scope.viewReq = function(){
+		$scope.request = true;
+		$http.get('/student/request-list/'+student_id ).success(function(student){
+				
+				$scope.requested_schedules = student.request;
+
+		});
+	};
 }]);
+
+app.directive('subjectRequest', function(){
+	return{
+		scope:{},
+		restrict:"E",
+		link: function(scope, element, attrs){
+			var el = element.attr('id');
+			
+			element.on('click', function(){
+				element.hide();
+				if(element.attr('id')){
+					console.log(el);
+				}
+			});
+		}
+	}
+});

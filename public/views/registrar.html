@@ -186,11 +186,11 @@
 
 	</div>
 	<!-- students Information -->
-	<div class="student_info eleven column modal">
+	<div class="student_info eleven column">
 		<toggle-student-info>X</toggle-student-info>
         <div class="student_info_details row">
         	<h4>Student No:{{studentInfo.student_no}}</h4>
-        	<h3>Student Information</h3>
+        	<h4>Student Information</h4>
             <div class="block">
           		<span class="caption">Student Name</span><span>{{studentInfo.first_name}} {{studentInfo.middle_name}} {{studentInfo.last_name}}</span>
             </div>
@@ -230,7 +230,7 @@
             <div class="block">
               <span>father's Occupation</span><span>{{studentInfo.father_occupation}}</span>
             </div>
-            <h3>School Attended</h3>
+            <h4>School Attended</h4>
             <div class="block">
               <span>Highest Educational Attended</span><span>{{studentInfo.high_Educ_Att}}</span>
             </div>
@@ -240,7 +240,7 @@
             <div class="block">
               <span>School Address</span><span>{{studentInfo.prev_school_add}}</span>
             </div>
-            <h3>Guardian</h3>
+            <h4>Guardian</h4>
             <div class="block">
               <span>Guardian name</span><span>{{studentInfo.guardian_name}}</span>
             </div>
@@ -253,6 +253,60 @@
             <div class="block">
             	<span>Relationship</span><span>{{studentInfo.guardian_rel}}</span>
             </div>
+        </div>
+        <div class="student_request">
+        	<h4>Student Request</h4>
+        	<table>
+        		<thead>
+	        		<th>Subject Code</th>
+					<th>Subject Title</th>
+					<th>Units</th>
+					<th>Section</th>
+					<th>Days</th>
+					<th>Time</th>
+					<th>Rm. no.</th>
+					<th>Instructor</th>
+        		</thead>
+        		<tbody>
+        			<tr ng-repeat="req in scheduleReq">
+        				<td>{{req.subject_name}}</td>
+        				<td>{{req.subject_des}}</td>
+        				<td>{{req.units}}</td>
+        				<td>{{req.section_name}}</td>
+        				<td>{{req.days}}</td>
+        				<td>{{req.time}}</td>
+        				<td>{{req.room}}</td>
+        				<td>{{req.instructor}}</td>
+	        		</tr>
+        		</tbody>
+        	</table>
+        </div>
+        <div class="grades">
+        	<h4>Student Grades</h4>
+        	<table>
+        		<thead>
+	        		<th>Subject Code</th>
+					<th>Subject Title</th>
+					<th>Units</th>
+					<th>Prelim</th>
+					<th>Midterm</th>
+					<th>Pre-Final</th>
+					<th>Final</th>
+					<th>GPA</th>
+        		</thead>
+        		<tbody>
+        			<tr ng-repeat="grade in studentGrades">
+        				<td>{{grade.subject_name}}</td>
+        				<td>{{grade.subject_des}}</td>
+        				<td>{{grade.units}}</td>
+        				<td>{{grade.Prelim}}</td>
+        				<td>{{grade.Midterm}}</td>
+        				<td>{{grade.PreFinal}}</td>
+        				<td>{{grade.Final}}</td>
+        				<td>total</td>
+	        		</tr>
+        		</tbody>
+        	</table>
         </div>
     </div>
 </div>

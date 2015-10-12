@@ -1,6 +1,10 @@
 .student_info {
-	position: relative;
-	margin-top: 1.8rem;
+	position: absolute;
+	border-radius: 4px;
+	background: #fff;
+	top: 5%;
+	z-index: 5;
+	display: none;
 	margin-bottom: 3.2rem;
 	&_details{
 		padding: 0 1rem;

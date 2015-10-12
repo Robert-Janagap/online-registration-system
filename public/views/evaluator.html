@@ -299,7 +299,7 @@
 		<toggle-student-info ng-click="viewInfo(new)">X</toggle-student-info>
         <div class="student_info_details row">
         	<h4>Student No:{{studentInfo.student_no}}</h4>
-        	<h3>Student Information</h3>
+        	<h4>Student Information</h4>
             <div class="block">
           		<span class="caption">Student Name</span><span>{{studentInfo.first_name}} {{studentInfo.middle_name}} {{studentInfo.last_name}}</span>
             </div>
@@ -339,7 +339,7 @@
             <div class="block">
               <span>father's Occupation</span><span>{{studentInfo.father_occupation}}</span>
             </div>
-            <h3>School Attended</h3>
+            <h4>School Attended</h4>
             <div class="block">
               <span>Highest Educational Attended</span><span>{{studentInfo.high_Educ_Att}}</span>
             </div>
@@ -349,7 +349,7 @@
             <div class="block">
               <span>School Address</span><span>{{studentInfo.prev_school_add}}</span>
             </div>
-            <h3>Guardian</h3>
+            <h4>Guardian</h4>
             <div class="block">
               <span>Guardian name</span><span>{{studentInfo.guardian_name}}</span>
             </div>
@@ -362,6 +362,21 @@
             <div class="block">
             	<span>Relationship</span><span>{{studentInfo.guardian_rel}}</span>
             </div>
+        </div>
+        <div class="curriculum_subjects">
+        	<h4>curriculum subjects</h4>
+        	<table>
+        		<thead>
+	        		<th>Year</th>
+					<th>Term</th>
+					<th>Subject Code</th>
+					<th>Subject Title</th>
+					<th>Unit</th>
+					<th>Cost/units</th>
+					<th>Pre-requisite</th>
+        		</thead>
+        		<tbody></tbody>
+        	</table>
         </div>
     </div>
 </div>

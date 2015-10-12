@@ -25,7 +25,7 @@
 	<div class="nine column pull--right">
 		<!-- course class schedule in this year -->
 		<article class="content row s_course_schedule">
-			<h4>BSIT Class Schedule</h4>
+			<h4>BSIT Class Schedule</h4><span ng-click="viewReq()" ng-show="!regular">request</span>
 			<ul>
 				<li ng-repeat= "year in course_years">
 					<div class="btn" ng-click="year_level_schedules(year)">{{year}}</div>
@@ -55,15 +55,19 @@
 						<td>{{schedule.time}}</td>
 						<td>{{schedule.room}}</td>
 						<td>{{schedule.instructor}}</td>
-						<td><div class="btn btn--blue" ng-show="!regular" ng-click="requestSched(schedule)" ng-model="">+</div></td>
-						<!-- <td><input type="checkbox" ng-show="!regular" ng-checked="requestSched(schedule)"></td> -->
+						<td>
+
+						<div class="btn btn--blue" ng-show="request" ng-click="requestSched(schedule)" ng-model="">+</div>
+						<!-- <subject-request class="btn btn--blue set" ng-show="request" ng-click="requestSched(schedule)" id="{{schedule.subject_name}}">+</subject-request> -->
+
+						</td>
 					</tr>
 				</tbody>
 			</table>
 		</article>
 		<!-- request subject schedule -->
-		<article class="content row">
-			<div class="btn--close">X</div>
+		<article class="content row" ng-show="request">
+			<div class="btn--close" ng-click="closeReq()">X</div>
 			<h4>Your subjects schedule request</h4>
 			<table>
 				<caption>Class Schedule</caption>
@@ -89,7 +93,7 @@
 						<td>{{schedule.time}}</td>
 						<td>{{schedule.room}}</td>
 						<td>{{schedule.instructor}}</td>
-						<td><div class="btn btn--red" ng-show="!regular" ng-click="removeReq(schedule)">-</div></td>
+						<td><div class="btn btn--red" ng-show="!regular" ng-click="removeReq(schedule)" id="{{schedule.elemId}}">-</div></td>
 					</tr>
 				</tbody>
 			</table>

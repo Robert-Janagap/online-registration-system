@@ -67,4 +67,17 @@ router.get('/courses/:id', function(req, res){
 		res.json(data);
 	});
 });
+
+// // get course years and terms
+// router.post('/course-yearsAndTerms/:id', function( req, res) {
+// 	curriculums.find({school_year:req.params.id},function(err, data){
+// 		if(err){
+// 			return err;
+// 		}
+// 		res.json(data);
+// 	});
+
+// });
+
+
 module.exports =router;
