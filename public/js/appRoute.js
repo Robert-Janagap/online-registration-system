@@ -104,10 +104,10 @@ app.config(function($routeProvider){
 		.when('/teacher',{
 			templateUrl: 'views/teacher.html',
 			controller: 'teacherCtrl',
-			title: 'Teacher',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Teacher'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/student',{
 			templateUrl: 'views/student.html',

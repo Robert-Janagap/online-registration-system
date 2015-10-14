@@ -71,7 +71,7 @@ gulp.task('linting', function(){
 
 gulp.task( 'watching',function(){
     gulp.watch( './src/scss/**/*.scss',[ 'sass' ] );
-    gulp.watch( './public/js/**/*.js',[ 'linting' ] );
+    //gulp.watch( './public/js/**/*.js',[ 'linting' ] );
 	} );
 
 //dev

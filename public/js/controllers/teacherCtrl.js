@@ -1,9 +1,9 @@
 app.controller('teacherCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
 	// add grades
 	
-	var name = $rootScope.currentUser.username;
+	// var name = $rootScope.currentUser.username;
 	// 
-	// var name = "boss";
+	var name = "aa";
 	
 	// find teacher and its schedule
 	$http.get('/teacher/find-teacher/' + name).success(function(teacher){
@@ -27,7 +27,7 @@ app.controller('teacherCtrl', ['$scope', '$http','$rootScope', function($scope, 
 			
 			}
 			$scope.studentList = studentsList;
-
+			$scope.student_count = studentsList.length;
 		});
 		// for table caption
 		$scope.subject_code = classSchedule.subject_name;

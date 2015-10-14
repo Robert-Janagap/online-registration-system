@@ -82,28 +82,6 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			school_info.enrolled = true;
 			$scope.refreshIrregSched();
 
-			$http.put('/registrar/enroll-student/' + school_info.student_no, school_info).success(function(data){
-			
-			});
-
-			//get curriculum subjects based on student course year and term
-			$http.get('/registrar/student-curriculum/' + school_info.curriculum).success(function(curriculum){
-				$scope.yearAndTerms(curriculum);
-				var curriculumSubjects = [];
-				for (var i = curriculum.length - 1; i >= 0; i--) {
-					for (var b = curriculum[i].subjects.length - 1; b >= 0; b--) {
-						if(curriculum[i].subjects[b].course_name == school_info.course_name){
-
-							// add student curriculum subjects
-							$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculum[i].subjects[b]).success(function(student){
-							});
-
-						}
-					}
-				}
-				
-			});
-
 		}else{//regular student
 			// utilities
 			$scope.studentRegular = false;
@@ -111,27 +89,27 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			
 			// enroll student
 			school_info.enrolled = true;
+		}
+		// enroll student
+		$http.put('/registrar/enroll-student/' + school_info.student_no, school_info).success(function(data){
+		
+		});
 
-			$http.put('/registrar/enroll-student/' + school_info.student_no, school_info).success(function(data){
-			
-			});
+		//get curriculum subjects
+		$http.get('/registrar/student-curriculum/' + school_info.curriculum).success(function(curriculum){
+			var curriculumSubjects = [];
+			for (var i = curriculum.length - 1; i >= 0; i--) {
+				for (var b = curriculum[i].subjects.length - 1; b >= 0; b--) {
+					if(curriculum[i].subjects[b].course_name == school_info.course_name){
+						
+						// add student curriculum subjects
+						$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculum[i].subjects[b]).success(function(student){
+						});
 
-			//get curriculum subjects
-			$http.get('/registrar/student-curriculum/' + school_info.curriculum).success(function(curriculum){
-				var curriculumSubjects = [];
-				for (var i = curriculum.length - 1; i >= 0; i--) {
-					for (var b = curriculum[i].subjects.length - 1; b >= 0; b--) {
-						if(curriculum[i].subjects[b].course_name == school_info.course_name){
-							
-							// add student curriculum subjects
-							$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculum[i].subjects[b]).success(function(student){
-							});
-
-						}
 					}
 				}
-			});
-		}
+			}
+		});
 
 		
 

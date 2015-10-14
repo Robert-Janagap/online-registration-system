@@ -11,10 +11,10 @@
 	text-shadow: 0 1px 1px rgba(0,0,0,0.2);
 	-webkit-user-select: none;
 	outline: none;
-	transition: all .2s ease-in-out;
-	// box-shadow: 0 2px 0px rgba(0,0,0,0.3);
+	transition: all .1s ease-in-out;
 	&:active{
 		color: #fff;
+		box-shadow: 0 3px 9px rgba(0,0,0,0.3);
 	}
 }
 .btn--md{
@@ -23,21 +23,22 @@
 	border-radius: 4px;
 }
 .btn--lg{
-	padding: 8px 16px;
-	font-size: 1.3rem;
+	padding: 8px 24px;
+	font-size: 1.2rem;
 	border-radius: 5px;
 }
 // buttons
 $buttons: (
-	"green" #0EE718 hsl(65, 99%, 70%),
-	"orange" #DB6700 hsl(37, 99%, 70%),
-	"red"   #DB0000 hsl(0, 100%, 70%),
-	"blue" #0052DB hsl(218, 100%, 70%)
+	"green" #44E94C hsl(65, 99%, 70%),
+	"orange" #DD8639 hsl(37, 99%, 70%),
+	"red"   #DB3939 hsl(0, 100%, 70%),
+	"blue" #3A76DA hsl(218, 100%, 70%)
 );
 @each $color in $buttons {
 	.btn--#{nth($color, 1)} {
-		color: nth($color, 2);
-		border: 1px solid #{nth($color, 2)};
+		color: #fff;
+		border: 1px solid nth($color, 2);
+		background: nth($color, 2);
 	}
 }
 // hover buttons style
@@ -55,17 +56,17 @@ $buttonHover: (
 	}
 }
 // active buttons style
-$buttonActive: (
-	"green" hsl(65, 70%, 53%),
-	"orange" hsl(28, 70%, 53%),
-	"red"  hsl(0, 70%, 53%),
-	"blue" hsl(218, 70%, 53%)
-);
-@each $color in $buttonActive {
-	.btn--#{nth($color, 1)}:active {
-		background: #{nth($color, 2)};
-	}
-}
+// $buttonActive: (
+// 	"green" hsl(65, 70%, 53%),
+// 	"orange" hsl(28, 70%, 53%),
+// 	"red"  hsl(0, 70%, 53%),
+// 	"blue" hsl(218, 70%, 53%)
+// );
+// @each $color in $buttonActive {
+// 	.btn--#{nth($color, 1)}:active {
+// 		background: #{nth($color, 2)};
+// 	}
+// }
 //testing only
 .view{ 
 		border: 1px solid #ccc;

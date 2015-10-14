@@ -53,3 +53,21 @@
 ::-webkit-datetime-edit-text:not([aria-valuenow]) {
     color: transparent;
 }
+
+.input__group--normal{
+	display: inline-block;
+	padding: 0 .8rem;
+	margin: 1rem 0;
+	label{
+		display: block;
+		margin-bottom: .2rem;
+	}
+}
+.input__groups--last{
+	margin-bottom: 2rem;
+}
+.registration__form{
+	hr{
+		margin-top: 1.5rem;
+	}
+}

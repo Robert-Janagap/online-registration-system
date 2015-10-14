@@ -1,0 +1,39 @@
+<header>
+    <div class="container">
+    	<div class="logo">
+	        <a href="#/"><img src="/img/logo.png" alt="Bacolod City College"></a>
+	    </div>
+	    <nav class="nav" ng-controller="navCtrl">
+            <ul class="navBar">
+                <li class="nav_list"><a href="#/" class="nav_items">Home</a></li>
+                <li class="nav_list"><a href="" class="nav_items">About</a>
+                    <ul class="navBar_sub">
+                        <li><a href="#/school-info">School Information</a></li>
+                        <li><a href="#/administration">Administration</a></li>
+                        <li><a href="#/support-services">Support Services</a></li>
+                    </ul>
+                </li>
+                <li class="nav_list"><a href="" class="nav_items">Admission</a>
+                    <ul class="navBar_sub">
+                        <li><a href="#/registration">Registration</a></li>
+                        <li><a href="#/admission-requirements">Admission Requirements</a></li>
+                        <li><a href="#/enrollment-procedure">Enrollment Procedure</a></li>
+                        <li><a href="#/policies">Policies</a></li>
+                    </ul>
+                </li>
+                <li class="nav_list"><a href="" class="nav_items">Academics</a>
+                    <ul class="navBar_sub">
+                        <li><a href="#/courses-offered">Courses Offered</a></li>
+                        <li><a href="#/events-calendar">Events Calendar</a></li>
+                    </ul>
+                </li>
+                <li class="nav_list"><a href="#/news" class="nav_items">News</a></li>
+                <li class="nav_list"><a href="#/alumni" class="nav_items">Alumni</a></li>
+                <span ng-show="currentUser">
+                    <li class="nav_list"><a href="#/{{currentUser.roles}}" class="nav_items">Dashboard</a></li>
+                    <li class="nav_list"><a href="#/logout" class="nav_items" ng-click="logOut()">logout</a></li>
+                </span>
+            </ul>
+	    </nav>
+    </div>
+</header>
