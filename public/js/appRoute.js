@@ -72,10 +72,10 @@ app.config(function($routeProvider){
 		.when('/administrator',{
 			templateUrl: 'views/administrator.html',
 			controller: 'administratorCtrl',
-			title: 'Administrator',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Administrator'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/program-coordinator',{
 			templateUrl: 'views/programCoordinator.html',
@@ -88,18 +88,18 @@ app.config(function($routeProvider){
 		.when('/evaluator',{
 			templateUrl: 'views/evaluator.html',
 			controller: 'evaluatorCtrl',
-			title: 'Evaluator',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Evaluator'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/registrar',{
 			templateUrl: 'views/registrar.html',
 			controller: 'registrarCtrl',
-			title: 'Registrar',
-			resolve:{
-				logincheck: checkLogin
-			}
+			title: 'Registrar'
+			// resolve:{
+			// 	logincheck: checkLogin
+			// }
 		})
 		.when('/teacher',{
 			templateUrl: 'views/teacher.html',

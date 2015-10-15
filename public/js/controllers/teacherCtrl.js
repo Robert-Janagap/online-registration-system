@@ -3,7 +3,7 @@ app.controller('teacherCtrl', ['$scope', '$http','$rootScope', function($scope, 
 	
 	// var name = $rootScope.currentUser.username;
 	// 
-	var name = "aa";
+	var name = "bb";
 	
 	// find teacher and its schedule
 	$http.get('/teacher/find-teacher/' + name).success(function(teacher){

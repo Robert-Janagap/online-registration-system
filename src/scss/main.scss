@@ -16,3 +16,19 @@
 		padding: 10px;
 	}
 }
+.preRequisite{
+	position: absolute;
+	top: 45px;
+    background: #fff;
+    width: 150px;
+    height: auto;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+	li{
+		display: block;
+		padding: .4rem;
+		cursor: pointer;
+		&:hover{
+			color: #3272E6;
+		}
+	}
+}

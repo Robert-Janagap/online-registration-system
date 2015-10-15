@@ -158,6 +158,7 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 		$http.get('/administrator/courseSubjects/'+ id).success(function(data){
 			var year = [],
 				terms = [];
+
 			for (var i = 1; data[0].courses[0].totalYears >= i; i++) {
 				
 				year.push(i);
@@ -180,18 +181,31 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 	$scope.subjectInYear = function(year, id){
 		$http.get('/administrator/findSubjectsByYear/' + id).success(function(data){
 			var objects = [];
+			$scope.subjectList = [];
+
 			for (var i = data.length - 1; i >= 0; i--) {
 				if(data[i].year_level === year && $scope.courseName === data[i].course_name){
 					objects.push(data[i]);
 				}
 			}
+
 			$scope.subjects = objects;
+
+			for (var i = data.length - 1; i >= 0; i--) {
+				 $scope.subjectList.push(data[i].subject_name);
+			};
+			console.log($scope.subjectList);
 		});
 		// utilities
 		$scope.subjectsOfYear = year;
 		$scope.semesterClick = false;
 		$scope.yearClick = true;
 	};
+	// get pre-requisite subject
+	$scope.getPre = function(subject){
+		$scope.subject.subPreRequisite = subject;
+		
+	}
 	$scope.subjectWithTerm = function(term, id){
 		$http.get('/administrator/findSubjectsByYear/' + id).success(function(data){
 			var objects = [];

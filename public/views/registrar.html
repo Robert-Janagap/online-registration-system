@@ -105,7 +105,7 @@
 					</ul>
 					<div class="btn" ng-click="enrollStudent(studentSchoolInfo.sectionId,studentSchoolInfo)">Next</div>
 				</div>
-				
+				<!-- irregular -->
 				<div class="studentSchedule" ng-show="showSchedule">
 					<div class="studentSchedule_search" ng-show="showSchedule">
 						<h4>Subject Schedule</h4>
@@ -118,6 +118,7 @@
 							<table>
 								<thead>
 									<tr>
+										<th>Student list</th>
 										<th>Subject Code</th>
 										<th>Units</th>
 										<th>Section</th>
@@ -129,6 +130,7 @@
 								</thead>
 								<tbody>
 									<tr ng-repeat="schedule in sectionSchedules.schedule | filter:searchSchedule">
+										<td><div class="btn" ng-click="viewStudents(schedule)">view</div></td>
 										<td>{{schedule.subject_name}}</td>
 										<td>{{schedule.units}}</td>
 										<td>{{schedule.section}}</td>
@@ -144,12 +146,13 @@
 							<div class="btn" ng-click="subjectSchedule()" ng-show="!studentRegular">Save</div>
 						</div>
 					</div>
-					
+					<!-- regular -->
 					<div class="subjectSchedule"  ng-show="studentRegular">
 						<table>
 							<caption>Subject Schedule</caption>
 							<thead>
 								<tr>
+									<th>Student list</th>
 									<th>Subject Code</th>
 									<th>Units</th>
 									<th>Section</th>
@@ -161,6 +164,7 @@
 							</thead>
 							<tbody>
 								<tr ng-repeat ="schedule in irregularSchedules">
+									<td><div class="btn" ng-click="viewStudents(schedule)">view</div></td>
 									<td>{{schedule.subject_name}}</td>
 									<td>{{schedule.units}}</td>
 									<td>{{schedule.section_name}}</td>
@@ -185,8 +189,29 @@
 				<h4>already enrolled</h4>
 			</div>
 		</article>
-
+		<article class="content row" ng-show="studentList">
+			<span>student list: {{student_count}}</span>
+			<table>
+				<caption>{{students_course}}</caption>
+				<thead>
+					<tr>
+						<th>Course</th>
+						<th>Student Name</th>
+						<th>Section</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="list in student_list">
+						<td>{{list.course_name}}</td>
+						<td>{{list.student_name}}</td>
+						<td>{{list.section}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="btn" ng-click="closeStudentList()">Back</div>
+		</article>
 	</div>
+
 	<!-- students Information -->
 	<div class="student_info eleven column">
 		<toggle-student-info>X</toggle-student-info>

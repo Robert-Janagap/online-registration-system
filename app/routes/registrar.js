@@ -204,4 +204,17 @@ router.get('/student-request/:id', function(req, res){
 		res.json(data);
 	});
 });
+
+// count student
+router.get('/student-count/:id', function(req, res){
+	users.findById(req.params.id, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
+
+
+
 module.exports = router;

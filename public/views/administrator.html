@@ -353,6 +353,9 @@
 							<input-group>
 								<input type="text" class="input_preRequisite" ng-model="subject.subPreRequisite">
 								<label for="">Pre-requisite</label>
+								<ul class="preRequisite" ng-show="subject.subPreRequisite">
+									<li ng-repeat= "subject in subjectList | filter:subject.subPreRequisite | limitTo:5" ng-click="getPre(subject)">{{subject}}</li>
+								</ul>
 							</input-group>
 						</td>
 						<td>
