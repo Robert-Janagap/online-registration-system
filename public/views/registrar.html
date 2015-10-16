@@ -1,14 +1,14 @@
 <!-- sidebar -->
-<div class="three column admin_sidebar boxShadow">
+<div class="three column admin_sidebar boxShadow" ng-controller="navCtrl">
 	<div class="logo admin_sidebar_logo">
     	<a href="#/"><img src="/img/logo.png" alt="Bacolod City College"></a>
 	</div>
 	<div class="admin_sidebarNav">
 		<h4 class="person_role">Registrar</h4>
-		<select class="person">
-			<option selected><a href="">Faith Gwapa</a></option>
-			<option value=""><a href="">Manage Account</a></option>
-			<option value=""><a href="">Log-out</a></option>
+		<select class="person" ng-change="userSelect(userOption)" ng-model="userOption">
+			<option selected><a href="">{{currentUser.name}}</a></option>
+			<option value="account"><a href="">Manage Account</a></option>
+			<option value="logOut"><a href="">Log-out</a></option>
 		</select>
 		<ul>
 			<li class="admin_sidebarNav--list">
