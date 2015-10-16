@@ -1,30 +1,42 @@
-<div class="container">
 <!-- sidebar -->
-	<div class="three column admin_sidebar boxShadow ">
-		<div class="person">
-			<div class="person_image"><img src="img/me.png" alt=" Profile picture "></div>
-			<div class="person_name">{{currentUser.name}}</div>
-			<div class="person_role">{{currentUser.roles}}</div>
-		</div>
-		<div class="admin_sidebarNav">
-			<ul>
-				<li class="admin_sidebarNav--list">
-					<a class="admin_sidebarNav--item">Student List</a>
-				</li>
-				<li class="admin_sidebarNav--list">
-					<a class="admin_sidebarNav--item">Scheduling</a>
-				</li>
-				<li class="admin_sidebarNav--list">
-					<a class="admin_sidebarNav--item">Blogs</a>
-				</li>
-			</ul>
-		</div>
+<div class="three column admin_sidebar boxShadow">
+	<div class="logo admin_sidebar_logo">
+    	<a href="#/"><img src="/img/logo.png" alt="Bacolod City College"></a>
 	</div>
+	<div class="admin_sidebarNav">
+		<h4 class="person_role">Registrar</h4>
+		<select class="person">
+			<option selected><a href="">Faith Gwapa</a></option>
+			<option value=""><a href="">Manage Account</a></option>
+			<option value=""><a href="">Log-out</a></option>
+		</select>
+		<ul>
+			<li class="admin_sidebarNav--list">
+				<a class="admin_sidebarNav--item">Student List</a>
+			</li>
+			<li class="admin_sidebarNav--list">
+				<a class="admin_sidebarNav--item">Scheduling</a>
+			</li>
+			<li class="admin_sidebarNav--list">
+				<a class="admin_sidebarNav--item">Registration</a>
+			</li>
+		</ul>
+	</div>
+	<div class="copyright--tall copyright--client">
+        <div>
+            <span>copyright &copy; 2015 <a href="#/">Online Registration System</a></span>
+        </div>
+    </div>
+</div>
+<div class="container">
 <!-- contents -->
 	<div class="overlay"></div>
 	<div class="nine column pull--right">
 		<article class="content">
-			<h3>Student List</h3>
+			<div class="content__title content__title--admin">
+				<h3 class="content__title_text--admin">Student List</h3>
+				<span class="content__title_border"></span>
+			</div>	
 			<input-group>
 				<input type="text" ng-model="searchStudent">
 				<label for="">Search student</label>
@@ -91,14 +103,14 @@
 						</li>
 						<li>
 							<select name="" id="" ng-model="studentSchoolInfo.status">
-								<option value="">--select status--</option>
+								<option selected>--select status--</option>
 								<option value="regular">Regular</option>
 								<option value="irregular">Irregular</option>
 							</select>
 						</li>
 						<li>
 							<select name="" id="" ng-model="studentSchoolInfo.sectionId">
-								<option value="">--Select Section--</option>
+								<option selected>--Select Section--</option>
 								<option value="{{section._id}}" ng-repeat="section in sectionList">{{section.section}}</option>
 							</select>
 						</li>

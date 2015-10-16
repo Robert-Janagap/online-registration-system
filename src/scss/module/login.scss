@@ -2,8 +2,8 @@
 	margin: 0 auto;
 	margin-top: 50px;
 	margin-bottom: 200px;
-	label, input{
-		display: block;
-		margin-bottom: .8rem;
-	}
+	width: 50%;
+	border: 1px solid rgba(204, 204, 204, 0.85);
+    box-shadow: 0 2px 5px #ccc;
+    text-align: center;
 }

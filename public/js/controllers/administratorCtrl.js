@@ -194,7 +194,6 @@ app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($s
 			for (var i = data.length - 1; i >= 0; i--) {
 				 $scope.subjectList.push(data[i].subject_name);
 			};
-			console.log($scope.subjectList);
 		});
 		// utilities
 		$scope.subjectsOfYear = year;

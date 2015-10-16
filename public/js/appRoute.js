@@ -72,10 +72,10 @@ app.config(function($routeProvider){
 		.when('/administrator',{
 			templateUrl: 'views/administrator.html',
 			controller: 'administratorCtrl',
-			title: 'Administrator'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Administrator',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/program-coordinator',{
 			templateUrl: 'views/programCoordinator.html',
@@ -88,26 +88,26 @@ app.config(function($routeProvider){
 		.when('/evaluator',{
 			templateUrl: 'views/evaluator.html',
 			controller: 'evaluatorCtrl',
-			title: 'Evaluator'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Evaluator',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/registrar',{
 			templateUrl: 'views/registrar.html',
 			controller: 'registrarCtrl',
-			title: 'Registrar'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Registrar',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/teacher',{
 			templateUrl: 'views/teacher.html',
 			controller: 'teacherCtrl',
-			title: 'Teacher'
-			// resolve:{
-			// 	logincheck: checkLogin
-			// }
+			title: 'Teacher',
+			resolve:{
+				logincheck: checkLogin
+			}
 		})
 		.when('/student',{
 			templateUrl: 'views/student.html',
@@ -146,6 +146,12 @@ app.controller('navCtrl',['$scope','$http','$location','$rootScope', function($s
 			$rootScope.currentUser = null;
 			$location.url('/');
 		});
+	};
+	// sidebar nav client side select
+	$scope.userSelect = function(selected){
+		if(selected === "logOut"){
+			$scope.logOut();
+		}
 	};
 }]);
 

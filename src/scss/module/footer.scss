@@ -40,4 +40,17 @@ footer{
 	background: #116D05;
 	font-size: .8rem;
 	padding: .5rem 0;
+	&--tall{
+		padding: 1.2rem 0;
+	}
+	&--client{
+		position: absolute;
+		bottom: 50px;
+		text-align: center;
+		width: 100%;
+		a{
+			color: #3dc419;
+			display: block;
+		}
+	}
 }

@@ -1,31 +1,35 @@
+<!-- sidebar -->
+<div class="three column admin_sidebar boxShadow">
+	<div class="logo admin_sidebar_logo">
+    	<a href="#/"><img src="/img/logo.png" alt="Bacolod City College"></a>
+	</div>
+	<div class="admin_sidebarNav">
+		<h4 class="person_role">Teacher</h4>
+		<select class="person">
+			<option selected><a href="">Anthony Abellar</a></option>
+			<option value=""><a href="">Manage Account</a></option>
+			<option value=""><a href="">Log-out</a></option>
+		</select>
+		<ul>
+			<li class="admin_sidebarNav--list">
+				<a class="admin_sidebarNav--item">Class Schedule</a>
+			</li>
+		</ul>
+	</div>
+	<div class="copyright--tall copyright--client">
+        <div>
+            <span>copyright &copy; 2015 <a href="#/">Online Registration System</a></span>
+        </div>
+    </div>
+</div>
 <div class="container">
 	<div class="overlay"></div>
-	<div class="three column admin_sidebar boxShadow ">
-		<div class="person">
-			<div class="person_image"><img src="img/me.png" alt=" Profile picture "></div>
-			<div class="person_name">{{currentUser.name}}</div>
-			<div class="person_role">{{currentUser.roles}}</div>
-		</div>
-		<div class="admin_sidebarNav">
-			<ul>
-				<li class="admin_sidebarNav--list">
-					<a class="admin_sidebarNav--item">Curriculum</a>
-				</li>
-				<li class="admin_sidebarNav--list">
-					<a class="admin_sidebarNav--item">Assestments</a>
-				</li>
-				<li class="admin_sidebarNav--list">
-					<a class="admin_sidebarNav--item">Faculty and Staff</a>
-				</li>
-				<li class="admin_sidebarNav--list">
-					<a class="admin_sidebarNav--item">Blog</a>
-				</li>
-			</ul>
-		</div>
-	</div>
 	<div class="nine column pull--right">
 		<div class="content row">
-			<h4>Class Schedule</h4>
+			<div class="content__title content__title--admin">
+				<h3 class="content__title_text--admin">Class Schedule</h3>
+				<span class="content__title_border"></span>
+			</div>	
 			<table>
 				<thead>
 					<tr>
