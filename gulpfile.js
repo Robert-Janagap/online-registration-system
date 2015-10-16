@@ -11,6 +11,8 @@ var jshint = require('gulp-jshint');
 var jshintSylish = require('jshint-stylish');
 var htmlify = require('gulp-angular-htmlify');
 var minifyHtml = require('gulp-minify-html');
+var minifyImage = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
 //styles
 gulp.task( 'sass',function(){
 
@@ -61,7 +63,15 @@ gulp.task('html', function(){
 		//.pipe(rename({suffix:'.min'}))
 		.pipe(gulp.dest('production/'));
 });
-
+//minify image
+gulp.task('imagemin', function(){
+	return gulp.src('./public/img/*')
+		.pipe(minifyImage({
+			progressive: true,
+			use: [pngquant()]
+			}))
+		.pipe(gulp.dest('production/img/'));
+});
 //javascript linting
 gulp.task('linting', function(){
 	return gulp.src('./public/js/**/*.js')
@@ -78,5 +88,5 @@ gulp.task( 'watching',function(){
 gulp.task('default', ['watching']);
 
 //production
-gulp.task('minify', ['html', 'sass-minify', 'js']);
+gulp.task('minify', ['html', 'sass-minify', 'js', 'imagemin']);
 
