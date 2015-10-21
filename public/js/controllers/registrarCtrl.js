@@ -40,13 +40,13 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 				
 
 				$http.get('/registrar/student-enrolled/'+ $scope.studentSchoolInfo.student_no).success(function(student){
-					if(student.enrolled === false){
-						$scope.student_schedule = true;
-						$scope.studentEnrolled = false;
-					}else{
+					if(student.enrolled === true){
 						$scope.student_schedule = false;
 						$scope.studentEnrolled = true;
 						$scope.showSchedule = false;
+					}else{
+						$scope.student_schedule = true;
+						$scope.studentEnrolled = false;
 					}
 				});
 

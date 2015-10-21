@@ -4,36 +4,62 @@
 		<span class="content__title_border"></span>
 	</div>
 	<div class="registration__form">
-		<form action="">
+		<form action="" novalidate name="form" class="css-form">
 			<div class="input__groups">
 				<h3 class="content__title_text">application data</h3>
 				<div class="input__group--normal">
 					<label for="">Your Department</label>
-					<select name="" id="">
-						<option value="">ICT - Information Communication Technology</option>
+					<select name="" id="" ng-model="register.department" ng-change="studentDepartment(register.department)">
+						<option value="">--select department--</option>
+						<option value="{{department.department_name}}" ng-repeat="department in departments">{{department.department_name}} -- {{department.department_des}}</option>
 					</select>
 				</div>
 				<div class="input__group--normal">
 					<label for="">Course</label>
-					<select name="" id="">
-						<option value="">BSIT - Bachelor of information technology</option>
+					<select name="" id="" ng-change="studentCourseYear(courseYear, register.department)" ng-model="register.course_name">
+						<option value="">--select course--</option>
+						<option value="{{course.course_name}}" ng-repeat="course in courses">{{course.course_name}}--{{course.course_des}}</option>
 					</select>
 				</div>
 				<div class="input__group--normal">
 					<label for="">Year Level</label>
 					<ul class="list_items">
-		    			<li><input type="checkbox" ng-model="" ng-true-value=1>1st</li>
-		    			<li><input type="checkbox" ng-model="" ng-true-value=2>2nd</li>
-		    			<li><input type="checkbox" ng-model="" ng-true-value=3>3rd</li>
-		    			<li><input type="checkbox" ng-model="" ng-true-value=4>4th</li>
+		    			<li>
+		    				<label for="year_level_one">
+		    					<input type="checkbox" ng-model="register.year_level" ng-true-value=1 id="year_level_one">1st
+		    				</label>
+		    			</li>
+		    			<li>
+		    				<label for="year_level_two">
+		    					<input type="checkbox" ng-model="register.year_level" ng-true-value=2 id="year_level_two">2nd
+		    				</label>
+		    			</li>
+		    			<li>
+		    				<label for="year_level_three">
+		    					<input type="checkbox" ng-model="register.year_level" ng-true-value=3 id="year_level_three">3rd
+		    				</label>
+		    			</li>
+		    			<li>
+		    				<label for="year_level_four">
+		    					<input type="checkbox" ng-model="register.year_level" ng-true-value=4 id="year_level_four">4th
+		    				</label>
+		    			</li>
 		    		</ul>
 				</div>
 				
 		    	<div class="input__group--normal">
 					<label for="">Term</label>
 					<ul class="list_items">
-		    			<li><input type="checkbox" ng-model="" ng-true-value=1>1st semester</li>
-		    			<li><input type="checkbox" ng-model="" ng-true-value=2>2nd semester</li>
+		    			<li>
+		    				<label for="one_semester">
+		    					<input type="checkbox" ng-model="register.term" ng-true-value=1 id="one_semester">1st semester
+		    				</label>
+		    			</li>
+		    			<li>
+		    				<label for="two_semester">
+		    					<input type="checkbox" ng-model="register.term" ng-true-value=2 id="two_semester">2nd semester
+		    				</label>
+		    			</li>
 		    		</ul>
 				</div>
 			
@@ -41,131 +67,193 @@
 			
 			</div>
 
-			
 			<div class="input__groups">
-				<h3 class="content__title_text">personal data</h3>
+				<h3 class="content__title_text">personal data <span class="small">* this input field must be filled up</span></h3>
 
 				<div class="input__group--normal">
-					<label for="">First name</label>
-					<input type="text">
+					<label for="">First name *</label>
+					<input type="text" ng-model="register.first_name" name="firstName" required>
+					<div ng-show="form.$submitted || form.firstName.$touched">
+						<span ng-show="form.firstName.$error.required">Tell us your name</span>
+					</div>
 				</div>
 
 				<div class="input__group--normal">
-					<label for="">Surname name</label>
-					<input type="text">
+					<label for="">Surname name *</label>
+					<input type="text" ng-model="register.last_name" name="surname" required>
+					<div ng-show="form.$submitted || form.surname.$touched">
+						<span ng-show="form.surname.$error.required">Tell us your surname</span>
+					</div>
 				</div>
 
 				<div class="input__group--normal">
-					<label for="">Middle name</label>
-					<input type="text">
+					<label for="">Middle name *</label>
+					<input type="text" ng-model="register.middle_name" name="middleName" required>
+					<div ng-show="form.$submitted || form.middleName.$touched">
+						<span ng-show="form.middleName.$error.required">Tell us your middle name</span>
+					</div>
 				</div>
 
 				<div class="input__group--normal">
-					<label for="">Age</label>
-					<input type="number">
+					<label for="">Age *</label>
+					<input type="number" ng-model="register.age" name="age" required>
+					<div ng-show="form.$submitted || form.age.$touched">
+						<span ng-show="form.age.$error.required">Tell us your age</span>
+					</div>
 				</div>
 				
 				<div class="input__group--normal">
 					<label for="">Gender</label>
 					<ul class="list_items">
-		    			<li><input type="checkbox" ng-model="" ng-true-value=1>Male</li>
-		    			<li><input type="checkbox" ng-model="" ng-true-value=2>Female</li>
+		    			<li>
+		    				<label for="male_gender">
+		    					<input type="checkbox" ng-model="register.gender" ng-true-value="'male'" id="male_gender">male
+		    				</label>
+		    			</li>
+		    			<li>
+		    				<label for="female_gender">
+		    					<input type="checkbox" ng-model="register.gender" ng-true-value="'female'" id="female_gender">female
+		    				</label>
+		    			</li>
 		    		</ul>
 				</div>
 				
 				<div class="input__group--normal">
-					<label for="">Address</label>
-					<input type="text">
+					<label for="">Address *</label>
+					<input type="text" ng-model="register.address" name="address" required>
+					<div ng-show="form.$submitted || form.address.$touched">
+						<span ng-show="form.address.$error.required">Tell us your address</span>
+					</div>
 				</div>
 				
 				<div class="input__group--normal">
-					<label for="">Contact no.</label>
-					<input type="number">
+					<label for="">Contact no. *</label>
+					<input type="number" ng-model="register.contact" name="contact" required>
+					<div ng-show="form.$submitted || form.contact.$touched">
+						<span ng-show="form.contact.$error.required">Tell us your contact number</span>
+					</div>
 				</div>
 
 				<div class="input__group--normal">
-					<label for="">Date of birth</label>
-					<input type="date">
+					<label for="">Date of birth *</label>
+					<input type="date" ng-model="register.date" name="birth" required>
+					<div ng-show="form.$submitted || form.birth.$touched">
+						<span ng-show="form.birth.$error.required">Tell us your birthday</span>
+					</div>
 				</div>
 
 				<div class="input__group--normal">
 					<label for="">Nationality</label>
-					<input type="text">
+					<input type="text" ng-model="register.nationality">
 				</div>
 
 				<div class="input__group--normal">
 					<label for="">Civil status</label>
 					<ul class="list_items">
-		    			<li><input type="checkbox" ng-model="" ng-true-value=1>single</li>
-		    			<li><input type="checkbox" ng-model="" ng-true-value=2>married</li>
+		    			<li>
+			    			<label for="single_status">
+			    				<input type="checkbox" ng-model="register.civil_status" ng-true-value="'single'" id="single_status">
+								single
+							</label>
+		    			</li>
+		    			<li>
+		    				<label for="married_status">
+		    					<input type="checkbox" ng-model="register.civil_status" ng-true-value="'married'" id="married_status">
+		    					married
+		    				</label>
+		    			</li>
 		    		</ul>
 				</div>
 
 				<div class="input__group--normal">
-					<label for="">Nationality</label>
-					<input type="text">
-				</div>
-
-				<div class="input__group--normal">
 					<label for="">Religion</label>
-					<input type="text">
+					<input type="text" ng-model="register.religion">
 				</div>
 
 				<div class="input__group--normal">
-					<label for="">Email</label>
-					<input type="email">
+					<label for="">Email <span class="small">(example@gmail.com)</span> *</label>
+					<input type="email" ng-model="register.email" name="uEmail" required="">
+					<div ng-show="form.$submitted || form.uEmail.$touched">
+						<span ng-show="form.uEmail.$error.required">Tell us your email</span>
+						<span ng-show="form.uEmail.$error.email">This is not a valid email</span>
+					</div>
 				</div>
 
 				<div class="input__group--normal">
 					<label for="">Mother's name</label>
-					<input type="text">
+					<input type="text" ng-model="register.mother_name">
 				</div>
 
 				<div class="input__group--normal">
 					<label for="">Mother's Occupation</label>
-					<input type="text">
+					<input type="text" ng-model="register.mother_occupation">
 				</div>
 
 				<div class="input__group--normal">
 					<label for="">Father's name</label>
-					<input type="text">
+					<input type="text" ng-model="register.father_name">
 				</div>
 
 				<div class="input__group--normal">
 					<label for="">Father's Occupation</label>
-					<input type="text">
+					<input type="text" ng-model="register.father_occupation">
 				</div>
-
+				
 				<hr>
 			</div>
 
-			<div class="input__groups input__groups--last">
+			<div class="input__groups">
+				<h3 class="content__title_text">Educational Background</h3>
+				<div class="input__group--normal">
+		    		<label>Highest Educational Attended</label>
+		    		<select name="" id="" ng-model="register.high_Educ_Att">
+		    			<option selected>--Highest Educational Attended--</option>
+		    			<option value="high-school">High School</option>
+		    			<option value="college">College</option>
+		    			<option value="vocational">Vocational</option>
+		    			<option value="masteral">Masteral</option>
+		    			<option value="doctorate">Doctorate</option>
+		    		</select>
+		    	</div>
+		    	<div class="input__group--normal">
+		    		<label>previous school</label>
+		    		<input type="text" ng-model="register.prev_school">
+		    	</div>
+		    	<div class="input__group--normal">
+		    		<label>school address</label>
+		    		<input type="text" ng-model="register.prev_school_add">
+		    	</div>
+		    	<span ng-show="!guardian">do you have Guardian <span class="btn" ng-click="guardian = true">Yes</span> or just <button class="btn btn--blue" ng-disabled="form.$invalid" ng-click="submitRegistrationForm(register)">Submit</button></span>
+		    	<hr>
+			</div>
+
+			<div class="input__groups input__groups--last" ng-show="guardian">
 				<h3 class="content__title_text">Guardian information</h3>
 
 				<div class="input__group--normal">
-					<label for="">Guardina name</label>
-					<input type="text">
+					<label for="">Guardian name</label>
+					<input type="text" ng-model="register.guardian_name">
 				</div>
 
 				<div class="input__group--normal">
 					<label for="">Address</label>
-					<input type="text">
+					<input type="text" ng-model="register.guardian_add">
 				</div>
 
 				<div class="input__group--normal">
 					<label for="">Contact no.</label>
-					<input type="number">
+					<input type="number" ng-model="register.guardian_contact">
 				</div>
 
 				<div class="input__group--normal">
 					<label for="">Relationship</label>
-					<input type="text">
+					<input type="text" ng-model="register.guardian_rel">
 				</div>
 
 				<hr>
 			</div>
 
-			<div class="btn btn--blue">Submit</div>
+			<submit class="btn btn--blue" ng-click="submitRegistrationForm(register)" ng-show="guardian">Submit</submit>
 		</form>
 	</div>
 </div>

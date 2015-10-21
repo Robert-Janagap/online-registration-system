@@ -49,41 +49,6 @@ app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', funct
 			// $scope.yearsAndTerms();
 		});
 	};
-	// $scope.yearsAndTerms = function(){
-	// 	var years = [];
-	// 	var terms = [];
-	// 	var student = $scope.studentInfo;
-	// 	var curriculum_year = student.curriculum;
-	// 	$http.post('/evaluator/course-yearsAndTerms/' + curriculum_year, student).success(function(curriculum){
-	// 		for (var i = curriculum.length - 1; i >= 0; i--) {
-
-	// 			for (var b = curriculum[i].courses.length - 1; b >= 0; b--) {
-
-	// 				if(curriculum[i].courses[b].course_name == student.course_name){
-
-	// 					$scope.courseInfo = curriculum[i].courses[b];
-
-	// 					for (var y = 1; $scope.courseInfo.totalYears >= y; y++) {
-	// 						years.push(y);
-	// 					}
-
-	// 					for (var x = 1; $scope.courseInfo.totalTerms >= x; x++) {
-	// 						terms.push(x);
-	// 					}
-						
-	// 					$scope.course_years = years;
-	// 					$scope.course_terms = terms;
-	// 				}	
-
-	// 			}
-				
-	// 		}
-			
-	// 	});
-	// 	// console.log(student);
-	// 	// console.log($scope.course_years);
-	// }
-	
 	// current curriculum
 	$http.get('/evaluator/currentCurriculum').success(function(currentCurriculum){
 		$currentCur = currentCurriculum.curriculumYear;

@@ -37,7 +37,8 @@
     "morgan": "^1.6.1",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
-    "pg": "^4.4.2"
+    "pg": "^4.4.2",
+    "sendgrid": "^1.9.2"
   },
   "devDependencies": {
     "browser-sync": "^2.8.2",
@@ -56,6 +57,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.5.2",
+    "gulp-strip-debug": "^1.0.2",
     "gulp-uglify": "^1.4.1",
     "gulp-uncss": "^1.0.4",
     "imagemin-pngquant": "^4.2.0",
