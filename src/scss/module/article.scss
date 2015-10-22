@@ -5,6 +5,22 @@
 		margin-top: 0;
 	}
 }
+.contents{
+	&__title{
+		margin-top: 0;
+		&--normal{
+			margin-bottom: .5rem;
+		}
+	}
+	&__image{
+		display: block;
+		width: 100%;
+		height: 250px;
+		background: #ccc;
+		border-radius: 4px;
+		margin-top: 2rem;
+	}
+}
 .content--right{
 	text-align: center;
 }
@@ -13,4 +29,35 @@
 	color: #fff;
 	padding-top: 1rem;
 	padding-bottom: 3rem;
+}
+.faculty__card{
+	margin: 2rem 0;
+	&--circle{
+		width: 20%;
+	    height: 100px;
+	    background: #ccc;
+	    border-radius: 100%;
+	    float: left;
+	}
+	&_info{
+		float: left;
+	    width: 76%;
+	    margin-left: .5rem;
+	}
+	&_name{
+		display: block;
+	    margin-bottom: 7px;
+	    margin-top: 10px;
+	}
+	blockqoute{
+		    font-size: 0.9rem;
+	}
+}
+.news__title{
+	text-align: center;
+}
+
+.news__section{
+	margin: 3rem 0;
+	border-bottom: 2px solid #ccc;
 }

@@ -49,3 +49,14 @@
    		}
 	}
 }
+.circle__count{
+	border: 1px solid #ccc;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    margin: 0 auto;
+    border-radius: 100%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

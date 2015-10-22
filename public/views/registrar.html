@@ -142,7 +142,9 @@
 								</thead>
 								<tbody>
 									<tr ng-repeat="schedule in sectionSchedules.schedule | filter:searchSchedule">
-										<td><div class="btn" ng-click="viewStudents(schedule)">view</div></td>
+										<td>
+											<div class="btn" ng-click="viewStudents(schedule)">view</div>
+										</td>
 										<td>{{schedule.subject_name}}</td>
 										<td>{{schedule.units}}</td>
 										<td>{{schedule.section}}</td>
@@ -164,7 +166,6 @@
 							<caption>Subject Schedule</caption>
 							<thead>
 								<tr>
-									<th>Student list</th>
 									<th>Subject Code</th>
 									<th>Units</th>
 									<th>Section</th>
@@ -176,7 +177,6 @@
 							</thead>
 							<tbody>
 								<tr ng-repeat ="schedule in irregularSchedules">
-									<td><div class="btn" ng-click="viewStudents(schedule)">view</div></td>
 									<td>{{schedule.subject_name}}</td>
 									<td>{{schedule.units}}</td>
 									<td>{{schedule.section_name}}</td>
@@ -201,6 +201,7 @@
 				<h4>already enrolled</h4>
 			</div>
 		</article>
+		<!-- student list -->
 		<article class="content row" ng-show="studentList">
 			<span>student list: {{student_count}}</span>
 			<table>

@@ -12,13 +12,9 @@ var express =require( 'express' ),
 	port =process.env.PORT ||3000;
 
 // connect to database
+var mongoDbURL = require('./config/database.js');
 
-//local
-mongoose.connect('mongodb://127.0.0.1/onlineRegistrationSystem');
-
-//web
-// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://heroku_6sh77jbx:m2p275b5iretgt9oggkunm6bnv@ds047602.mongolab.com:47602/heroku_6sh77jbx');
-
+mongoose.connect(mongoDbURL.url);
 
 //database
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
@@ -31,8 +27,8 @@ var studentSchoolInfo = mongoose.model('studentSchoolInfo', require('./app/model
 
 //use middleware
 app.use(compression());
-app.use( express.static( path.join( __dirname,'/public' ) ) );
-// app.use( express.static( path.join( __dirname,'/production' ) ) );
+// app.use( express.static( path.join( __dirname,'/public' ) ) );
+app.use( express.static( path.join( __dirname,'/production' ) ) );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended :true } ) );
 app.use(session({

@@ -1,0 +1,27 @@
+.sidebar{
+	text-align: center;
+    font-size: .9rem;
+	&__news{
+		display: block;
+		border-bottom: 2px solid #DAD8D8;
+    	margin-bottom: 1rem;
+    	&:last-child{
+    		border-bottom: 0;
+    	}
+		&--items{
+		}
+	}
+	&__inner{
+		padding: .8rem;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+	img{
+		margin: 0 auto;
+		width: 80%;
+	    background: #ccc;
+	    border-radius: 4px;
+	    vertical-align: middle;
+	    height: 80px;
+	}
+}

@@ -13,6 +13,7 @@ var htmlify = require('gulp-angular-htmlify');
 var minifyHtml = require('gulp-minify-html');
 var minifyImage = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
+var stripDebug = require('gulp-strip-debug');
 //styles
 gulp.task( 'sass',function(){
 
@@ -46,6 +47,7 @@ gulp.task( 'js',function(){
 	return gulp.src( ['./public/lib/jquery-2.1.4.min.js','./public/lib/angular.min.js', './public/lib/angular-route.min.js', './public/lib/sideBarFixed.js', './public/js/appRoute.js', './public/js/controllers/*.js'] )
 	    .pipe( plumber() )
 		.pipe(sourcemap.init())
+			.pipe(stripDebug())
 	    	.pipe(concat('app.js'))
 	    	.pipe(ngAnnotate())
 	    	.pipe(uglify())
