@@ -1,4 +1,38 @@
 app.controller('administratorCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
+	//default
+	$scope.curriculum_list =true;
+	$scope.show_content = function(value){
+		
+		console.log(value);
+		if(value === 1){
+			$scope.curriculum_list =true;
+			$scope.assestment_view =false;
+			$scope.faculty_view =false;
+			$scope.school_settings = false;
+		}else if( value === 2 ){
+			$scope.curriculum_list =false;
+			$scope.assestment_view =true;
+			$scope.faculty_view =false;
+			$scope.school_settings = false;
+		}else if( value === 3 ){
+			$scope.curriculum_list =false;
+			$scope.assestment_view =false;
+			$scope.faculty_view =true;
+			$scope.school_settings = false;
+		}else{
+			$scope.school_settings = true;
+			$scope.curriculum_list =false;
+			$scope.assestment_view =false;
+			$scope.faculty_view =false;
+		}	
+	}
+	// reset student enrolled status
+	$scope.resetStudent = function(){
+		$http.put('administrator/reset').success(function(data){
+			$scope.resetMsg = "Succefully restarted the enrollment"
+		});
+		$scope.resetMsg ="successfully reset enrollment"
+	}
 	// add users
 	$scope.refreshUsers = function(){
 		$http.get('/administrator/users').success(function(data){

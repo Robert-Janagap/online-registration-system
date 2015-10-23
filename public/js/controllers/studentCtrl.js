@@ -1,14 +1,46 @@
 app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
-	// view grades
-	// get course years and term
-	// filter course subjects based on yeaer and term
-
 	// student_id
-	var student_id = $rootScope.currentUser.username;
+	// var student_id = $rootScope.currentUser.username;
 	
 	// testing
-	// var student_id = 3816206;
+	var student_id = 3816206;
 	
+	// default
+	$scope.courseSchedule_view =true;
+	$scope.student_view = function(value){
+		if(value === 1) {
+			$scope.courseSchedule_view =true;
+			$scope.schedule_view =false;
+			$scope.financial_view =false;
+			$scope.grades_view =false;
+			$scope.courseSubjects_view =false;
+		}else if(value === 2){
+			$scope.courseSchedule_view =false;
+			$scope.schedule_view =true;
+			$scope.financial_view =false;
+			$scope.grades_view =false;
+			$scope.courseSubjects_view =false;
+		}else if(value === 3){
+			$scope.courseSchedule_view =false;
+			$scope.schedule_view =false;
+			$scope.financial_view =true;
+			$scope.grades_view =false;
+			$scope.courseSubjects_view =false;
+		}else if(value === 4){
+			$scope.courseSchedule_view =false;
+			$scope.schedule_view =false;
+			$scope.financial_view =false;
+			$scope.grades_view =true;
+			$scope.courseSubjects_view =false;
+		}else{
+			$scope.courseSchedule_view =false;
+			$scope.schedule_view =false;
+			$scope.financial_view =false;
+			$scope.grades_view =false;
+			$scope.courseSubjects_view =true;
+		}
+	}
+
 	// get student schedules
 	$http.get('/student/studentSchedules/' + student_id).success(function(student){
 		$scope.schedules = student.schedule;
@@ -210,6 +242,11 @@ app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, 
 				$scope.requested_schedules = student.request;
 
 		});
+	};
+	$scope.gpa = function(prelim, midterm, preFinal, finals){
+		console.log(prelim, midterm, preFinal, finals);
+		var gpa = (prelim + midterm + preFinal + finals) / 4;
+		return gpa;
 	};
 }]);
 

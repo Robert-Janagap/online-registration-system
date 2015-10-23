@@ -5,7 +5,44 @@ var assestments = mongoose.model('assestments');
 var curriculumList = mongoose.model('curriculumList');
 var curriculums = mongoose.model('curriculums');
 var users = mongoose.model('users');
+var studentSchoolInfo = mongoose.model('studentSchoolInfo');
+var studentList = mongoose.model('studentList');
 
+// reset enrollment
+router.put('/reset', function( req, res){
+	studentSchoolInfo.update({}, {$set:{
+		enrolled:false,
+		schedule:[]
+	}}, 
+	{multi: true}, 
+	function(err, data){
+		if(err){
+			return err;
+		}
+	});
+
+	// studentList.update({}, {$set:{
+	// 	subjects:[]
+	// }}, 
+	// {multi: true}, 
+	// function(err, data){
+	// 	if(err){
+	// 		return err;
+	// 	}
+	// 	res.json(data);
+	// });
+
+	users.update({}, {$set:{
+		studentList:[],
+	}}, 
+	{multi: true}, 
+	function(err, data){
+		if(err){
+			return err;
+		}
+	});
+
+});
 //for selected curriculum
 router.get('/curriculumSel/:id', function( req, res) {
 	curriculums.find({school_year: req.params.id}, function(err, data){

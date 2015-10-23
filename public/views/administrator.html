@@ -12,13 +12,16 @@
 		</select>
 		<ul>
 			<li class="admin_sidebarNav--list">
-				<a class="admin_sidebarNav--item">Curriculum</a>
+				<a class="admin_sidebarNav--item" ng-click="show_content(1)">Curriculum</a>
 			</li>
 			<li class="admin_sidebarNav--list">
-				<a class="admin_sidebarNav--item">Assestments</a>
+				<a class="admin_sidebarNav--item" ng-click="show_content(2)">Assestments</a>
 			</li>
 			<li class="admin_sidebarNav--list">
-				<a class="admin_sidebarNav--item">Faculty and Staff</a>
+				<a class="admin_sidebarNav--item" ng-click="show_content(3)">Faculty and Staff</a>
+			</li>
+			<li class="admin_sidebarNav--list">
+				<a class="admin_sidebarNav--item" ng-click="show_content(4)">School Settings</a>
 			</li>
 		</ul>
 	</div>
@@ -31,8 +34,26 @@
 <div class="container">
 <!-- contents -->
 	<div class="nine column pull--right">
+		<article class="content row" ng-show="school_settings">
+			<div class="content__title content__title--admin">
+				<h3 class="content__title_text--admin">School Settings</h3> <span class="error_message">{{curriculumError}}</span>
+				<span class="content__title_border"></span>
+			</div>
+			<ul>
+				<li>
+					<span>Reset Enrollment</span>
+					<div class="btn btn--red" ng-click="resetStudent()">Reset</div>
+					<div ng-show="resetMsg">{{resetMsg}}</div>
+				</li>
+				<!-- <li>
+					<span>Change Semester</span>
+					<div class="btn btn--green">1st semester</div>
+					<div class="btn btn--green">2nd semester</div>
+				</li> -->
+			</ul>	
+		</article>
 		<!-- Curriculum list -->
-		<article class="content row">
+		<article class="content row" ng-show="curriculum_list">
 			<div class="content__title content__title--admin">
 				<h3 class="content__title_text--admin">Curriculum <add-cur></add-cur></h3> <span class="error_message">{{curriculumError}}</span>
 				<span class="content__title_border"></span>
@@ -58,7 +79,7 @@
 				<input type="text" class="input_units" ng-model="curriculum_new.curriculum_year">
 				<label for="">Year</label>
 			</input-group>
-			<closeadd-cur class="btn pull--right" ng-click="addCurriculum(curriculum_new)">Save</closeadd-cur>
+			<closeadd-cur class="btn pull--right btn--blue" ng-click="addCurriculum(curriculum_new)">Save</closeadd-cur>
 		</div>
 		<!-- curriculum information -->
 		<article class="content row departmentList">
@@ -103,10 +124,10 @@
 				<!-- department list -->
 				<ul class="department_settings row" ng-repeat="department in curriculum">
 					<li ng-click="getCourses(department._id,department)">
-					<span>{{department.department_name}}</span>
-					<span>{{department.department_des}}</span>
-					<button class="btn btn--red" ng-click="deleteDep(department._id, curYear)">X</button>
-					<update-department class="btn btn--orange" ng-click="editDep(department)">edit</update-department>
+						<span>{{department.department_name}}</span>
+						<span>{{department.department_des}}</span>
+						<update-department class="btn btn--orange" ng-click="editDep(department)">edit</update-department>
+						<button class="btn btn--red" ng-click="deleteDep(department._id, curYear)">X</button>
 					</li>
 				</ul>
 				<!-- department courses -->
@@ -157,7 +178,7 @@
 			</form>
 		</article>
 		<!-- assestment view -->
-		<article class="content row">
+		<article class="content row" ng-show="assestment_view">
 			<div class="content__title content__title--admin">
 				<h3 class="content__title_text--admin">Assestment <openfees></openfees></h3> <span class="error_message">{{errorAssestment}}</span>
 				<span class="content__title_border"></span>
@@ -242,7 +263,7 @@
 			</div>
 		</article>
 		<!-- faculty and staff -->
-		<article class="content row facultyStaff">
+		<article class="content row facultyStaff" ng-show="faculty_view">
 			<div class="content__title content__title--admin">
 				<h3 class="content__title_text--admin">Faculty and Staff <faculty-stuff>+</faculty-stuff></h3> <span class="error_message">{{errorUser}}</span>
 				<span class="content__title_border"></span>
@@ -257,7 +278,6 @@
 						<th>Name</th>
 						<th>Role</th>
 						<th>Username</th>
-						<th>Password</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -265,7 +285,6 @@
 						<td>{{user.name}}</td>
 						<td>{{user.roles}}</td>
 						<td>{{user.username}}</td>
-						<td>{{user.password}}</td>
 						<td><div class="btn btn--orange">Edit</div></td>
 						<td><div class="btn btn--red" ng-click="deleteUser(user._id)">Delete</div></td>
 					</tr>

@@ -14,12 +14,6 @@
 			<li class="admin_sidebarNav--list">
 				<a class="admin_sidebarNav--item">Student List</a>
 			</li>
-			<li class="admin_sidebarNav--list">
-				<a class="admin_sidebarNav--item">Scheduling</a>
-			</li>
-			<li class="admin_sidebarNav--list">
-				<a class="admin_sidebarNav--item">Registration</a>
-			</li>
 		</ul>
 	</div>
 	<div class="copyright--tall copyright--client">
@@ -343,7 +337,7 @@
         				<td>{{grade.Midterm}}</td>
         				<td>{{grade.PreFinal}}</td>
         				<td>{{grade.Final}}</td>
-        				<td>total</td>
+        				<td>{{gpa(grade.Prelim,grade.Midterm,grade.PreFinal,grade.Final)}}</td>
 	        		</tr>
         		</tbody>
         	</table>

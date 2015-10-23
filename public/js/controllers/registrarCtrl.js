@@ -65,6 +65,9 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			});
 
 		});
+
+		$scope.showSchedule = false;
+		$scope.studentRegular = false;
 	};
 
 	// find section schedule, add and find student curriculum subjects, student user access
@@ -100,17 +103,24 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 		//get curriculum subjects
 		$http.get('/registrar/student-curriculum/' + school_info.curriculum).success(function(curriculum){
 			var curriculumSubjects = [];
-			for (var i = curriculum.length - 1; i >= 0; i--) {
-				for (var b = curriculum[i].subjects.length - 1; b >= 0; b--) {
-					if(curriculum[i].subjects[b].course_name == school_info.course_name){
-						
-						// add student curriculum subjects
-						$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculum[i].subjects[b]).success(function(student){
-						});
+			// check if user is already have curriculum subjects
+			$http.get('registrar/check-curriculum/' + $scope.student_id).success(function(data){
+				if(data.subjects.length !== 0){
+					console.log('ok dokie');
+				}else{
+					for (var i = curriculum.length - 1; i >= 0; i--) {
+						for (var b = curriculum[i].subjects.length - 1; b >= 0; b--) {
+							if(curriculum[i].subjects[b].course_name == school_info.course_name){
+								
+								// add student curriculum subjects
+								$http.put('/registrar/student-subjects/' + $scope.student_id,  curriculum[i].subjects[b]).success(function(student){
+								});
 
+							}
+						}
 					}
 				}
-			}
+			});
 		});
 
 		
@@ -188,6 +198,7 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 			});
 		} 
 		$scope.student_schedule = false;
+		$scope.showSchedule = false;
 	};
 	// add student schedule for irregular
 	$scope.irregularSchedule = function(schedule){
@@ -254,12 +265,15 @@ app.controller('registrarCtrl', ['$scope', '$http', function($scope, $http){
 
 	$scope.saveIrregularSched = function(){
 		$scope.student_schedule = false;
+		$scope.studentRegular = false;
 	};
 
 	$scope.closeErrorMessageEnrolled = function(){
 		$scope.studentEnrolled = false;
 	};
-	$scope.getStudentReq = function(){
-
-	}
+	$scope.gpa = function(prelim, midterm, preFinal, finals){
+		console.log(prelim, midterm, preFinal, finals);
+		var gpa = (prelim + midterm + preFinal + finals) / 4;
+		return gpa;
+	};
 }]);

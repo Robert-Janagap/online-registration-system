@@ -7,6 +7,17 @@ var studentSchoolInfo = mongoose.model('studentSchoolInfo');
 var curriculums = mongoose.model('curriculums');
 var users = mongoose.model('users');
 
+
+
+// check student curriculum subjects
+router.get('/check-curriculum/:id', function( req, res){
+	studentList.findById(req.params.id, function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	});
+});
 // get student list
 router.get('/students', function( req, res) {
 	studentList.find({}, function(err, data){
@@ -142,7 +153,6 @@ router.get('/student-curriculum/:id', function(req, res){
 
 // add student curriculum subjects
 router.put('/student-subjects/:id', function(req, res){
-
 	studentList.findByIdAndUpdate(req.params.id,{
 		$addToSet:{
 			subjects:{

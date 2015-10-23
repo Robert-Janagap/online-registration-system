@@ -67,5 +67,17 @@ router.get('/courses/:id', function(req, res){
 		res.json(data);
 	});
 });
-
+// register old student
+router.put('/register_oldStudent/:id', function(req, res){
+	studentSchoolInfo.update({student_no: req.params.id},{$set:{
+		course_name:req.body.course_name,
+		year_level:req.body.year_level,
+		term:req.body.term,
+	}} ,function(err, data){
+		if(err){
+			return err;
+		}
+		res.json(data);
+	})
+});
 module.exports =router;

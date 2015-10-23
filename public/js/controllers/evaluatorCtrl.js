@@ -1,4 +1,33 @@
 app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', function($scope, $http, $filter,$rootScope){
+	// default
+	$scope.student_list = true;
+	$scope.show_contents = function(value){
+		if(value === 1){
+			$scope.student_list = true;
+			$scope.registration_view = false;
+		}else{
+			$scope.student_list = false;
+			$scope.registration_view = true;
+		}
+	};
+	// register old student
+	$scope.registerOldStudent = function(school_info, student_no){
+		$http.put('evaluator/register_oldStudent/'+ student_no, school_info).success(function(data){
+			// $scope.registerMsg = "succesfully register this student";
+		});
+		
+	}
+	// current curriculum
+	$http.get('/registration/currentCurriculum').success(function(currentCurriculum){
+		$currentCur = currentCurriculum.curriculumYear;
+
+		// get courses in current curriculum
+		$http.get('/registration/courses/' + $currentCur).success(function(department){
+			$scope.departments = department;
+		});
+
+	});
+	
 	// School year
 	var currentYear = new Date().getFullYear();
 	var nextYear = new Date().getFullYear() + 1;
@@ -13,6 +42,7 @@ app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', funct
 	$scope.viewNewStudents();
 
 	$scope.addNewStudent = function(newStudent){
+
 		// correct the format of Date of Birth
 		var birthday = $filter('date')(newStudent.date, "yyyy-MM-dd");
 		// for student random number
@@ -49,17 +79,30 @@ app.controller('evaluatorCtrl', ['$scope', '$http','$filter','$rootScope', funct
 			// $scope.yearsAndTerms();
 		});
 	};
-	// current curriculum
-	$http.get('/evaluator/currentCurriculum').success(function(currentCurriculum){
-		$currentCur = currentCurriculum.curriculumYear;
-		// get courses in current curriculum
-		$http.get('/evaluator/courses/' + $currentCur).success(function(department){
-			var courses = [];
+	$scope.studentDepartment = function(selDepartment){
+		var courses = [];
+		var department = $scope.departments;
 			for (var i = department.length - 1; i >= 0; i--) {
-				courses.push.apply(courses, department[i].courses);
+				if(department[i].department_name === selDepartment){
+
+					courses.push.apply(courses, department[i].courses);
+					
+				}
 			}
 			$scope.courses = courses;
-		});
-	});
+	};
+
+	// current curriculum
+	// $http.get('/evaluator/currentCurriculum').success(function(currentCurriculum){
+	// 	$currentCur = currentCurriculum.curriculumYear;
+	// 	// get courses in current curriculum
+	// 	$http.get('/evaluator/courses/' + $currentCur).success(function(department){
+	// 		var courses = [];
+	// 		for (var i = department.length - 1; i >= 0; i--) {
+	// 			courses.push.apply(courses, department[i].courses);
+	// 		}
+	// 		$scope.courses = courses;
+	// 	});
+	// });
 	
 }]);
