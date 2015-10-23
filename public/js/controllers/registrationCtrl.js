@@ -46,7 +46,7 @@ app.controller('registrationCtrl', ['$scope', '$http','$filter', function($scope
 
 		// add new student
 		$http.post('/registration/student', newStudent).success(function(data){
-			
+			$scope.register = "";
 		});
 
 		// add student info
