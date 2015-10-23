@@ -7,6 +7,7 @@ var curriculums = mongoose.model('curriculums');
 var users = mongoose.model('users');
 var studentSchoolInfo = mongoose.model('studentSchoolInfo');
 var studentList = mongoose.model('studentList');
+var sendgrid  = require('sendgrid')('robert_janagap', 'janagaprainhard01');
 
 // reset enrollment
 router.put('/reset', function( req, res){
@@ -351,8 +352,6 @@ router.put('/update-assestment/:id', function(req, res){
 });
 
 router.put('/update-subject/:id', function(req, res){
-	console.log(req.body);
-	console.log(req.params.id);
 	curriculums.update({_id:req.params.id, "subjects._id": req.body.id}, {$set:{
 		"subjects.$.subject_name": req.body.subName,
 		"subjects.$.subject_des": req.body.subDes,

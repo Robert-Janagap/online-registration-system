@@ -14,7 +14,7 @@ var express =require( 'express' ),
 // connect to database
 var mongoDbURL = require('./config/database.js');
 
-mongoose.connect(mongoDbURL.local);
+mongoose.connect(mongoDbURL.url);
 
 //database
 var curriculums = mongoose.model('curriculums', require('./app/models/curriculums.js'));
@@ -27,8 +27,8 @@ var studentSchoolInfo = mongoose.model('studentSchoolInfo', require('./app/model
 
 //use middleware
 app.use(compression());
-app.use( express.static( path.join( __dirname,'/public' ) ) );
-// app.use( express.static( path.join( __dirname,'/production' ) ) );
+// app.use( express.static( path.join( __dirname,'/public' ) ) );
+app.use( express.static( path.join( __dirname,'/production' ) ) );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended :true } ) );
 app.use(session({
@@ -227,6 +227,7 @@ app.get('/createAdmin', function(req, res){
 		}
 	});
 });
+
 
 //server listening
 http.createServer( app ).listen( port,function() {

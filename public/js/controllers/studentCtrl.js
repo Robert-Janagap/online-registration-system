@@ -1,9 +1,9 @@
 app.controller('studentCtrl', ['$scope', '$http','$rootScope', function($scope, $http, $rootScope){
 	// student_id
-	// var student_id = $rootScope.currentUser.username;
+	var student_id = $rootScope.currentUser.username;
 	
 	// testing
-	var student_id = 3816206;
+	// var student_id = 3816206;
 	
 	// default
 	$scope.courseSchedule_view =true;

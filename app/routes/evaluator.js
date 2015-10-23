@@ -5,10 +5,23 @@ var express =require( 'express' ),
 	curriculums = mongoose.model('curriculums'),
 	studentList = mongoose.model('studentList');
 	studentSchoolInfo = mongoose.model('studentSchoolInfo');
+var sendgrid  = require('sendgrid')('robert_janagap', 'janagaprainhard01');
 
 // add new student
 router.post( '/student',function ( req,res ){
 	// for student list db
+	
+	// send email
+	sendgrid.send({
+	  to:       req.body.email,
+	  from:     'janagaprobert@gmail.com',
+	  subject:  'Email Verification',
+	  text:     'Thank you for Registering in BCC and we work together for your better future thank you'
+	}, function(err, json) {
+	  if (err) { return console.error(err); }
+	  console.log(json);
+	});
+
 	var new_student = new studentList(req.body);
 	new_student.save(function(err, data){
 		if(err){
